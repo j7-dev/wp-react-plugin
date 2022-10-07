@@ -14,6 +14,6 @@ A plugin to demonstrate [Vite for WP](https://github.com/kucrut/vite-for-wp).
    # To build production assets:
    npm run build
    ```
-1. Visit your site's homepage and see the rendered application on the footer.
+1. Visit your site's homepage and see the rendered application on the footer 🚀
 
 Visit [Vite for WP](https://github.com/kucrut/vite-for-wp) project page for documentation.
