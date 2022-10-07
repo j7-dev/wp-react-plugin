@@ -10,7 +10,7 @@ A plugin to demonstrate [Vite for WP](https://github.com/kucrut/vite-for-wp).
    ```sh
    composer install
    npm install
-   npm dev
+   npm run dev
    ```
 
 Visit [Vite for WP](https://github.com/kucrut/vite-for-wp) project page for documentation.
