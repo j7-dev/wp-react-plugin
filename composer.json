@@ -1,0 +1,13 @@
+{
+	"name": "kucrut/vite-for-wp-example-react",
+	"description": "A plugin to demonstrate Vite for WP integration.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-only",
+	"authors": [
+		{
+			"name": "Dzikri Aziz",
+			"email": "dzikri.aziz@gmail.com"
+		}
+	],
+	"require": {}
+}
