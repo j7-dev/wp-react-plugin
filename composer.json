@@ -10,6 +10,6 @@
 		}
 	],
 	"require": {
-		"kucrut/vite-for-wp": "^0.3.0"
+		"kucrut/vite-for-wp": "^0.5.2"
 	}
 }
