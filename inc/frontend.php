@@ -29,7 +29,7 @@ function render_app(): void {
 function enqueue_script(): void {
 	Vite\enqueue_asset(
 		dirname( __DIR__ ) . '/js/dist',
-		'js/src/main.jsx',
+		'js/src/main.tsx',
 		[
 			'handle' => 'vite-for-wp-react',
 			'in-footer' => true,

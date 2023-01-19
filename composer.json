@@ -5,11 +5,23 @@
 	"license": "GPL-2.0-only",
 	"authors": [
 		{
-			"name": "Dzikri Aziz",
-			"email": "dzikri.aziz@gmail.com"
+			"name": "JerryLiu",
+			"email": "jerryliu@gmail.com"
 		}
 	],
+  "config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
 	"require": {
 		"kucrut/vite-for-wp": "^0.5.2"
+	},
+  "require-dev": {
+		"wp-coding-standards/wpcs": "^2.3",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.2"
+	},
+	"scripts": {
+		"lint": "phpcs"
 	}
 }
