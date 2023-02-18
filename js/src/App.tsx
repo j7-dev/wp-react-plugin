@@ -1,26 +1,14 @@
 import React from 'react'
-import {
-	Outlet,
-	ReactLocation,
-	Router,
-} from '@tanstack/react-location'
-import { defaultRouters } from '@/Router'
 import CustomLayouts from '@/components/CustomLayouts'
 import { ConfigProvider } from 'antd'
 import 'global.css'
 
 
 
-// Set up a ReactLocation instance
-const location = new ReactLocation()
-console.log('location', location)
 
 function App() {
 	return (
-		<Router
-			location={location}
-			routes={defaultRouters}
-		>
+
 			<ConfigProvider
 				theme={{
 					token: {
@@ -33,11 +21,8 @@ function App() {
 					},
 				}}
 			>
-				<CustomLayouts>
-					<Outlet /> {/* Start rendering router matches */}
-				</CustomLayouts>
+				<CustomLayouts />
 			</ConfigProvider>
-		</Router>
 	)
 }
 

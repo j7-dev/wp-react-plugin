@@ -1,11 +1,12 @@
 import React from 'react'
 import { Card } from 'antd'
-import { Link } from '@tanstack/react-location'
+import {Link} from 'react-router-dom'
 
 const { Meta } = Card
+const baseUrl = process.env.BASE_URL || ''
 
 const CreatCompanyCategoryCard: React.FC = () => (
-	<Link to='/check'>
+	<Link to={`${baseUrl}/check`}>
 		<Card
 			style={{ width: '100%' }}
 			cover={

@@ -2,13 +2,16 @@
 import DefaultPage from '@/pages/'
 import Create from '@/pages/Create'
 import Check from '@/pages/Check'
+import {
+  createBrowserRouter,
+} from "react-router-dom";
 
 const baseUrl = process.env.BASE_URL || ''
 
 
 
 
-export const defaultRouters = [
+export const defaultRouters = createBrowserRouter([
 	{
 		path: baseUrl,
 		element: <DefaultPage />
@@ -21,7 +24,7 @@ export const defaultRouters = [
 		path: `${baseUrl}/check`,
 		element: <Check />,
 	},
-]
+])
 
 export const defaultRouterMetas = [
 	{
