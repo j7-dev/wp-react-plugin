@@ -5,4 +5,10 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 // https://vitejs.dev/config/
 export default create_config('js/src/main.tsx', 'js/dist', {
 	plugins: [react(), tsconfigPaths()],
+  define: {
+    'process.env': {
+      BASE_URL: "/home/carbon-check-app",
+      RENDER_ID: 'carbon-check-app'
+    },
+  }
 });

@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.rounded-none .ant-select-selector {
+  border-radius: 0 !important;
+}
+.rounded-l-none .ant-select-selector {
+  border-radius: 0 6px 6px 0 !important;
+}
+.cc-modal .ant-modal-body {
+  height: calc(80vh - 6rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+}

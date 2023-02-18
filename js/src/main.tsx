@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
-ReactDOM.createRoot(document.getElementById('my-app') as HTMLElement).render(
+const renderId = process.env.RENDER_ID || 'my-app';
+
+
+ReactDOM.createRoot(document.getElementById(renderId) as HTMLElement).render(
 	<React.StrictMode>
 		<App />
 	</React.StrictMode>,

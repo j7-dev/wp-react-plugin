@@ -1,31 +1,44 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from './assets/vite.svg';
-import './App.css';
+import React from 'react'
+import {
+	Outlet,
+	ReactLocation,
+	Router,
+} from '@tanstack/react-location'
+import { defaultRouters } from '@/Router'
+import CustomLayouts from '@/components/CustomLayouts'
+import { ConfigProvider } from 'antd'
+import 'global.css'
+
+
+
+// Set up a ReactLocation instance
+const location = new ReactLocation()
+console.log('location', location)
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
-		<div className="App">
-			<div className="logos">
-				<a href="https://vitejs.dev" target="_blank">
-					<img src={viteLogo.toString()} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://reactjs.org" target="_blank">
-					<img src={reactLogo.toString()} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h2>Vite + React</h2>
-			<div className="card">
-				<button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-		</div>
-	);
+		<Router
+			location={location}
+			routes={defaultRouters}
+		>
+			<ConfigProvider
+				theme={{
+					token: {
+						colorPrimary: '#54bab9',
+						colorLink: '#54bab9',
+						colorLinkActive: '#46a8a7',
+						colorLinkHover: '#79c7c3',
+						colorFillQuaternary: '#fbf8f1', //table
+						colorText: '#707070',
+					},
+				}}
+			>
+				<CustomLayouts>
+					<Outlet /> {/* Start rendering router matches */}
+				</CustomLayouts>
+			</ConfigProvider>
+		</Router>
+	)
 }
 
-export default App;
+export default App
