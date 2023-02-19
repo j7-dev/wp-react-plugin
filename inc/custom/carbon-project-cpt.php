@@ -57,12 +57,18 @@ function your_prefix_register_post_type()
     'menu_position'       => 4,
     'menu_icon'           => 'dashicons-chart-area',
     'capability_type'     => 'post',
-    'supports'            => ['title', 'editor', 'thumbnail'],
+    'supports'            => ['title', 'editor', 'thumbnail', 'custom-fields'],
     'taxonomies'          => [],
     'rewrite'             => [
       'with_front' => false,
     ],
   ];
 
-  register_post_type('cabon-project-cpt', $args);
+  register_meta('post', 'project_data', [
+    'type' => 'string',
+    'show_in_rest' => true,
+    'single' => true,
+  ]);
+
+  register_post_type('carbon-project', $args);
 }

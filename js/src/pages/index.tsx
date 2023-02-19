@@ -1,20 +1,51 @@
-
+import {useState, useEffect} from 'react'
 import { Row, Col } from 'antd'
 import ProjectsCompanyCard from '@/components/ProjectsCompanyCard'
 import ProjectsCompanyCreateButton from '@/components/ProjectsCompanyCreateButton'
-import { nanoid } from 'nanoid'
-
+import { getResources } from '@/api'
+import { useMany } from '@/hooks'
 
 function DefaultPage() {
+const [projects, setProjects] = useState<any[]>([])
+
+useEffect(() => {
+  getResources('carbon-project').then((res) => {
+    console.log(res)
+    setProjects(res?.data || [])
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}, [])
+
+const images = useMany({
+  resource: 'media',
+  args: {
+    include: [23],
+  },
+  queryOptions: {
+    enabled: projects.length > 0 || false,
+  },
+})
+
 
 
 	return (
 		<Row gutter={[24, 24]}>
-			{new Array(0).fill(0).map(() => (
-				<Col key={nanoid()} xl={{ span: 6 }} lg={{ span: 8 }} sm={{ span: 12 }} xs={{ span: 24 }}>
-					<ProjectsCompanyCard />
-				</Col>
-			))
+			{projects.map((project) => {
+        const image = images?.find((image:any) => image?.id === project?.featured_media)
+
+        return (
+          <Col key={project?.id} xl={{ span: 6 }} lg={{ span: 8 }} sm={{ span: 12 }} xs={{ span: 24 }}>
+            <ProjectsCompanyCard
+            id={project?.id}
+            title={project?.title?.rendered as string}
+            image={image}
+            description={project?.content?.rendered as string}
+            />
+          </Col>
+        )
+      })
 			}
 			<Col xl={{ span: 6 }} lg={{ span: 8 }} sm={{ span: 12 }} xs={{ span: 24 }}>
 				<ProjectsCompanyCreateButton />

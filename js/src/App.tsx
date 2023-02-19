@@ -1,7 +1,8 @@
 
-import CustomLayouts from '@/components/CustomLayouts'
 import { ConfigProvider } from 'antd'
 import 'global.css'
+import { RouterProvider } from "react-router-dom";
+import { defaultRouters } from "@/Router";
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 					},
 				}}
 			>
-				<CustomLayouts />
+				      <RouterProvider router={defaultRouters} />
 			</ConfigProvider>
 	)
 }

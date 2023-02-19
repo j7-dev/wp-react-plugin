@@ -1,9 +1,8 @@
-import React from 'react'
-import { Card, Form, notification } from 'antd'
-import {LoadingOutlined} from '@ant-design/icons'
-import {Link} from 'react-router-dom'
-import { useColor } from '@/hooks'
-import axios from '@/api'
+import React, {useState} from 'react'
+import { Card, Modal, Alert } from 'antd'
+import {useNavigate} from 'react-router-dom'
+import {createProject} from '@/api'
+
 
 
 
@@ -17,40 +16,54 @@ const CreatCompanyCategoryCard: React.FC<{option: {
   image: string
 }}> = ({option}) => {
 
-const form = Form.useFormInstance()
-const [api, contextHolder] = notification.useNotification();
-const {colorPrimary} = useColor()
-const category = Form.useWatch(['project', 'category'])
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [confirmLoading, setConfirmLoading] = useState(false);
+const navigate = useNavigate();
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = async () => {
+    setConfirmLoading(true);
+
+    try {
+      const createResult = await createProject({
+        title: '○○○○股份有限公司',
+        status: "publish",
+        meta:{
+          company_category: option.name
+        }
+      })
+
+      setIsModalOpen(false);
+      setConfirmLoading(false);
+      navigate(`${baseUrl}check`, {state: {id: createResult?.data?.id || 0}});
+
+    } catch (error) {
+      setIsModalOpen(false);
+      setConfirmLoading(false);
+      console.log('catch error', error);
+    }
+
+
+
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
 
 
 
-const handleClick = async () => {
-  form.setFieldValue(['project', 'category'], option.name)
-  // const data = await axios.get('/wp/v2/posts')
-  const token = await axios.post('/jwt-auth/v1/token', {
-    username: 'carbon',
-        password: 'X0921565659x+'
-  })
-
-  console.log('token', token)
-
-
-  api.open({
-    message: <><LoadingOutlined style={{color:colorPrimary}} className='mr-4' />創建專案中...</>,
-    description: <></>,
-    placement: 'bottomRight',
-  });
-}
 
 
   return (
 <>
-{contextHolder}
-<Link to={`${baseUrl}/check`}>
       <Card
-      // onClick={handleClick}
-        style={{ width: '100%' }}
+      onClick={showModal}
+        className='w-full'
         cover={
           <img
             className='aspect-[16/9]'
@@ -60,10 +73,24 @@ const handleClick = async () => {
         }
       >
         <Meta
-          title={<p className='text-center my-0'>{option?.name || '沒有名稱'}</p>}
+          title={<p className='text-center my-auto'>{option?.name || '沒有名稱'}</p>}
         />
       </Card>
-      </Link>
+
+      <Modal
+      title={<>創建專案 - 分類: {option?.name}</>}
+      centered
+      open={isModalOpen}
+      onOk={handleOk}
+      onCancel={handleCancel}
+      okText="確認創建專案"
+      cancelText="再想想"
+      confirmLoading={confirmLoading}
+      >
+
+        <Alert className='my-8' message="按下確認後會創建專案，下一頁可以填寫更多資訊" type="info" showIcon />
+
+      </Modal>
 </>
   )
 }

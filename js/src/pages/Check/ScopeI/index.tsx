@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import { useState, useContext } from 'react'
 import CheckScopeITable from '@/components/CheckScopeITable'
 import { Button } from 'antd'
 import { AppstoreAddOutlined } from '@ant-design/icons'
-
 const ScopeI = () => {
 
   const [count, setCount] = useState([0])

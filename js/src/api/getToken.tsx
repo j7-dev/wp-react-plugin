@@ -1,7 +1,7 @@
 
-import axios from '@/api'
+import {axios} from '@/api'
 
-const getToken = async () => {
+export const getToken = async () => {
 
   const token = await axios.post('/jwt-auth/v1/token', {
       username: 'carbon',
@@ -10,5 +10,3 @@ const getToken = async () => {
 
   return token
 }
-
-export default getToken

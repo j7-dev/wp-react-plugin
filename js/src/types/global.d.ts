@@ -3,6 +3,9 @@ declare global {
     root: string,
     nonce: string,
   }
+  var userData: {
+    userName: string,
+  }
 }
 
 export {};

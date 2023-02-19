@@ -39,6 +39,7 @@
     }
   ],
   "files": [
-    "js/src/types/global.d.ts"
+    "js/src/types/global.d.ts",
+    "js/src/types/index.d.ts"
   ]
 }
