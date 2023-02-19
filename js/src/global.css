@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.container {
+/* .container {
   max-width: 1280px;
   margin: 0 auto;
-}
+} */
 
 .rounded-none .ant-select-selector {
   border-radius: 0 !important;

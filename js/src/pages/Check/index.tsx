@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
-import { Tabs, Typography, theme } from 'antd'
+import { Tabs, Typography, Form } from 'antd'
 import type { TabsProps } from 'antd'
 import ScopeI from './ScopeI'
 import ScopeII from './ScopeII'
 import Chart from './Chart'
 import Export from './Export'
-
-const {useToken} = theme
+import { useColor } from '@/hooks'
 
 const items: TabsProps['items'] = [
   {
@@ -34,13 +33,14 @@ const items: TabsProps['items'] = [
 
 const App: React.FC = () => {
 
-  const {token} = useToken()
+
+  const {colorPrimary} = useColor()
   const [editableStr, setEditableStr] = useState('○○○○股份有限公司')
 
 
   return (
     <>
-      <hr style={{borderColor: token.colorPrimary}} />
+      <hr style={{borderColor: colorPrimary}} />
       <Typography.Title editable={{onChange: setEditableStr}} level={3} className='mt-8'>
         {editableStr}
       </Typography.Title>

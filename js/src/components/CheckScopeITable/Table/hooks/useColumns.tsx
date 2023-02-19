@@ -1,17 +1,17 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import {ColumnType} from 'antd/lib/table'
 import { TYearlyDataType } from '../types'
-import { Popconfirm, theme, Tooltip} from 'antd'
+import { Popconfirm,  Tooltip} from 'antd'
 import { TableDataContext } from '@/components/CheckScopeITable'
 import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
 import {gwpMapping} from '@/utils'
 import EditRowButton from '@/components/CheckScopeITable/Table/components/EditRowButton'
+import { useColor } from '@/hooks'
 
-const {useToken} = theme
 
 const useColumns = () => {
 
-  const {token} = useToken()
+  const {colorPrimary} = useColor()
 
   const { dataSource, handleDelete, editable = false } = useContext(TableDataContext)
 
@@ -45,7 +45,7 @@ const useColumns = () => {
     },
     {
       title: <><Tooltip title='二氧化碳當量(CO2e, carbon dioxide equivalent)是測量碳足跡(carbon footprints)的標準單位'>
-      CO<sub>2</sub>e 碳排 (噸/年) <InfoCircleFilled style={{color: token.colorPrimary}} /></Tooltip>
+      CO<sub>2</sub>e 碳排 (噸/年) <InfoCircleFilled style={{color: colorPrimary}} /></Tooltip>
       </>,
       align: 'center',
       dataIndex: 'carbonTonsPerYear',

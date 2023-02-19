@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, createContext} from 'react'
-import { Modal,Input,Radio,Form, theme} from 'antd'
+import { Modal,Input,Radio,Form} from 'antd'
 import {SlidersOutlined} from '@ant-design/icons'
 import { TableDataContext } from '@/components/CheckScopeITable'
 import EditGWPYearlyFormItem from '@/components/CheckScopeITable/Table/components/EditGWPYearlyFormItem'
@@ -8,13 +8,13 @@ import EditGWPHourlyFormItem from '@/components/CheckScopeITable/Table/component
 import {TYearlyDataType} from '@/components/CheckScopeITable/Table/types'
 import { gwpMapping, convertUnitToTons } from '@/utils'
 import type {TUnit} from '@/types'
+import { useColor } from '@/hooks'
 
-const {useToken} = theme
 export const EditRowButtonContext = createContext<TYearlyDataType | null>(null)
 
 const EditRowButton:React.FC<{record:TYearlyDataType}> = ({record}) => {
 
-  const {token} = useToken()
+  const {colorPrimary} = useColor()
   const [form] = Form.useForm()
 
   const {handleEdit} = useContext(TableDataContext)
@@ -93,7 +93,7 @@ const EditRowButton:React.FC<{record:TYearlyDataType}> = ({record}) => {
 
   return (
     <>
-      <SlidersOutlined className='ml-4' style={{color: token.colorPrimary}} onClick={showModal} />
+      <SlidersOutlined className='ml-4' style={{color: colorPrimary}} onClick={showModal} />
       <EditRowButtonContext.Provider value={record}>
         <Modal
           title="設備資料更新"

@@ -34,8 +34,21 @@ function enqueue_script(): void
     dirname(__DIR__) . '/js/dist',
     'js/src/main.tsx',
     [
-      'handle' => 'vite-for-wp-react',
+      'handle' => PROJECT_NAME,
       'in-footer' => true,
     ]
   );
+
+  wp_localize_script(PROJECT_NAME, 'userData', array(
+    'userName' => wp_get_current_user()->user_login,
+  ));
+
+  wp_localize_script('wp-api', 'wpApiSettings', array(
+    'root' => esc_url_raw(rest_url()),
+    'nonce' => wp_create_nonce('wp_rest'),
+  ));
 }
+
+
+
+include_once __DIR__ . '/custom/includes.php';

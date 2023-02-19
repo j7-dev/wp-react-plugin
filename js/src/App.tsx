@@ -1,14 +1,11 @@
-import React from 'react'
+
 import CustomLayouts from '@/components/CustomLayouts'
 import { ConfigProvider } from 'antd'
 import 'global.css'
 
 
-
-
 function App() {
 	return (
-
 			<ConfigProvider
 				theme={{
 					token: {

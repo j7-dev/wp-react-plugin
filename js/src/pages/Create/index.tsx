@@ -1,17 +1,30 @@
-import React from 'react'
 import { Row, Col } from 'antd'
 import CreatCompanyCategoryCard from '@/components/CreatCompanyCategoryCard'
 import CreatCompanyCategoryInput from '@/components/CreatCompanyCategoryInput'
-import { nanoid } from 'nanoid'
+import {companyCategories} from '@/utils'
+import {Form} from 'antd'
 
-console.log('Hello from Create!!');
+
 
 const Create = () => {
+  const [form] = Form.useForm()
 	return (
+    <Form form={form}>
+      <Form.Item
+      name={['project', 'category']}
+      noStyle
+      initialValue=''
+      >
+
+      </Form.Item>
 		<Row gutter={[24, 24]}>
-			{new Array(10).fill(0).map((_, i) => (
-				<Col key={nanoid()} xl={{ span: 6 }} lg={{ span: 8 }} sm={{ span: 12 }} xs={{ span: 24 }}>
-					<CreatCompanyCategoryCard />
+			{companyCategories.map((companyCategory, i) => (
+				<Col key={companyCategory.key} xl={{ span: 6 }} lg={{ span: 8 }} sm={{ span: 12 }} xs={{ span: 24 }}>
+					<CreatCompanyCategoryCard option={{
+            name: companyCategory.name,
+            key: companyCategory.key,
+            image: companyCategory.image
+          }} />
 				</Col>
 			))
 			}
@@ -19,6 +32,7 @@ const Create = () => {
 				<CreatCompanyCategoryInput />
 			</Col>
 		</Row>
+    </Form>
 	)
 }
 

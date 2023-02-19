@@ -1,5 +1,5 @@
 import React, { useContext,useState } from 'react'
-import { Table, Row, Button, Typography, theme } from 'antd'
+import { Table, Row, Button, Typography } from 'antd'
 import AddRowButton from './components/AddRowButton'
 import { TYearlyDataType } from './types'
 import useColumns from './hooks/useColumns'
@@ -7,11 +7,11 @@ import { TableDataContext } from '@/components/CheckScopeITable'
 import { DeleteFilled } from '@ant-design/icons'
 import useMonthlyTable from './hooks/useMonthlyTable'
 import {ColumnType} from 'antd/lib/table'
+import { useColor } from '@/hooks'
 
-const {useToken} = theme
 
 const App: React.FC = () => {
-  const {token} = useToken()
+  const {colorPrimary} = useColor()
   const columns = useColumns()
   const {renderTable} = useMonthlyTable()
   const { dataSource, onDelete: handleDeleteGroup, groupRowIndex, editable = false } = useContext(TableDataContext)
@@ -49,7 +49,7 @@ const App: React.FC = () => {
         </Row>
       )}
 
-      <div style={{backgroundColor:token.colorPrimary}} className='my-8 h-[3px]' />
+      <div style={{backgroundColor:colorPrimary}} className='my-8 h-[3px]' />
     </div>
   )
 }

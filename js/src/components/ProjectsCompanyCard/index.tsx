@@ -9,7 +9,7 @@ const baseUrl = process.env.BASE_URL || ''
 const ProjectsCompanyCard: React.FC = () => (
 	<Link to={`${baseUrl}/create`}>
 		<Card
-			style={{ width: '100%' }}
+      className='aspect-[3/4] w-full'
 			cover={
 				<img
 					className='aspect-[16/9]'
