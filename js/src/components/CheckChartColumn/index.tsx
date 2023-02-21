@@ -1,16 +1,13 @@
 import React from 'react'
 import { Column } from '@ant-design/plots'
 import fakeData from '@/pages/Check/Chart/fakeData'
-import {IStyle} from './interfaces'
-
+import type { IStyle } from './interfaces'
 
 const CheckChartColumn = () => {
 	const copyFakeData = JSON.parse(JSON.stringify(fakeData))
 
 	const data = copyFakeData
 	console.log('CheckChartColumn', data)
-
-
 
 	const config = {
 		data,
@@ -29,7 +26,7 @@ const CheckChartColumn = () => {
 			},
 		],
 		connectedArea: {
-			style: (oldStyle:IStyle) => {
+			style: (oldStyle: IStyle) => {
 				return {
 					fill: 'rgba(0,0,0,0.25)',
 					stroke: oldStyle.fill,
@@ -41,7 +38,5 @@ const CheckChartColumn = () => {
 
 	return <Column {...config} />
 }
-
-
 
 export default CheckChartColumn

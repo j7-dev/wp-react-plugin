@@ -1,5 +1,4 @@
-
-import { Table } from 'antd'
+import type { Table } from "antd";
 
 interface Item {
   key: string;
@@ -28,8 +27,7 @@ export interface DataType {
   source: string;
   usagePerYear: number;
   percentage: number;
-  CarbonTonsPerYear:number;
+  CarbonTonsPerYear: number;
 }
 
-export type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
-
+export type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;

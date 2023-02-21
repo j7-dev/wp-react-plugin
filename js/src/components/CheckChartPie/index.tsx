@@ -1,18 +1,15 @@
 import React from 'react'
 import { Pie, measureTextWidth } from '@ant-design/plots'
 import fakeData from '@/pages/Check/Chart/fakeData'
-import {IData} from '@/pages/Check/Chart/interface'
+import type { IData } from '@/pages/Check/Chart/interface'
 
-
-interface IStyle {
-[key:string]:string | number
-}
+type IStyle = Record<string, number | string>
 
 const CheckChartPie = () => {
 	const copyFakeData = JSON.parse(JSON.stringify(fakeData))
 
 	// sum the value if the type is 工廠1
-	const data = copyFakeData.reduce((acc:IData[], cur:IData) => {
+	const data = copyFakeData.reduce((acc: IData[], cur: IData) => {
 		const index = acc.findIndex((item) => item.type === cur.type)
 		delete cur.month
 		if (index === -1) {
@@ -26,20 +23,36 @@ const CheckChartPie = () => {
 
 	console.log('CheckChartPie', data)
 
-	function renderStatistic(containerWidth:number, text:string, style:IStyle) {
-		const { width: textWidth, height: textHeight } = measureTextWidth(text, style)
+	function renderStatistic(
+		containerWidth: number,
+		text: string,
+		style: IStyle,
+	) {
+		const { width: textWidth, height: textHeight } = measureTextWidth(
+			text,
+			style,
+		)
 		const R = containerWidth / 2 // r^2 = (w / 2)^2 + (h - offsetY)^2
 
 		let scale = 1
 
 		if (containerWidth < textWidth) {
-			scale = Math.min(Math.sqrt(Math.abs(Math.pow(R, 2) / (Math.pow(textWidth / 2, 2) + Math.pow(textHeight, 2)))), 1)
+			scale = Math.min(
+				Math.sqrt(
+					Math.abs(
+						Math.pow(R, 2) /
+							(Math.pow(textWidth / 2, 2) + Math.pow(textHeight, 2)),
+					),
+				),
+				1,
+			)
 		}
 
 		const textStyleStr = `width:${containerWidth}px;`
-		return `<div style="${textStyleStr};font-size:${scale}em;line-height:${scale < 1 ? 1 : 'inherit'};">${text}</div>`
+		return `<div style="${textStyleStr};font-size:${scale}em;line-height:${
+			scale < 1 ? 1 : 'inherit'
+		};">${text}</div>`
 	}
-
 
 	const config = {
 		appendPadding: 10,
@@ -50,7 +63,7 @@ const CheckChartPie = () => {
 		innerRadius: 0.64,
 		meta: {
 			value: {
-				formatter: (v:number) => `${v} ¥`,
+				formatter: (v: number) => `${v} ¥`,
 			},
 		},
 		label: {
@@ -65,7 +78,7 @@ const CheckChartPie = () => {
 		statistic: {
 			title: {
 				offsetY: -4,
-				customHtml: (container:HTMLElement, _view:unknown, datum:any) => {
+				customHtml: (container: HTMLElement, _view: unknown, datum: any) => {
 					console.log('@@@ datum', datum)
 
 					const { width, height } = container.getBoundingClientRect()
@@ -81,9 +94,16 @@ const CheckChartPie = () => {
 				style: {
 					fontSize: '24px',
 				},
-				customHtml: (container:HTMLElement, _view:unknown, datum:any, data:any) => {
+				customHtml: (
+					container: HTMLElement,
+					_view: unknown,
+					datum: any,
+					theData: any,
+				) => {
 					const { width } = container.getBoundingClientRect()
-					const text = datum ? `${datum.value}噸/年` : `${data.reduce((r:number, d:IData) => r + d.value, 0)}噸/年`
+					const text = datum
+						? `${datum.value}噸/年`
+						: `${theData.reduce((r: number, d: IData) => r + d.value, 0)}噸/年`
 					return renderStatistic(width, text, {
 						fontSize: 16,
 					})

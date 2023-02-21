@@ -51,7 +51,13 @@ export const months = [
   },
 ];
 
-export const convertUnitToTons = ({ value, unit }: { value: number; unit: TUnit }) => {
+export const convertUnitToTons = ({
+  value,
+  unit,
+}: {
+  value: number;
+  unit: TUnit;
+}) => {
   switch (unit) {
     case "kg":
       return value / 1000;
@@ -60,7 +66,13 @@ export const convertUnitToTons = ({ value, unit }: { value: number; unit: TUnit 
   }
 };
 
-export const reverseUnitValue = ({ value, unit }: { value: number; unit: TUnit }) => {
+export const reverseUnitValue = ({
+  value,
+  unit,
+}: {
+  value: number;
+  unit: TUnit;
+}) => {
   switch (unit) {
     case "kg":
       return value * 1000;
@@ -80,20 +92,19 @@ export const getStatusText = (statusText: string) => {
   return statusText || "";
 };
 
-const baseUrl = process.env.BASE_URL || ''
-
+const baseUrl = process.env.BASE_URL || "";
 
 export const defaultRouterMetas = [
-	{
-		path: baseUrl,
-		title: '所有專案',
-	},
-	{
-		path: `${baseUrl}create`,
-		title: '選擇你的公司分類',
-	},
-	{
-		path: `${baseUrl}check`,
-		title: '碳盤查',
-	},
-]
+  {
+    path: baseUrl,
+    title: "所有專案",
+  },
+  {
+    path: `${baseUrl}create`,
+    title: "選擇你的公司分類",
+  },
+  {
+    path: `${baseUrl}check`,
+    title: "碳盤查",
+  },
+];

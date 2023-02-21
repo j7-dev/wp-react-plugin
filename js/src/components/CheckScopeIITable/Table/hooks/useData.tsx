@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DataType } from '../interfaces'
+import type { DataType } from '../interfaces'
 
 const useData = () => {
 	const [dataSource, setDataSource] = useState<DataType[]>([
@@ -49,8 +49,15 @@ const useData = () => {
 		setDataSource(newData)
 	}
 
-
-	return { dataSource, setDataSource, count, setCount, handleAdd, handleSave, handleDelete }
+	return {
+		dataSource,
+		setDataSource,
+		count,
+		setCount,
+		handleAdd,
+		handleSave,
+		handleDelete,
+	}
 }
 
 export default useData

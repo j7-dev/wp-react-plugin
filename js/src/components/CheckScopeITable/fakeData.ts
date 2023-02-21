@@ -1,25 +1,29 @@
-import { TMonthlyDataType, TYearlyDataType } from './Table/types'
+import type { TMonthlyDataType, TYearlyDataType } from "./Table/types";
 
-export const monthlyDataSource:TMonthlyDataType[] = new Array(12).fill(0).map((_, i) => ({
-  // equipment: '工廠1',
-  key: i + 1,
-  month: i + 1,
-  GreenhouseGasesTonsPerYear: Math.round(Math.random() * 1000),
-  gpt: Math.round(Math.random() * 100) / 100,
-  co2e: Math.round(Math.random() * 1000),
-  CarbonTonsPerYear: Math.round(Math.random() * 1000),
-}))
+export const monthlyDataSource: TMonthlyDataType[] = new Array(12)
+  .fill(0)
+  .map((_, i) => ({
+    // equipment: '工廠1',
+    key: i + 1,
+    month: i + 1,
+    GreenhouseGasesTonsPerYear: Math.round(Math.random() * 1000),
+    gpt: Math.round(Math.random() * 100) / 100,
+    co2e: Math.round(Math.random() * 1000),
+    CarbonTonsPerYear: Math.round(Math.random() * 1000),
+  }));
 
-export const defaultMonthlyData:TMonthlyDataType[] = new Array(12).fill(0).map((_, i) => ({
-  key: i + 1,
-  month: i + 1,
-  GreenhouseGasesTonsPerYear: 0,
-  gpt: 0,
-  co2e: 0,
-  CarbonTonsPerYear: 0,
-}))
+export const defaultMonthlyData: TMonthlyDataType[] = new Array(12)
+  .fill(0)
+  .map((_, i) => ({
+    key: i + 1,
+    month: i + 1,
+    GreenhouseGasesTonsPerYear: 0,
+    gpt: 0,
+    co2e: 0,
+    CarbonTonsPerYear: 0,
+  }));
 
-export const yearlyDataSource:TYearlyDataType[] = [
+export const yearlyDataSource: TYearlyDataType[] = [
   // {
   //   key: '0',
   //   equipment: '鍋爐(CO2)',
@@ -42,4 +46,4 @@ export const yearlyDataSource:TYearlyDataType[] = [
   //   period: 'yearly',
   //   unit: 'kg'
   // },
-]
+];

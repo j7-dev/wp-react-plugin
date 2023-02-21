@@ -1,16 +1,22 @@
-import React, {useContext} from 'react'
-import { DataType } from '../interfaces'
-import {Popconfirm, Typography} from 'antd'
+import React, { useContext } from 'react'
+import type { DataType } from '../interfaces'
+import { Popconfirm, Typography } from 'antd'
 import { TableDataContext } from '@/components/CheckScopeIITable'
-import {DeleteOutlined} from '@ant-design/icons'
-import {ColumnType} from 'antd/lib/table'
-
-
+import { DeleteOutlined } from '@ant-design/icons'
+import type { ColumnType } from 'antd/lib/table'
 
 const useColumns = () => {
-	const {dataSource, handleSave, handleDelete, editable = false} = useContext(TableDataContext)
+	const {
+		dataSource,
+		handleSave,
+		handleDelete,
+		editable = false,
+	} = useContext(TableDataContext)
 
-	const defaultColumns: (ColumnType<DataType> & { editable?: boolean; dataIndex: string; })[] = [
+	const defaultColumns: (ColumnType<DataType> & {
+		editable?: boolean
+		dataIndex: string
+	})[] = [
 		{
 			title: <Typography.Text editable={editable}>電力來源</Typography.Text>,
 			dataIndex: 'source',
@@ -18,7 +24,9 @@ const useColumns = () => {
 			editable,
 		},
 		{
-			title: <Typography.Text editable={editable}>使用度數(年)</Typography.Text>,
+			title: (
+				<Typography.Text editable={editable}>使用度數(年)</Typography.Text>
+			),
 			dataIndex: 'usagePerYear',
 			editable,
 		},
@@ -28,7 +36,7 @@ const useColumns = () => {
 			editable,
 			render: (percentage: number) => {
 				return `${Math.round(percentage * 100)}%`
-			}
+			},
 		},
 		{
 			title: '碳排(噸/年)',
@@ -38,16 +46,19 @@ const useColumns = () => {
 		{
 			title: '動作',
 			dataIndex: 'action',
-			render: (_, record:DataType) =>
+			render: (_, record: DataType) =>
 				dataSource.length >= 1 ? (
-					<Popconfirm title="確認刪除?" onConfirm={() => handleDelete(record.key)}>
-						<DeleteOutlined className='text-red-500' />
+					<Popconfirm
+						title="確認刪除?"
+						onConfirm={() => handleDelete(record.key)}
+					>
+						<DeleteOutlined className="text-red-500" />
 					</Popconfirm>
 				) : null,
 		},
 	]
 
-	if(!editable){
+	if (!editable) {
 		defaultColumns.pop()
 		return defaultColumns
 	}

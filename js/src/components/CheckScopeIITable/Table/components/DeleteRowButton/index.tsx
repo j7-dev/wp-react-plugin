@@ -1,14 +1,13 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { Button } from 'antd'
 import { TableDataContext } from '@/components/CheckScopeIITable'
 
 const DeleteRowButton = () => {
-
-	const {handleDelete} = useContext(TableDataContext)
+	const { handleDelete } = useContext(TableDataContext)
 
 	return (
 		<Button onClick={handleDelete} type="primary" style={{ marginTop: 16 }}>
-     刪除
+			刪除
 		</Button>
 	)
 }

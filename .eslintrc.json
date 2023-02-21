@@ -1,61 +1,93 @@
 {
   "env": {
+    "node": true,
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "commonjs": true
   },
   "extends": [
+    "prettier",
     "plugin:@typescript-eslint/recommended",
     "plugin:@wordpress/eslint-plugin/custom",
     "plugin:@wordpress/eslint-plugin/esnext",
     "plugin:@wordpress/eslint-plugin/jsdoc",
-    "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "eslint-config-prettier"
   ],
-  "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "parser": "babel-eslint"
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "rules": {
     "indent": [
       "error",
       "tab"
     ],
-    "linebreak-style": [
+    "semi": [
       "error",
-      "unix"
+      "never"
     ],
     "quotes": [
       "error",
       "single"
     ],
-    "semi": [
-      "error",
-      "never"
+    "no-console": [
+      "warn"
     ],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_",
-        "caughtErrorsIgnorePattern": "^_"
-      }
-    ],
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "prettier/prettier": "error",
+    "no-unused-vars": "off",
+    "no-shadow": "error",
     "camelcase": "off",
     "quote-props": [
       "error",
       "consistent"
     ],
-    "jsdoc/valid-types": "off"
+    "jsdoc/valid-types": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.d.ts"
+      ],
+      "rules": {
+        "no-undef": "off",
+        "no-var": "off"
+      }
+    },
+    {
+      "files": [
+        "*.js"
+      ],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "globals": {
+    "JSX": "readonly",
+    "window": "readonly",
+    "React": "readonly",
+    "document": "readonly",
+    "wpApiSettings": "readonly"
   }
 }

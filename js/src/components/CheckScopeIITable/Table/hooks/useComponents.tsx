@@ -1,15 +1,10 @@
-
-import React, {useState, useContext, useRef, useEffect} from 'react'
-import { EditableRowProps, EditableCellProps} from '../interfaces'
-import {Form, Input} from 'antd'
+import React, { useState, useContext, useRef, useEffect } from 'react'
+import type { EditableRowProps, EditableCellProps } from '../interfaces'
+import { Form, Input, InputRef } from 'antd'
 import type { FormInstance } from 'antd/es/form'
-import type { InputRef } from 'antd'
-
 
 const useComponents = () => {
-
-
-	const EditableContext = React.createContext<FormInstance<any> | null>(null)
+	const EditableContext = React.createContext<FormInstance | null>(null)
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
@@ -38,7 +33,7 @@ const useComponents = () => {
 
 		useEffect(() => {
 			if (editing) {
-        inputRef.current!.focus()
+				inputRef.current!.focus()
 			}
 		}, [editing])
 
@@ -75,7 +70,11 @@ const useComponents = () => {
 					<Input ref={inputRef} onPressEnter={save} onBlur={save} />
 				</Form.Item>
 			) : (
-				<div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
+				<div
+					className="editable-cell-value-wrap"
+					style={{ paddingRight: 24 }}
+					onClick={toggleEdit}
+				>
 					{children}
 				</div>
 			)
@@ -84,14 +83,12 @@ const useComponents = () => {
 		return <td {...restProps}>{childNode}</td>
 	}
 
-
 	const components = {
 		body: {
 			row: EditableRow,
 			cell: EditableCell,
 		},
 	}
-
 
 	return components
 }

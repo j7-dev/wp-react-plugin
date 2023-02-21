@@ -1,8 +1,7 @@
-import {axios} from '@/api'
+import { axios } from '@/api'
 
-export const deleteProject = async (id:number) => {
+export const deleteProject = async (id: number) => {
+	const deleteResult = await axios.delete(`/wp/v2/carbon-project/${id}`)
 
-  const deleteResult = await axios.delete(`/wp/v2/carbon-project/${id}`)
-
-  return deleteResult
+	return deleteResult
 }

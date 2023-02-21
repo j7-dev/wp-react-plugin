@@ -1,6 +1,5 @@
-
-import { TUnit } from '@/types'
-import { Table } from 'antd'
+import type { TUnit } from "@/types";
+import type { Table } from "antd";
 
 interface Item {
   key: string;
@@ -11,11 +10,11 @@ interface Item {
 
 export type EditableTableProps = Parameters<typeof Table>[0];
 
-export type TEditableRowProps = {
+export interface TEditableRowProps {
   index: number;
 }
 
-export type TEditableCellProps = {
+export interface TEditableCellProps {
   title: React.ReactNode;
   editable: boolean;
   children: React.ReactNode;
@@ -23,7 +22,7 @@ export type TEditableCellProps = {
   record: Item;
 }
 
-export type TMonthlyDataType = {
+export interface TMonthlyDataType {
   key: React.Key;
   month: number;
   GreenhouseGasesTonsPerYear: number;
@@ -32,7 +31,7 @@ export type TMonthlyDataType = {
   CarbonTonsPerYear: number;
 }
 
-export type TYearlyDataType = {
+export interface TYearlyDataType {
   key: string;
   equipment: string;
   gwp: string;
@@ -40,17 +39,19 @@ export type TYearlyDataType = {
   ar5: number;
   co2e: number;
   carbonTonsPerYear: number;
-  period: 'yearly' | 'monthly' | 'hourly';
-  monthlyAmount?:number[];
-  hourlyAmount?:number;
+  period: "hourly" | "monthly" | "yearly";
+  monthlyAmount?: number[];
+  hourlyAmount?: number;
   unit: TUnit;
 }
 
-export type ColumnTypes = Exclude<EditableTableProps['columns'], undefined> & {
+export type ColumnTypes = Exclude<EditableTableProps["columns"], undefined> & {
   editable?: boolean;
   dataIndex: string;
   title: string;
-  render?: (text: string, record: TMonthlyDataType, index: number) => React.ReactNode;
+  render?: (
+    text: string,
+    record: TMonthlyDataType,
+    index: number,
+  ) => React.ReactNode;
 };
-
-
