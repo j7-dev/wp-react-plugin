@@ -27,10 +27,7 @@
     "prettier"
   ],
   "rules": {
-    "indent": [
-      "error",
-      "tab"
-    ],
+    "@wordpress/no-unused-vars-before-return": "off",
     "semi": [
       "error",
       "never"

@@ -1,5 +1,5 @@
 import { ConfigProvider } from 'antd'
-import 'global.css'
+import 'global.scss'
 import { RouterProvider } from 'react-router-dom'
 import { defaultRouters } from '@/Router'
 

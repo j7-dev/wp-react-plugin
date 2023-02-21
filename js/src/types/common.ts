@@ -1,1 +1,1 @@
-export type TUnit = "kg" | "tons";
+export type TUnit = 'kg' | 'tons'
