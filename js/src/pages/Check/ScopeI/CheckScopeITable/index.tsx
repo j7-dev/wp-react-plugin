@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext } from 'react'
 import Table from './Table'
-import { IGroupData, TYearlyDataType } from './Table/types'
+import { IGroupData } from './Table/types'
 
 export const TableDataContext = createContext<any | null>(null)
 
@@ -14,17 +14,8 @@ type ICheckScopeITableProps = {
 }
 
 const CheckScopeITable: React.FC<ICheckScopeITableProps> = (props) => {
-  const [
-    dataSource,
-    setDataSource,
-  ] = useState<TYearlyDataType[]>([])
-
-  useEffect(() => {
-    setDataSource(props?.groupData?.dataSource || [])
-  }, [])
-
   return (
-    <TableDataContext.Provider value={{ dataSource, setDataSource, ...props }}>
+    <TableDataContext.Provider value={{ ...props }}>
       <Table />
     </TableDataContext.Provider>
   )

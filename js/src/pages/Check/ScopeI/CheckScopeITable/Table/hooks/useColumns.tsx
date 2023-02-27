@@ -3,6 +3,8 @@ import type { ColumnType } from 'antd/lib/table'
 import type { TYearlyDataType } from '../types'
 import { Popconfirm, Tooltip } from 'antd'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
+import { ProjectContext } from '@/pages/Check'
+
 import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
 import { gwpMapping } from '@/utils'
 import EditRowButton from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/EditRowButton'
@@ -10,12 +12,15 @@ import { useColor } from '@/hooks'
 
 const useColumns = () => {
   const { colorPrimary } = useColor()
-
+  const { scopes } = useContext(ProjectContext)
   const {
-    dataSource,
+    groupKey,
     handleDelete,
     editable = false,
   } = useContext(TableDataContext)
+  const scopeIGroups = scopes?.scopeI || []
+  const dataSource =
+    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
 
   const defaultColumns: (ColumnType<TYearlyDataType> & {
     editable?: boolean

@@ -1,4 +1,5 @@
-import React, { createContext } from 'react'
+/* eslint-disable @typescript-eslint/no-empty-function */
+import React, { createContext, useState } from 'react'
 import { Tabs, Form, Button, TabsProps } from 'antd'
 import ScopeI from './ScopeI'
 import ScopeII from './ScopeII'
@@ -8,9 +9,25 @@ import { useColor, useOne, useEditableTitle } from '@/hooks'
 import { useLocation } from 'react-router-dom'
 import { updateResource } from '@/api'
 import { useQueryClient } from '@tanstack/react-query'
+import { IGroupData } from './ScopeI/CheckScopeITable/Table/types'
 
-export const ProjectContext = createContext<any>({
+export const ProjectContext = createContext<{
+  projectData: any
+  scopes: {
+    scopeI: IGroupData[]
+    scopeII: IGroupData[]
+  }
+  setScopes: React.Dispatch<{
+    scopeI: IGroupData[]
+    scopeII: IGroupData[]
+  }>
+}>({
   projectData: null,
+  scopes: {
+    scopeI: [],
+    scopeII: [],
+  },
+  setScopes: () => {},
 })
 
 const items: TabsProps['items'] = [
@@ -37,6 +54,16 @@ const items: TabsProps['items'] = [
 ]
 
 const App: React.FC = () => {
+  const [
+    scopes,
+    setScopes,
+  ] = useState<{
+    scopeI: IGroupData[]
+    scopeII: IGroupData[]
+  }>({
+    scopeI: [],
+    scopeII: [],
+  })
   const { state } = useLocation()
   const [form] = Form.useForm()
 
@@ -62,18 +89,18 @@ const App: React.FC = () => {
   })
 
   const handleUpdate = async () => {
-    const formData = form.getFieldsValue() || {}
+    const title = form.getFieldValue(['title']) || ''
 
-    console.log('formData', formData)
+    console.log('scopes', scopes)
 
     try {
       await updateResource({
         resource: 'carbon-project',
         id,
         args: {
-          title: formData?.title || '',
+          title,
           meta: {
-            project_data: JSON.stringify(formData),
+            project_data: JSON.stringify({}),
           },
         },
       })
@@ -97,7 +124,7 @@ const App: React.FC = () => {
         </div>
 
         <div className="w-full border-2 border-gray-500 mt-8">
-          <ProjectContext.Provider value={{ projectData }}>
+          <ProjectContext.Provider value={{ projectData, scopes, setScopes }}>
             <Tabs tabPosition="left" items={items} />
           </ProjectContext.Provider>
         </div>

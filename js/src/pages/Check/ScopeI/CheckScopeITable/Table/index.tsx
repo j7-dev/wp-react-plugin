@@ -15,10 +15,8 @@ const App: React.FC = () => {
   const { colorPrimary } = useColor()
   const columns = useColumns()
   const { renderTable } = useMonthlyTable()
-  const { projectData: projectContextData } = useContext(ProjectContext)
-  const scopeIGroups: IGroupData[] = JSON.parse(
-    projectContextData?.meta?.scopeI || '[]',
-  )
+  const { projectData: projectContextData, scopes } = useContext(ProjectContext)
+  const scopeIGroups = scopes?.scopeI || []
 
   const {
     groupKey,
@@ -26,8 +24,10 @@ const App: React.FC = () => {
     groupData,
     onDelete: handleDeleteGroup,
     editable = false,
-    dataSource,
   } = useContext(TableDataContext)
+
+  const dataSource =
+    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
 
   const id = projectContextData?.id || 0
   const form = Form.useFormInstance()
@@ -51,8 +51,6 @@ const App: React.FC = () => {
   const handleDelete = (theGroupKey: string) => () => {
     handleDeleteGroup(theGroupKey)
   }
-
-  useEffect(() => {}, [])
 
   // console.log('projectData', projectData)
   // console.log('projectContextData', projectContextData)

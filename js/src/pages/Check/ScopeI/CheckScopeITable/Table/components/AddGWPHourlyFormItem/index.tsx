@@ -4,12 +4,18 @@ import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
 import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRowButton'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
+import { ProjectContext } from '@/pages/Check'
+
 import HiddenInput from '@/components/HiddenInput'
 import { nanoid } from 'nanoid'
 
 const AddGWPHourlyFormItem = () => {
+  const { scopes } = useContext(ProjectContext)
   const { validating } = useContext(FormContext)
-  const { groupIndex, dataSource } = useContext(TableDataContext)
+  const { groupIndex, groupKey } = useContext(TableDataContext)
+  const scopeIGroups = scopes?.scopeI || []
+  const dataSource =
+    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
   const rowIndex = dataSource.length || 0
 
   return (

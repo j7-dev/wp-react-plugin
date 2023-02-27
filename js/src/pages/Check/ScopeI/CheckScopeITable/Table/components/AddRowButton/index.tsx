@@ -8,13 +8,17 @@ import type { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Tabl
 import { nanoid } from 'nanoid'
 import { gwpMapping, convertUnitToTons } from '@/utils'
 import type { TUnit } from '@/types'
-
+import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 
 export const FormContext = createContext<any | null>(null)
 const AddRowButton = () => {
   const form = Form.useFormInstance()
-  const { dataSource, setDataSource, groupIndex } = useContext(TableDataContext)
+  const { scopes, setScopes } = useContext(ProjectContext)
+  const { groupIndex, groupKey } = useContext(TableDataContext)
+  const scopeIGroups = scopes?.scopeI || []
+  const dataSource =
+    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
   const rowIndex = dataSource.length || 0
 
   const [
@@ -47,7 +51,7 @@ const AddRowButton = () => {
 
     console.log('groupData', theKey, groupData)
 
-    const theDataSource = groupData.dataSource.find(
+    const theRecord = groupData.dataSource.find(
       (item: {
         key: string
         equipment: string
@@ -61,56 +65,59 @@ const AddRowButton = () => {
       }) => item?.key === theKey,
     )
 
-    console.log('theDataSource', theDataSource)
+    console.log('theRecord', theRecord)
 
-    const getYearlyAmount = (theRecord: any) => {
-      switch (theRecord?.period) {
+    const getYearlyAmount = (record: any) => {
+      switch (record?.period) {
         case 'yearly':
           return convertUnitToTons({
-            value: theRecord.yearlyAmount ?? 0,
-            unit: theRecord.unit,
+            value: record.yearlyAmount ?? 0,
+            unit: record.unit,
           })
         case 'monthly':
           return convertUnitToTons({
-            value: (theRecord?.monthlyAmount ?? []).reduce(
+            value: (record?.monthlyAmount ?? []).reduce(
               (acc: number, cur: number) => acc + cur,
               0,
             ),
-            unit: theRecord.unit,
+            unit: record.unit,
           })
         case 'hourly':
           return convertUnitToTons({
-            value: (theRecord.hourlyAmount ?? 0) * (theRecord.hours ?? 0),
-            unit: theRecord.unit,
+            value: (record.hourlyAmount ?? 0) * (record.hours ?? 0),
+            unit: record.unit,
           })
         default:
           return 0
       }
     }
-    const yearlyAmount = getYearlyAmount(theDataSource)
+    const yearlyAmount = getYearlyAmount(theRecord)
 
     const ar5 =
-      gwpMapping.find((gwp) => gwp?.value === theDataSource?.gwp)?.ar5 || 0
+      gwpMapping.find((gwp) => gwp?.value === theRecord?.gwp)?.ar5 || 0
 
     const carbonTonsPerYear = yearlyAmount * ar5
 
-    const theFormatDataSource: TYearlyDataType = {
-      key: theDataSource?.key ?? '',
-      equipment: theDataSource?.equipment,
-      gwp: theDataSource.gwp,
+    const theFormatRecord: TYearlyDataType = {
+      key: theRecord?.key ?? '',
+      equipment: theRecord?.equipment,
+      gwp: theRecord.gwp,
       yearlyAmount,
       ar5,
       co2e: carbonTonsPerYear,
       carbonTonsPerYear,
-      period: theDataSource?.period,
+      period: theRecord?.period,
       monthlyAmount:
-        theDataSource?.period === 'monthly' ? theDataSource.monthlyAmount : [],
+        theRecord?.period === 'monthly' ? theRecord.monthlyAmount : [],
       hourlyAmount:
-        theDataSource?.period === 'hourly' ? theDataSource.hourlyAmount : [],
-      unit: theDataSource.unit,
+        theRecord?.period === 'hourly' ? theRecord.hourlyAmount : [],
+      unit: theRecord.unit,
     }
 
-    return theFormatDataSource
+    return {
+      ...dataSource,
+      ...theFormatRecord,
+    }
   }
 
   // TODO
@@ -139,10 +146,11 @@ const AddRowButton = () => {
         //   },
         // })
         console.log('newDataSources', newDataSource)
-        setDataSource([
-          ...dataSource,
-          newDataSource,
-        ])
+
+        const newScopes = JSON.parse(JSON.stringify(scopes))
+        newScopes.scopeI[groupIndex].dataSource = newDataSource
+
+        setScopes(newScopes)
       })
       .catch((err) => {
         console.log('Validate Failed:', err)
