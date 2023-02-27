@@ -1,7 +1,8 @@
 import React from 'react'
 import { Table } from 'antd'
 import type { ColumnTypes, TYearlyDataType } from '../types'
-import { months, gwpMapping } from '@/utils'
+import { months, gwpMapping, convertUnitToTons } from '@/utils'
+import { TUnit } from '@/types'
 
 const useMonthlyTable = () => {
   const columns: (ColumnTypes[number] & { dataIndex: string })[] = [
@@ -24,8 +25,11 @@ const useMonthlyTable = () => {
       align: 'center',
       dataIndex: 'monthlyAmount',
       width: 200,
-      render: (monthlyAmount: number) =>
-        Math.round(monthlyAmount * 1000) / 1000,
+      render: (monthlyAmount: number, record: any) =>
+        convertUnitToTons({
+          value: monthlyAmount,
+          unit: record?.unit,
+        }),
     },
     {
       title: 'GPT係數',
@@ -38,15 +42,22 @@ const useMonthlyTable = () => {
       align: 'center',
       dataIndex: 'co2e',
       width: 120,
-      render: (co2e: number) => Math.round(co2e * 1000) / 1000,
+      render: (co2e: number, record: any) =>
+        convertUnitToTons({
+          value: co2e,
+          unit: record?.unit,
+        }),
     },
     {
       title: '碳排(噸/月)',
       align: 'center',
       dataIndex: 'carbonTonsPerMonth',
       width: 200,
-      render: (carbonTonsPerMonth: number) =>
-        Math.round(carbonTonsPerMonth * 1000) / 1000,
+      render: (carbonTonsPerMonth: number, record: any) =>
+        convertUnitToTons({
+          value: carbonTonsPerMonth,
+          unit: record?.unit,
+        }),
     },
     {
       title: '',
@@ -69,6 +80,7 @@ const useMonthlyTable = () => {
         ar5,
         co2e: ar5 * value,
         carbonTonsPerMonth: ar5 * value,
+        unit: record.unit,
       }
     })
     return (

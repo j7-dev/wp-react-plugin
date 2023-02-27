@@ -3,21 +3,12 @@ import { Input, InputNumber, Form, Row, Col } from 'antd'
 import { months } from '@/utils'
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
-import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRowButton'
+import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRecordButton'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
-import { ProjectContext } from '@/pages/Check'
-
-import HiddenInput from '@/components/HiddenInput'
-import { nanoid } from 'nanoid'
 
 const AddGWPMonthlyFormItem = () => {
-  const { scopes } = useContext(ProjectContext)
   const { validating } = useContext(FormContext)
-  const { groupIndex, groupKey } = useContext(TableDataContext)
-  const scopeIGroups = scopes?.scopeI || []
-  const dataSource =
-    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
-  const rowIndex = dataSource.length || 0
+  const { groupIndex } = useContext(TableDataContext)
 
   return (
     <>
@@ -25,10 +16,7 @@ const AddGWPMonthlyFormItem = () => {
         <Col span={12}>
           <Form.Item
             name={[
-              'scopeI',
               groupIndex,
-              'dataSource',
-              rowIndex,
               'gwp',
             ]}
             className="w-full"
@@ -42,10 +30,7 @@ const AddGWPMonthlyFormItem = () => {
             <FormGWPSelect
               className="rounded-[6px]"
               name={[
-                'scopeI',
                 groupIndex,
-                'dataSource',
-                rowIndex,
                 'gwp',
               ]}
             />
@@ -54,10 +39,7 @@ const AddGWPMonthlyFormItem = () => {
         <Col span={12}>
           <Form.Item
             name={[
-              'scopeI',
               groupIndex,
-              'dataSource',
-              rowIndex,
               'unit',
             ]}
             className="w-full"
@@ -72,10 +54,7 @@ const AddGWPMonthlyFormItem = () => {
             <FormUnitSelect
               className="rounded-l-[6px]"
               name={[
-                'scopeI',
                 groupIndex,
-                'dataSource',
-                rowIndex,
                 'unit',
               ]}
             />
@@ -94,10 +73,7 @@ const AddGWPMonthlyFormItem = () => {
               >
                 <Form.Item
                   name={[
-                    'scopeI',
                     groupIndex,
-                    'dataSource',
-                    rowIndex,
                     'monthlyAmount',
                     month.value,
                   ]}
@@ -130,10 +106,7 @@ const AddGWPMonthlyFormItem = () => {
               >
                 <Form.Item
                   name={[
-                    'scopeI',
                     groupIndex,
-                    'dataSource',
-                    rowIndex,
                     'monthlyAmount',
                     month.value,
                   ]}
@@ -157,17 +130,6 @@ const AddGWPMonthlyFormItem = () => {
           )}
         </Col>
       </Row>
-      <HiddenInput
-        name={[
-          'scopeI',
-          groupIndex,
-          'dataSource',
-          rowIndex,
-          'key',
-        ]}
-        initialValue={nanoid()}
-        required
-      />
     </>
   )
 }

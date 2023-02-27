@@ -3,7 +3,7 @@ import { Input, InputNumber, Form, Button, Divider } from 'antd'
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons'
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
-import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRowButton'
+import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRecordButton'
 
 const AddGWPHourlyFormItem = () => {
   const [

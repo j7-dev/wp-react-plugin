@@ -47,7 +47,7 @@ export type TYearlyDataType = {
 }
 
 export type IGroupData = {
-  key: string
+  groupKey: string
   groupName: string
   dataSource: TYearlyDataType[]
 }

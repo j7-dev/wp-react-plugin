@@ -4,7 +4,7 @@ import { months } from '@/utils'
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons'
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
-import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRowButton'
+import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRecordButton'
 
 const AddGWPMonthlyFormItem = () => {
   const [

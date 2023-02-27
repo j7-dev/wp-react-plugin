@@ -60,9 +60,9 @@ export const convertUnitToTons = ({
 }) => {
   switch (unit) {
     case 'kg':
-      return value / 1000
+      return Math.round(value) / 1000
     case 'tons':
-      return value
+      return Math.round(value)
   }
 }
 

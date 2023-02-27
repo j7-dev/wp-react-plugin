@@ -12,14 +12,13 @@ import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 
 export const FormContext = createContext<any | null>(null)
-const AddRowButton = () => {
+const AddRecordButton = () => {
   const form = Form.useFormInstance()
   const { scopes, setScopes } = useContext(ProjectContext)
   const { groupIndex, groupKey } = useContext(TableDataContext)
   const scopeIGroups = scopes?.scopeI || []
-  const dataSource =
-    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
-  const rowIndex = dataSource.length || 0
+  const group = scopeIGroups.find((theGroup) => theGroup.groupKey === groupKey)
+  const dataSource = group?.dataSource || []
 
   const [
     isModalOpen,
@@ -37,87 +36,58 @@ const AddRowButton = () => {
   }
 
   const handleData = () => {
-    const theKey = form.getFieldValue([
-      'scopeI',
-      groupIndex,
-      'dataSource',
-      rowIndex,
-      'key',
-    ])
-    const formData = form.getFieldsValue()
-
+    const formData = form.getFieldsValue()[groupIndex]
     console.log('formData', formData)
-    const groupData = formData?.scopeI[groupIndex]
 
-    console.log('groupData', theKey, groupData)
-
-    const theRecord = groupData.dataSource.find(
-      (item: {
-        key: string
-        equipment: string
-        period: string
-        gwp: string
-        unit: TUnit
-        yearlyAmount?: number
-        hourlyAmount?: number
-        hours?: number
-        monthlyAmount?: number[]
-      }) => item?.key === theKey,
-    )
-
-    console.log('theRecord', theRecord)
-
-    const getYearlyAmount = (record: any) => {
-      switch (record?.period) {
+    const getYearlyAmount = (theFormData: any) => {
+      switch (theFormData?.period) {
         case 'yearly':
           return convertUnitToTons({
-            value: record.yearlyAmount ?? 0,
-            unit: record.unit,
+            value: theFormData.yearlyAmount ?? 0,
+            unit: theFormData.unit,
           })
         case 'monthly':
           return convertUnitToTons({
-            value: (record?.monthlyAmount ?? []).reduce(
+            value: (theFormData?.monthlyAmount ?? []).reduce(
               (acc: number, cur: number) => acc + cur,
               0,
             ),
-            unit: record.unit,
+            unit: theFormData.unit,
           })
         case 'hourly':
           return convertUnitToTons({
-            value: (record.hourlyAmount ?? 0) * (record.hours ?? 0),
-            unit: record.unit,
+            value: (theFormData.hourlyAmount ?? 0) * (theFormData.hours ?? 0),
+            unit: theFormData.unit,
           })
         default:
           return 0
       }
     }
-    const yearlyAmount = getYearlyAmount(theRecord)
+    const yearlyAmount = getYearlyAmount(formData)
 
-    const ar5 =
-      gwpMapping.find((gwp) => gwp?.value === theRecord?.gwp)?.ar5 || 0
+    const ar5 = gwpMapping.find((gwp) => gwp?.value === formData?.gwp)?.ar5 || 0
 
     const carbonTonsPerYear = yearlyAmount * ar5
 
     const theFormatRecord: TYearlyDataType = {
-      key: theRecord?.key ?? '',
-      equipment: theRecord?.equipment,
-      gwp: theRecord.gwp,
+      key: nanoid(),
+      equipment: formData?.equipment,
+      gwp: formData.gwp,
       yearlyAmount,
       ar5,
       co2e: carbonTonsPerYear,
       carbonTonsPerYear,
-      period: theRecord?.period,
+      period: formData?.period,
       monthlyAmount:
-        theRecord?.period === 'monthly' ? theRecord.monthlyAmount : [],
-      hourlyAmount:
-        theRecord?.period === 'hourly' ? theRecord.hourlyAmount : [],
-      unit: theRecord.unit,
+        formData?.period === 'monthly' ? formData.monthlyAmount : [],
+      hourlyAmount: formData?.period === 'hourly' ? formData.hourlyAmount : [],
+      unit: formData.unit,
     }
 
-    return {
+    return [
       ...dataSource,
-      ...theFormatRecord,
-    }
+      theFormatRecord,
+    ]
   }
 
   // TODO
@@ -128,6 +98,7 @@ const AddRowButton = () => {
       .then((_values) => {
         setValidating(false)
         setIsModalOpen(false)
+        const formData = form.getFieldsValue()
         const newDataSource = handleData()
         // const scopeI = JSON.stringify({
         //   ...fetchMetaProjectData,
@@ -148,6 +119,7 @@ const AddRowButton = () => {
         console.log('newDataSources', newDataSource)
 
         const newScopes = JSON.parse(JSON.stringify(scopes))
+
         newScopes.scopeI[groupIndex].dataSource = newDataSource
 
         setScopes(newScopes)
@@ -163,10 +135,7 @@ const AddRowButton = () => {
 
   const period = Form.useWatch(
     [
-      'scopeI',
       groupIndex,
-      'dataSource',
-      rowIndex,
       'period',
     ],
     form,
@@ -176,31 +145,19 @@ const AddRowButton = () => {
   useEffect(() => {
     form.resetFields([
       [
-        'scopeI',
         groupIndex,
-        'dataSource',
-        rowIndex,
         'yearlyAmount',
       ],
       [
-        'scopeI',
         groupIndex,
-        'dataSource',
-        rowIndex,
         'monthlyAmount',
       ],
       [
-        'scopeI',
         groupIndex,
-        'dataSource',
-        rowIndex,
         'hourlyAmount',
       ],
       [
-        'scopeI',
         groupIndex,
-        'dataSource',
-        rowIndex,
         'hours',
       ],
     ])
@@ -232,10 +189,7 @@ const AddRowButton = () => {
           <Form.Item
             // hasFeedback={true}
             name={[
-              'scopeI',
               groupIndex,
-              'dataSource',
-              rowIndex,
               'equipment',
             ]}
             rules={[{ required: validating, message: '請輸入設備名稱' }]}
@@ -245,10 +199,7 @@ const AddRowButton = () => {
 
           <Form.Item
             name={[
-              'scopeI',
               groupIndex,
-              'dataSource',
-              rowIndex,
               'period',
             ]}
             initialValue="yearly"
@@ -276,4 +227,4 @@ const AddRowButton = () => {
   )
 }
 
-export default AddRowButton
+export default AddRecordButton

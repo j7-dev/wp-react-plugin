@@ -3,31 +3,19 @@ import { Input, InputNumber, Form } from 'antd'
 
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
-import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRowButton'
+import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRecordButton'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
-import { ProjectContext } from '@/pages/Check'
-
-import HiddenInput from '@/components/HiddenInput'
-import { nanoid } from 'nanoid'
 
 const AddGWPYearlyFormItem = () => {
-  const { scopes } = useContext(ProjectContext)
-
   const { validating } = useContext(FormContext)
-  const { groupIndex, groupKey } = useContext(TableDataContext)
-  const scopeIGroups = scopes?.scopeI || []
-  const dataSource =
-    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
-  const rowIndex = dataSource.length
+  const { groupIndex } = useContext(TableDataContext)
+
   return (
     <>
       <Input.Group compact className="mb-4">
         <Form.Item
           name={[
-            'scopeI',
             groupIndex,
-            'dataSource',
-            rowIndex,
             'yearlyAmount',
           ]}
           className="w-[calc(100%-20rem)] mb-0"
@@ -47,10 +35,7 @@ const AddGWPYearlyFormItem = () => {
         </Form.Item>
         <Form.Item
           name={[
-            'scopeI',
             groupIndex,
-            'dataSource',
-            rowIndex,
             'gwp',
           ]}
           className="w-60 mb-0"
@@ -63,20 +48,14 @@ const AddGWPYearlyFormItem = () => {
         >
           <FormGWPSelect
             name={[
-              'scopeI',
               groupIndex,
-              'dataSource',
-              rowIndex,
               'gwp',
             ]}
           />
         </Form.Item>
         <Form.Item
           name={[
-            'scopeI',
             groupIndex,
-            'dataSource',
-            rowIndex,
             'unit',
           ]}
           className="w-20 mb-0"
@@ -90,26 +69,12 @@ const AddGWPYearlyFormItem = () => {
         >
           <FormUnitSelect
             name={[
-              'scopeI',
               groupIndex,
-              'dataSource',
-              rowIndex,
               'unit',
             ]}
           />
         </Form.Item>
       </Input.Group>
-      <HiddenInput
-        name={[
-          'scopeI',
-          groupIndex,
-          'dataSource',
-          rowIndex,
-          'key',
-        ]}
-        initialValue={nanoid()}
-        required
-      />
     </>
   )
 }

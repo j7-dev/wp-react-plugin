@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import { Tabs, Form, Button, TabsProps } from 'antd'
 import ScopeI from './ScopeI'
 import ScopeII from './ScopeII'
@@ -24,8 +24,20 @@ export const ProjectContext = createContext<{
 }>({
   projectData: null,
   scopes: {
-    scopeI: [],
-    scopeII: [],
+    scopeI: [
+      {
+        groupKey: '0',
+        groupName: '工廠 #1',
+        dataSource: [],
+      },
+    ],
+    scopeII: [
+      {
+        groupKey: '0',
+        groupName: '工廠 #1',
+        dataSource: [],
+      },
+    ],
   },
   setScopes: () => {},
 })
@@ -61,8 +73,20 @@ const App: React.FC = () => {
     scopeI: IGroupData[]
     scopeII: IGroupData[]
   }>({
-    scopeI: [],
-    scopeII: [],
+    scopeI: [
+      {
+        groupKey: '0',
+        groupName: '工廠 #1',
+        dataSource: [],
+      },
+    ],
+    scopeII: [
+      {
+        groupKey: '0',
+        groupName: '工廠 #1',
+        dataSource: [],
+      },
+    ],
   })
   const { state } = useLocation()
   const [form] = Form.useForm()
@@ -91,7 +115,23 @@ const App: React.FC = () => {
   const handleUpdate = async () => {
     const title = form.getFieldValue(['title']) || ''
 
-    console.log('scopes', scopes)
+    const copyScopes = JSON.parse(JSON.stringify(scopes))
+    const updateScopeI = copyScopes.scopeI.map(
+      (theGroup: IGroupData, groupIndex: number) => ({
+        ...theGroup,
+        groupName:
+          form.getFieldValue([
+            groupIndex,
+            'groupName',
+          ]) || '',
+      }),
+    )
+    const updateScopes = {
+      ...copyScopes,
+      scopeI: updateScopeI,
+    }
+
+    console.log('updateScopes', updateScopes)
 
     try {
       await updateResource({
@@ -100,7 +140,7 @@ const App: React.FC = () => {
         args: {
           title,
           meta: {
-            project_data: JSON.stringify({}),
+            project_data: JSON.stringify(updateScopes),
           },
         },
       })
@@ -110,6 +150,13 @@ const App: React.FC = () => {
       ])
     } catch (error) {}
   }
+
+  useEffect(() => {
+    if (!!projectData) {
+      const fectchScopes = JSON.parse(projectData.meta.project_data)
+      setScopes(fectchScopes)
+    }
+  }, [projectData])
 
   return (
     <>

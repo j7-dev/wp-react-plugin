@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { Table, Row, Button, Form } from 'antd'
-import AddRowButton from './components/AddRowButton'
+import AddRecordButton from './components/AddRecordButton'
 import type { TYearlyDataType, IGroupData } from './types'
 import useColumns from './hooks/useColumns'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
@@ -26,8 +26,10 @@ const App: React.FC = () => {
     editable = false,
   } = useContext(TableDataContext)
 
+  console.log('groupData', groupData)
+
   const dataSource =
-    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
+    scopeIGroups.find((group) => group.groupKey === groupKey)?.dataSource || []
 
   const id = projectContextData?.id || 0
   const form = Form.useFormInstance()
@@ -35,7 +37,6 @@ const App: React.FC = () => {
   const { element } = useEditableTitle({
     form,
     name: [
-      'scopeI',
       groupIndex,
       'groupName',
     ],
@@ -81,7 +82,7 @@ const App: React.FC = () => {
             <DeleteFilled className="mr-2" />
             刪除群組
           </Button>
-          <AddRowButton />
+          <AddRecordButton />
         </Row>
       )}
 

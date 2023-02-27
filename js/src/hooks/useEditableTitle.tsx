@@ -33,6 +33,7 @@ const useEditableTitle = ({
 
   useEffect(() => {
     setEditableStr(title.theTitle)
+    form.setFieldValue(name, title.theTitle)
   }, [title.theTitle])
 
   const renderTitle = () => (

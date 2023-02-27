@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import CheckScopeITable from '@/pages/Check/ScopeI/CheckScopeITable'
 import { Button } from 'antd'
 import { AppstoreAddOutlined } from '@ant-design/icons'
@@ -7,52 +7,53 @@ import { IGroupData } from './CheckScopeITable/Table/types'
 import { nanoid } from 'nanoid'
 
 const ScopeIPage = () => {
-  const { projectData } = useContext(ProjectContext)
+  const { projectData, scopes, setScopes } = useContext(ProjectContext)
   console.log('projectData', projectData)
   const postId = projectData?.id
-  const metaData = JSON.parse(projectData?.meta?.project_data || '{}')
-  const scopeIGroups: IGroupData[] = metaData?.scopeI || []
-  const [
-    groupKeys,
-    setGroupKeys,
-  ] = useState([nanoid()])
-
-  useEffect(() => {
-    if (scopeIGroups.length > 0) {
-      const fetchKeys = scopeIGroups.map((group) => group.key)
-      setGroupKeys(fetchKeys)
-    }
-  }, [])
+  const scopeIGroups: IGroupData[] = scopes?.scopeI || []
 
   const handleAdd = () => {
-    setGroupKeys([
-      ...groupKeys,
-      nanoid(),
-    ])
+    setScopes({
+      ...scopes,
+      scopeI: [
+        ...scopeIGroups,
+        {
+          groupKey: nanoid(),
+          groupName: '工廠',
+          dataSource: [],
+        },
+      ],
+    })
   }
 
-  const handleDeleteGroup = (groupKey: string) => {
-    const newCount = groupKeys.filter((rowIndex) => rowIndex !== groupKey)
-    setGroupKeys(newCount)
+  const handleDeleteGroup = (theGroupKey: string) => {
+    const newScopeIGroups = scopeIGroups.filter(
+      (theGroup) => theGroup?.groupKey !== theGroupKey,
+    )
+    setScopes({
+      ...scopes,
+      scopeI: [
+        ...newScopeIGroups,
+      ],
+    })
   }
+
+  useEffect(() => {
+    if (!!projectData?.meta?.project_data) {
+      const fetchScopes = JSON.parse(projectData?.meta?.project_data)
+      console.log('fetchScopes', projectData?.meta)
+    }
+  }, [projectData])
 
   return (
     <>
-      {groupKeys.map((groupKey, index) => {
-        const groupData = scopeIGroups.find(
-          (group) => group.key === groupKey,
-        ) || {
-          key: groupKey,
-          groupName: '工廠',
-          dataSource: [],
-        }
-
+      {scopeIGroups.map((theGroup, index) => {
         return (
           <CheckScopeITable
-            key={groupKey}
-            groupKey={groupKey}
+            key={theGroup?.groupKey}
+            groupKey={theGroup?.groupKey}
             groupIndex={index}
-            groupData={groupData}
+            groupData={theGroup}
             postId={postId}
             onDelete={handleDeleteGroup}
             editable
