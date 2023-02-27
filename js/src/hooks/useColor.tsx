@@ -3,9 +3,9 @@ import { theme } from 'antd'
 const { useToken } = theme
 
 const useColor = () => {
-	const { token } = useToken()
+  const { token } = useToken()
 
-	return token
+  return token
 }
 
 export default useColor

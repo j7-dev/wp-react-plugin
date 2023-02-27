@@ -1,4 +1,4 @@
 export interface IStyle {
-	opacity: number
-	fill: string
+  opacity: number
+  fill: string
 }

@@ -10,6 +10,7 @@
     "allowJs": false,
     "skipLibCheck": true,
     "declaration": true,
+    "preserveSymlinks": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

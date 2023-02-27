@@ -7,22 +7,22 @@ import { createBrowserRouter } from 'react-router-dom'
 const baseUrl = process.env.BASE_URL || ''
 
 export const defaultRouters = createBrowserRouter([
-	{
-		path: baseUrl,
-		element: <CustomLayouts />,
-		children: [
-			{
-				path: '',
-				element: <DefaultPage />,
-			},
-			{
-				path: 'create',
-				element: <Create />,
-			},
-			{
-				path: 'check',
-				element: <Check />,
-			},
-		],
-	},
+  {
+    path: baseUrl,
+    element: <CustomLayouts />,
+    children: [
+      {
+        path: '',
+        element: <DefaultPage />,
+      },
+      {
+        path: 'create',
+        element: <Create />,
+      },
+      {
+        path: 'check',
+        element: <Check />,
+      },
+    ],
+  },
 ])

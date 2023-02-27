@@ -6,14 +6,14 @@
     "commonjs": true
   },
   "extends": [
-    "prettier",
     "plugin:@typescript-eslint/recommended",
     "plugin:@wordpress/eslint-plugin/custom",
     "plugin:@wordpress/eslint-plugin/esnext",
     "plugin:@wordpress/eslint-plugin/jsdoc",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
-    "eslint-config-prettier"
+    "eslint-config-prettier",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -39,14 +39,32 @@
     "no-console": [
       "warn"
     ],
+    "linebreak-style": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error",
-    "no-unused-vars": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "lf",
+        "useTabs": false,
+        "tabWidth": 2,
+        "prettier-multiline-arrays-set-threshold": 1
+      }
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
     "no-shadow": "error",
+    "@typescript-eslint/no-shadow": [
+      "error"
+    ],
     "camelcase": "off",
     "quote-props": [
       "error",
