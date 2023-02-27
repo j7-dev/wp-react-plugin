@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { Table, Row, Button, Form } from 'antd'
+import React, { useContext } from 'react'
+import { Table, Row, Button, Form, Popconfirm } from 'antd'
 import AddRecordButton from './components/AddRecordButton'
 import type { TYearlyDataType } from './types'
 import useColumns from './hooks/useColumns'
@@ -8,7 +8,6 @@ import { DeleteFilled } from '@ant-design/icons'
 import useMonthlyTable from './hooks/useMonthlyTable'
 import type { ColumnType } from 'antd/lib/table'
 import { useColor, useEditableTitle } from '@/hooks'
-import { updateResource } from '@/api'
 import { ProjectContext } from '@/pages/Check'
 
 const App: React.FC = () => {
@@ -73,15 +72,17 @@ const App: React.FC = () => {
       />
       {!!editable && (
         <Row justify="space-between">
-          <Button
-            className="mt-4"
-            type="primary"
-            danger
-            onClick={handleDelete(groupKey)}
+          <Popconfirm
+            title="確認刪除群組?"
+            okText="確認"
+            cancelText="取消"
+            onConfirm={handleDelete(groupKey)}
           >
-            <DeleteFilled className="mr-2" />
-            刪除群組
-          </Button>
+            <Button className="mt-4" type="dashed" danger>
+              <DeleteFilled className="mr-2" />
+              刪除群組
+            </Button>
+          </Popconfirm>
           <AddRecordButton />
         </Row>
       )}

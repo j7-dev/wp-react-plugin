@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { Button, Modal, Input, Radio, Form } from 'antd'
-import { FolderAddOutlined } from '@ant-design/icons'
+import { FolderAddFilled } from '@ant-design/icons'
 import GWPYearlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPYearlyFormItem'
 import GWPMonthlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPMonthlyFormItem'
 import GWPHourlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPHourlyFormItem'
@@ -179,8 +179,8 @@ const AddRecordButton = () => {
 
   return (
     <>
-      <Button onClick={showModal} type="default" className="mt-4">
-        <FolderAddOutlined className="mr-2" />
+      <Button onClick={showModal} type="primary" className="mt-4">
+        <FolderAddFilled className="mr-2" />
         新增設備
       </Button>
       <Modal

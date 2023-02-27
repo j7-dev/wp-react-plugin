@@ -50,6 +50,8 @@ const useColumns = () => {
         dataSource.length >= 1 ? (
           <Popconfirm
             title="確認刪除?"
+            okText="確認"
+            cancelText="取消"
             onConfirm={() => handleDelete(record.key)}
           >
             <DeleteOutlined className="text-red-500" />
