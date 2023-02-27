@@ -29,9 +29,46 @@ const AddRecordButton = () => {
     setValidating,
   ] = useState(false)
 
+  const resetFormData = () => {
+    form.resetFields([
+      [
+        groupIndex,
+        'equipment',
+      ],
+      [
+        groupIndex,
+        'period',
+      ],
+      [
+        groupIndex,
+        'yearlyAmount',
+      ],
+      [
+        groupIndex,
+        'monthlyAmount',
+      ],
+      [
+        groupIndex,
+        'hourlyAmount',
+      ],
+      [
+        groupIndex,
+        'hours',
+      ],
+      [
+        groupIndex,
+        'gwp',
+      ],
+      [
+        groupIndex,
+        'unit',
+      ],
+    ])
+  }
+
   const showModal = () => {
     setIsModalOpen(true)
-    // TODO set reset field name
+    resetFormData()
   }
 
   const handleData = () => {
@@ -79,7 +116,7 @@ const AddRecordButton = () => {
       period: formData?.period,
       monthlyAmount:
         formData?.period === 'monthly' ? formData.monthlyAmount : [],
-      hourlyAmount: formData?.period === 'hourly' ? formData.hourlyAmount : [],
+      hourlyAmount: formData?.period === 'hourly' ? formData.hourlyAmount : 0,
       unit: formData.unit,
     }
 
@@ -139,28 +176,6 @@ const AddRecordButton = () => {
     ],
     form,
   )
-
-  // TODO
-  useEffect(() => {
-    form.resetFields([
-      [
-        groupIndex,
-        'yearlyAmount',
-      ],
-      [
-        groupIndex,
-        'monthlyAmount',
-      ],
-      [
-        groupIndex,
-        'hourlyAmount',
-      ],
-      [
-        groupIndex,
-        'hours',
-      ],
-    ])
-  }, [period])
 
   return (
     <>

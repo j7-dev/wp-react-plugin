@@ -6,7 +6,7 @@ import GWPMonthlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/comp
 import GWPHourlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPHourlyFormItem'
 import type { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
 import { nanoid } from 'nanoid'
-import { gwpMapping, convertUnitToTons } from '@/utils'
+import { gwpMapping, convertUnitToTons, reverseUnitValue } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 import { useColor } from '@/hooks'
@@ -35,22 +35,27 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
   const showModal = (theRecord: TYearlyDataType) => () => {
     setIsModalOpen(true)
-    console.log('record', theRecord)
-    form.setFieldValue(
-      [
-        groupIndex,
-        'equipment',
-      ],
-      theRecord.equipment,
-    )
 
-    form.setFieldValue(
-      [
-        groupIndex,
-        'period',
-      ],
-      theRecord.period,
-    )
+    const theYearlyAmount = reverseUnitValue({
+      value: theRecord.yearlyAmount,
+      unit: theRecord.unit,
+    })
+
+    const theHourlyAmount = theRecord.hourlyAmount || 0
+    const theHours = !!theHourlyAmount ? theYearlyAmount / theHourlyAmount : 0
+
+    form.setFieldsValue({
+      [groupIndex]: {
+        equipment: theRecord.equipment,
+        period: theRecord.period,
+        yearlyAmount: theRecord.yearlyAmount || 0,
+        monthlyAmount: theRecord.monthlyAmount || new Array(12).fill(0),
+        hourlyAmount: theRecord.hourlyAmount || 0,
+        hours: Math.round(theHours),
+        gwp: theRecord.gwp,
+        unit: theRecord.unit,
+      },
+    })
   }
 
   const handleData = () => {
@@ -88,23 +93,28 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
     const carbonTonsPerYear = yearlyAmount * ar5
 
     const theFormatRecord: TYearlyDataType = {
-      key: nanoid(),
+      key: record?.key || nanoid(),
       equipment: formData?.equipment,
-      gwp: formData.gwp,
+      gwp: formData?.gwp,
       yearlyAmount,
       ar5,
       co2e: carbonTonsPerYear,
       carbonTonsPerYear,
       period: formData?.period,
       monthlyAmount:
-        formData?.period === 'monthly' ? formData.monthlyAmount : [],
-      hourlyAmount: formData?.period === 'hourly' ? formData.hourlyAmount : [],
+        formData?.period === 'monthly' ? formData?.monthlyAmount : [],
+      hourlyAmount: formData?.period === 'hourly' ? formData?.hourlyAmount : 0,
       unit: formData.unit,
     }
 
+    const theRecordIndex = dataSource.findIndex(
+      (theRecord) => theRecord.key === record?.key,
+    )
+
     return [
-      ...dataSource,
+      ...dataSource.slice(0, theRecordIndex),
       theFormatRecord,
+      ...dataSource.slice(theRecordIndex + 1),
     ]
   }
 
@@ -116,7 +126,6 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
       .then((_values) => {
         setValidating(false)
         setIsModalOpen(false)
-        const formData = form.getFieldsValue()
         const newDataSource = handleData()
         // const scopeI = JSON.stringify({
         //   ...fetchMetaProjectData,
@@ -158,28 +167,6 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
     ],
     form,
   )
-
-  // TODO
-  useEffect(() => {
-    form.resetFields([
-      [
-        groupIndex,
-        'yearlyAmount',
-      ],
-      [
-        groupIndex,
-        'monthlyAmount',
-      ],
-      [
-        groupIndex,
-        'hourlyAmount',
-      ],
-      [
-        groupIndex,
-        'hours',
-      ],
-    ])
-  }, [period])
 
   return (
     <>
