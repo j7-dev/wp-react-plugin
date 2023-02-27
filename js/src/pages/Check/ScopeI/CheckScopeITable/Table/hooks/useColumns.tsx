@@ -7,20 +7,33 @@ import { ProjectContext } from '@/pages/Check'
 
 import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
 import { gwpMapping } from '@/utils'
-import EditRowButton from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/EditRowButton'
+import EditRecordButton from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/EditRecordButton'
 import { useColor } from '@/hooks'
 
 const useColumns = () => {
   const { colorPrimary } = useColor()
-  const { scopes } = useContext(ProjectContext)
-  const {
-    groupKey,
-    handleDelete,
-    editable = false,
-  } = useContext(TableDataContext)
+  const { scopes, setScopes } = useContext(ProjectContext)
   const scopeIGroups = scopes?.scopeI || []
-  const dataSource =
-    scopeIGroups.find((group) => group.key === groupKey)?.dataSource || []
+  const { groupIndex, editable = false } = useContext(TableDataContext)
+  const group = scopeIGroups[groupIndex]
+  const dataSource = group?.dataSource || []
+
+  const handleDelete = (key: string) => {
+    const newDataSource = dataSource.filter(
+      (theRecord) => theRecord.key !== key,
+    )
+    setScopes({
+      ...scopes,
+      scopeI: [
+        ...scopeIGroups.slice(0, groupIndex),
+        {
+          ...group,
+          dataSource: newDataSource,
+        },
+        ...scopeIGroups.slice(groupIndex + 1),
+      ],
+    })
+  }
 
   const defaultColumns: (ColumnType<TYearlyDataType> & {
     editable?: boolean
@@ -74,18 +87,17 @@ const useColumns = () => {
       dataIndex: 'action',
       width: 100,
       fixed: 'right',
-      render: (_, record: TYearlyDataType) =>
-        dataSource.length >= 1 ? (
-          <p className="text-center">
-            <Popconfirm
-              title="確認刪除?"
-              onConfirm={() => handleDelete(record.key)}
-            >
-              <DeleteOutlined className="text-red-500 text-[20px]" />
-            </Popconfirm>
-            <EditRowButton record={record} />
-          </p>
-        ) : null,
+      render: (_, record: TYearlyDataType) => (
+        <p className="text-center">
+          <Popconfirm
+            title="確認刪除?"
+            onConfirm={() => handleDelete(record.key)}
+          >
+            <DeleteOutlined className="text-red-500 text-[20px]" />
+          </Popconfirm>
+          <EditRecordButton record={record} />
+        </p>
+      ),
     },
   ]
 

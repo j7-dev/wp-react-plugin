@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { Button, Modal, Input, Radio, Form } from 'antd'
-import { FolderAddOutlined } from '@ant-design/icons'
+import { Modal, Input, Radio, Form } from 'antd'
+import { SlidersOutlined } from '@ant-design/icons'
 import GWPYearlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPYearlyFormItem'
 import GWPMonthlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPMonthlyFormItem'
 import GWPHourlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPHourlyFormItem'
@@ -9,15 +9,19 @@ import { nanoid } from 'nanoid'
 import { gwpMapping, convertUnitToTons } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
+import { useColor } from '@/hooks'
 
 export const FormContext = createContext<any | null>(null)
-const AddRecordButton = () => {
+const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
+  record,
+}) => {
   const form = Form.useFormInstance()
   const { scopes, setScopes } = useContext(ProjectContext)
   const { groupIndex, groupKey } = useContext(TableDataContext)
   const scopeIGroups = scopes?.scopeI || []
   const group = scopeIGroups.find((theGroup) => theGroup.groupKey === groupKey)
   const dataSource = group?.dataSource || []
+  const { colorPrimary } = useColor()
 
   const [
     isModalOpen,
@@ -29,9 +33,24 @@ const AddRecordButton = () => {
     setValidating,
   ] = useState(false)
 
-  const showModal = () => {
+  const showModal = (theRecord: TYearlyDataType) => () => {
     setIsModalOpen(true)
-    // TODO set reset field name
+    console.log('record', theRecord)
+    form.setFieldValue(
+      [
+        groupIndex,
+        'equipment',
+      ],
+      theRecord.equipment,
+    )
+
+    form.setFieldValue(
+      [
+        groupIndex,
+        'period',
+      ],
+      theRecord.period,
+    )
   }
 
   const handleData = () => {
@@ -164,19 +183,20 @@ const AddRecordButton = () => {
 
   return (
     <>
-      <Button onClick={showModal} type="default" className="mt-4">
-        <FolderAddOutlined className="mr-2" />
-        新增設備
-      </Button>
+      <SlidersOutlined
+        className="ml-4 text-[20px]"
+        style={{ color: colorPrimary }}
+        onClick={showModal(record)}
+      />
       <Modal
-        title="新增設備"
+        title="編輯設備"
         open={isModalOpen}
         onOk={handleModalOk}
         centered
         width={600}
         className="cc-modal"
         onCancel={handleCancel}
-        okText="新增設備"
+        okText="編輯設備"
         cancelText="取消"
       >
         <Form
@@ -239,4 +259,4 @@ const AddRecordButton = () => {
   )
 }
 
-export default AddRecordButton
+export default EditRecordButton

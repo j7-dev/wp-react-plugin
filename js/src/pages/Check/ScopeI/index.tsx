@@ -12,7 +12,7 @@ const ScopeIPage = () => {
   const postId = projectData?.id
   const scopeIGroups: IGroupData[] = scopes?.scopeI || []
 
-  const handleAdd = () => {
+  const handleAddGroup = () => {
     setScopes({
       ...scopes,
       scopeI: [
@@ -64,7 +64,7 @@ const ScopeIPage = () => {
         className="w-full mt-8"
         type="primary"
         size="large"
-        onClick={handleAdd}
+        onClick={handleAddGroup}
       >
         <AppstoreAddOutlined className="mr-2" />
         新增群組

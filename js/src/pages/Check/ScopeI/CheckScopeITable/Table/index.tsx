@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Table, Row, Button, Form } from 'antd'
 import AddRecordButton from './components/AddRecordButton'
-import type { TYearlyDataType, IGroupData } from './types'
+import type { TYearlyDataType } from './types'
 import useColumns from './hooks/useColumns'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 import { DeleteFilled } from '@ant-design/icons'

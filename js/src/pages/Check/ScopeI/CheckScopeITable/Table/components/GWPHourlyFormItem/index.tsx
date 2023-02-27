@@ -1,34 +1,30 @@
-import { useContext } from 'react'
 import { Input, InputNumber, Form } from 'antd'
-
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
-import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRecordButton'
-import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 
-const AddGWPYearlyFormItem = () => {
-  const { validating } = useContext(FormContext)
-  const { groupIndex } = useContext(TableDataContext)
-
+const GWPHourlyFormItem: React.FC<{
+  groupIndex: number
+  validating: boolean
+}> = ({ groupIndex, validating }) => {
   return (
     <>
       <Input.Group compact className="mb-4">
         <Form.Item
           name={[
             groupIndex,
-            'yearlyAmount',
+            'hourlyAmount',
           ]}
           className="w-[calc(100%-20rem)] mb-0"
           initialValue={0}
           rules={[
             {
               required: validating,
-              message: '請輸入年排放量',
+              message: '請輸入每小時排放量',
             },
           ]}
         >
           <InputNumber
-            addonBefore="年排放"
+            addonBefore="每小時排放"
             className="w-full rounded-r-none"
             min={0}
           />
@@ -75,8 +71,31 @@ const AddGWPYearlyFormItem = () => {
           />
         </Form.Item>
       </Input.Group>
+      <Input.Group compact className="mb-4">
+        <Form.Item
+          name={[
+            groupIndex,
+            'hours',
+          ]}
+          className="w-full mb-0"
+          initialValue={0}
+          rules={[
+            {
+              required: validating,
+              message: '請輸入此設備今年運轉了幾小時',
+            },
+          ]}
+        >
+          <InputNumber
+            addonBefore="此設備今年運轉了"
+            addonAfter="小時"
+            className="w-full"
+            min={0}
+          />
+        </Form.Item>
+      </Input.Group>
     </>
   )
 }
 
-export default AddGWPYearlyFormItem
+export default GWPHourlyFormItem

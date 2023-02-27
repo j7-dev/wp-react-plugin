@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useState, useEffect } from 'react'
-import { Tabs, Form, Button, TabsProps } from 'antd'
+import { Tabs, Form, Button, TabsProps, Popover } from 'antd'
+import { InfoCircleOutlined } from '@ant-design/icons'
 import ScopeI from './ScopeI'
 import ScopeII from './ScopeII'
 import Chart from './Chart'
@@ -10,6 +11,7 @@ import { useLocation } from 'react-router-dom'
 import { updateResource } from '@/api'
 import { useQueryClient } from '@tanstack/react-query'
 import { IGroupData } from './ScopeI/CheckScopeITable/Table/types'
+import { isEqual } from 'lodash-es'
 
 export const ProjectContext = createContext<{
   projectData: any
@@ -88,11 +90,15 @@ const App: React.FC = () => {
       },
     ],
   })
+  const [
+    popoverOpen,
+    setPopoverOpen,
+  ] = useState(false)
   const { state } = useLocation()
   const [form] = Form.useForm()
 
   const id = state?.id
-  const { colorPrimary } = useColor()
+  const { colorPrimary, colorInfo } = useColor()
   const projectData = useOne({
     resource: 'carbon-project',
     id,
@@ -145,9 +151,10 @@ const App: React.FC = () => {
         },
       })
       queryClient.invalidateQueries([
-        'getProject',
+        'get_carbon-project',
         id,
       ])
+      setPopoverOpen(false)
     } catch (error) {}
   }
 
@@ -158,16 +165,44 @@ const App: React.FC = () => {
     }
   }, [projectData])
 
+  useEffect(() => {
+    if (!!projectData) {
+      const fectchScopes = JSON.parse(projectData.meta.project_data)
+      const isSame = isEqual(scopes, fectchScopes)
+
+      setPopoverOpen(!isSame)
+    }
+  }, [scopes])
+
   return (
     <>
       <Form form={form}>
         <hr style={{ borderColor: colorPrimary }} />
         <div className="flex justify-between align-middle mt-8">
           {element}
-
-          <Button type="primary" size="large" onClick={handleUpdate}>
-            更新專案資料
-          </Button>
+          <Popover
+            content={<p>偵測到頁面有數據變更</p>}
+            title={
+              <>
+                <InfoCircleOutlined
+                  style={{ color: colorInfo }}
+                  className="mr-2"
+                />{' '}
+                記得儲存你的資料
+              </>
+            }
+            open={popoverOpen}
+          >
+            <Button
+              type="primary"
+              className={popoverOpen ? 'animate-pulse' : ''}
+              danger={popoverOpen}
+              size="large"
+              onClick={handleUpdate}
+            >
+              更新專案資料
+            </Button>
+          </Popover>
         </div>
 
         <div className="w-full border-2 border-gray-500 mt-8">

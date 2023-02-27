@@ -1,15 +1,12 @@
-import { useContext } from 'react'
 import { Input, InputNumber, Form, Row, Col } from 'antd'
 import { months } from '@/utils'
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
-import { FormContext } from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/AddRecordButton'
-import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 
-const AddGWPMonthlyFormItem = () => {
-  const { validating } = useContext(FormContext)
-  const { groupIndex } = useContext(TableDataContext)
-
+const GWPMonthlyFormItem: React.FC<{
+  groupIndex: number
+  validating: boolean
+}> = ({ groupIndex, validating }) => {
   return (
     <>
       <Row gutter={24}>
@@ -134,4 +131,4 @@ const AddGWPMonthlyFormItem = () => {
   )
 }
 
-export default AddGWPMonthlyFormItem
+export default GWPMonthlyFormItem
