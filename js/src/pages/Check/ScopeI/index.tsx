@@ -38,13 +38,6 @@ const ScopeIPage = () => {
     })
   }
 
-  useEffect(() => {
-    if (!!projectData?.meta?.project_data) {
-      const fetchScopes = JSON.parse(projectData?.meta?.project_data)
-      console.log('fetchScopes', projectData?.meta)
-    }
-  }, [projectData])
-
   return (
     <>
       {scopeIGroups.map((theGroup, index) => {

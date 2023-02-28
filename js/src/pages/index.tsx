@@ -24,10 +24,13 @@ function DefaultPage() {
       })
   }, [])
 
+  const featureImgIds = projects.map((project: any) => project?.featured_media)
+  const uniqueFeatureImgIds = Array.from(new Set(featureImgIds))
+
   const images = useMany({
     resource: 'media',
     args: {
-      include: [23],
+      include: uniqueFeatureImgIds,
     },
     queryOptions: {
       enabled: projects.length > 0 || false,

@@ -21,7 +21,7 @@ const Export = () => {
   const { projectData, scopes } = useContext(ProjectContext)
   const postId = projectData?.id
   const scopeIGroups: TGroupData[] = scopes?.scopeI || []
-  console.log('@@@ scopes', scopes)
+
   const mergedDataSource: TYearlyDataType[] = flatten(
     scopeIGroups.map((group) => group?.dataSource) || [],
   )
@@ -79,7 +79,10 @@ const Export = () => {
     setIsExportModalOpen(true)
   }
 
-  const jsonString = JSON.stringify(JSON.stringify(scopes || '{}'))
+  const jsonString = JSON.stringify(JSON.stringify(scopes || '{}')).replace(
+    /\\/g,
+    ' ',
+  )
 
   const download = (text: string) => () => {
     const blob = new Blob([text], { type: 'text/plain' })

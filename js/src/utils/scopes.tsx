@@ -17,5 +17,9 @@ export const defaultScopes = {
     title: '○○○○股份有限公司',
     content: '',
     companyCategory: '未分類',
+    imgData: {
+      attachmentId: 0,
+      url: '',
+    },
   },
 }

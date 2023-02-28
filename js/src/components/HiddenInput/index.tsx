@@ -7,7 +7,7 @@ const HiddenInput: React.FC<{
   required?: boolean
 }> = ({ name, initialValue = '○○○', required = false }) => {
   const form = Form.useFormInstance()
-  const value = form.getFieldValue(name)
+  const value = Form.useWatch(name, form)
 
   return (
     <>

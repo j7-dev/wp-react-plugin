@@ -85,15 +85,17 @@ export const reverseUnitValue = ({
   }
 }
 
-export const getStatusText = (statusText: string) => {
-  switch (statusText) {
-    case 'Created':
+export const getTypeText = (type: string) => {
+  console.log('@@@ type', type)
+
+  switch (type) {
+    case 'carbon-project':
       return '專案創建'
-    case 'OK':
-      return '專案更新'
+    case 'attachment':
+      return '圖片上傳'
   }
 
-  return statusText || ''
+  return type || ''
 }
 
 const baseUrl = process.env.BASE_URL || ''

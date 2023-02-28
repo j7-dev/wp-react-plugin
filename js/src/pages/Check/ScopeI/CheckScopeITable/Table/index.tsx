@@ -29,8 +29,6 @@ const App: React.FC = () => {
     onDelete: handleDeleteGroup = () => {},
   } = useContext(TableDataContext)
 
-  console.log('groupData', groupData)
-
   const dataSource =
     scopeIGroups.find((group) => group.groupKey === groupKey)?.dataSource || []
 

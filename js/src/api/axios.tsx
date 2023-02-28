@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 import { notification } from 'antd'
-import { getStatusText } from '@/utils'
+import { getTypeText } from '@/utils'
 
 const baseURL = process.env.API_URL || wpApiSettings.root || ''
 const timeout = process.env.API_TIMEOUT || '30000'
@@ -14,11 +14,13 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
+
+    const type = response?.data?.type
     const method = response.config.method
-    const statusText = getStatusText(response.statusText)
+    const typeText = getTypeText(type)
     if (method !== 'get') {
       notification.success({
-        message: `${statusText}成功`,
+        message: `${typeText}成功`,
         onClick: () => {
           console.log('response', response)
         },

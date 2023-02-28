@@ -33,13 +33,16 @@ const useOne = (options: {
       }),
     options.queryOptions || {},
   )
-  const { isSuccess, data } = getResult
+  const { isSuccess, data, isFetching } = getResult
 
   useEffect(() => {
     if (data) {
       setFetchedData(data.data || null)
     }
-  }, [isSuccess])
+  }, [
+    isSuccess,
+    isFetching,
+  ])
 
   return fetchedData
 }

@@ -20,11 +20,13 @@ export const ProjectContext = createContext<{
   scopes: TScopes
   setScopes: React.Dispatch<TScopes>
   printMode: boolean
+  setIsDiff: React.Dispatch<boolean>
 }>({
   projectData: null,
   scopes: defaultScopes,
   setScopes: () => {},
   printMode: false,
+  setIsDiff: () => {},
 })
 
 const App: React.FC = () => {
@@ -51,25 +53,21 @@ const App: React.FC = () => {
       key: '1',
       label: <span onClick={handlePrintMode(false)}>SCOPE I</span>,
       children: <ScopeI />,
-      forceRender: true,
     },
     {
       key: '2',
       label: <span onClick={handlePrintMode(false)}>SCOPE II</span>,
       children: <ScopeII />,
-      forceRender: true,
     },
     {
       key: '3',
       label: <span onClick={handlePrintMode(true)}>報表</span>,
       children: <Chart />,
-      forceRender: true,
     },
     {
       key: '4',
       label: <span onClick={handlePrintMode(true)}>匯出</span>,
       children: <Export />,
-      forceRender: true,
     },
   ]
 
@@ -118,6 +116,7 @@ const App: React.FC = () => {
         args: {
           content,
           title,
+          featured_media: updateScopes?.info?.imgData?.attachmentId || 0,
           meta: {
             project_data: JSON.stringify(updateScopes),
           },
@@ -134,11 +133,16 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!!projectData) {
       const fectchScopes = JSON.parse(projectData.meta.project_data)
+      console.log('projectData.meta.project_data   fectchScopes', fectchScopes)
       setScopes(fectchScopes)
-      form.setFieldValue(['title'], projectData?.title?.rendered)
+      form.setFieldValue(['title'], fectchScopes?.info?.title)
       form.setFieldValue(
         ['content'],
-        (projectData?.content?.rendered || '').replace(/<[^>]+>/g, ''),
+        (fectchScopes?.info?.content || '').replace(/<[^>]+>/g, ''),
+      )
+      form.setFieldValue(
+        ['companyCategory'],
+        (fectchScopes?.info?.companyCategory || '').replace(/<[^>]+>/g, ''),
       )
     }
   }, [projectData])
@@ -154,7 +158,7 @@ const App: React.FC = () => {
   return (
     <>
       <ProjectContext.Provider
-        value={{ projectData, scopes, setScopes, printMode }}
+        value={{ projectData, scopes, setScopes, printMode, setIsDiff }}
       >
         <Form form={form}>
           <hr style={{ borderColor: colorPrimary }} />

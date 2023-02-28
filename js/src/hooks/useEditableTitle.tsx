@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Typography } from 'antd'
 import HiddenInput from '@/components/HiddenInput'
 import { FormInstance } from 'antd/lib/form'
+import { ProjectContext } from '@/pages/Check'
 
 const useEditableTitle = ({
   form,
@@ -25,10 +26,12 @@ const useEditableTitle = ({
     editableStr,
     setEditableStr,
   ] = useState(initialValue)
+  const { setIsDiff } = useContext(ProjectContext)
 
   const handleChange = (str: string) => {
     setEditableStr(str)
     form.setFieldValue(name, str)
+    setIsDiff(!(str === editableStr))
   }
 
   useEffect(() => {

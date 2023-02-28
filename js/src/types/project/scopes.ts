@@ -10,6 +10,10 @@ export type TInfo = {
   title: string
   content: string
   companyCategory: string
+  imgData: {
+    attachmentId: number
+    url: string
+  }
 }
 
 export type TScopes = {
