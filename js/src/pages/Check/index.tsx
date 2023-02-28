@@ -11,7 +11,11 @@ import {
   Modal,
   Input,
 } from 'antd'
-import { InfoCircleOutlined, WarningFilled } from '@ant-design/icons'
+import {
+  InfoCircleOutlined,
+  WarningFilled,
+  EditOutlined,
+} from '@ant-design/icons'
 import ScopeI from './ScopeI'
 import ScopeII from './ScopeII'
 import Chart from './Chart'
@@ -22,6 +26,8 @@ import { updateResource, deleteResource } from '@/api'
 import { useQueryClient } from '@tanstack/react-query'
 import { IGroupData } from './ScopeI/CheckScopeITable/Table/types'
 import { isEqual } from 'lodash-es'
+import ImageUpload from '@/components/ImageUpload'
+import { renderHTML } from '@/utils'
 
 export const ProjectContext = createContext<{
   projectData: any
@@ -59,21 +65,25 @@ const items: TabsProps['items'] = [
     key: '1',
     label: 'SCOPE I',
     children: <ScopeI />,
+    forceRender: true,
   },
   {
     key: '2',
     label: 'SCOPE II',
     children: <ScopeII />,
+    forceRender: true,
   },
   {
     key: '3',
     label: '報表',
     children: <Chart />,
+    forceRender: true,
   },
   {
     key: '4',
     label: '匯出',
     children: <Export />,
+    forceRender: true,
   },
 ]
 
@@ -115,6 +125,7 @@ const App: React.FC = () => {
     setDeleteInputValidateMsg,
   ] = useState('')
   const navigate = useNavigate()
+  const title = Form.useWatch(['title'], form)
 
   const id = state?.id
   const { colorPrimary, colorInfo, colorError, colorErrorBg } = useColor()
@@ -125,21 +136,8 @@ const App: React.FC = () => {
 
   const queryClient = useQueryClient()
 
-  const { element } = useEditableTitle({
-    form,
-    name: ['title'],
-    required: true,
-    initialValue: '○○○○股份有限公司',
-    fetchData: projectData,
-    title: {
-      theTitle: projectData?.title?.rendered || '',
-      level: 3,
-    },
-  })
-
   const handleUpdate = async () => {
-    const title = form.getFieldValue(['title']) || ''
-
+    const content = form.getFieldValue(['content'])
     const copyScopes = JSON.parse(JSON.stringify(scopes))
     const updateScopeI = copyScopes.scopeI.map(
       (theGroup: IGroupData, groupIndex: number) => ({
@@ -163,6 +161,7 @@ const App: React.FC = () => {
         resource: 'carbon-project',
         id,
         args: {
+          content,
           title,
           meta: {
             project_data: JSON.stringify(updateScopes),
@@ -181,6 +180,11 @@ const App: React.FC = () => {
     if (!!projectData) {
       const fectchScopes = JSON.parse(projectData.meta.project_data)
       setScopes(fectchScopes)
+      form.setFieldValue(['title'], projectData?.title?.rendered)
+      form.setFieldValue(
+        ['content'],
+        (projectData?.content?.rendered || '').replace(/<[^>]+>/g, ''),
+      )
     }
   }, [projectData])
 
@@ -226,13 +230,81 @@ const App: React.FC = () => {
     setDeleteInputValue(e?.target?.value || '')
   }
 
+  const [
+    isEditProjectModalOpen,
+    setIsEditProjectModalOpen,
+  ] = useState(false)
+
+  const showEditProjectModal = () => {
+    setIsEditProjectModalOpen(true)
+  }
+
+  const handleEditProjectOk = async () => {
+    setIsEditProjectModalOpen(false)
+
+    // if (deleteInputValue === projectData?.title?.rendered) {
+    //   const deleteResult = await deleteResource({
+    //     resource: 'carbon-project',
+    //     id,
+    //   })
+    //   if (deleteResult?.status === 200) {
+    //     setIsEditProjectModalOpen(false)
+    //     navigate('')
+    //   } else {
+    //     console.log('deleteResult', deleteResult)
+    //   }
+    // } else {
+    //   setEditInputValidateMsg('輸入的專案名稱不正確')
+    // }
+  }
+
+  const handleEditProjectCancel = () => {
+    setIsEditProjectModalOpen(false)
+  }
+
   return (
     <>
       <Form form={form}>
         <hr style={{ borderColor: colorPrimary }} />
 
         <Row align="middle" className="my-8">
-          <Col flex="auto">{element}</Col>
+          <Col flex="auto">
+            <h2
+              className="text-2xl cursor-pointer"
+              onClick={showEditProjectModal}
+            >
+              {title}
+              <EditOutlined className="ml-2" style={{ color: colorPrimary }} />
+            </h2>
+            <Modal
+              title="編輯專案基本資料"
+              open={isEditProjectModalOpen}
+              onOk={handleEditProjectOk}
+              onCancel={handleEditProjectCancel}
+              centered
+              okText="確認"
+              cancelText="取消"
+              forceRender={true}
+            >
+              <p className="mb-1 mt-6">公司/專案名稱:</p>
+
+              <Form.Item name={['title']} noStyle>
+                <Input />
+              </Form.Item>
+              <p className="mb-1 mt-6">公司/專案說明:</p>
+
+              <Form.Item name={['content']} noStyle>
+                <Input.TextArea
+                  autoSize={{ minRows: 4 }}
+                  maxLength={100}
+                  showCount
+                />
+              </Form.Item>
+              <div className="mt-6">
+                <ImageUpload />
+              </div>
+            </Modal>
+          </Col>
           <Col flex="none">
             <div className="flex justify-end align-middle">
               <Popover
@@ -242,8 +314,8 @@ const App: React.FC = () => {
                     <InfoCircleOutlined
                       style={{ color: colorInfo }}
                       className="mr-2"
-                    />{' '}
-                    記得儲存你的資料
+                    />
+                    記得儲存資料
                   </>
                 }
                 open={popoverOpen}

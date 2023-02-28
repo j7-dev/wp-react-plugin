@@ -1,4 +1,3 @@
-import React from 'react'
 import { Row, Col, Alert } from 'antd'
 import CheckChartColumn from '@/components/CheckChartColumn'
 import CheckChartPie from '@/components/CheckChartPie'

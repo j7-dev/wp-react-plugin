@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useContext } from 'react'
 import { Table, Row, Button, Form, Popconfirm } from 'antd'
 import AddRecordButton from './components/AddRecordButton'
@@ -21,7 +22,7 @@ const App: React.FC = () => {
     groupKey,
     groupIndex,
     groupData,
-    onDelete: handleDeleteGroup,
+    onDelete: handleDeleteGroup = () => {},
     editable = false,
   } = useContext(TableDataContext)
 

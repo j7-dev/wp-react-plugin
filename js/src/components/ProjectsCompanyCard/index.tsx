@@ -2,6 +2,7 @@ import React from 'react'
 import { Card } from 'antd'
 import { Link } from 'react-router-dom'
 import defaultImage from '@/defaultImage.jpg'
+import { renderHTML } from '@/utils'
 
 const { Meta } = Card
 const baseUrl = process.env.BASE_URL || ''
@@ -23,7 +24,7 @@ const ProjectsCompanyCard: React.FC<{
         />
       }
     >
-      <Meta title={title} description={description} />
+      <Meta title={title} description={renderHTML(description)} />
     </Card>
   </Link>
 )

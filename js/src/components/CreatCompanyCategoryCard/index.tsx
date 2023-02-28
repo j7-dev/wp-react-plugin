@@ -33,7 +33,7 @@ const CreatCompanyCategoryCard: React.FC<{
     try {
       const createResult = await createResource({
         resource: 'carbon-project',
-        options: {
+        args: {
           title: '○○○○股份有限公司',
           status: 'publish',
           meta: {

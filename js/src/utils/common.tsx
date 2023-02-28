@@ -1,4 +1,8 @@
+import React from 'react'
 import type { TUnit } from '@/types'
+
+export const renderHTML = (rawHTML: string) =>
+  React.createElement('div', { dangerouslySetInnerHTML: { __html: rawHTML } })
 
 export const months = [
   {
