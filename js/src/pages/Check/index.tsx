@@ -27,8 +27,27 @@ import { useQueryClient } from '@tanstack/react-query'
 import { IGroupData } from './ScopeI/CheckScopeITable/Table/types'
 import { isEqual } from 'lodash-es'
 import ImageUpload from '@/components/ImageUpload'
-import { renderHTML } from '@/utils'
 
+export const defaultScopes = {
+  scopeI: [
+    {
+      groupKey: '0',
+      groupName: '工廠 #1',
+      dataSource: [],
+    },
+  ],
+  scopeII: [
+    {
+      groupKey: '0',
+      groupName: '工廠 #1',
+      dataSource: [],
+    },
+  ],
+  info: {
+    title: '○○○○股份有限公司',
+    companyCategory: '未分類',
+  },
+}
 export const ProjectContext = createContext<{
   projectData: any
   scopes: {
@@ -41,22 +60,7 @@ export const ProjectContext = createContext<{
   }>
 }>({
   projectData: null,
-  scopes: {
-    scopeI: [
-      {
-        groupKey: '0',
-        groupName: '工廠 #1',
-        dataSource: [],
-      },
-    ],
-    scopeII: [
-      {
-        groupKey: '0',
-        groupName: '工廠 #1',
-        dataSource: [],
-      },
-    ],
-  },
+  scopes: defaultScopes,
   setScopes: () => {},
 })
 
@@ -94,22 +98,11 @@ const App: React.FC = () => {
   ] = useState<{
     scopeI: IGroupData[]
     scopeII: IGroupData[]
-  }>({
-    scopeI: [
-      {
-        groupKey: '0',
-        groupName: '工廠 #1',
-        dataSource: [],
-      },
-    ],
-    scopeII: [
-      {
-        groupKey: '0',
-        groupName: '工廠 #1',
-        dataSource: [],
-      },
-    ],
-  })
+    info: {
+      title: string
+      companyCategory: string
+    }
+  }>(defaultScopes)
   const [
     popoverOpen,
     setPopoverOpen,
@@ -138,7 +131,8 @@ const App: React.FC = () => {
 
   const handleUpdate = async () => {
     const content = form.getFieldValue(['content'])
-    const copyScopes = JSON.parse(JSON.stringify(scopes))
+    const copyScopes = JSON.parse(JSON.stringify(scopes || defaultScopes))
+
     const updateScopeI = copyScopes.scopeI.map(
       (theGroup: IGroupData, groupIndex: number) => ({
         ...theGroup,

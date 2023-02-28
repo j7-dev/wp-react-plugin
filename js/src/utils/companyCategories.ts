@@ -1,54 +1,94 @@
-import defaultImage from '@/defaultImage.jpg'
+import defaultImage from '@/static/defaultImage.jpg'
+import office from '@/static/office.jpg'
+import petroleum from '@/static/petroleum.jpg'
+import construction from '@/static/construction.jpg'
+import entertainment from '@/static/entertainment.jpg'
+import energy_sector from '@/static/energy_sector.jpg'
+import education from '@/static/education.jpg'
+import infotech from '@/static/infotech.jpg'
+import transportation from '@/static/transportation.jpg'
+import retail from '@/static/retail.jpg'
+import manufacturing from '@/static/manufacturing.jpg'
+import restaraunts from '@/static/restaraunts.jpg'
+import medical_service from '@/static/medical_service.jpg'
+import tourism from '@/static/tourism.jpg'
+import agriculture from '@/static/agriculture.jpg'
+import logistics from '@/static/logistics.jpg'
 
 export const companyCategories = [
   {
     key: '1',
-    name: '農、林、漁、牧業',
-    image: defaultImage,
+    name: '一般辦公室',
+    image: office,
   },
   {
     key: '2',
-    name: '礦業及土石採取業',
-    image: defaultImage,
+    name: '石化業',
+    image: petroleum,
   },
   {
     key: '3',
-    name: '製造業',
-    image: defaultImage,
+    name: '建築',
+    image: construction,
   },
   {
     key: '4',
-    name: '水電燃氣業',
-    image: defaultImage,
+    name: '娛樂界',
+    image: entertainment,
   },
   {
     key: '5',
-    name: ' 營造及工程業 ',
-    image: defaultImage,
+    name: '能源業',
+    image: energy_sector,
   },
   {
     key: '6',
-    name: '批發、零售及餐飲業',
-    image: defaultImage,
+    name: '教育產業',
+    image: education,
   },
   {
     key: '7',
-    name: '運輸、倉儲及通信業',
-    image: defaultImage,
+    name: '軟體資通',
+    image: infotech,
   },
   {
     key: '8',
-    name: '金融、保險及不動產業',
-    image: defaultImage,
+    name: '運輸',
+    image: transportation,
   },
   {
     key: '9',
-    name: '文化、運動、休閒及其他服務業',
-    image: defaultImage,
+    name: '零售業',
+    image: retail,
   },
   {
     key: '10',
-    name: '其他未分類業 ',
-    image: defaultImage,
+    name: '製造業',
+    image: manufacturing,
+  },
+  {
+    key: '11',
+    name: '餐廳',
+    image: restaraunts,
+  },
+  {
+    key: '12',
+    name: '醫療系統',
+    image: medical_service,
+  },
+  {
+    key: '13',
+    name: '觀光旅遊',
+    image: tourism,
+  },
+  {
+    key: '14',
+    name: '農牧業',
+    image: agriculture,
+  },
+  {
+    key: '15',
+    name: '物流',
+    image: logistics,
   },
 ]

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { defaultRouterMetas } from '@/utils'
 import { useColor } from '@/hooks'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 const CustomLayouts = () => {
   const { colorText } = useColor()
-  const pathname = window.location.pathname
+  const location = useLocation()
+  const pathname = location.pathname
   const [
     title,
     setTitle,

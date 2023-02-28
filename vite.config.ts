@@ -4,7 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 // BASE_URL: "/",
 //       RENDER_ID: 'my-app',
-//       API_URL: 'http://carbon.local/wp-json',
+//       API_URL: 'http://carbon.local/wp-json', // 'https://carbon.yc-tech.co/wp-json'
 //       API_TIMEOUT: '30000',
 
 // https://vitejs.dev/config/
@@ -17,7 +17,7 @@ export default create_config('js/src/main.tsx', 'js/dist', {
     'process.env': {
       BASE_URL: '/home/carbon-check-app/',
       RENDER_ID: 'carbon-check-app',
-      API_URL: 'https://carbon.yc-tech.co//wp-json',
+      API_URL: 'http://carbon.local/wp-json',
       API_TIMEOUT: '30000',
     },
   },

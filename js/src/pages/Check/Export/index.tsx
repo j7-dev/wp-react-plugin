@@ -80,6 +80,7 @@ const Export = () => {
             centered
             open={isExportModalOpen}
             footer={null}
+            onCancel={() => setIsExportModalOpen(false)}
           >
             <Input.TextArea value={jsonString} rows={6} />
             <div className="flex justify-end mt-4">
