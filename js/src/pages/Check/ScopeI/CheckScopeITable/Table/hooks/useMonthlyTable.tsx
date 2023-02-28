@@ -1,10 +1,11 @@
-import React from 'react'
+import { useContext } from 'react'
 import { Table } from 'antd'
 import type { ColumnTypes, TYearlyDataType } from '../types'
 import { months, gwpMapping, convertUnitToTons } from '@/utils'
-import { TUnit } from '@/types'
+import { ProjectContext } from '@/pages/Check'
 
 const useMonthlyTable = () => {
+  const { printMode = false } = useContext(ProjectContext)
   const columns: (ColumnTypes[number] & { dataIndex: string })[] = [
     {
       title: '月份',
@@ -68,6 +69,10 @@ const useMonthlyTable = () => {
     },
   ]
 
+  if (printMode) {
+    columns.pop()
+  }
+
   const renderTable = (record: TYearlyDataType) => {
     const dataSource = (record.monthlyAmount ?? []).map((value, index) => {
       const ar5 = record.ar5 || 0
@@ -89,7 +94,7 @@ const useMonthlyTable = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={false}
-        scroll={{ x: 1100 }}
+        scroll={printMode ? undefined : { x: 1100 }}
         size="middle"
       />
     )

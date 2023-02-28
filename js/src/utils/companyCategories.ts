@@ -1,4 +1,3 @@
-import defaultImage from '@/static/defaultImage.jpg'
 import office from '@/static/office.jpg'
 import petroleum from '@/static/petroleum.jpg'
 import construction from '@/static/construction.jpg'

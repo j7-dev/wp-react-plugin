@@ -1,3 +1,5 @@
+export * from './scopes'
+
 // _links: Object { self: (1) […], collection: (1) […], about: (1) […], … }
 // content: Object { rendered: "", protected: false }
 // date: "2023-02-19T16:43:44"

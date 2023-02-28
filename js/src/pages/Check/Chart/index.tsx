@@ -6,12 +6,12 @@ import { ProjectContext } from '@/pages/Check'
 import { flatten } from 'lodash-es'
 import {
   TYearlyDataType,
-  IGroupData,
+  TGroupData,
 } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
 
 const Chart = () => {
   const { scopes } = useContext(ProjectContext)
-  const scopeIGroups: IGroupData[] = scopes?.scopeI || []
+  const scopeIGroups: TGroupData[] = scopes?.scopeI || []
   const mergedDataSource: TYearlyDataType[] = flatten(
     scopeIGroups.map((group) => group?.dataSource) || [],
   )

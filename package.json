@@ -28,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-element-to-jsx-string": "^15.0.0",
     "react-router-dom": "^6.8.1",
+    "react-to-print": "^2.14.12",
     "sort-by": "^1.2.0",
     "zod": "^3.20.6"
   },

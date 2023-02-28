@@ -3,14 +3,14 @@ import CheckScopeITable from '@/pages/Check/ScopeI/CheckScopeITable'
 import { Button } from 'antd'
 import { AppstoreAddOutlined } from '@ant-design/icons'
 import { ProjectContext } from '@/pages/Check'
-import { IGroupData } from './CheckScopeITable/Table/types'
+import { TGroupData } from '@/types'
 import { nanoid } from 'nanoid'
 
 const ScopeIPage = () => {
   const { projectData, scopes, setScopes } = useContext(ProjectContext)
   console.log('projectData', projectData)
   const postId = projectData?.id
-  const scopeIGroups: IGroupData[] = scopes?.scopeI || []
+  const scopeIGroups: TGroupData[] = scopes?.scopeI || []
 
   const handleAddGroup = () => {
     setScopes({
@@ -56,7 +56,6 @@ const ScopeIPage = () => {
             groupData={theGroup}
             postId={postId}
             onDelete={handleDeleteGroup}
-            editable
           />
         )
       })}

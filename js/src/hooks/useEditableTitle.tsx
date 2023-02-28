@@ -8,18 +8,18 @@ const useEditableTitle = ({
   name,
   required,
   initialValue,
-  fetchData,
   title,
+  printMode = false,
 }: {
   form: FormInstance<any>
   name: string | number | (string | number)[]
   required?: boolean
   initialValue?: string | number
-  fetchData: any
   title: {
     theTitle: string
     level: 1 | 2 | 3 | 4 | 5 | undefined
   }
+  printMode?: boolean
 }) => {
   const [
     editableStr,
@@ -39,16 +39,18 @@ const useEditableTitle = ({
   const renderTitle = () => (
     <>
       <Typography.Title
-        editable={{ onChange: handleChange }}
+        editable={printMode ? false : { onChange: handleChange }}
         level={title.level}
       >
         {editableStr}
       </Typography.Title>
-      <HiddenInput
-        name={name}
-        required={required}
-        initialValue={initialValue}
-      />
+      {!printMode ? (
+        <HiddenInput
+          name={name}
+          required={required}
+          initialValue={initialValue}
+        />
+      ) : null}
     </>
   )
 

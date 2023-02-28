@@ -4,7 +4,6 @@ import type { TYearlyDataType } from '../types'
 import { Popconfirm, Tooltip } from 'antd'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 import { ProjectContext } from '@/pages/Check'
-
 import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
 import { gwpMapping } from '@/utils'
 import EditRecordButton from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/EditRecordButton'
@@ -12,9 +11,9 @@ import { useColor } from '@/hooks'
 
 const useColumns = () => {
   const { colorPrimary } = useColor()
-  const { scopes, setScopes } = useContext(ProjectContext)
+  const { scopes, setScopes, printMode = false } = useContext(ProjectContext)
   const scopeIGroups = scopes?.scopeI || []
-  const { groupIndex, editable = false } = useContext(TableDataContext)
+  const { groupIndex } = useContext(TableDataContext)
   const group = scopeIGroups[groupIndex]
   const dataSource = group?.dataSource || []
 
@@ -101,7 +100,7 @@ const useColumns = () => {
     },
   ]
 
-  if (!editable) {
+  if (printMode) {
     defaultColumns.pop()
     return defaultColumns
   }

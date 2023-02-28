@@ -46,12 +46,6 @@ export type TYearlyDataType = {
   unit: TUnit
 }
 
-export type IGroupData = {
-  groupKey: string
-  groupName: string
-  dataSource: TYearlyDataType[]
-}
-
 export type ColumnTypes = Exclude<EditableTableProps['columns'], undefined> & {
   editable?: boolean
   dataIndex: string

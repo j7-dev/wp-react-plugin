@@ -2,10 +2,9 @@ import { useState } from 'react'
 import { Row, Col, Modal, Alert } from 'antd'
 import CreatCompanyCategoryCard from '@/pages/Create/CreatCompanyCategoryCard'
 import CreatCompanyCategoryInput from '@/pages/Create/CreatCompanyCategoryInput'
-import { companyCategories } from '@/utils'
+import { companyCategories, defaultScopes } from '@/utils'
 import { useNavigate } from 'react-router-dom'
 import { createResource } from '@/api'
-import { defaultScopes } from '@/pages/Check'
 
 const baseUrl = process.env.BASE_URL || ''
 

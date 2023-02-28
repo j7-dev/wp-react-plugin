@@ -15,7 +15,11 @@ const App: React.FC = () => {
   const { colorPrimary } = useColor()
   const columns = useColumns()
   const { renderTable } = useMonthlyTable()
-  const { projectData: projectContextData, scopes } = useContext(ProjectContext)
+  const {
+    projectData: projectContextData,
+    scopes,
+    printMode = false,
+  } = useContext(ProjectContext)
   const scopeIGroups = scopes?.scopeI || []
 
   const {
@@ -23,7 +27,6 @@ const App: React.FC = () => {
     groupIndex,
     groupData,
     onDelete: handleDeleteGroup = () => {},
-    editable = false,
   } = useContext(TableDataContext)
 
   console.log('groupData', groupData)
@@ -42,11 +45,11 @@ const App: React.FC = () => {
     ],
     required: true,
     initialValue: '工廠',
-    fetchData: projectContextData,
     title: {
       theTitle: groupData?.groupName || '工廠',
       level: 4,
     },
+    printMode,
   })
 
   const handleDelete = (theGroupKey: string) => () => {
@@ -69,9 +72,9 @@ const App: React.FC = () => {
         dataSource={dataSource}
         columns={columns as ColumnType<TYearlyDataType>[]}
         pagination={false}
-        scroll={{ x: 1150 }}
+        scroll={printMode ? undefined : { x: 1150 }}
       />
-      {!!editable && (
+      {!printMode && (
         <Row justify="space-between">
           <Popconfirm
             title="確認刪除群組?"
