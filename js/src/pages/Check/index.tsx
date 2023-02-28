@@ -10,6 +10,7 @@ import {
   Popover,
   Modal,
   Input,
+  notification,
 } from 'antd'
 import {
   InfoCircleOutlined,
@@ -20,7 +21,7 @@ import ScopeI from './ScopeI'
 import ScopeII from './ScopeII'
 import Chart from './Chart'
 import Export from './Export'
-import { useColor, useOne, useEditableTitle } from '@/hooks'
+import { useColor, useOne } from '@/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateResource, deleteResource } from '@/api'
 import { useQueryClient } from '@tanstack/react-query'
@@ -57,6 +58,10 @@ export const ProjectContext = createContext<{
   setScopes: React.Dispatch<{
     scopeI: IGroupData[]
     scopeII: IGroupData[]
+    info: {
+      title: string
+      companyCategory: string
+    }
   }>
 }>({
   projectData: null,
@@ -104,9 +109,13 @@ const App: React.FC = () => {
     }
   }>(defaultScopes)
   const [
-    popoverOpen,
-    setPopoverOpen,
+    isDiff,
+    setIsDiff,
   ] = useState(false)
+  const [
+    api,
+    contextHolder,
+  ] = notification.useNotification()
   const { state } = useLocation()
   const [form] = Form.useForm()
   const [
@@ -166,7 +175,7 @@ const App: React.FC = () => {
         'get_carbon-project',
         id,
       ])
-      setPopoverOpen(false)
+      setIsDiff(false)
     } catch (error) {}
   }
 
@@ -186,7 +195,7 @@ const App: React.FC = () => {
     if (!!projectData) {
       const fectchScopes = JSON.parse(projectData.meta.project_data)
       const isSame = isEqual(scopes, fectchScopes)
-      setPopoverOpen(!isSame)
+      setIsDiff(!isSame)
     }
   }, [scopes])
 
@@ -256,8 +265,21 @@ const App: React.FC = () => {
     setIsEditProjectModalOpen(false)
   }
 
+  useEffect(() => {
+    if (isDiff) {
+      api.warning({
+        key: 'saveReminder',
+        placement: 'bottomRight',
+        message: '您有未儲存的變更',
+        description: '請記得到頁面上方更新專案資料',
+        duration: null,
+      })
+    }
+  }, [isDiff])
+
   return (
     <>
+      {contextHolder}
       <Form form={form}>
         <hr style={{ borderColor: colorPrimary }} />
 
@@ -302,7 +324,6 @@ const App: React.FC = () => {
           <Col flex="none">
             <div className="flex justify-end align-middle">
               <Popover
-                content={<p>偵測到頁面有數據變更</p>}
                 title={
                   <>
                     <InfoCircleOutlined
@@ -312,11 +333,11 @@ const App: React.FC = () => {
                     記得儲存資料
                   </>
                 }
-                open={popoverOpen}
+                open={isDiff}
               >
                 <Button
                   type="primary"
-                  className={`${popoverOpen ? 'animate-pulse' : ''} mr-2`}
+                  className={`${isDiff ? 'animate-pulse' : ''} mr-2`}
                   size="large"
                   onClick={handleUpdate}
                 >

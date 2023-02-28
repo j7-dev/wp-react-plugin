@@ -1,17 +1,40 @@
-import { Row, Col, Alert } from 'antd'
+import { useContext } from 'react'
+import { Row, Col, Alert, Empty } from 'antd'
 import CheckChartColumn from '@/components/CheckChartColumn'
 import CheckChartPie from '@/components/CheckChartPie'
+import { ProjectContext } from '@/pages/Check'
+import { flatten } from 'lodash-es'
+import {
+  TYearlyDataType,
+  IGroupData,
+} from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
 
 const Chart = () => {
+  const { scopes } = useContext(ProjectContext)
+  const scopeIGroups: IGroupData[] = scopes?.scopeI || []
+  const mergedDataSource: TYearlyDataType[] = flatten(
+    scopeIGroups.map((group) => group?.dataSource) || [],
+  )
+
   return (
     <>
       <Row gutter={24}>
-        <Col span={24} lg={{ span: 16 }} className="mb-12">
-          <CheckChartColumn />
-        </Col>
-        <Col span={24} lg={{ span: 8 }} className="mb-12">
-          <CheckChartPie />
-        </Col>
+        {mergedDataSource.length > 0 ? (
+          <>
+            <Col span={24} lg={{ span: 16 }} className="mb-12">
+              <CheckChartColumn mergedDataSource={mergedDataSource} />
+            </Col>
+            <Col span={24} lg={{ span: 8 }} className="mb-12">
+              <CheckChartPie mergedDataSource={mergedDataSource} />
+            </Col>
+          </>
+        ) : (
+          <div className="w-full px-2">
+            <div className="flex justify-center items-center w-full aspect-video bg-slate-100 rounded-xl">
+              <Empty description="沒有資料" />
+            </div>
+          </div>
+        )}
       </Row>
       <Row className="mt-8" gutter={24}>
         <Col span={24} lg={{ span: 12 }} className="mb-8">

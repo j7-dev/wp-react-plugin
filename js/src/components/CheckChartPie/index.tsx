@@ -1,26 +1,22 @@
-import { useContext } from 'react'
 import { Pie, measureTextWidth } from '@ant-design/plots'
 import type { IData } from '@/pages/Check/Chart/interface'
-import { ProjectContext } from '@/pages/Check'
-import { flatten } from 'lodash-es'
+import { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
 
 type IStyle = Record<string, number | string>
 
-const CheckChartPie = () => {
-  const { scopes } = useContext(ProjectContext)
-  const scopeIGroups = scopes?.scopeI || []
-  const scopeIMergedDataSource = flatten(
-    scopeIGroups.map((group) => group?.dataSource) || [],
-  )
+const CheckChartPie: React.FC<{
+  mergedDataSource: TYearlyDataType[]
+}> = ({ mergedDataSource }) => {
+  const formatData = !!mergedDataSource
+    ? mergedDataSource.map((record) => {
+        const yearlyAmount = record?.yearlyAmount || 0
 
-  const formatData = scopeIMergedDataSource.map((record) => {
-    const yearlyAmount = record?.yearlyAmount || 0
-
-    return {
-      value: Math.round(yearlyAmount * 1000) / 1000,
-      type: record.equipment,
-    }
-  })
+        return {
+          value: Math.round(yearlyAmount * 1000) / 1000,
+          type: record?.equipment,
+        }
+      })
+    : []
 
   // sum the value if the type is 工廠1
   const data = formatData

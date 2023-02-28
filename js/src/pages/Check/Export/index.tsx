@@ -1,12 +1,16 @@
 import { useContext, useState } from 'react'
-import { Row, Col, Button, Modal, Input } from 'antd'
+import { Row, Col, Button, Modal, Input, Empty } from 'antd'
 import CheckChartColumn from '@/components/CheckChartColumn'
 import CheckChartPie from '@/components/CheckChartPie'
 import CheckScopeITable from '@/pages/Check/ScopeI/CheckScopeITable'
 import { ProjectContext } from '@/pages/Check'
-import { IGroupData } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
+import {
+  TYearlyDataType,
+  IGroupData,
+} from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
 import ClipboardJS from 'clipboard'
 import { DownloadOutlined, CopyOutlined } from '@ant-design/icons'
+import { flatten } from 'lodash-es'
 
 new ClipboardJS('.button')
 
@@ -15,6 +19,9 @@ const Export = () => {
   const postId = projectData?.id
   const scopeIGroups: IGroupData[] = scopes?.scopeI || []
   console.log('@@@ scopes', scopes)
+  const mergedDataSource: TYearlyDataType[] = flatten(
+    scopeIGroups.map((group) => group?.dataSource) || [],
+  )
 
   const [
     isExportModalOpen,
@@ -41,12 +48,22 @@ const Export = () => {
   return (
     <>
       <Row gutter={24}>
-        <Col span={24} lg={{ span: 16 }}>
-          <CheckChartColumn />
-        </Col>
-        <Col span={24} lg={{ span: 8 }}>
-          <CheckChartPie />
-        </Col>
+        {mergedDataSource.length > 0 ? (
+          <>
+            <Col span={24} lg={{ span: 16 }} className="mb-12">
+              <CheckChartColumn mergedDataSource={mergedDataSource} />
+            </Col>
+            <Col span={24} lg={{ span: 8 }} className="mb-12">
+              <CheckChartPie mergedDataSource={mergedDataSource} />
+            </Col>
+          </>
+        ) : (
+          <div className="w-full px-2">
+            <div className="flex justify-center items-center w-full aspect-video bg-slate-100 rounded-xl">
+              <Empty description="沒有資料" />
+            </div>
+          </div>
+        )}
       </Row>
       {scopeIGroups.map((theGroup, index) => {
         return (
