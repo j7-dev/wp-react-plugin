@@ -30,13 +30,19 @@ const useMany = (options: {
       }),
     options.queryOptions || {},
   )
-  const { isSuccess, data } = getResult
+  const { isSuccess, data, isFetching } = getResult
 
   useEffect(() => {
+    console.log('changeddddd')
     if (data) {
+      console.log('set data')
+
       setFetchedData(data.data || null)
     }
-  }, [isSuccess])
+  }, [
+    isSuccess,
+    isFetching,
+  ])
 
   return fetchedData
 }

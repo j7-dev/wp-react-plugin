@@ -10,6 +10,7 @@ import ClipboardJS from 'clipboard'
 import { DownloadOutlined, CopyOutlined } from '@ant-design/icons'
 import { flatten } from 'lodash-es'
 import { useReactToPrint } from 'react-to-print'
+import { getCopyableJson, removeKey } from '@/utils'
 
 new ClipboardJS('.button')
 
@@ -79,10 +80,11 @@ const Export = () => {
     setIsExportModalOpen(true)
   }
 
-  const jsonString = JSON.stringify(JSON.stringify(scopes || '{}')).replace(
-    /\\/g,
-    ' ',
-  )
+  //TODO scopeII remove key
+  //remove key
+  const scopesForDownload = removeKey(scopes)
+
+  const jsonString = getCopyableJson(scopesForDownload || '{}')
 
   const download = (text: string) => () => {
     const blob = new Blob([text], { type: 'text/plain' })
@@ -130,7 +132,7 @@ const Export = () => {
         })}
       </div>
       <Row className="my-8" gutter={24}>
-        <Col span={24} lg={{ span: 12 }}>
+        <Col className="my-2" span={24} lg={{ span: 12 }}>
           <Button
             type="primary"
             size="large"
@@ -140,7 +142,7 @@ const Export = () => {
             匯出為 PDF
           </Button>
         </Col>
-        <Col span={24} lg={{ span: 12 }}>
+        <Col className="my-2" span={24} lg={{ span: 12 }}>
           <Button
             type="default"
             size="large"

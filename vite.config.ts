@@ -17,7 +17,7 @@ export default create_config('js/src/main.tsx', 'js/dist', {
     'process.env': {
       BASE_URL: '/home/carbon-check-app/',
       RENDER_ID: 'carbon-check-app',
-      API_URL: 'https://carbon.yc-tech.co/wp-json',
+      API_URL: 'http://carbon.local/wp-json',
       API_TIMEOUT: '30000',
     },
   },

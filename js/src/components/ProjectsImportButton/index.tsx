@@ -1,6 +1,7 @@
 import React from 'react'
 import { UploadOutlined } from '@ant-design/icons'
 import { Button, message, Upload, UploadProps } from 'antd'
+import JsonUpload from '../JsonUpload'
 
 const props: UploadProps = {
   name: 'file',
@@ -21,9 +22,9 @@ const props: UploadProps = {
 }
 
 const ProjectsImportButton: React.FC = () => (
-  <Upload {...props}>
-    <Button icon={<UploadOutlined />}>使用 JSON 檔案上傳</Button>
-  </Upload>
+  <>
+    <JsonUpload />
+  </>
 )
 
 export default ProjectsImportButton

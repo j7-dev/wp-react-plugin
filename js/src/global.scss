@@ -18,6 +18,11 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.json-upload {
+  .ant-upload {
+    width: 100%;
+  }
+}
 
 @media print {
   html,
