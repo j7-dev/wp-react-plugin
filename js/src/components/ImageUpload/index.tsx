@@ -30,9 +30,6 @@ const ImageUpload = () => {
     customRequest: async (request) => {
       console.log('request', request)
 
-      // const { status } = info.file
-      // console.log('status', status)
-      // TODO
       try {
         const createResult = await createResource({
           resource: 'media',

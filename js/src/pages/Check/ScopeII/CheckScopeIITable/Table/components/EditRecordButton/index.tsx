@@ -1,14 +1,14 @@
 import { createContext, useContext, useState } from 'react'
 import { Modal, Input, Radio, Form } from 'antd'
 import { SlidersOutlined } from '@ant-design/icons'
-import GWPYearlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPYearlyFormItem'
-import GWPMonthlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPMonthlyFormItem'
-import GWPHourlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPHourlyFormItem'
-import type { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
+import GWPYearlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPYearlyFormItem'
+import GWPMonthlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPMonthlyFormItem'
+import GWPHourlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPHourlyFormItem'
+import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
 import { gwpMapping, convertUnitToTons, reverseUnitValue } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
-import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
+import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import { useColor } from '@/hooks'
 
 export const FormContext = createContext<any | null>(null)
@@ -18,8 +18,8 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
   const form = Form.useFormInstance()
   const { scopes, setScopes } = useContext(ProjectContext)
   const { groupIndex, groupKey } = useContext(TableDataContext)
-  const scopeIGroups = scopes?.scopeI || []
-  const group = scopeIGroups.find((theGroup) => theGroup.groupKey === groupKey)
+  const scopeIIGroups = scopes?.scopeII || []
+  const group = scopeIIGroups.find((theGroup) => theGroup.groupKey === groupKey)
   const dataSource = group?.dataSource || []
   const { colorPrimary } = useColor()
 
@@ -128,7 +128,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
         const newDataSource = handleData()
         const newScopes = JSON.parse(JSON.stringify(scopes))
 
-        newScopes.scopeI[groupIndex].dataSource = newDataSource
+        newScopes.scopeII[groupIndex].dataSource = newDataSource
 
         setScopes(newScopes)
       })

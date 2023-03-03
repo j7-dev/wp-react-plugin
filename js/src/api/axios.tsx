@@ -8,7 +8,7 @@ const timeout = process.env.API_TIMEOUT || '30000'
 const instance: AxiosInstance = axios.create({
   baseURL,
   timeout: parseInt(timeout, 10),
-  headers: { 'X-WP-Nonce': wpApiSettings.nonce },
+  headers: { 'X-WP-Nonce': wpApiSettings?.nonce || '' },
 })
 
 instance.interceptors.response.use(

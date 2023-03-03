@@ -70,6 +70,7 @@ const EditProjectModal = () => {
           <Input />
         </Form.Item>
 
+        {/* TODO: dropdown + add cat */}
         <p className="mb-1 mt-6">公司/專案分類:</p>
 
         <Form.Item name={['companyCategory']} noStyle>

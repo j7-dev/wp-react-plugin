@@ -1,47 +1,62 @@
-import React, { useState } from 'react'
-import CheckScopeIITable from '@/components/CheckScopeIITable'
+import { useContext, useEffect } from 'react'
+import CheckScopeIITable from '@/pages/Check/ScopeII/CheckScopeIITable'
 import { Button } from 'antd'
 import { AppstoreAddOutlined } from '@ant-design/icons'
+import { ProjectContext } from '@/pages/Check'
+import { TGroupData } from '@/types'
 import { nanoid } from 'nanoid'
 
-const ScopeII = () => {
-  const [
-    groups,
-    setGroups,
-  ] = useState<string[]>(['TAB-1'])
-  const [
-    count,
-    setCount,
-  ] = useState(1)
+const ScopeIIPage = () => {
+  const { projectData, scopes, setScopes } = useContext(ProjectContext)
+  console.log('projectData', projectData)
+  const postId = projectData?.id
+  const scopeIIGroups: TGroupData[] = scopes?.scopeII || []
 
-  const handleAdd = () => {
-    setCount(count + 1)
-    setGroups([
-      ...groups,
-      `TAB-${count + 1}`,
-    ])
+  const handleAddGroup = () => {
+    setScopes({
+      ...scopes,
+      scopeII: [
+        ...scopeIIGroups,
+        {
+          groupKey: nanoid(),
+          groupName: '工廠',
+          dataSource: [],
+        },
+      ],
+    })
   }
 
-  const handleDeleteGroup = (id: string) => {
-    setGroups(groups.filter((item) => item !== id))
+  const handleDeleteGroup = (theGroupKey: string) => {
+    const newScopeIIGroups = scopeIIGroups.filter(
+      (theGroup) => theGroup?.groupKey !== theGroupKey,
+    )
+    setScopes({
+      ...scopes,
+      scopeII: [
+        ...newScopeIIGroups,
+      ],
+    })
   }
-
-  console.log(groups.filter((item) => item !== 'TAB-1'))
 
   return (
     <>
-      {groups.map((id) => (
-        <CheckScopeIITable
-          key={nanoid()}
-          id={id}
-          onDelete={handleDeleteGroup}
-        />
-      ))}
+      {scopeIIGroups.map((theGroup, index) => {
+        return (
+          <CheckScopeIITable
+            key={theGroup?.groupKey}
+            groupKey={theGroup?.groupKey}
+            groupIndex={index}
+            groupData={theGroup}
+            postId={postId}
+            onDelete={handleDeleteGroup}
+          />
+        )
+      })}
       <Button
         className="w-full mt-8"
         type="primary"
         size="large"
-        onClick={handleAdd}
+        onClick={handleAddGroup}
       >
         <AppstoreAddOutlined className="mr-2" />
         新增群組
@@ -50,4 +65,4 @@ const ScopeII = () => {
   )
 }
 
-export default ScopeII
+export default ScopeIIPage

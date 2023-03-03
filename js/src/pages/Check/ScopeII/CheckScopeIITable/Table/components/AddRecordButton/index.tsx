@@ -1,22 +1,20 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { Button, Modal, Input, Radio, Form } from 'antd'
 import { FolderAddFilled } from '@ant-design/icons'
-import GWPYearlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPYearlyFormItem'
-import GWPMonthlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPMonthlyFormItem'
-import GWPHourlyFormItem from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/GWPHourlyFormItem'
-import type { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
+import GWPYearlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPYearlyFormItem'
+import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
 import { gwpMapping, convertUnitToTons } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
-import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
+import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 
 export const FormContext = createContext<any | null>(null)
 const AddRecordButton = () => {
   const form = Form.useFormInstance()
   const { scopes, setScopes } = useContext(ProjectContext)
   const { groupIndex, groupKey } = useContext(TableDataContext)
-  const scopeIGroups = scopes?.scopeI || []
-  const group = scopeIGroups.find((theGroup) => theGroup.groupKey === groupKey)
+  const scopeIIGroups = scopes?.scopeII || []
+  const group = scopeIIGroups.find((theGroup) => theGroup.groupKey === groupKey)
   const dataSource = group?.dataSource || []
 
   const [
@@ -136,7 +134,7 @@ const AddRecordButton = () => {
         const newDataSource = handleData()
         const newScopes = JSON.parse(JSON.stringify(scopes))
 
-        newScopes.scopeI[groupIndex].dataSource = newDataSource
+        newScopes.scopeII[groupIndex].dataSource = newDataSource
 
         setScopes(newScopes)
       })
@@ -161,17 +159,17 @@ const AddRecordButton = () => {
     <>
       <Button onClick={showModal} type="primary" className="mt-4">
         <FolderAddFilled className="mr-2" />
-        新增設備
+        新增電力來源
       </Button>
       <Modal
-        title="新增設備"
+        title="新增電力來源"
         open={isModalOpen}
         onOk={handleModalOk}
         centered
         width={600}
         className="cc-modal"
         onCancel={handleCancel}
-        okText="新增設備"
+        okText="新增電力來源"
         cancelText="取消"
       >
         <Form
@@ -186,48 +184,12 @@ const AddRecordButton = () => {
               groupIndex,
               'equipment',
             ]}
-            rules={[{ required: validating, message: '請輸入設備名稱' }]}
+            rules={[{ required: validating, message: '請輸入電力來源' }]}
           >
-            <Input className="mt-8" addonBefore="設備名稱" />
+            <Input className="mt-8" addonBefore="電力來源" />
           </Form.Item>
 
-          <Form.Item
-            name={[
-              groupIndex,
-              'period',
-            ]}
-            initialValue="yearly"
-          >
-            <Radio.Group className="w-full mt-8" buttonStyle="solid">
-              <Radio.Button className="w-1/3 text-center" value="yearly">
-                年碳排放
-              </Radio.Button>
-              <Radio.Button className="w-1/3 text-center" value="monthly">
-                月碳排放
-              </Radio.Button>
-              <Radio.Button className="w-1/3 text-center" value="hourly">
-                每小時碳排放
-              </Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-          {period === 'yearly' && (
-            <GWPYearlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
-          {period === 'monthly' && (
-            <GWPMonthlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
-          {period === 'hourly' && (
-            <GWPHourlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
+          <GWPYearlyFormItem groupIndex={groupIndex} validating={validating} />
         </Form>
       </Modal>
     </>
