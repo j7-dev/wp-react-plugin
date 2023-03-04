@@ -99,9 +99,21 @@ const App: React.FC = () => {
           ]) || '',
       }),
     )
+    const updateScopeII = copyScopes.scopeII.map(
+      (theGroup: TGroupData, groupIndex: number) => ({
+        ...theGroup,
+        groupName:
+          form.getFieldValue([
+            'scopeII',
+            groupIndex,
+            'groupName',
+          ]) || '',
+      }),
+    )
     const updateScopes = {
       ...copyScopes,
       scopeI: updateScopeI,
+      scopeII: updateScopeII,
       info: {
         ...copyScopes.info,
         title,

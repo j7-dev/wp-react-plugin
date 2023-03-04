@@ -42,6 +42,7 @@ const ExtendableSelect: React.FC<{
     <Form.Item
       label="電力來源"
       name={[
+        'scopeII',
         groupIndex,
         'electricSource',
       ]}

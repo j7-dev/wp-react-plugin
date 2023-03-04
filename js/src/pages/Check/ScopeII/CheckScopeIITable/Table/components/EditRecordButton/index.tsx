@@ -1,14 +1,14 @@
 import { createContext, useContext, useState } from 'react'
-import { Modal, Input, Radio, Form } from 'antd'
+import { Modal, Row, Col, Form, InputNumber } from 'antd'
 import { SlidersOutlined } from '@ant-design/icons'
-import GWPYearlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPYearlyFormItem'
-
 import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
-import { gwpMapping, convertUnitToTons, reverseUnitValue } from '@/utils'
+import { electricSources } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import { useColor } from '@/hooks'
+import ExtendableSelect from '../ExtendableSelect'
+import { round } from 'lodash-es'
 
 export const FormContext = createContext<any | null>(null)
 const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
@@ -20,6 +20,23 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
   const scopeIIGroups = scopes?.scopeII || []
   const group = scopeIIGroups.find((theGroup) => theGroup.groupKey === groupKey)
   const dataSource = group?.dataSource || []
+  const watchYearlyAmount = Form.useWatch(
+    [
+      'scopeII',
+      groupIndex,
+      'yearlyAmount',
+    ],
+    form,
+  )
+  const watchCo2Kwh = Form.useWatch(
+    [
+      'scopeII',
+      groupIndex,
+      'co2Kwh',
+    ],
+    form,
+  )
+
   const { colorPrimary } = useColor()
 
   const [
@@ -34,76 +51,33 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
   const showModal = (theRecord: TYearlyDataType) => () => {
     setIsModalOpen(true)
-
-    const theYearlyAmount = reverseUnitValue({
-      value: theRecord.yearlyAmount,
-      unit: theRecord.unit,
-    })
-
-    const theHourlyAmount = theRecord.hourlyAmount || 0
-    const theHours = !!theHourlyAmount ? theYearlyAmount / theHourlyAmount : 0
+    const yearlyAmount = theRecord?.yearlyAmount || 0
+    const co2Kwh = theRecord?.co2Kwh || 1
 
     form.setFieldsValue({
-      [groupIndex]: {
-        electricSource: theRecord.electricSource,
-        period: theRecord.period,
-        yearlyAmount: theRecord.yearlyAmount || 0,
-        monthlyAmount: theRecord.monthlyAmount || new Array(12).fill(0),
-        hourlyAmount: theRecord.hourlyAmount || 0,
-        hours: Math.round(theHours),
-        gwp: theRecord.gwp,
-        unit: theRecord.unit,
+      scopeII: {
+        [groupIndex]: {
+          electricSource: theRecord?.electricSource,
+          co2Kwh,
+          yearlyAmount,
+        },
       },
     })
   }
 
   const handleData = () => {
-    const formData = form.getFieldsValue()[groupIndex]
-    console.log('formData', formData)
+    const formData = form.getFieldsValue().scopeII[groupIndex]
 
-    const getYearlyAmount = (theFormData: any) => {
-      switch (theFormData?.period) {
-        case 'yearly':
-          return convertUnitToTons({
-            value: theFormData.yearlyAmount ?? 0,
-            unit: theFormData.unit,
-          })
-        case 'monthly':
-          return convertUnitToTons({
-            value: (theFormData?.monthlyAmount ?? []).reduce(
-              (acc: number, cur: number) => acc + cur,
-              0,
-            ),
-            unit: theFormData.unit,
-          })
-        case 'hourly':
-          return convertUnitToTons({
-            value: (theFormData.hourlyAmount ?? 0) * (theFormData.hours ?? 0),
-            unit: theFormData.unit,
-          })
-        default:
-          return 0
-      }
-    }
-    const yearlyAmount = getYearlyAmount(formData)
-
-    const ar5 = gwpMapping.find((gwp) => gwp?.value === formData?.gwp)?.ar5 || 0
-
-    const carbonTonsPerYear = yearlyAmount * ar5
+    const yearlyAmount = formData?.yearlyAmount || 0
+    const co2Kwh = formData.co2Kwh || 1
+    const carbonTonsPerYear = yearlyAmount * co2Kwh
 
     const theFormatRecord: TYearlyDataType = {
-      key: record?.key || nanoid(),
+      key: nanoid(),
       electricSource: formData?.electricSource,
-      gwp: formData?.gwp,
+      co2Kwh: formData.co2Kwh || 1,
       yearlyAmount,
-      ar5,
-      co2e: carbonTonsPerYear,
       carbonTonsPerYear,
-      period: formData?.period,
-      monthlyAmount:
-        formData?.period === 'monthly' ? formData?.monthlyAmount : [],
-      hourlyAmount: formData?.period === 'hourly' ? formData?.hourlyAmount : 0,
-      unit: formData.unit,
     }
 
     const theRecordIndex = dataSource.findIndex(
@@ -140,13 +114,28 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
     setIsModalOpen(false)
   }
 
-  const period = Form.useWatch(
-    [
-      groupIndex,
-      'period',
-    ],
-    form,
-  )
+  const handleESSelect = (value: any) => {
+    const isES = Object.keys(value[groupIndex]).includes('electricSource')
+
+    const values = {
+      ...form.getFieldsValue(),
+    }
+    if (isES) {
+      const source = electricSources.find(
+        (s) => s.value === value[groupIndex].electricSource,
+      ) || {
+        yearlyAmount: 0,
+        co2Kwh: 1,
+      }
+
+      console.log('source', source)
+
+      values[groupIndex].yearlyAmount = source.yearlyAmount
+      values[groupIndex].co2Kwh = source.co2Kwh
+
+      form.setFieldsValue(values)
+    }
+  }
 
   return (
     <>
@@ -156,14 +145,13 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
         onClick={showModal(record)}
       />
       <Modal
-        title="編輯設備"
+        title="編輯電力來源"
         open={isModalOpen}
         onOk={handleModalOk}
         centered
         width={600}
-        className="cc-modal"
         onCancel={handleCancel}
-        okText="編輯設備"
+        okText="編輯電力來源"
         cancelText="取消"
       >
         <Form
@@ -171,19 +159,76 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
           onFieldsChange={() => {
             setValidating(false)
           }}
+          layout="vertical"
+          onValuesChange={handleESSelect}
         >
-          <Form.Item
-            // hasFeedback={true}
-            name={[
-              groupIndex,
-              'electricSource',
-            ]}
-            rules={[{ required: validating, message: '請輸入設備名稱' }]}
-          >
-            <Input className="mt-8" addonBefore="設備名稱" />
-          </Form.Item>
+          <Row gutter={16} className="mt-8">
+            <Col span={12}>
+              <ExtendableSelect
+                groupIndex={groupIndex}
+                validating={validating}
+              />
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="使用度數(年)"
+                name={[
+                  'scopeII',
+                  groupIndex,
+                  'yearlyAmount',
+                ]}
+                initialValue={0}
+                rules={[
+                  {
+                    required: validating,
+                    message: '請輸入年排放量',
+                  },
+                ]}
+              >
+                <InputNumber className="w-full" min={0} />
+              </Form.Item>
+            </Col>
+          </Row>
 
-          <GWPYearlyFormItem groupIndex={groupIndex} validating={validating} />
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                label={
+                  <>
+                    CO<sub>2</sub>/Kwh
+                  </>
+                }
+                name={[
+                  'scopeII',
+                  groupIndex,
+                  'co2Kwh',
+                ]}
+                initialValue={0}
+                rules={[
+                  {
+                    required: validating,
+                    message: `請輸入${(
+                      <>
+                        CO<sub>2</sub>/Kwh
+                      </>
+                    )}`,
+                  },
+                ]}
+              >
+                <InputNumber className="w-full" min={0} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="碳排(噸/年)">
+                <InputNumber
+                  value={watchYearlyAmount * watchCo2Kwh}
+                  className="w-full"
+                  min={0}
+                  disabled
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       </Modal>
     </>

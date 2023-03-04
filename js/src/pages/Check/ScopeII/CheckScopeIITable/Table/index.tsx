@@ -2,11 +2,11 @@
 import React, { useContext } from 'react'
 import { Table, Row, Button, Form, Popconfirm } from 'antd'
 import AddRecordButton from './components/AddRecordButton'
-import type { TYearlyDataType } from './types'
+import { TYearlyDataType } from './types'
 import useColumns from './hooks/useColumns'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import { DeleteFilled } from '@ant-design/icons'
-import useMonthlyTable from './hooks/useMonthlyTable'
+
 import type { ColumnType } from 'antd/lib/table'
 import { useColor, useEditableTitle } from '@/hooks'
 import { ProjectContext } from '@/pages/Check'
@@ -14,7 +14,7 @@ import { ProjectContext } from '@/pages/Check'
 const App: React.FC = () => {
   const { colorPrimary } = useColor()
   const columns = useColumns()
-  const { renderTable } = useMonthlyTable()
+
   const {
     projectData: projectContextData,
     scopes,
@@ -28,9 +28,12 @@ const App: React.FC = () => {
     groupData,
     onDelete: handleDeleteGroup = () => {},
   } = useContext(TableDataContext)
+  console.log('🚀 ~ file: index.tsx:31 ~ groupData:', groupData)
 
   const dataSource =
-    scopeIIGroups.find((group) => group.groupKey === groupKey)?.dataSource || []
+    (scopeIIGroups.find((group) => group.groupKey === groupKey)?.dataSource as
+      | TYearlyDataType[]
+      | undefined) || ([] as TYearlyDataType[])
 
   const id = projectContextData?.id || 0
   const form = Form.useFormInstance()
@@ -38,6 +41,7 @@ const App: React.FC = () => {
   const { element } = useEditableTitle({
     form,
     name: [
+      'scopeII',
       groupIndex,
       'groupName',
     ],
@@ -54,18 +58,11 @@ const App: React.FC = () => {
     handleDeleteGroup(theGroupKey)
   }
 
-  // console.log('projectData', projectData)
-  // console.log('projectContextData', projectContextData)
-
   return (
     <div>
       {element}
       <Table
         className="mt-4"
-        expandable={{
-          expandedRowRender: (record: TYearlyDataType) => renderTable(record),
-          rowExpandable: (record) => record.period === 'monthly',
-        }}
         bordered
         dataSource={dataSource}
         columns={columns as ColumnType<TYearlyDataType>[]}

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { Button, Modal, InputNumber, Form, Row, Col } from 'antd'
+import { Button, Modal, Row, Col, Form, InputNumber } from 'antd'
 import { FolderAddFilled } from '@ant-design/icons'
 import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
@@ -16,9 +16,9 @@ const AddRecordButton = () => {
   const scopeIIGroups = scopes?.scopeII || []
   const group = scopeIIGroups.find((theGroup) => theGroup.groupKey === groupKey)
   const dataSource = group?.dataSource || []
-
   const watchYearlyAmount = Form.useWatch(
     [
+      'scopeII',
       groupIndex,
       'yearlyAmount',
     ],
@@ -26,6 +26,7 @@ const AddRecordButton = () => {
   )
   const watchCo2Kwh = Form.useWatch(
     [
+      'scopeII',
       groupIndex,
       'co2Kwh',
     ],
@@ -45,34 +46,42 @@ const AddRecordButton = () => {
   const resetFormData = () => {
     form.resetFields([
       [
+        'scopeII',
         groupIndex,
-        'electricSource',
+        'equipment',
       ],
       [
+        'scopeII',
         groupIndex,
         'period',
       ],
       [
+        'scopeII',
         groupIndex,
         'yearlyAmount',
       ],
       [
+        'scopeII',
         groupIndex,
         'monthlyAmount',
       ],
       [
+        'scopeII',
         groupIndex,
         'hourlyAmount',
       ],
       [
+        'scopeII',
         groupIndex,
         'hours',
       ],
       [
+        'scopeII',
         groupIndex,
         'gwp',
       ],
       [
+        'scopeII',
         groupIndex,
         'unit',
       ],
@@ -85,52 +94,18 @@ const AddRecordButton = () => {
   }
 
   const handleData = () => {
-    const formData = form.getFieldsValue()[groupIndex]
-    console.log('formData', formData)
+    const formData = form.getFieldsValue().scopeII[groupIndex]
 
-    const getYearlyAmount = (theFormData: any) => {
-      switch (theFormData?.period) {
-        case 'yearly':
-          return convertUnitToTons({
-            value: theFormData.yearlyAmount ?? 0,
-            unit: theFormData.unit,
-          })
-        case 'monthly':
-          return convertUnitToTons({
-            value: (theFormData?.monthlyAmount ?? []).reduce(
-              (acc: number, cur: number) => acc + cur,
-              0,
-            ),
-            unit: theFormData.unit,
-          })
-        case 'hourly':
-          return convertUnitToTons({
-            value: (theFormData.hourlyAmount ?? 0) * (theFormData.hours ?? 0),
-            unit: theFormData.unit,
-          })
-        default:
-          return 0
-      }
-    }
-    const yearlyAmount = getYearlyAmount(formData)
-
-    const ar5 = gwpMapping.find((gwp) => gwp?.value === formData?.gwp)?.ar5 || 0
-
-    const carbonTonsPerYear = yearlyAmount * ar5
+    const yearlyAmount = formData?.yearlyAmount || 0
+    const co2Kwh = formData.co2Kwh || 1
+    const carbonTonsPerYear = yearlyAmount * co2Kwh
 
     const theFormatRecord: TYearlyDataType = {
       key: nanoid(),
       electricSource: formData?.electricSource,
-      gwp: formData.gwp,
+      co2Kwh: formData.co2Kwh || 1,
       yearlyAmount,
-      ar5,
-      co2e: carbonTonsPerYear,
       carbonTonsPerYear,
-      period: formData?.period,
-      monthlyAmount:
-        formData?.period === 'monthly' ? formData.monthlyAmount : [],
-      hourlyAmount: formData?.period === 'hourly' ? formData.hourlyAmount : 0,
-      unit: formData.unit,
     }
 
     return [
@@ -163,23 +138,27 @@ const AddRecordButton = () => {
   }
 
   const handleESSelect = (value: any) => {
-    const isES = Object.keys(value[groupIndex]).includes('electricSource')
+    const isES = Object.keys(value.scopeII[groupIndex]).includes(
+      'electricSource',
+    )
 
     const values = {
       ...form.getFieldsValue(),
     }
+
+    console.log('@@@values', values)
     if (isES) {
       const source = electricSources.find(
-        (s) => s.value === value[groupIndex].electricSource,
+        (s) => s.value === value.scopeII[groupIndex].electricSource,
       ) || {
         yearlyAmount: 0,
-        conversionRate: 1,
+        co2Kwh: 1,
       }
 
       console.log('source', source)
 
-      values[groupIndex].yearlyAmount = source.yearlyAmount
-      values[groupIndex].co2Kwh = source.conversionRate
+      values.scopeII[groupIndex].yearlyAmount = source.yearlyAmount
+      values.scopeII[groupIndex].co2Kwh = source.co2Kwh
 
       form.setFieldsValue(values)
     }
@@ -220,6 +199,7 @@ const AddRecordButton = () => {
               <Form.Item
                 label="使用度數(年)"
                 name={[
+                  'scopeII',
                   groupIndex,
                   'yearlyAmount',
                 ]}
@@ -245,6 +225,7 @@ const AddRecordButton = () => {
                   </>
                 }
                 name={[
+                  'scopeII',
                   groupIndex,
                   'co2Kwh',
                 ]}

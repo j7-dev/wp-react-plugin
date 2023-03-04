@@ -1,4 +1,3 @@
-import type { TUnit } from '@/types'
 import type { Table } from 'antd'
 import { z } from 'zod'
 
@@ -23,36 +22,10 @@ export type TEditableCellProps = {
   record: Item
 }
 
-export type TMonthlyDataType = {
-  key: React.Key
-  month: number
-  GreenhouseGasesTonsPerYear: number
-  gpt: number
-  co2e: number
-  CarbonTonsPerYear: number
-}
-
 export type TYearlyDataType = {
   key: string
   electricSource: string
-  gwp: string
   yearlyAmount: number
-  ar5: number
-  co2e: number
+  co2Kwh: number
   carbonTonsPerYear: number
-  period: 'hourly' | 'monthly' | 'yearly'
-  monthlyAmount?: number[]
-  hourlyAmount?: number
-  unit: TUnit
-}
-
-export type ColumnTypes = Exclude<EditableTableProps['columns'], undefined> & {
-  editable?: boolean
-  dataIndex: string
-  title: string
-  render?: (
-    text: string,
-    record: TMonthlyDataType,
-    index: number,
-  ) => React.ReactNode
 }

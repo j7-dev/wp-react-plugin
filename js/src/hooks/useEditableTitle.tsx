@@ -47,13 +47,7 @@ const useEditableTitle = ({
       >
         {editableStr}
       </Typography.Title>
-      {!printMode ? (
-        <HiddenInput
-          name={name}
-          required={required}
-          initialValue={initialValue}
-        />
-      ) : null}
+      {!printMode ? <HiddenInput name={name} required={required} /> : null}
     </>
   )
 

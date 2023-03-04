@@ -3,9 +3,8 @@ import { CloseCircleFilled } from '@ant-design/icons'
 
 const HiddenInput: React.FC<{
   name: string | number | (string | number)[]
-  initialValue?: string | number
   required?: boolean
-}> = ({ name, initialValue = '○○○', required = false }) => {
+}> = ({ name, required = false }) => {
   const form = Form.useFormInstance()
   const value = Form.useWatch(name, form)
 
@@ -14,7 +13,6 @@ const HiddenInput: React.FC<{
       <Form.Item
         name={name}
         hidden
-        initialValue={initialValue}
         rules={[
           {
             required,

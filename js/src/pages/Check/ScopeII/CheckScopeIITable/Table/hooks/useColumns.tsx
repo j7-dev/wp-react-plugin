@@ -5,10 +5,9 @@ import { Popconfirm, Tooltip } from 'antd'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import { ProjectContext } from '@/pages/Check'
 import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
-import { gwpMapping } from '@/utils'
 import EditRecordButton from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/EditRecordButton'
 import { useColor } from '@/hooks'
-import { floor } from 'lodash-es'
+import { round } from 'lodash-es'
 
 const useColumns = () => {
   const { colorPrimary } = useColor()
@@ -47,21 +46,17 @@ const useColumns = () => {
       fixed: 'left',
     },
     {
-      title: '用電度數',
-      width: 160,
-      align: 'center',
-      dataIndex: 'yearlyAmount',
-    },
-    {
-      title: (
-        <>
-          CO<sub>2</sub>/Kwh
-        </>
-      ),
+      title: '使用度數 (年)',
       align: 'center',
       width: 200,
+      dataIndex: 'yearlyAmount',
+      render: (yearlyAmount: number) => round(yearlyAmount, 3),
+    },
+    {
+      title: 'co2Kwh',
+      align: 'center',
       dataIndex: 'co2Kwh',
-      render: (co2Kwh: number) => floor(co2Kwh, 3),
+      width: 120,
     },
     {
       title: (
@@ -74,7 +69,7 @@ const useColumns = () => {
       ),
       align: 'center',
       dataIndex: 'carbonTonsPerYear',
-      render: (carbonTonsPerYear: number) => floor(carbonTonsPerYear, 3),
+      render: (carbonTonsPerYear: number) => round(carbonTonsPerYear, 3),
       width: 200,
     },
     {
