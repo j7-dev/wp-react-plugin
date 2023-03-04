@@ -2,8 +2,7 @@ import { createContext, useContext, useState } from 'react'
 import { Modal, Input, Radio, Form } from 'antd'
 import { SlidersOutlined } from '@ant-design/icons'
 import GWPYearlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPYearlyFormItem'
-import GWPMonthlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPMonthlyFormItem'
-import GWPHourlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPHourlyFormItem'
+
 import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
 import { gwpMapping, convertUnitToTons, reverseUnitValue } from '@/utils'
@@ -46,7 +45,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
     form.setFieldsValue({
       [groupIndex]: {
-        equipment: theRecord.equipment,
+        electricSource: theRecord.electricSource,
         period: theRecord.period,
         yearlyAmount: theRecord.yearlyAmount || 0,
         monthlyAmount: theRecord.monthlyAmount || new Array(12).fill(0),
@@ -94,7 +93,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
     const theFormatRecord: TYearlyDataType = {
       key: record?.key || nanoid(),
-      equipment: formData?.equipment,
+      electricSource: formData?.electricSource,
       gwp: formData?.gwp,
       yearlyAmount,
       ar5,
@@ -177,50 +176,14 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
             // hasFeedback={true}
             name={[
               groupIndex,
-              'equipment',
+              'electricSource',
             ]}
             rules={[{ required: validating, message: '請輸入設備名稱' }]}
           >
             <Input className="mt-8" addonBefore="設備名稱" />
           </Form.Item>
 
-          <Form.Item
-            name={[
-              groupIndex,
-              'period',
-            ]}
-            initialValue="yearly"
-          >
-            <Radio.Group className="w-full mt-8" buttonStyle="solid">
-              <Radio.Button className="w-1/3 text-center" value="yearly">
-                年碳排放
-              </Radio.Button>
-              <Radio.Button className="w-1/3 text-center" value="monthly">
-                月碳排放
-              </Radio.Button>
-              <Radio.Button className="w-1/3 text-center" value="hourly">
-                每小時碳排放
-              </Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-          {period === 'yearly' && (
-            <GWPYearlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
-          {period === 'monthly' && (
-            <GWPMonthlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
-          {period === 'hourly' && (
-            <GWPHourlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
+          <GWPYearlyFormItem groupIndex={groupIndex} validating={validating} />
         </Form>
       </Modal>
     </>

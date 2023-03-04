@@ -1,12 +1,12 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { Button, Modal, Input, Radio, Form } from 'antd'
+import { Button, Modal, InputNumber, Form, Row, Col } from 'antd'
 import { FolderAddFilled } from '@ant-design/icons'
-import GWPYearlyFormItem from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/GWPYearlyFormItem'
 import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
-import { gwpMapping, convertUnitToTons } from '@/utils'
+import { gwpMapping, convertUnitToTons, electricSources } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
+import ExtendableSelect from '../ExtendableSelect'
 
 export const FormContext = createContext<any | null>(null)
 const AddRecordButton = () => {
@@ -16,6 +16,21 @@ const AddRecordButton = () => {
   const scopeIIGroups = scopes?.scopeII || []
   const group = scopeIIGroups.find((theGroup) => theGroup.groupKey === groupKey)
   const dataSource = group?.dataSource || []
+
+  const watchYearlyAmount = Form.useWatch(
+    [
+      groupIndex,
+      'yearlyAmount',
+    ],
+    form,
+  )
+  const watchCo2Kwh = Form.useWatch(
+    [
+      groupIndex,
+      'co2Kwh',
+    ],
+    form,
+  )
 
   const [
     isModalOpen,
@@ -31,7 +46,7 @@ const AddRecordButton = () => {
     form.resetFields([
       [
         groupIndex,
-        'equipment',
+        'electricSource',
       ],
       [
         groupIndex,
@@ -105,7 +120,7 @@ const AddRecordButton = () => {
 
     const theFormatRecord: TYearlyDataType = {
       key: nanoid(),
-      equipment: formData?.equipment,
+      electricSource: formData?.electricSource,
       gwp: formData.gwp,
       yearlyAmount,
       ar5,
@@ -147,13 +162,28 @@ const AddRecordButton = () => {
     setIsModalOpen(false)
   }
 
-  const period = Form.useWatch(
-    [
-      groupIndex,
-      'period',
-    ],
-    form,
-  )
+  const handleESSelect = (value: any) => {
+    const isES = Object.keys(value[groupIndex]).includes('electricSource')
+
+    const values = {
+      ...form.getFieldsValue(),
+    }
+    if (isES) {
+      const source = electricSources.find(
+        (s) => s.value === value[groupIndex].electricSource,
+      ) || {
+        yearlyAmount: 0,
+        conversionRate: 1,
+      }
+
+      console.log('source', source)
+
+      values[groupIndex].yearlyAmount = source.yearlyAmount
+      values[groupIndex].co2Kwh = source.conversionRate
+
+      form.setFieldsValue(values)
+    }
+  }
 
   return (
     <>
@@ -167,7 +197,6 @@ const AddRecordButton = () => {
         onOk={handleModalOk}
         centered
         width={600}
-        className="cc-modal"
         onCancel={handleCancel}
         okText="新增電力來源"
         cancelText="取消"
@@ -177,19 +206,74 @@ const AddRecordButton = () => {
           onFieldsChange={() => {
             setValidating(false)
           }}
+          layout="vertical"
+          onValuesChange={handleESSelect}
         >
-          <Form.Item
-            // hasFeedback={true}
-            name={[
-              groupIndex,
-              'equipment',
-            ]}
-            rules={[{ required: validating, message: '請輸入電力來源' }]}
-          >
-            <Input className="mt-8" addonBefore="電力來源" />
-          </Form.Item>
+          <Row gutter={16} className="mt-8">
+            <Col span={12}>
+              <ExtendableSelect
+                groupIndex={groupIndex}
+                validating={validating}
+              />
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="使用度數(年)"
+                name={[
+                  groupIndex,
+                  'yearlyAmount',
+                ]}
+                initialValue={0}
+                rules={[
+                  {
+                    required: validating,
+                    message: '請輸入年排放量',
+                  },
+                ]}
+              >
+                <InputNumber className="w-full" min={0} />
+              </Form.Item>
+            </Col>
+          </Row>
 
-          <GWPYearlyFormItem groupIndex={groupIndex} validating={validating} />
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                label={
+                  <>
+                    CO<sub>2</sub>/Kwh
+                  </>
+                }
+                name={[
+                  groupIndex,
+                  'co2Kwh',
+                ]}
+                initialValue={0}
+                rules={[
+                  {
+                    required: validating,
+                    message: `請輸入${(
+                      <>
+                        CO<sub>2</sub>/Kwh
+                      </>
+                    )}`,
+                  },
+                ]}
+              >
+                <InputNumber className="w-full" min={0} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="碳排(噸/年)">
+                <InputNumber
+                  value={watchYearlyAmount * watchCo2Kwh}
+                  className="w-full"
+                  min={0}
+                  disabled
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       </Modal>
     </>

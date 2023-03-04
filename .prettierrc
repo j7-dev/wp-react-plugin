@@ -9,7 +9,7 @@
   "trailingComma": "all",
   "useTabs": false,
   "endOfLine": "lf",
-  "prettier-multiline-arrays-set-threshold": 1,
+  "prettier-multiline-arrays-set-threshold": 2,
   "plugins": [
     "./node_modules/eslint-plugin-prettier",
     "./node_modules/prettier-plugin-multiline-arrays"

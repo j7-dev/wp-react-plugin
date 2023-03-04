@@ -8,6 +8,7 @@ import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
 import { gwpMapping } from '@/utils'
 import EditRecordButton from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/EditRecordButton'
 import { useColor } from '@/hooks'
+import { floor } from 'lodash-es'
 
 const useColumns = () => {
   const { colorPrimary } = useColor()
@@ -39,31 +40,28 @@ const useColumns = () => {
     dataIndex: string
   })[] = [
     {
-      title: '排碳設備',
+      title: '電力來源',
       align: 'center',
-      dataIndex: 'equipment',
+      dataIndex: 'electricSource',
       width: 200,
       fixed: 'left',
     },
     {
-      title: '溫室氣體',
+      title: '用電度數',
       width: 160,
       align: 'center',
-      dataIndex: 'gwp',
-      render: (gwp) => gwpMapping.find((item) => item.value === gwp)?.label,
+      dataIndex: 'yearlyAmount',
     },
     {
-      title: '溫室氣體排放量 (噸/年)',
+      title: (
+        <>
+          CO<sub>2</sub>/Kwh
+        </>
+      ),
       align: 'center',
       width: 200,
-      dataIndex: 'yearlyAmount',
-      render: (yearlyAmount: number) => Math.round(yearlyAmount * 1000) / 1000,
-    },
-    {
-      title: 'GPT係數',
-      align: 'center',
-      dataIndex: 'ar5',
-      width: 120,
+      dataIndex: 'co2Kwh',
+      render: (co2Kwh: number) => floor(co2Kwh, 3),
     },
     {
       title: (
@@ -76,8 +74,7 @@ const useColumns = () => {
       ),
       align: 'center',
       dataIndex: 'carbonTonsPerYear',
-      render: (carbonTonsPerYear: number) =>
-        Math.round(carbonTonsPerYear * 1000) / 1000,
+      render: (carbonTonsPerYear: number) => floor(carbonTonsPerYear, 3),
       width: 200,
     },
     {

@@ -34,7 +34,7 @@ export type TMonthlyDataType = {
 
 export type TYearlyDataType = {
   key: string
-  equipment: string
+  electricSource: string
   gwp: string
   yearlyAmount: number
   ar5: number

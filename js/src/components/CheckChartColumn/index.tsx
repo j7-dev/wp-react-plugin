@@ -4,6 +4,8 @@ import { flatten } from 'lodash-es'
 import { IStyle } from './interfaces'
 import { convertUnitToTons } from '@/utils'
 
+// TODO: Math to Floor
+
 const CheckChartColumn: React.FC<{
   mergedDataSource: TYearlyDataType[]
 }> = ({ mergedDataSource }) => {
