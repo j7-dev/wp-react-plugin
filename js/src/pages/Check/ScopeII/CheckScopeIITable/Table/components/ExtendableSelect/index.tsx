@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { PlusOutlined } from '@ant-design/icons'
 import { Divider, Input, Select, Space, Button, InputRef, Form } from 'antd'
-import { electricSources } from '@/utils'
+import { sourceNames } from '@/utils'
 
 let index = 0
 
@@ -9,7 +9,7 @@ const ExtendableSelect: React.FC<{
   groupIndex: number
   validating: boolean
 }> = ({ groupIndex, validating }) => {
-  const defaultItems = electricSources.map((item) => item.value)
+  const defaultItems = sourceNames.map((item) => item.value)
   const [
     items,
     setItems,
@@ -44,7 +44,7 @@ const ExtendableSelect: React.FC<{
       name={[
         'scopeII',
         groupIndex,
-        'electricSource',
+        'sourceName',
       ]}
       rules={[{ required: validating, message: '請輸入電力來源' }]}
     >

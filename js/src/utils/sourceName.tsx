@@ -1,4 +1,4 @@
-export const electricSources = [
+export const sourceNames = [
   {
     value: '電視',
     label: '電視',

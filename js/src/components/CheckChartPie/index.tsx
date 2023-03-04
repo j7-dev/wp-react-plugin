@@ -1,6 +1,7 @@
 import { Pie, measureTextWidth } from '@ant-design/plots'
 import type { IData } from '@/pages/Check/Chart/interface'
 import { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
+import { round } from 'lodash-es'
 
 type IStyle = Record<string, number | string>
 
@@ -9,11 +10,11 @@ const CheckChartPie: React.FC<{
 }> = ({ mergedDataSource }) => {
   const formatData = !!mergedDataSource
     ? mergedDataSource.map((record) => {
-        const yearlyAmount = record?.yearlyAmount || 0
+        const carbonTonsPerYear = record?.carbonTonsPerYear || 0
 
         return {
-          value: Math.round(yearlyAmount * 1000) / 1000,
-          type: record?.equipment,
+          value: round(carbonTonsPerYear),
+          type: record?.sourceName,
         }
       })
     : []

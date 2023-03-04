@@ -36,6 +36,7 @@ const App: React.FC = () => {
   const id = projectContextData?.id || 0
   const form = Form.useFormInstance()
   // const data = JSON.parse(projectContextData?.meta?.project_data || '{}')
+
   const { element } = useEditableTitle({
     form,
     name: [

@@ -1,10 +1,8 @@
 import { Column } from '@ant-design/plots'
 import { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
-import { flatten } from 'lodash-es'
+import { flatten, round } from 'lodash-es'
 import { IStyle } from './interfaces'
 import { convertUnitToTons } from '@/utils'
-
-// TODO: Math to Floor
 
 const CheckChartColumn: React.FC<{
   mergedDataSource: TYearlyDataType[]
@@ -16,24 +14,24 @@ const CheckChartColumn: React.FC<{
 
           const dataArr = monthlyAmount.map((amount, index) => {
             const amountTon = convertUnitToTons({
-              value: amount,
+              value: amount * (record?.ar5 || 1),
               unit: record?.unit,
             })
             return {
               month: `${index + 1}月`,
-              value: Math.round(amountTon * 1000) / 1000,
-              type: record?.equipment,
+              value: round(amountTon),
+              type: record?.sourceName,
             }
           })
           return dataArr
         }
-        const yearlyAmount = record?.yearlyAmount || 0
+        const carbonTonsPerYear = record?.carbonTonsPerYear || 0
         const dataArr = new Array(12)
-          .fill(yearlyAmount / 12)
+          .fill(carbonTonsPerYear / 12)
           .map((amount, index) => ({
             month: `${index + 1}月`,
-            value: Math.round(amount * 1000) / 1000,
-            type: record?.equipment,
+            value: round(amount),
+            type: record?.sourceName,
           }))
         return dataArr
       })

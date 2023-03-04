@@ -41,7 +41,7 @@ const useColumns = () => {
     {
       title: '電力來源',
       align: 'center',
-      dataIndex: 'electricSource',
+      dataIndex: 'sourceName',
       width: 200,
       fixed: 'left',
     },

@@ -8,7 +8,7 @@ const ZJsonUpload = z.object({
       dataSource: z
         .object({
           key: z.string(),
-          equipment: z.string(),
+          sourceName: z.string(),
           gwp: z.string(),
           yearlyAmount: z.number().min(0),
           ar5: z.number().min(0),

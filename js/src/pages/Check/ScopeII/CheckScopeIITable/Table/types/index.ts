@@ -24,7 +24,7 @@ export type TEditableCellProps = {
 
 export type TYearlyDataType = {
   key: string
-  electricSource: string
+  sourceName: string
   yearlyAmount: number
   co2Kwh: number
   carbonTonsPerYear: number

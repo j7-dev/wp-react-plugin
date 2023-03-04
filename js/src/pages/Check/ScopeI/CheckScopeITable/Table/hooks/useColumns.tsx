@@ -8,6 +8,7 @@ import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
 import { gwpMapping } from '@/utils'
 import EditRecordButton from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/EditRecordButton'
 import { useColor } from '@/hooks'
+import { round } from 'lodash-es'
 
 const useColumns = () => {
   const { colorPrimary } = useColor()
@@ -41,7 +42,7 @@ const useColumns = () => {
     {
       title: '排碳設備',
       align: 'center',
-      dataIndex: 'equipment',
+      dataIndex: 'sourceName',
       width: 200,
       fixed: 'left',
     },
@@ -57,7 +58,7 @@ const useColumns = () => {
       align: 'center',
       width: 200,
       dataIndex: 'yearlyAmount',
-      render: (yearlyAmount: number) => Math.round(yearlyAmount * 1000) / 1000,
+      render: (yearlyAmount: number) => round(yearlyAmount, 3),
     },
     {
       title: 'GPT係數',
@@ -76,8 +77,7 @@ const useColumns = () => {
       ),
       align: 'center',
       dataIndex: 'carbonTonsPerYear',
-      render: (carbonTonsPerYear: number) =>
-        Math.round(carbonTonsPerYear * 1000) / 1000,
+      render: (carbonTonsPerYear: number) => round(carbonTonsPerYear, 3),
       width: 200,
     },
     {

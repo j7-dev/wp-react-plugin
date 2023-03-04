@@ -13,7 +13,7 @@ const useEditableTitle = ({
   printMode = false,
 }: {
   form: FormInstance<any>
-  name: string | number | (string | number)[]
+  name: (string | number)[]
   required?: boolean
   initialValue?: string | number
   title: {
@@ -26,7 +26,10 @@ const useEditableTitle = ({
     editableStr,
     setEditableStr,
   ] = useState(initialValue)
-  const { setIsDiff } = useContext(ProjectContext)
+  const { setIsDiff, scopes } = useContext(ProjectContext)
+  // initValue = scopes.scopeI[0].groupName
+  const initValue = name.reduce((acc: any, cur: any) => acc[cur], scopes)
+  console.log('🚀 ~ file: useEditableTitle.tsx:32 ~ initValue:', initValue)
 
   const handleChange = (str: string) => {
     setEditableStr(str)
@@ -47,7 +50,9 @@ const useEditableTitle = ({
       >
         {editableStr}
       </Typography.Title>
-      {!printMode ? <HiddenInput name={name} required={required} /> : null}
+      {!printMode ? (
+        <HiddenInput name={name} required={required} initialValue={initValue} />
+      ) : null}
     </>
   )
 

@@ -34,7 +34,7 @@ const AddRecordButton = () => {
       [
         'scopeI',
         groupIndex,
-        'equipment',
+        'sourceName',
       ],
       [
         'scopeI',
@@ -115,7 +115,7 @@ const AddRecordButton = () => {
 
     const theFormatRecord: TYearlyDataType = {
       key: nanoid(),
-      equipment: formData?.equipment,
+      sourceName: formData?.sourceName,
       gwp: formData.gwp,
       yearlyAmount,
       ar5,
@@ -194,7 +194,7 @@ const AddRecordButton = () => {
             name={[
               'scopeI',
               groupIndex,
-              'equipment',
+              'sourceName',
             ]}
             rules={[{ required: validating, message: '請輸入設備名稱' }]}
           >

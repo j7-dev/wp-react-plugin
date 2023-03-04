@@ -10,6 +10,7 @@ import { gwpMapping, convertUnitToTons, reverseUnitValue } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 import { useColor } from '@/hooks'
+import { round } from 'lodash-es'
 
 export const FormContext = createContext<any | null>(null)
 const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
@@ -47,7 +48,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
     form.setFieldsValue({
       scopeI: {
         [groupIndex]: {
-          equipment: theRecord.equipment,
+          sourceName: theRecord.sourceName,
           period: theRecord.period,
           yearlyAmount: reverseUnitValue({
             value: theRecord.yearlyAmount || 0,
@@ -55,7 +56,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
           }),
           monthlyAmount: theRecord.monthlyAmount || new Array(12).fill(0),
           hourlyAmount: theRecord.hourlyAmount || 0,
-          hours: Math.round(theHours),
+          hours: round(theHours, 1),
           gwp: theRecord.gwp,
           unit: theRecord.unit,
         },
@@ -99,7 +100,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
     const theFormatRecord: TYearlyDataType = {
       key: record?.key || nanoid(),
-      equipment: formData?.equipment,
+      sourceName: formData?.sourceName,
       gwp: formData?.gwp,
       yearlyAmount,
       ar5,
@@ -184,7 +185,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
             name={[
               'scopeI',
               groupIndex,
-              'equipment',
+              'sourceName',
             ]}
             rules={[{ required: validating, message: '請輸入設備名稱' }]}
           >

@@ -1,5 +1,6 @@
 import React from 'react'
 import type { TUnit } from '@/types'
+import { round } from 'lodash-es'
 
 export const renderHTML = (rawHTML: string) =>
   React.createElement('div', { dangerouslySetInnerHTML: { __html: rawHTML } })
@@ -64,9 +65,9 @@ export const convertUnitToTons = ({
 }) => {
   switch (unit) {
     case 'kg':
-      return Math.round(value) / 1000
+      return round(value / 1000, 3)
     case 'tons':
-      return Math.round(value)
+      return round(value, 3)
   }
 }
 

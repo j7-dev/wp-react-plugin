@@ -4,16 +4,20 @@ import CheckChartColumn from '@/components/CheckChartColumn'
 import CheckChartPie from '@/components/CheckChartPie'
 import { ProjectContext } from '@/pages/Check'
 import { flatten } from 'lodash-es'
-import {
-  TYearlyDataType,
-  TGroupData,
-} from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
+import { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
+import { TGroupData } from '@/types'
 
 const Chart = () => {
   const { scopes } = useContext(ProjectContext)
   const scopeIGroups: TGroupData[] = scopes?.scopeI || []
-  const mergedDataSource: TYearlyDataType[] = flatten(
-    scopeIGroups.map((group) => group?.dataSource) || [],
+  const scopeIIGroups: TGroupData[] = scopes?.scopeII || []
+  const mergedDataSource: TYearlyDataType[] = flatten([
+    ...(scopeIGroups.map((group) => group?.dataSource) || []),
+    ...(scopeIIGroups.map((group) => group?.dataSource) || []),
+  ])
+  console.log(
+    '🚀 ~ file: index.tsx:18 ~ Chart ~ mergedDataSource:',
+    mergedDataSource,
   )
 
   return (

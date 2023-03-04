@@ -3,7 +3,7 @@ import { Button, Modal, Row, Col, Form, InputNumber } from 'antd'
 import { FolderAddFilled } from '@ant-design/icons'
 import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
-import { gwpMapping, convertUnitToTons, electricSources } from '@/utils'
+import { gwpMapping, convertUnitToTons, sourceNames } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import ExtendableSelect from '../ExtendableSelect'
@@ -48,7 +48,7 @@ const AddRecordButton = () => {
       [
         'scopeII',
         groupIndex,
-        'equipment',
+        'sourceName',
       ],
       [
         'scopeII',
@@ -102,7 +102,7 @@ const AddRecordButton = () => {
 
     const theFormatRecord: TYearlyDataType = {
       key: nanoid(),
-      electricSource: formData?.electricSource,
+      sourceName: formData?.sourceName,
       co2Kwh: formData.co2Kwh || 1,
       yearlyAmount,
       carbonTonsPerYear,
@@ -138,9 +138,7 @@ const AddRecordButton = () => {
   }
 
   const handleESSelect = (value: any) => {
-    const isES = Object.keys(value.scopeII[groupIndex]).includes(
-      'electricSource',
-    )
+    const isES = Object.keys(value.scopeII[groupIndex]).includes('sourceName')
 
     const values = {
       ...form.getFieldsValue(),
@@ -148,8 +146,8 @@ const AddRecordButton = () => {
 
     console.log('@@@values', values)
     if (isES) {
-      const source = electricSources.find(
-        (s) => s.value === value.scopeII[groupIndex].electricSource,
+      const source = sourceNames.find(
+        (s) => s.value === value.scopeII[groupIndex].sourceName,
       ) || {
         yearlyAmount: 0,
         co2Kwh: 1,

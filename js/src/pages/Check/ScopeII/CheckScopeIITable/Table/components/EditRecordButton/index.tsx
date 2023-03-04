@@ -3,7 +3,7 @@ import { Modal, Row, Col, Form, InputNumber } from 'antd'
 import { SlidersOutlined } from '@ant-design/icons'
 import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
-import { electricSources } from '@/utils'
+import { sourceNames } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import { useColor } from '@/hooks'
@@ -57,7 +57,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
     form.setFieldsValue({
       scopeII: {
         [groupIndex]: {
-          electricSource: theRecord?.electricSource,
+          sourceName: theRecord?.sourceName,
           co2Kwh,
           yearlyAmount,
         },
@@ -74,7 +74,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
     const theFormatRecord: TYearlyDataType = {
       key: nanoid(),
-      electricSource: formData?.electricSource,
+      sourceName: formData?.sourceName,
       co2Kwh: formData.co2Kwh || 1,
       yearlyAmount,
       carbonTonsPerYear,
@@ -115,14 +115,14 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
   }
 
   const handleESSelect = (value: any) => {
-    const isES = Object.keys(value[groupIndex]).includes('electricSource')
+    const isES = Object.keys(value[groupIndex]).includes('sourceName')
 
     const values = {
       ...form.getFieldsValue(),
     }
     if (isES) {
-      const source = electricSources.find(
-        (s) => s.value === value[groupIndex].electricSource,
+      const source = sourceNames.find(
+        (s) => s.value === value[groupIndex].sourceName,
       ) || {
         yearlyAmount: 0,
         co2Kwh: 1,
