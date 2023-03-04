@@ -45,21 +45,26 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
     const theHours = !!theHourlyAmount ? theYearlyAmount / theHourlyAmount : 0
 
     form.setFieldsValue({
-      [groupIndex]: {
-        equipment: theRecord.equipment,
-        period: theRecord.period,
-        yearlyAmount: theRecord.yearlyAmount || 0,
-        monthlyAmount: theRecord.monthlyAmount || new Array(12).fill(0),
-        hourlyAmount: theRecord.hourlyAmount || 0,
-        hours: Math.round(theHours),
-        gwp: theRecord.gwp,
-        unit: theRecord.unit,
+      scopeI: {
+        [groupIndex]: {
+          equipment: theRecord.equipment,
+          period: theRecord.period,
+          yearlyAmount: reverseUnitValue({
+            value: theRecord.yearlyAmount || 0,
+            unit: theRecord.unit,
+          }),
+          monthlyAmount: theRecord.monthlyAmount || new Array(12).fill(0),
+          hourlyAmount: theRecord.hourlyAmount || 0,
+          hours: Math.round(theHours),
+          gwp: theRecord.gwp,
+          unit: theRecord.unit,
+        },
       },
     })
   }
 
   const handleData = () => {
-    const formData = form.getFieldsValue()[groupIndex]
+    const formData = form.getFieldsValue().scopeI[groupIndex]
     console.log('formData', formData)
 
     const getYearlyAmount = (theFormData: any) => {
@@ -143,6 +148,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
   const period = Form.useWatch(
     [
+      'scopeI',
       groupIndex,
       'period',
     ],
@@ -176,6 +182,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
           <Form.Item
             // hasFeedback={true}
             name={[
+              'scopeI',
               groupIndex,
               'equipment',
             ]}
@@ -186,6 +193,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
           <Form.Item
             name={[
+              'scopeI',
               groupIndex,
               'period',
             ]}

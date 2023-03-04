@@ -71,7 +71,7 @@ const EditProjectButtons: React.FC<{
         placement: 'bottomRight',
         message: '您有未儲存的變更',
         description: '請記得到頁面上方更新專案資料',
-        duration: null,
+        duration: 4.5,
       })
     }
   }, [isDiff])

@@ -93,6 +93,7 @@ const App: React.FC = () => {
         ...theGroup,
         groupName:
           form.getFieldValue([
+            'scopeI',
             groupIndex,
             'groupName',
           ]) || '',

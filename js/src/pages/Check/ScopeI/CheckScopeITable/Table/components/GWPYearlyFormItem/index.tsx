@@ -12,6 +12,7 @@ const GWPYearlyFormItem: React.FC<{
       <Input.Group compact className="mb-4">
         <Form.Item
           name={[
+            'scopeI',
             groupIndex,
             'yearlyAmount',
           ]}
@@ -32,6 +33,7 @@ const GWPYearlyFormItem: React.FC<{
         </Form.Item>
         <Form.Item
           name={[
+            'scopeI',
             groupIndex,
             'gwp',
           ]}
@@ -45,6 +47,7 @@ const GWPYearlyFormItem: React.FC<{
         >
           <FormGWPSelect
             name={[
+              'scopeI',
               groupIndex,
               'gwp',
             ]}
@@ -52,6 +55,7 @@ const GWPYearlyFormItem: React.FC<{
         </Form.Item>
         <Form.Item
           name={[
+            'scopeI',
             groupIndex,
             'unit',
           ]}
@@ -66,6 +70,7 @@ const GWPYearlyFormItem: React.FC<{
         >
           <FormUnitSelect
             name={[
+              'scopeI',
               groupIndex,
               'unit',
             ]}

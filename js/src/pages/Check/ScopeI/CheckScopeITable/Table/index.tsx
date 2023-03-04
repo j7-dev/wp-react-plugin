@@ -28,6 +28,7 @@ const App: React.FC = () => {
     groupData,
     onDelete: handleDeleteGroup = () => {},
   } = useContext(TableDataContext)
+  console.log('🚀 ~ file: index.tsx:31 ~ groupData:', groupData)
 
   const dataSource =
     scopeIGroups.find((group) => group.groupKey === groupKey)?.dataSource || []
@@ -38,6 +39,7 @@ const App: React.FC = () => {
   const { element } = useEditableTitle({
     form,
     name: [
+      'scopeI',
       groupIndex,
       'groupName',
     ],

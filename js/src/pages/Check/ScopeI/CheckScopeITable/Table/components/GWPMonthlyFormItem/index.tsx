@@ -13,6 +13,7 @@ const GWPMonthlyFormItem: React.FC<{
         <Col span={12}>
           <Form.Item
             name={[
+              'scopeI',
               groupIndex,
               'gwp',
             ]}
@@ -27,6 +28,7 @@ const GWPMonthlyFormItem: React.FC<{
             <FormGWPSelect
               className="rounded-[6px]"
               name={[
+                'scopeI',
                 groupIndex,
                 'gwp',
               ]}
@@ -36,6 +38,7 @@ const GWPMonthlyFormItem: React.FC<{
         <Col span={12}>
           <Form.Item
             name={[
+              'scopeI',
               groupIndex,
               'unit',
             ]}
@@ -51,6 +54,7 @@ const GWPMonthlyFormItem: React.FC<{
             <FormUnitSelect
               className="rounded-l-[6px]"
               name={[
+                'scopeI',
                 groupIndex,
                 'unit',
               ]}
@@ -70,6 +74,7 @@ const GWPMonthlyFormItem: React.FC<{
               >
                 <Form.Item
                   name={[
+                    'scopeI',
                     groupIndex,
                     'monthlyAmount',
                     month.value,
@@ -103,6 +108,7 @@ const GWPMonthlyFormItem: React.FC<{
               >
                 <Form.Item
                   name={[
+                    'scopeI',
                     groupIndex,
                     'monthlyAmount',
                     month.value,

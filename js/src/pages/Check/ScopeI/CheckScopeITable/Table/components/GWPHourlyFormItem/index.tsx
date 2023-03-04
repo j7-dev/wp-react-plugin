@@ -11,6 +11,7 @@ const GWPHourlyFormItem: React.FC<{
       <Input.Group compact className="mb-4">
         <Form.Item
           name={[
+            'scopeI',
             groupIndex,
             'hourlyAmount',
           ]}
@@ -31,6 +32,7 @@ const GWPHourlyFormItem: React.FC<{
         </Form.Item>
         <Form.Item
           name={[
+            'scopeI',
             groupIndex,
             'gwp',
           ]}
@@ -44,6 +46,7 @@ const GWPHourlyFormItem: React.FC<{
         >
           <FormGWPSelect
             name={[
+              'scopeI',
               groupIndex,
               'gwp',
             ]}
@@ -51,6 +54,7 @@ const GWPHourlyFormItem: React.FC<{
         </Form.Item>
         <Form.Item
           name={[
+            'scopeI',
             groupIndex,
             'unit',
           ]}
@@ -65,6 +69,7 @@ const GWPHourlyFormItem: React.FC<{
         >
           <FormUnitSelect
             name={[
+              'scopeI',
               groupIndex,
               'unit',
             ]}
@@ -74,6 +79,7 @@ const GWPHourlyFormItem: React.FC<{
       <Input.Group compact className="mb-4">
         <Form.Item
           name={[
+            'scopeI',
             groupIndex,
             'hours',
           ]}

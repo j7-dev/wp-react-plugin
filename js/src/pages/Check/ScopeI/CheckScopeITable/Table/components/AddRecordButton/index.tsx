@@ -32,34 +32,42 @@ const AddRecordButton = () => {
   const resetFormData = () => {
     form.resetFields([
       [
+        'scopeI',
         groupIndex,
         'equipment',
       ],
       [
+        'scopeI',
         groupIndex,
         'period',
       ],
       [
+        'scopeI',
         groupIndex,
         'yearlyAmount',
       ],
       [
+        'scopeI',
         groupIndex,
         'monthlyAmount',
       ],
       [
+        'scopeI',
         groupIndex,
         'hourlyAmount',
       ],
       [
+        'scopeI',
         groupIndex,
         'hours',
       ],
       [
+        'scopeI',
         groupIndex,
         'gwp',
       ],
       [
+        'scopeI',
         groupIndex,
         'unit',
       ],
@@ -72,7 +80,7 @@ const AddRecordButton = () => {
   }
 
   const handleData = () => {
-    const formData = form.getFieldsValue()[groupIndex]
+    const formData = form.getFieldsValue().scopeI[groupIndex]
     console.log('formData', formData)
 
     const getYearlyAmount = (theFormData: any) => {
@@ -151,6 +159,7 @@ const AddRecordButton = () => {
 
   const period = Form.useWatch(
     [
+      'scopeI',
       groupIndex,
       'period',
     ],
@@ -183,6 +192,7 @@ const AddRecordButton = () => {
           <Form.Item
             // hasFeedback={true}
             name={[
+              'scopeI',
               groupIndex,
               'equipment',
             ]}
@@ -193,6 +203,7 @@ const AddRecordButton = () => {
 
           <Form.Item
             name={[
+              'scopeI',
               groupIndex,
               'period',
             ]}
