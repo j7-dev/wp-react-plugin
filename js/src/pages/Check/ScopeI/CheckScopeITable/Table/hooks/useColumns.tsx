@@ -5,7 +5,7 @@ import { Popconfirm, Tooltip } from 'antd'
 import { TableDataContext } from '@/pages/Check/ScopeI/CheckScopeITable'
 import { ProjectContext } from '@/pages/Check'
 import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
-import { gwpMapping } from '@/utils'
+import { gwpMapping, windowOuterWidth } from '@/utils'
 import EditRecordButton from '@/pages/Check/ScopeI/CheckScopeITable/Table/components/EditRecordButton'
 import { useColor } from '@/hooks'
 import { round } from 'lodash-es'
@@ -44,7 +44,7 @@ const useColumns = () => {
       align: 'center',
       dataIndex: 'sourceName',
       width: 200,
-      fixed: 'left',
+      fixed: windowOuterWidth < 768 ? false : 'right',
     },
     {
       title: '溫室氣體',
@@ -85,7 +85,7 @@ const useColumns = () => {
       align: 'center',
       dataIndex: 'action',
       width: 100,
-      fixed: 'right',
+      fixed: windowOuterWidth < 768 ? false : 'right',
       render: (_, record: TYearlyDataType) => (
         <p className="text-center">
           <Popconfirm

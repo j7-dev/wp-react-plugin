@@ -1,7 +1,12 @@
 import { useContext } from 'react'
 import { Table } from 'antd'
 import type { ColumnTypes, TYearlyDataType } from '../types'
-import { months, gwpMapping, convertUnitToTons } from '@/utils'
+import {
+  months,
+  gwpMapping,
+  convertUnitToTons,
+  windowOuterWidth,
+} from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 
 const useMonthlyTable = () => {
@@ -12,7 +17,7 @@ const useMonthlyTable = () => {
       align: 'center',
       dataIndex: 'month',
       width: 200,
-      fixed: 'left',
+      fixed: windowOuterWidth < 768 ? false : 'left',
     },
     {
       title: '溫室氣體',
@@ -65,7 +70,7 @@ const useMonthlyTable = () => {
       align: 'center',
       dataIndex: 'action',
       width: 100,
-      fixed: 'right',
+      fixed: windowOuterWidth < 768 ? false : 'right',
     },
   ]
 

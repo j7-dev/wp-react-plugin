@@ -8,6 +8,7 @@ import { DeleteOutlined, InfoCircleFilled } from '@ant-design/icons'
 import EditRecordButton from '@/pages/Check/ScopeII/CheckScopeIITable/Table/components/EditRecordButton'
 import { useColor } from '@/hooks'
 import { round } from 'lodash-es'
+import { windowOuterWidth } from '@/utils'
 
 const useColumns = () => {
   const { colorPrimary } = useColor()
@@ -43,7 +44,7 @@ const useColumns = () => {
       align: 'center',
       dataIndex: 'sourceName',
       width: 200,
-      fixed: 'left',
+      fixed: windowOuterWidth < 768 ? false : 'right',
     },
     {
       title: '使用度數 (年)',
@@ -77,7 +78,7 @@ const useColumns = () => {
       align: 'center',
       dataIndex: 'action',
       width: 100,
-      fixed: 'right',
+      fixed: windowOuterWidth < 768 ? false : 'right',
       render: (_, record: TYearlyDataType) => (
         <p className="text-center">
           <Popconfirm
