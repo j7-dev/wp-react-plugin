@@ -3,6 +3,8 @@ import { Row, Col, Button, Modal, Input, Empty, notification } from 'antd'
 import CheckChartColumn from '@/components/CheckChartColumn'
 import CheckChartPie from '@/components/CheckChartPie'
 import CheckScopeITable from '@/pages/Check/ScopeI/CheckScopeITable'
+import CheckScopeIITable from '@/pages/Check/ScopeII/CheckScopeIITable'
+
 import { ProjectContext } from '@/pages/Check'
 import { TYearlyDataType } from '@/pages/Check/ScopeI/CheckScopeITable/Table/types'
 import { TGroupData } from '@/types'
@@ -22,10 +24,12 @@ const Export = () => {
   const { projectData, scopes } = useContext(ProjectContext)
   const postId = projectData?.id
   const scopeIGroups: TGroupData[] = scopes?.scopeI || []
+  const scopeIIGroups: TGroupData[] = scopes?.scopeII || []
 
-  const mergedDataSource: TYearlyDataType[] = flatten(
-    scopeIGroups.map((group) => group?.dataSource) || [],
-  )
+  const mergedDataSource: TYearlyDataType[] = flatten([
+    ...(scopeIGroups.map((group) => group?.dataSource) || []),
+    ...(scopeIIGroups.map((group) => group?.dataSource) || []),
+  ])
 
   const [
     isPrinting,
@@ -122,6 +126,18 @@ const Export = () => {
         {scopeIGroups.map((theGroup, index) => {
           return (
             <CheckScopeITable
+              key={theGroup?.groupKey}
+              groupKey={theGroup?.groupKey}
+              groupIndex={index}
+              groupData={theGroup}
+              postId={postId}
+            />
+          )
+        })}
+
+        {scopeIIGroups.map((theGroup, index) => {
+          return (
+            <CheckScopeIITable
               key={theGroup?.groupKey}
               groupKey={theGroup?.groupKey}
               groupIndex={index}

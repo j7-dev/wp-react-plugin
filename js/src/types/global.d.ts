@@ -5,6 +5,7 @@ declare global {
   }
   var userData: {
     userName: string
+    userId: string
   }
 }
 

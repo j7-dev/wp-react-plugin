@@ -57,7 +57,7 @@ function your_prefix_register_post_type()
     'menu_position'       => 4,
     'menu_icon'           => 'dashicons-chart-area',
     'capability_type'     => 'post',
-    'supports'            => ['title', 'editor', 'thumbnail', 'custom-fields'],
+    'supports'            => ['title', 'editor', 'thumbnail', 'custom-fields', 'author'],
     'taxonomies'          => [],
     'rewrite'             => [
       'with_front' => false,

@@ -6,6 +6,9 @@ import { useMany } from '@/hooks'
 function DefaultPage() {
   const projects = useMany({
     resource: 'carbon-project',
+    args: {
+      author: window?.userData?.userId || '0',
+    },
     queryOptions: {
       enabled: true,
     },

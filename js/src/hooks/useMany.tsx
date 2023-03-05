@@ -17,12 +17,21 @@ const useMany = (options: {
     enabled?: boolean
   }
 }) => {
+  const queryKey = !!options?.args
+    ? [
+        `get_${options.resource}s`,
+        options?.args,
+      ]
+    : [
+        `get_${options.resource}s`,
+      ]
+
   const [
     fetchedData,
     setFetchedData,
   ] = useState<any>(null)
   const getResult = useQuery(
-    [`get_${options.resource}s`],
+    queryKey,
     async () =>
       getResources({
         resource: options.resource,

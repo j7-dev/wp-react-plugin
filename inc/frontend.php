@@ -41,6 +41,7 @@ function enqueue_script(): void
 
   wp_localize_script(PROJECT_NAME, 'userData', array(
     'userName' => wp_get_current_user()->user_login,
+    'userId' => wp_get_current_user()->data->ID,
   ));
 
   wp_localize_script('wp-api', 'wpApiSettings', array(

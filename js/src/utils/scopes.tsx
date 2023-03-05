@@ -42,6 +42,22 @@ export const removeKey = (scopes: TScopes) => {
         }),
       }
     }),
+    scopeII: scopes?.scopeII?.map((group) => {
+      return {
+        ...group,
+        groupKey: undefined,
+        dataSource: group?.dataSource?.map((item) => {
+          return {
+            ...item,
+            key: undefined,
+          }
+        }),
+      }
+    }),
+    info: {
+      ...scopes?.info,
+      imgData: undefined,
+    },
   }
 }
 
