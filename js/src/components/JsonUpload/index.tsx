@@ -19,7 +19,7 @@ import { addKey } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 
-const baseUrl = process.env.BASE_URL || ''
+const baseUrl = import.meta.env.VITE_BASE_URL || ''
 
 const JsonUpload = () => {
   const [

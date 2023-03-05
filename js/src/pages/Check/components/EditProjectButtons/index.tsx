@@ -47,7 +47,7 @@ const EditProjectButtons: React.FC<{
       })
       if (deleteResult?.status === 200) {
         setIsDeleteProjectModalOpen(false)
-        navigate(process.env.BASE_URL || '/home/carbon-check-app/')
+        navigate(import.meta.env.VITE_BASE_URL || '/home/carbon-check-app/')
       } else {
         console.log('deleteResult', deleteResult)
       }

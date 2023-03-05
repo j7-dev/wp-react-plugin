@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from 'axios'
 import { notification } from 'antd'
 import { getTypeText } from '@/utils'
 
-const baseURL = process.env.API_URL || wpApiSettings.root || ''
-const timeout = process.env.API_TIMEOUT || '30000'
+const baseURL = import.meta.env.VITE_API_URL || wpApiSettings.root || ''
+const timeout = import.meta.env.VITE_API_TIMEOUT || '30000'
 
 const instance: AxiosInstance = axios.create({
   baseURL,

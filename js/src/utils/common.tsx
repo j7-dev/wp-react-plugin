@@ -129,7 +129,7 @@ export const getTypeText = (
   }
 }
 
-const baseUrl = process.env.BASE_URL || ''
+const baseUrl = import.meta.env.VITE_BASE_URL || ''
 
 export const defaultRouterMetas = [
   {

@@ -14,7 +14,7 @@ const queryClient = new QueryClient({
   },
 })
 
-const renderId = process.env.RENDER_ID || 'my-app'
+const renderId = import.meta.env.VITE_RENDER_ID || 'my-app'
 
 ReactDOM.createRoot(document.getElementById(renderId)!).render(
   <React.StrictMode>

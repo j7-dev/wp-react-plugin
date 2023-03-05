@@ -6,7 +6,7 @@ import { companyCategories, defaultScopes } from '@/utils'
 import { useNavigate } from 'react-router-dom'
 import { createResource } from '@/api'
 
-const baseUrl = process.env.BASE_URL || ''
+const baseUrl = import.meta.env.VITE_BASE_URL || ''
 
 const Create = () => {
   const [

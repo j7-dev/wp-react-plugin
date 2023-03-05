@@ -3,7 +3,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import ProjectsImportButton from '@/components/ProjectsImportButton'
 import { Link } from 'react-router-dom'
 
-const baseUrl = process.env.BASE_URL || ''
+const baseUrl = import.meta.env.VITE_BASE_URL || ''
 
 const ProjectsCompanyCreateButton = () => {
   return (

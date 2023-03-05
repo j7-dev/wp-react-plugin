@@ -5,7 +5,7 @@ import defaultImage from '@/static/defaultImage.jpg'
 import { renderHTML } from '@/utils'
 
 const { Meta } = Card
-const baseUrl = process.env.BASE_URL || ''
+const baseUrl = import.meta.env.VITE_BASE_URL || ''
 
 const ProjectsCompanyCard: React.FC<{
   id: number

@@ -5,7 +5,7 @@ import ProjectsCompanyCreateButton from '@/components/ProjectsCompanyCreateButto
 import { useMany } from '@/hooks'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-const baseUrl = process.env.BASE_URL || ''
+const baseUrl = import.meta.env.VITE_BASE_URL || ''
 
 function DefaultPage() {
   const navigate = useNavigate()
