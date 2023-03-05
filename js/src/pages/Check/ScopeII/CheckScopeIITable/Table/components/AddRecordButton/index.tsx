@@ -3,7 +3,7 @@ import { Button, Modal, Row, Col, Form, InputNumber } from 'antd'
 import { FolderAddFilled } from '@ant-design/icons'
 import type { TYearlyDataType } from '@/pages/Check/ScopeII/CheckScopeIITable/Table/types'
 import { nanoid } from 'nanoid'
-import { gwpMapping, convertUnitToTons, sourceNames } from '@/utils'
+import { handleClearZero, sourceNames } from '@/utils'
 import { ProjectContext } from '@/pages/Check'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import ExtendableSelect from '../ExtendableSelect'
@@ -204,7 +204,11 @@ const AddRecordButton = () => {
                   },
                 ]}
               >
-                <InputNumber className="w-full" min={0} />
+                <InputNumber
+                  className="w-full"
+                  min={0}
+                  onClick={handleClearZero}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -234,7 +238,11 @@ const AddRecordButton = () => {
                   },
                 ]}
               >
-                <InputNumber className="w-full" min={0} />
+                <InputNumber
+                  className="w-full"
+                  min={0}
+                  onClick={handleClearZero}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>

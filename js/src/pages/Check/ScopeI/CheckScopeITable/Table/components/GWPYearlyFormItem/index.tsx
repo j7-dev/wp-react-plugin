@@ -1,5 +1,5 @@
 import { Input, InputNumber, Form } from 'antd'
-
+import { handleClearZero } from '@/utils'
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
 
@@ -29,6 +29,7 @@ const GWPYearlyFormItem: React.FC<{
             addonBefore="年排放"
             className="w-full rounded-r-none"
             min={0}
+            onClick={handleClearZero}
           />
         </Form.Item>
         <Form.Item

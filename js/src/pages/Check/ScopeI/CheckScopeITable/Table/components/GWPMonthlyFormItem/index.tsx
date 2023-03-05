@@ -1,5 +1,5 @@
 import { Input, InputNumber, Form, Row, Col } from 'antd'
-import { months } from '@/utils'
+import { months, handleClearZero } from '@/utils'
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
 
@@ -92,6 +92,7 @@ const GWPMonthlyFormItem: React.FC<{
                     addonBefore={<p className="m-0 w-16">{month.label}</p>}
                     className="w-full"
                     min={0}
+                    onClick={handleClearZero}
                   />
                 </Form.Item>
               </Input.Group>
@@ -126,6 +127,7 @@ const GWPMonthlyFormItem: React.FC<{
                     addonBefore={<p className="m-0 w-16">{month.label}</p>}
                     className="w-full"
                     min={0}
+                    onClick={handleClearZero}
                   />
                 </Form.Item>
               </Input.Group>

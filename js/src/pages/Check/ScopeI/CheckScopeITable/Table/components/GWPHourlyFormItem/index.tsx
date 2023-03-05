@@ -1,6 +1,7 @@
 import { Input, InputNumber, Form } from 'antd'
 import FormGWPSelect from '@/components/FormGWPSelect'
 import FormUnitSelect from '@/components/FormUnitSelect'
+import { handleClearZero } from '@/utils'
 
 const GWPHourlyFormItem: React.FC<{
   groupIndex: number
@@ -28,6 +29,7 @@ const GWPHourlyFormItem: React.FC<{
             addonBefore="每小時排放"
             className="w-full rounded-r-none"
             min={0}
+            onClick={handleClearZero}
           />
         </Form.Item>
         <Form.Item
@@ -97,6 +99,7 @@ const GWPHourlyFormItem: React.FC<{
             addonAfter="小時"
             className="w-full"
             min={0}
+            onClick={handleClearZero}
           />
         </Form.Item>
       </Input.Group>
