@@ -53,37 +53,12 @@ const AddRecordButton = () => {
       [
         'scopeII',
         groupIndex,
-        'period',
-      ],
-      [
-        'scopeII',
-        groupIndex,
         'yearlyAmount',
       ],
       [
         'scopeII',
         groupIndex,
-        'monthlyAmount',
-      ],
-      [
-        'scopeII',
-        groupIndex,
-        'hourlyAmount',
-      ],
-      [
-        'scopeII',
-        groupIndex,
-        'hours',
-      ],
-      [
-        'scopeII',
-        groupIndex,
-        'gwp',
-      ],
-      [
-        'scopeII',
-        groupIndex,
-        'unit',
+        'co2Kwh',
       ],
     ])
   }
@@ -125,7 +100,7 @@ const AddRecordButton = () => {
         const newScopes = JSON.parse(JSON.stringify(scopes))
 
         newScopes.scopeII[groupIndex].dataSource = newDataSource
-
+        console.log('🚀 ~ file: index.tsx:101 ~ .then ~ newScopes:', newScopes)
         setScopes(newScopes)
       })
       .catch((err) => {

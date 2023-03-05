@@ -44,7 +44,7 @@ const useColumns = () => {
       align: 'center',
       dataIndex: 'sourceName',
       width: 200,
-      fixed: windowOuterWidth < 768 ? false : 'right',
+      fixed: false,
     },
     {
       title: '使用度數 (年)',
@@ -78,7 +78,7 @@ const useColumns = () => {
       align: 'center',
       dataIndex: 'action',
       width: 100,
-      fixed: windowOuterWidth < 768 ? false : 'right',
+      fixed: false,
       render: (_, record: TYearlyDataType) => (
         <p className="text-center">
           <Popconfirm

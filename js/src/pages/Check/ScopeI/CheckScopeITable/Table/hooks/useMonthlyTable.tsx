@@ -17,7 +17,7 @@ const useMonthlyTable = () => {
       align: 'center',
       dataIndex: 'month',
       width: 200,
-      fixed: windowOuterWidth < 768 ? false : 'left',
+      fixed: false,
     },
     {
       title: '溫室氣體',
@@ -70,7 +70,7 @@ const useMonthlyTable = () => {
       align: 'center',
       dataIndex: 'action',
       width: 100,
-      fixed: windowOuterWidth < 768 ? false : 'right',
+      fixed: false,
     },
   ]
 
