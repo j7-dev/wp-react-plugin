@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Row, Col, Modal, Alert } from 'antd'
 import CreatCompanyCategoryCard from '@/pages/Create/CreatCompanyCategoryCard'
 import CreatCompanyCategoryInput from '@/pages/Create/CreatCompanyCategoryInput'
@@ -66,6 +66,14 @@ const Create = () => {
   const handleCancel = () => {
     setIsModalOpen(false)
   }
+
+  useEffect(() => {
+    const navigateInfo = {
+      path: 'create',
+      state: null,
+    }
+    sessionStorage.setItem('navigateInfo', JSON.stringify(navigateInfo))
+  }, [])
 
   return (
     <Row

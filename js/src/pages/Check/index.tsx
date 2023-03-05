@@ -167,6 +167,16 @@ const App: React.FC = () => {
     }
   }, [scopes])
 
+  useEffect(() => {
+    const navigateInfo = {
+      path: 'check',
+      state: {
+        id,
+      },
+    }
+    sessionStorage.setItem('navigateInfo', JSON.stringify(navigateInfo))
+  }, [])
+
   return (
     <div className="w-full overflow-x-auto pb-8">
       <div className="min-w-[990px]">

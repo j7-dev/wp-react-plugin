@@ -49,21 +49,6 @@ const CheckChartColumn: React.FC<{
       // 可手动配置 label 数据标签位置
       // position: 'middle', // 'top', 'bottom', 'middle'
     },
-    interactions: [
-      {
-        type: 'active-region',
-        enable: false,
-      },
-    ],
-    connectedArea: {
-      style: (oldStyle: IStyle) => {
-        return {
-          fill: 'rgba(0,0,0,0.25)',
-          stroke: oldStyle.fill,
-          lineWidth: 0.5,
-        }
-      },
-    },
   }
 
   return <Column {...config} />
