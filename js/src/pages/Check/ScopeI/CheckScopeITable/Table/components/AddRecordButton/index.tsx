@@ -81,7 +81,6 @@ const AddRecordButton = () => {
 
   const handleData = () => {
     const formData = form.getFieldsValue().scopeI[groupIndex]
-    console.log('formData', formData)
 
     const getYearlyAmount = (theFormData: any) => {
       switch (theFormData?.period) {

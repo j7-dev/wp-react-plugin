@@ -40,7 +40,6 @@ const useUpdate = (options: {
 
   useEffect(() => {
     if (data) {
-      console.log(data)
       // setFetchedData(data.data || null)
     }
   }, [isSuccess])

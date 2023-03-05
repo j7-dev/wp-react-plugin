@@ -23,7 +23,7 @@ const CreatCompanyCategoryInput: React.FC<{
       <div className="aspect-[16/9] flex flex-col justify-center items-center w-full">
         <QuestionOutlined className="text-gray-300" style={{ fontSize: 48 }} />
         <div className="text-gray-300" style={{ marginTop: 24 }}>
-          找不到所屬的產業
+          找不到所屬的產業嗎
         </div>
       </div>
       <div className="w-full py-4">

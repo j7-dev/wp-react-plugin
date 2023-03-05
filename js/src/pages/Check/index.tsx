@@ -146,7 +146,6 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!!projectData) {
       const fectchScopes = JSON.parse(projectData.meta.project_data)
-      console.log('projectData.meta.project_data   fectchScopes', fectchScopes)
       setScopes(fectchScopes)
       form.setFieldValue(['title'], fectchScopes?.info?.title)
       form.setFieldValue(

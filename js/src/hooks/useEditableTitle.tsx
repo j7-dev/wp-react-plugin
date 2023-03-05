@@ -29,7 +29,6 @@ const useEditableTitle = ({
   const { setIsDiff, scopes } = useContext(ProjectContext)
   // initValue = scopes.scopeI[0].groupName
   const initValue = name.reduce((acc: any, cur: any) => acc[cur], scopes)
-  console.log('🚀 ~ file: useEditableTitle.tsx:32 ~ initValue:', initValue)
 
   const handleChange = (str: string) => {
     setEditableStr(str)

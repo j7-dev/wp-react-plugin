@@ -28,7 +28,6 @@ const App: React.FC = () => {
     groupData,
     onDelete: handleDeleteGroup = () => {},
   } = useContext(TableDataContext)
-  console.log('🚀 ~ file: index.tsx:31 ~ groupData:', groupData)
 
   const dataSource =
     (scopeIIGroups.find((group) => group.groupKey === groupKey)?.dataSource as

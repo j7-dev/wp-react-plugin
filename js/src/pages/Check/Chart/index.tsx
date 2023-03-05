@@ -15,10 +15,6 @@ const Chart = () => {
     ...(scopeIGroups.map((group) => group?.dataSource) || []),
     ...(scopeIIGroups.map((group) => group?.dataSource) || []),
   ])
-  console.log(
-    '🚀 ~ file: index.tsx:18 ~ Chart ~ mergedDataSource:',
-    mergedDataSource,
-  )
 
   return (
     <>

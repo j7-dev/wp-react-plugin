@@ -28,8 +28,6 @@ const ImageUpload = () => {
     name: 'file',
     multiple: false,
     customRequest: async (request) => {
-      console.log('request', request)
-
       try {
         const createResult = await createResource({
           resource: 'media',
@@ -54,34 +52,19 @@ const ImageUpload = () => {
           },
         })
         setIsLoading(false)
-        console.log('createResult', createResult)
       } catch (error) {
         setIsLoading(false)
-
         console.log('error', error)
       }
 
       const newRequest = {
         ...request,
-        onProgress: (e: { percent: number }) => {
-          console.log('e', e)
-        },
-        onError: (error: any) => {
-          console.log('error', error)
-        },
-        onSuccess: (response: any) => {
-          console.log('response', response)
-        },
       }
 
       return newRequest
     },
     onChange(info) {
       setIsLoading(true)
-      console.log('info', info)
-    },
-    onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files)
     },
     maxCount: 1,
     showUploadList: false,

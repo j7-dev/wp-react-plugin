@@ -144,7 +144,6 @@ const AddRecordButton = () => {
       ...form.getFieldsValue(),
     }
 
-    console.log('@@@values', values)
     if (isES) {
       const source = sourceNames.find(
         (s) => s.value === value.scopeII[groupIndex].sourceName,
@@ -152,8 +151,6 @@ const AddRecordButton = () => {
         yearlyAmount: 0,
         co2Kwh: 1,
       }
-
-      console.log('source', source)
 
       values.scopeII[groupIndex].yearlyAmount = source.yearlyAmount
       values.scopeII[groupIndex].co2Kwh = source.co2Kwh
@@ -205,7 +202,7 @@ const AddRecordButton = () => {
                 rules={[
                   {
                     required: validating,
-                    message: '請輸入年排放量',
+                    message: '請輸入使用度數',
                   },
                 ]}
               >

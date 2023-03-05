@@ -42,10 +42,7 @@ const useMany = (options: {
   const { isSuccess, data, isFetching } = getResult
 
   useEffect(() => {
-    console.log('changeddddd')
     if (data) {
-      console.log('set data')
-
       setFetchedData(data.data || null)
     }
   }, [

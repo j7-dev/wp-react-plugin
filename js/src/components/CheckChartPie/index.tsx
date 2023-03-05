@@ -22,8 +22,6 @@ const CheckChartPie: React.FC<{
   // sum the value if the type is 工廠1
   const data = formatData
 
-  // console.log('CheckChartPie', data)
-
   function renderStatistic(
     containerWidth: number,
     text: string,

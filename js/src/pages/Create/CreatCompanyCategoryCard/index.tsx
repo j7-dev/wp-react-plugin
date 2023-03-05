@@ -16,7 +16,7 @@ const CreatCompanyCategoryCard: React.FC<{
     <>
       <Card
         onClick={showModal(option?.name || '沒有名稱')}
-        className="w-full"
+        className="w-full cursor-pointer"
         cover={
           <img
             className="aspect-[16/9]"

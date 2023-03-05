@@ -80,9 +80,6 @@ const JsonUpload = () => {
         reader.readAsText(file.originFileObj)
       }
     },
-    onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files)
-    },
     maxCount: 1,
     showUploadList: false,
     className: 'block w-full',

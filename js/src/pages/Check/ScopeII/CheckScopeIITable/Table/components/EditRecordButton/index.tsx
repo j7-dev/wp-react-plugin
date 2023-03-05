@@ -128,8 +128,6 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
         co2Kwh: 1,
       }
 
-      console.log('source', source)
-
       values[groupIndex].yearlyAmount = source.yearlyAmount
       values[groupIndex].co2Kwh = source.co2Kwh
 

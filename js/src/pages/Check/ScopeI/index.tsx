@@ -8,7 +8,6 @@ import { nanoid } from 'nanoid'
 
 const ScopeIPage = () => {
   const { projectData, scopes, setScopes } = useContext(ProjectContext)
-  console.log('projectData', projectData)
   const postId = projectData?.id
   const scopeIGroups: TGroupData[] = scopes?.scopeI || []
 
