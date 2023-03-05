@@ -11,8 +11,7 @@ import { ProjectContext } from '@/pages/Check'
 const { Dragger } = Upload
 
 const ImageUpload = () => {
-  const { projectData, scopes, setScopes, setIsDiff } =
-    useContext(ProjectContext)
+  const { scopes, setScopes } = useContext(ProjectContext)
   const imgData = scopes?.info?.imgData || {
     attachmentId: 0,
     url: '',
