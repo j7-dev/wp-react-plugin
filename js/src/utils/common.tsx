@@ -2,6 +2,8 @@ import React from 'react'
 import type { TUnit } from '@/types'
 import { round } from 'lodash-es'
 
+export const windowOuterWidth = window?.outerWidth || 1200
+
 export const renderHTML = (rawHTML: string) =>
   React.createElement('div', { dangerouslySetInnerHTML: { __html: rawHTML } })
 

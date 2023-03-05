@@ -53,10 +53,13 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
     setIsModalOpen(true)
     const yearlyAmount = theRecord?.yearlyAmount || 0
     const co2Kwh = theRecord?.co2Kwh || 1
+    const values = form.getFieldsValue()
 
     form.setFieldsValue({
       scopeII: {
+        ...values?.scopeII,
         [groupIndex]: {
+          groupName: group?.groupName || '',
           sourceName: theRecord?.sourceName,
           co2Kwh,
           yearlyAmount,

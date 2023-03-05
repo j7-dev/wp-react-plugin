@@ -10,6 +10,10 @@ const ScopeIIPage = () => {
   const { projectData, scopes, setScopes } = useContext(ProjectContext)
   const postId = projectData?.id
   const scopeIIGroups: TGroupData[] = scopes?.scopeII || []
+  console.log(
+    '🚀 ~ file: index.tsx:13 ~ ScopeIIPage ~ scopeIIGroups:',
+    scopeIIGroups,
+  )
 
   const handleAddGroup = () => {
     setScopes({
@@ -40,10 +44,11 @@ const ScopeIIPage = () => {
   return (
     <>
       {scopeIIGroups.map((theGroup, index) => {
+        const key = theGroup?.groupKey || nanoid()
         return (
           <CheckScopeIITable
-            key={theGroup?.groupKey}
-            groupKey={theGroup?.groupKey}
+            key={key}
+            groupKey={key}
             groupIndex={index}
             groupData={theGroup}
             postId={postId}

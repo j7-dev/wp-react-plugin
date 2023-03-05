@@ -40,10 +40,11 @@ const ScopeIPage = () => {
   return (
     <>
       {scopeIGroups.map((theGroup, index) => {
+        const key = theGroup?.groupKey || nanoid()
         return (
           <CheckScopeITable
-            key={theGroup?.groupKey}
-            groupKey={theGroup?.groupKey}
+            key={key}
+            groupKey={key}
             groupIndex={index}
             groupData={theGroup}
             postId={postId}

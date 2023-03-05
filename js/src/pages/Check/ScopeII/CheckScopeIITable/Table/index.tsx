@@ -6,12 +6,13 @@ import { TYearlyDataType } from './types'
 import useColumns from './hooks/useColumns'
 import { TableDataContext } from '@/pages/Check/ScopeII/CheckScopeIITable'
 import { DeleteFilled } from '@ant-design/icons'
-
 import type { ColumnType } from 'antd/lib/table'
 import { useColor, useEditableTitle } from '@/hooks'
 import { ProjectContext } from '@/pages/Check'
+import { windowOuterWidth } from '@/utils'
 
 const App: React.FC = () => {
+  const size = windowOuterWidth < 768 ? 'small' : 'middle'
   const { colorPrimary } = useColor()
   const columns = useColumns()
 
@@ -63,12 +64,12 @@ const App: React.FC = () => {
     <div>
       {element}
       <Table
+        size={size}
         className="mt-4"
         bordered
         dataSource={dataSource}
         columns={columns as ColumnType<TYearlyDataType>[]}
         pagination={false}
-        scroll={printMode ? undefined : { x: 1150 }}
       />
       {!printMode && (
         <Row justify="space-between">

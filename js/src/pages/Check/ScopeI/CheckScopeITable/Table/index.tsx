@@ -10,8 +10,10 @@ import useMonthlyTable from './hooks/useMonthlyTable'
 import type { ColumnType } from 'antd/lib/table'
 import { useColor, useEditableTitle } from '@/hooks'
 import { ProjectContext } from '@/pages/Check'
+import { windowOuterWidth } from '@/utils'
 
 const App: React.FC = () => {
+  const size = windowOuterWidth < 768 ? 'small' : 'middle'
   const { colorPrimary } = useColor()
   const columns = useColumns()
   const { renderTable } = useMonthlyTable()
@@ -60,6 +62,7 @@ const App: React.FC = () => {
     <div>
       {element}
       <Table
+        size={size}
         className="mt-4"
         expandable={{
           expandedRowRender: (record: TYearlyDataType) => renderTable(record),
@@ -69,7 +72,6 @@ const App: React.FC = () => {
         dataSource={dataSource}
         columns={columns as ColumnType<TYearlyDataType>[]}
         pagination={false}
-        scroll={printMode ? undefined : { x: 1150 }}
       />
       {!printMode && (
         <Row justify="space-between">
