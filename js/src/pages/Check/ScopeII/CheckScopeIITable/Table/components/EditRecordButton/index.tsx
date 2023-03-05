@@ -70,7 +70,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
 
     const yearlyAmount = formData?.yearlyAmount || 0
     const co2Kwh = formData.co2Kwh || 1
-    const carbonTonsPerYear = yearlyAmount * co2Kwh
+    const carbonTonsPerYear = (yearlyAmount * co2Kwh) / 1000
 
     const theFormatRecord: TYearlyDataType = {
       key: nanoid(),
@@ -124,11 +124,9 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
       const source = sourceNames.find(
         (s) => s.value === value[groupIndex].sourceName,
       ) || {
-        yearlyAmount: 0,
         co2Kwh: 1,
       }
 
-      values[groupIndex].yearlyAmount = source.yearlyAmount
       values[groupIndex].co2Kwh = source.co2Kwh
 
       form.setFieldsValue(values)
@@ -193,7 +191,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
               <Form.Item
                 label={
                   <>
-                    CO<sub>2</sub>/Kwh
+                    CO<sub>2</sub>(kg)/Kwh
                   </>
                 }
                 name={[
@@ -207,7 +205,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
                     required: validating,
                     message: `請輸入${(
                       <>
-                        CO<sub>2</sub>/Kwh
+                        CO<sub>2</sub>(kg)/Kwh
                       </>
                     )}`,
                   },
@@ -219,7 +217,7 @@ const EditRecordButton: React.FC<{ record: TYearlyDataType }> = ({
             <Col span={12}>
               <Form.Item label="碳排(噸/年)">
                 <InputNumber
-                  value={watchYearlyAmount * watchCo2Kwh}
+                  value={(watchYearlyAmount * watchCo2Kwh) / 1000}
                   className="w-full"
                   min={0}
                   disabled

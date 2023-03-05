@@ -98,7 +98,7 @@ const AddRecordButton = () => {
 
     const yearlyAmount = formData?.yearlyAmount || 0
     const co2Kwh = formData.co2Kwh || 1
-    const carbonTonsPerYear = yearlyAmount * co2Kwh
+    const carbonTonsPerYear = (yearlyAmount * co2Kwh) / 1000
 
     const theFormatRecord: TYearlyDataType = {
       key: nanoid(),
@@ -148,11 +148,9 @@ const AddRecordButton = () => {
       const source = sourceNames.find(
         (s) => s.value === value.scopeII[groupIndex].sourceName,
       ) || {
-        yearlyAmount: 0,
         co2Kwh: 1,
       }
 
-      values.scopeII[groupIndex].yearlyAmount = source.yearlyAmount
       values.scopeII[groupIndex].co2Kwh = source.co2Kwh
 
       form.setFieldsValue(values)
@@ -216,7 +214,7 @@ const AddRecordButton = () => {
               <Form.Item
                 label={
                   <>
-                    CO<sub>2</sub>/Kwh
+                    CO<sub>2</sub>(kg)/Kwh
                   </>
                 }
                 name={[
@@ -230,7 +228,7 @@ const AddRecordButton = () => {
                     required: validating,
                     message: `請輸入${(
                       <>
-                        CO<sub>2</sub>/Kwh
+                        CO<sub>2</sub>(kg)/Kwh
                       </>
                     )}`,
                   },
@@ -242,7 +240,7 @@ const AddRecordButton = () => {
             <Col span={12}>
               <Form.Item label="碳排(噸/年)">
                 <InputNumber
-                  value={watchYearlyAmount * watchCo2Kwh}
+                  value={(watchYearlyAmount * watchCo2Kwh) / 1000}
                   className="w-full"
                   min={0}
                   disabled

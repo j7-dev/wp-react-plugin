@@ -182,63 +182,67 @@ const AddRecordButton = () => {
         okText="新增設備"
         cancelText="取消"
       >
-        <Form
-          form={form}
-          onFieldsChange={() => {
-            setValidating(false)
-          }}
-        >
-          <Form.Item
-            // hasFeedback={true}
-            name={[
-              'scopeI',
-              groupIndex,
-              'sourceName',
-            ]}
-            rules={[{ required: validating, message: '請輸入設備名稱' }]}
-          >
-            <Input className="mt-8" addonBefore="設備名稱" />
-          </Form.Item>
+        <div className="w-ful overflow-x-auto">
+          <div className="min-w-[600px]">
+            <Form
+              form={form}
+              onFieldsChange={() => {
+                setValidating(false)
+              }}
+            >
+              <Form.Item
+                // hasFeedback={true}
+                name={[
+                  'scopeI',
+                  groupIndex,
+                  'sourceName',
+                ]}
+                rules={[{ required: validating, message: '請輸入設備名稱' }]}
+              >
+                <Input className="mt-8" addonBefore="設備名稱" />
+              </Form.Item>
 
-          <Form.Item
-            name={[
-              'scopeI',
-              groupIndex,
-              'period',
-            ]}
-            initialValue="yearly"
-          >
-            <Radio.Group className="w-full mt-8" buttonStyle="solid">
-              <Radio.Button className="w-1/3 text-center" value="yearly">
-                年碳排放
-              </Radio.Button>
-              <Radio.Button className="w-1/3 text-center" value="monthly">
-                月碳排放
-              </Radio.Button>
-              <Radio.Button className="w-1/3 text-center" value="hourly">
-                每小時碳排放
-              </Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-          {period === 'yearly' && (
-            <GWPYearlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
-          {period === 'monthly' && (
-            <GWPMonthlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
-          {period === 'hourly' && (
-            <GWPHourlyFormItem
-              groupIndex={groupIndex}
-              validating={validating}
-            />
-          )}
-        </Form>
+              <Form.Item
+                name={[
+                  'scopeI',
+                  groupIndex,
+                  'period',
+                ]}
+                initialValue="yearly"
+              >
+                <Radio.Group className="w-full mt-8" buttonStyle="solid">
+                  <Radio.Button className="w-1/3 text-center" value="yearly">
+                    年碳排放
+                  </Radio.Button>
+                  <Radio.Button className="w-1/3 text-center" value="monthly">
+                    月碳排放
+                  </Radio.Button>
+                  <Radio.Button className="w-1/3 text-center" value="hourly">
+                    每小時碳排放
+                  </Radio.Button>
+                </Radio.Group>
+              </Form.Item>
+              {period === 'yearly' && (
+                <GWPYearlyFormItem
+                  groupIndex={groupIndex}
+                  validating={validating}
+                />
+              )}
+              {period === 'monthly' && (
+                <GWPMonthlyFormItem
+                  groupIndex={groupIndex}
+                  validating={validating}
+                />
+              )}
+              {period === 'hourly' && (
+                <GWPHourlyFormItem
+                  groupIndex={groupIndex}
+                  validating={validating}
+                />
+              )}
+            </Form>
+          </div>
+        </div>
       </Modal>
     </>
   )
