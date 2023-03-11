@@ -1,6 +1,7 @@
 # Boilerplate-React-WP-Plugin (BRWP)
 
 ⚠️⚠️⚠️ This is a beta version plugin,
+
 ⚠️⚠️⚠️ Don't use it in production mode
 
 demo link (coming soon)
@@ -24,7 +25,7 @@ Tech stacks (knowledge you need to have)
 
 ##### Back-end
 
-1.[usefulteam/jwt-auth](https://github.com/usefulteam/jwt-auth) - get JWT if a wordpress user is logged in
+1. [usefulteam/jwt-auth](https://github.com/usefulteam/jwt-auth) - get JWT if a wordpress user is logged in
 
 ## Install
 
