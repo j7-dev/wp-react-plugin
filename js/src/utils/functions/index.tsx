@@ -1,7 +1,5 @@
 import React from 'react'
 
-export * from './image'
-
 export const windowOuterWidth = window?.outerWidth || 1200
 export const isIphone = /iPhone/.test(navigator.userAgent)
 

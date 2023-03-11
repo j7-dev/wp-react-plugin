@@ -49,7 +49,7 @@ function GetPostsPage() {
                   />
                   <div className="p-4">
                     <h2 className="text-xl">{title}</h2>
-                    <p>{renderHTML(post?.content?.rendered as string)}</p>
+                    <div>{renderHTML(post?.content?.rendered as string)}</div>
                   </div>
                 </div>
               )
