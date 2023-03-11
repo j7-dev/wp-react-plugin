@@ -1,6 +1,9 @@
 # Boilerplate-React-WP-Plugin (BRWP)
 
-demo
+⚠️⚠️⚠️ This is a beta version plugin,
+⚠️⚠️⚠️ Don't use it in production mode
+
+demo link (coming soon)
 
 ## Before getting start
 
@@ -74,6 +77,8 @@ npm run build
 After you build the project will apply `.env.production` and enqueue the hashed assets in `js/dist` folder.
 
 the files in `js/dist` is EXACT the files of your plugin, you can only upload the `js/dist` if you don't want to share the `src` source code
+
+## Custom Hooks
 
 ---
 
