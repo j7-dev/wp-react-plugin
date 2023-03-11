@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { renderId } from '@/utils'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,8 +13,6 @@ const queryClient = new QueryClient({
     },
   },
 })
-
-const renderId = import.meta.env.VITE_RENDER_ID || 'my-app'
 
 ReactDOM.createRoot(document.getElementById(renderId)!).render(
   <React.StrictMode>

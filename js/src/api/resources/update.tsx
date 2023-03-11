@@ -1,4 +1,5 @@
 import { axios } from '@/api'
+import { apiUrl } from '@/utils'
 
 export const updateResource = async ({
   resource,
@@ -11,7 +12,10 @@ export const updateResource = async ({
     [key: string]: any
   }
 }) => {
-  const updateResult = await axios.post(`/wp/v2/${resource}/${id}`, args)
+  const updateResult = await axios.post(
+    `${apiUrl}/wp/v2/${resource}/${id}`,
+    args,
+  )
 
   return updateResult
 }

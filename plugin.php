@@ -11,7 +11,7 @@
 
 namespace Kucrut\ViteForWPExample\React;
 
-define('PROJECT_NAME', 'carbon-check');
+define('PROJECT_NAME', 'your-project');
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/inc/frontend.php';

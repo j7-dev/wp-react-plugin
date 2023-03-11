@@ -44,7 +44,7 @@ function enqueue_script(): void
     'userId' => wp_get_current_user()->data->ID,
   ));
 
-  wp_localize_script('wp-api', 'wpApiSettings', array(
+  wp_localize_script(PROJECT_NAME, 'wpApiSettings', array(
     'root' => esc_url_raw(rest_url()),
     'nonce' => wp_create_nonce('wp_rest'),
   ));

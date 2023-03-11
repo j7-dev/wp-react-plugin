@@ -1,13 +1,12 @@
 import axios, { AxiosInstance } from 'axios'
 import { notification } from 'antd'
-import { getTypeText } from '@/utils'
+import { getTypeText, baseUrl, apiTimeout } from '@/utils'
 
-const baseURL = import.meta.env.VITE_API_URL || wpApiSettings.root || ''
-const timeout = import.meta.env.VITE_API_TIMEOUT || '30000'
+const wpApiSettings = window?.wpApiSettings || {}
 
 const instance: AxiosInstance = axios.create({
-  baseURL,
-  timeout: parseInt(timeout, 10),
+  baseURL: baseUrl,
+  timeout: parseInt(apiTimeout, 10),
   headers: { 'X-WP-Nonce': wpApiSettings?.nonce || '' },
 })
 

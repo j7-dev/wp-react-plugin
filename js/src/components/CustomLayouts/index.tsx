@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-import { defaultRouterMetas } from '@/utils'
-import { useColor } from '@/hooks'
+import { defaultRouterMetas } from '@/Router'
 import { Outlet, useLocation } from 'react-router-dom'
 
 const CustomLayouts = () => {
-  const { colorText } = useColor()
   const location = useLocation()
   const pathname = location.pathname
   const [
@@ -14,14 +12,15 @@ const CustomLayouts = () => {
 
   useEffect(() => {
     const newTitle =
-      defaultRouterMetas.find((item) => item.path === pathname)?.title || ''
+      defaultRouterMetas.find((item) => item.path === pathname)?.title ||
+      'undefined path'
     setTitle(newTitle)
   }, [pathname])
 
   return (
-    <div className="w-full flex flex-col">
-      <h1 style={{ color: colorText }} className="text-2xl my-8">
-        {title}
+    <div className="w-full flex flex-col my-16">
+      <h1 className="text-2xl my-8 py-4 border-2 border-dashed border-yellow-500 text-center">
+        {title} - This is a Layout Components
       </h1>
       <Outlet />
     </div>

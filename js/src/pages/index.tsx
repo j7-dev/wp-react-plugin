@@ -1,100 +1,44 @@
-import { useEffect } from 'react'
-import { Row, Col } from 'antd'
-import ProjectsCompanyCard from '@/components/ProjectsCompanyCard'
-import ProjectsCompanyCreateButton from '@/components/ProjectsCompanyCreateButton'
-import { useMany } from '@/hooks'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useState } from 'react'
+import reactLogo from '../assets/images/react.svg'
+import viteLogo from '../assets/images/vite.svg'
 
-const baseUrl = import.meta.env.VITE_BASE_URL || ''
+import { Link } from 'react-router-dom'
 
 function DefaultPage() {
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const action = searchParams.get('action')
-
-  const projects = useMany({
-    resource: 'carbon-project',
-    args: {
-      author: window?.userData?.userId || '0',
-    },
-    queryOptions: {
-      enabled: true,
-    },
-  })
-
-  const featureImgIds = !!projects
-    ? projects.map((project: any) => project?.featured_media)
-    : []
-  const uniqueFeatureImgIds = Array.from(new Set(featureImgIds))
-
-  const images = useMany({
-    resource: 'media',
-    args: {
-      include: uniqueFeatureImgIds,
-    },
-    queryOptions: {
-      enabled: (!!projects && projects.length > 0) || false,
-    },
-  })
-
-  useEffect(() => {
-    const navigateInfoStr = sessionStorage.getItem('navigateInfo') || '{}'
-    if (navigateInfoStr !== '{}' && action === 'redirect') {
-      const navigateInfo = JSON.parse(navigateInfoStr)
-      navigate(`${baseUrl}${navigateInfo?.path || ''}`, {
-        state: navigateInfo?.state || {},
-      })
-    }
-  }, [])
-
-  //TODO 過度態
+  const [
+    count,
+    setCount,
+  ] = useState(0)
 
   return (
-    <>
-      {!!projects ? (
-        <>
-          <Row
-            gutter={[
-              24,
-              24,
-            ]}
-          >
-            {projects.map((project: any) => {
-              const image = images?.find(
-                (theImage: any) => theImage?.id === project?.featured_media,
-              )
-
-              return (
-                <Col
-                  key={project?.id}
-                  xl={{ span: 6 }}
-                  lg={{ span: 8 }}
-                  sm={{ span: 12 }}
-                  xs={{ span: 24 }}
-                >
-                  <ProjectsCompanyCard
-                    id={project?.id}
-                    title={project?.title?.rendered as string}
-                    image={image}
-                    description={project?.content?.rendered as string}
-                  />
-                </Col>
-              )
-            })}
-            <Col
-              xl={{ span: 6 }}
-              lg={{ span: 8 }}
-              sm={{ span: 12 }}
-              xs={{ span: 24 }}
-            >
-              <ProjectsCompanyCreateButton />
-            </Col>
-          </Row>
-        </>
-      ) : (
-        <></>
-      )}
-    </>
+    <div className="App">
+      <div>
+        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="flex justify-center">
+        <button onClick={() => setCount((theCount) => theCount + 1)}>
+          count is {count}
+        </button>
+        <Link to="/get-posts">
+          <button>Get Posts Example</button>
+        </Link>
+        <Link to="/get-users">
+          <button>Get Users Example</button>
+        </Link>
+      </div>
+      <p>
+        Edit <code>src/App.tsx</code> and save to test HMR
+      </p>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </div>
   )
 }
 

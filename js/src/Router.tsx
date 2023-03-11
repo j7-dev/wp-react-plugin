@@ -1,10 +1,9 @@
 import CustomLayouts from '@/components/CustomLayouts'
 import DefaultPage from '@/pages/'
-import Create from '@/pages/Create'
-import Check from '@/pages/Check'
 import { createBrowserRouter } from 'react-router-dom'
-
-const baseUrl = import.meta.env.VITE_BASE_URL || ''
+import GetPostsPage from '@/pages/getPosts'
+import GetUsersPage from '@/pages/getUsers'
+import { baseUrl } from '@/utils'
 
 export const defaultRouters = createBrowserRouter([
   {
@@ -16,13 +15,28 @@ export const defaultRouters = createBrowserRouter([
         element: <DefaultPage />,
       },
       {
-        path: 'create',
-        element: <Create />,
+        path: 'get-posts',
+        element: <GetPostsPage />,
       },
       {
-        path: 'check',
-        element: <Check />,
+        path: 'get-users',
+        element: <GetUsersPage />,
       },
     ],
   },
 ])
+
+export const defaultRouterMetas = [
+  {
+    path: baseUrl,
+    title: '首頁',
+  },
+  {
+    path: `${baseUrl}get-posts`,
+    title: '所有文章',
+  },
+  {
+    path: `${baseUrl}get-users`,
+    title: '所有用戶',
+  },
+]

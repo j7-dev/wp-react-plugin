@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "i": "sudo npm i -D $npm_config_p --legacy-peer-deps",
+    "init": "npm install && composer install --no-interaction",
     "dev": "vite",
     "prebuild": "echo 'todo: remove console'",
     "build": "vite build",
@@ -15,22 +15,14 @@
   },
   "pre-commit": [],
   "dependencies": {
-    "@ant-design/charts": "^1.4.2",
     "@tanstack/react-query": "^4.24.9",
     "antd": "^5.1.4",
     "axios": "^1.3.3",
-    "clipboard": "^2.0.11",
-    "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
-    "match-sorter": "^6.3.1",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
-    "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^18.2.0",
-    "react-element-to-jsx-string": "^15.0.0",
     "react-router-dom": "^6.8.1",
-    "react-to-print": "^2.14.12",
-    "sort-by": "^1.2.0",
     "zod": "^3.20.6"
   },
   "devDependencies": {

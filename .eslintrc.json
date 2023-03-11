@@ -5,6 +5,7 @@
     "es2021": true,
     "commonjs": true
   },
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:@wordpress/eslint-plugin/custom",
@@ -15,7 +16,6 @@
     "eslint-config-prettier",
     "prettier"
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
@@ -39,6 +39,7 @@
     "no-console": [
       "warn"
     ],
+    "no-duplicate-imports": "error",
     "linebreak-style": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/interface-name-prefix": "off",
@@ -77,6 +78,21 @@
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_"
       }
+    ],
+    "lines-around-comment": [
+      "error",
+      {
+        "beforeBlockComment": true,
+        "afterBlockComment": true,
+        "beforeLineComment": true,
+        "afterLineComment": true,
+        "allowBlockStart": true,
+        "allowBlockEnd": true,
+        "allowObjectStart": true,
+        "allowObjectEnd": true,
+        "allowArrayStart": true,
+        "allowArrayEnd": true
+      }
     ]
   },
   "overrides": [
@@ -104,5 +120,10 @@
     "React": "readonly",
     "document": "readonly",
     "wpApiSettings": "readonly"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
