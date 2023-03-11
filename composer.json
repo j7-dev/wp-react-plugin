@@ -1,12 +1,12 @@
 {
-  "name": "kucrut/vite-for-wp-example-react",
-  "description": "A plugin to demonstrate Vite for WP integration.",
+  "name": "boilerplate-react.wordpress-plugin",
+  "description": "This is a boilerplate for creating a WordPress plugin with React, Tailwind, Ant Design, TypeScript, Zod, MSW, React Router v6, React Query v4, SCSS and Vite.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-only",
   "authors": [
     {
       "name": "JerryLiu",
-      "email": "jerryliu@gmail.com"
+      "email": "j7.dev.gg@outlook.com"
     }
   ],
   "config": {

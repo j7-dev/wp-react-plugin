@@ -13,6 +13,7 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
+
     const type = response?.data?.type
     const method = response?.config?.method || ''
     const statusText = response?.statusText
@@ -29,6 +30,7 @@ instance.interceptors.response.use(
   },
   async function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
+
     notification.error({
       message: `錯誤 ${error?.response?.data?.data?.status}`,
       description: error?.response?.data?.message || error?.message,

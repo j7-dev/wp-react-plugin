@@ -36,6 +36,7 @@ const useUpdate = (options: {
   //     }),
   //   options.queryOptions || {},
   // )
+
   const { isSuccess, data } = mutation
 
   useEffect(() => {

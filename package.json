@@ -1,7 +1,7 @@
 {
-  "name": "vite-for-wp-example-react",
+  "name": "boilerplate-react.wordpress-plugin",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "init": "npm install && composer install --no-interaction",
@@ -11,9 +11,12 @@
     "preview": "vite preview",
     "format": "prettier-eslint --write \"js/src/**/*.tsx\"",
     "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "push": "npm version patch && git push"
   },
-  "pre-commit": [],
+  "pre-commit": [
+    "lint:fix"
+  ],
   "dependencies": {
     "@tanstack/react-query": "^4.24.9",
     "antd": "^5.1.4",

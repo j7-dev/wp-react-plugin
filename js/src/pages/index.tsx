@@ -23,7 +23,7 @@ function DefaultPage() {
       <h1>Vite + React</h1>
       <div className="flex justify-center">
         <button onClick={() => setCount((theCount) => theCount + 1)}>
-          count is {count}
+          Count is {count}
         </button>
         <Link to="/get-posts">
           <button>Get Posts Example</button>

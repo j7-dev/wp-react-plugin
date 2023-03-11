@@ -29,14 +29,14 @@ export const defaultRouters = createBrowserRouter([
 export const defaultRouterMetas = [
   {
     path: baseUrl,
-    title: '首頁',
+    title: 'Home',
   },
   {
     path: `${baseUrl}get-posts`,
-    title: '所有文章',
+    title: 'All Posts',
   },
   {
     path: `${baseUrl}get-users`,
-    title: '所有用戶',
+    title: 'All Users',
   },
 ]

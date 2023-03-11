@@ -6,13 +6,13 @@ export const getTypeText = (
   const getMethodText = (theMethod: string) => {
     switch (theMethod) {
       case 'get':
-        return '獲取'
+        return 'Get'
       case 'post':
-        return '更新'
+        return 'Updated'
       case 'delete':
-        return '刪除'
+        return 'Deleted'
       default:
-        return '更新'
+        return 'Updated'
     }
   }
 
@@ -20,23 +20,23 @@ export const getTypeText = (
   const getResourceText = (theResource: string) => {
     switch (theResource) {
       case 'posts':
-        return '文章'
+        return 'Post'
       case 'users':
-        return '用戶'
+        return 'User'
       case 'attachment':
-        return '圖片'
+        return 'Image'
     }
   }
   const resourceText = getResourceText(resource)
 
   switch (resource + '-' + method) {
     case 'attachment-post':
-      return '圖片上傳'
+      return 'Image Uploaded'
     case 'posts-post':
       return statusText === 'Created'
-        ? `${resourceText}創建`
+        ? `${resourceText} Created`
         : `${resourceText}${methodText}`
     default:
-      return `${resourceText}${methodText}`
+      return `${resourceText} ${methodText}`
   }
 }
