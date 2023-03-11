@@ -6,8 +6,18 @@
   max-width: 1280px;
   margin: 0 auto;
 } */
+
 body {
   margin: 0 !important;
+}
+.overflow-x-scroll {
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-x: scroll; /* added css prefix for safari */
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  touch-action: auto;
 }
 .rounded-none .ant-select-selector {
   border-radius: 0 !important;

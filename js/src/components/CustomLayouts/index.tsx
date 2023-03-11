@@ -19,7 +19,7 @@ const CustomLayouts = () => {
   }, [pathname])
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col">
       <h1 style={{ color: colorText }} className="text-2xl my-8">
         {title}
       </h1>

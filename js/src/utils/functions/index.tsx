@@ -4,3 +4,5 @@ export const handleClearZero = (e: React.MouseEvent<HTMLInputElement>) => {
     target.value = ''
   }
 }
+
+export const isIphone = /iPhone/.test(navigator.userAgent)

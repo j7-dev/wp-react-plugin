@@ -25,6 +25,7 @@
     "match-sorter": "^6.3.1",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
+    "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^18.2.0",
     "react-element-to-jsx-string": "^15.0.0",
     "react-router-dom": "^6.8.1",

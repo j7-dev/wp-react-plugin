@@ -100,6 +100,7 @@ const AddRecordButton = () => {
         const newScopes = JSON.parse(JSON.stringify(scopes))
 
         newScopes.scopeII[groupIndex].dataSource = newDataSource
+        setScopes(newScopes)
       })
       .catch((err) => {
         console.log('Validate Failed:', err)
