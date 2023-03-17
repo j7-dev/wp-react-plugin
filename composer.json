@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-react.wordpress-plugin",
+  "name": "j7-dev/boilerplate-react-spa.wordpress-plugin",
   "description": "This is a boilerplate for creating a WordPress plugin with React, Tailwind, Ant Design, TypeScript, Zod, MSW, React Router v6, React Query v4, SCSS and Vite.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-only",
@@ -16,7 +16,7 @@
   },
   "require": {
     "kucrut/vite-for-wp": "^0.5.2",
-    "usefulteam/jwt-auth": "^2.1.3"
+    "usefulteam/jwt-auth": "^2.1"
   },
   "require-dev": {
     "wp-coding-standards/wpcs": "^2.3",
