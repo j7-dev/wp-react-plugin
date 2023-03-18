@@ -7,7 +7,7 @@ export const createResource = async ({
   config,
 }: {
   resource: string
-  args: {
+  args?: {
     [key: string]: any
   }
   config?: any

@@ -1,4 +1,4 @@
-# Boilerplate-React-WP-Plugin (BRWP)
+# Boilerplate-React-SPA-WP-Plugin (BRSWP)
 
 ⚠️⚠️⚠️ This is a beta version plugin
 
@@ -6,44 +6,26 @@
 
 demo link ( coming soon )
 
-- [Before getting start](#before-getting-start) - [Front-end](#front-end) - [Back-end](#back-end)
-- [Install](#install)
-- [Configuration](#configuration)
-- [Build](#build)
-- [Custom Hooks ⛏️⛏️⛏️](#custom-hooks-️️️)
-  - [`useOne`](#useone)
-    - [- Properties:](#--properties)
-    - [- Return:](#--return)
-    - [- Example:](#--example)
-  - [`useMany`](#usemany)
-    - [- Properties:](#--properties-1)
-    - [- Return:](#--return-1)
-    - [- Example:](#--example-1)
-- [How to use Front-End Router with WordPress](#how-to-use-front-end-router-with-wordpress)
-  - [Problems](#problems)
-  - [Reason](#reason)
-  - [Solution](#solution)
-- [Reference](#reference)
-
-<!-- /code_chunk_output -->
-
 ## Before getting start
 
 Tech stacks (knowledge you need to have)
 
-##### Front-end
+#### Front-end
 
 1. [Vite](https://vitejs.dev/) - build tool
 2. [React v18](https://beta.reactjs.org/)
 3. [TypeScript](https://www.typescriptlang.org/docs/) - compile project with type safe
 4. [Tailwind v3](https://tailwindcss.com/) - you can install any UI library, like Ant Design, MUI, Chakra...etc
 5. [SCSS](https://sass-lang.com/documentation/syntax)
-6. [Zod](https://zod.dev/) - ⚡runtime⚡ type safe🔰
-7. [MSW](https://mswjs.io/) - mock API data
-8. [React Query v4](https://tanstack.com/query/v4) - managing API status
-9. [React Router v6](https://reactrouter.com/en/main) - front-end router
+6. [React Query v4](https://tanstack.com/query/v4) - managing API status
 
-##### Back-end
+#### Front-end (Optional)
+
+1. [Zod](https://zod.dev/) - ⚡runtime⚡ type safe🔰
+2. [MSW](https://mswjs.io/) - mock API data
+3. [React Router v6](https://reactrouter.com/en/main) - front-end router
+
+#### Back-end
 
 1. [usefulteam/jwt-auth](https://github.com/usefulteam/jwt-auth) - get JWT if a wordpress user is logged in
 
@@ -52,42 +34,48 @@ Tech stacks (knowledge you need to have)
 1. Clone this repository into `/wp-content/plugins`.
    ```sh
    cd  {your-project}/wp-content/plugins
+   git clone https://github.com/j7-dev/boilerplate-react-SPA.wordpress-plugin.git
+   cd boilerplate-react-SPA.wordpress-plugin
    ```
 2. Install dependencies:
 
+   ⭐ You must have [Composer](https://getcomposer.org/) installed
+
    ```sh
-   npm run init
+   npm run init # This will run `npm install` & `composer install`
    npm run dev
    ```
 
-3. Activate the plugin from WordPress admin `/wp-admin`.
-   <img src="https://user-images.githubusercontent.com/9213776/224491978-0b2dac0e-103a-48e2-b8e7-9529dae18f2b.png">
+3. Change the API url to your project in `.env.development`
 
-4. Visit your site's homepage and see the rendered application on the footer 🚀
-   <img src="https://user-images.githubusercontent.com/9213776/224490277-b97b0fec-8086-43d9-8426-9ecf41b67da0.png">
+   ```sh
+   VITE_BASE_URL='/'
+   # ↑ The relative URL your app will be rendered at
 
-5. Click `Count`, `Get Post Example`, `Get Users Example` button to ensure the State and the WordPress API works
-   <img src="https://user-images.githubusercontent.com/9213776/224490729-ba1496c7-8da5-46d8-b5fe-a764aa333215.png">
-6. 🎉🎉🎉 Enjoy the dev 🎉🎉🎉
+   VITE_RENDER_ID='my-app'
+   # by default, the footer will render a <div id="my-app"></div> container at footer
+   # You can custom the render id
 
-## Configuration
+   VITE_API_URL='http://wpdev.local/wp-json'
+   # ↑ ⭐ change this to your site WordPress URL
+   # {site_url}/wp-json
 
-`.env.development`
+   VITE_API_TIMEOUT='30000'
+   ```
 
-```shell
-VITE_BASE_URL='/'
-# the path this plugin be used at
+4. Activate the plugin from WordPress admin `/wp-admin`.
 
-VITE_RENDER_ID='my-app'
-# by default, the footer will render a <div id="my-app"></div> container at footer
-# You can custom the render id
+   <img src="https://user-images.githubusercontent.com/9213776/226081766-6d3ce292-1be6-4a34-8a6b-6055670f0a74.png">
 
-VITE_API_URL='http://plugindev.local/wp-json'
-# ⭐ set your WordPress RESTFUL API url here
-# ⭐ {site_url}/wp-json
+5. Visit your site's homepage and see the rendered application on the footer 🚀🚀🚀
 
-VITE_API_TIMEOUT='30000'
-```
+   <img src="https://user-images.githubusercontent.com/9213776/226081865-8e23a778-8321-44d3-82f0-9f361530ad13.png">
+
+6. Click `Count`, `Get Post Example`, `Get Users Example` button to ensure the State and the WordPress API works
+
+   <img src="https://user-images.githubusercontent.com/9213776/226081923-c16cf62f-cd6e-4457-9150-8973b817a6e3.png">
+
+7. 🎉🎉🎉 Enjoy the dev 🎉🎉🎉
 
 ## Build
 
@@ -99,7 +87,165 @@ After you build the project will apply `.env.production` and enqueue the hashed 
 
 the files in `js/dist` is EXACT the files of your plugin, you can only upload the `js/dist` if you don't want to share the `src` source code
 
-## Custom Hooks ⛏️⛏️⛏️
+## Functions: Simple CRUD for WordPress Restful API
+
+path: `js\src\api\resources`
+
+### `createResource`
+
+#### - Properties:
+
+```typescript
+{
+  resource: string,
+  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
+  args?: {
+    [key: string]: any
+  },
+  // ↑ Check the WordPress RESTFUL API Endpoint args
+  config?: any
+  // ↑ This is Axios Config, see more info in https://axios-http.com/
+  // ex: change headers config for special use
+}
+```
+
+#### - Return:
+
+The created Resource id
+
+#### - Example:
+
+```javascript
+const createPost = await createResource({
+  resource: 'posts',
+  args: {
+    title: 'Post Created by API',
+    status: 'publish',
+  },
+})
+```
+
+### `getResource`
+
+#### - Properties:
+
+```typescript
+{
+  resource: string,
+  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
+  id: number,
+  args?: {
+    [key: string]: any
+  },
+  // ↑ Check the WordPress RESTFUL API Endpoint args (url params)
+}
+```
+
+#### - Return:
+
+WordPress Object
+
+#### - Example:
+
+```javascript
+// get the post with id = 200
+const getPost = await getResource({
+  resource: 'posts',
+  id: 200,
+})
+```
+
+### `getResources`
+
+#### - Properties:
+
+```typescript
+{
+  resource: string,
+  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
+  args?: {
+    [key: string]: any
+  },
+  // ↑ Check the WordPress RESTFUL API Endpoint args (url params)
+}
+```
+
+#### - Return:
+
+WordPress Object Array
+
+#### - Example:
+
+```javascript
+// get the all posts that author_id = 1
+const getPosts = await getResources({
+  resource: 'posts',
+  args: {
+    author: 1,
+  },
+})
+```
+
+### `updateResource`
+
+#### - Properties:
+
+```typescript
+{
+  resource: string,
+  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
+  id: number,
+  args?: {
+    [key: string]: any
+  },
+  // ↑ Check the WordPress RESTFUL API Endpoint args (url params)
+}
+```
+
+#### - Return:
+
+Update Status
+
+#### - Example:
+
+```javascript
+// update the title with post_id = 200
+const updatePost = await updateResource({
+  resource: 'posts',
+  id: 200,
+  args: {
+    title: 'Update Title by API',
+  },
+})
+```
+
+### `deleteResource`
+
+#### - Properties:
+
+```typescript
+{
+  resource: string,
+  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
+  id: number,
+}
+```
+
+#### - Return:
+
+Delete Status
+
+#### - Example:
+
+```javascript
+// delete the post with id = 200
+const deletePost = await deleteResource({
+  resource: 'posts',
+  id: 200,
+})
+```
+
+## Custom Hooks
 
 ### `useOne`
 
@@ -186,49 +332,10 @@ const posts = useMany({
 })
 ```
 
-## How to use Front-End Router with WordPress
-
-Sometimes we need a MPA ( Multi Page Application ), not just SPA ( Single Page Application ).
-
-### Problems
-
-1. WordPress use `backend router`
-2. Our React plugin using `frontend router`
-
-there would be a conflict.
-
-You will get a `❌404` page if you press `F5` to refresh to page at `/get-posts`
-
-### Reason
-
-Because every time you press `F5` to refresh the page, you will send a request to the server and the server will handle the request in WordPress's route, then it will found nothing.
-
-That's why we got `404`
-
-But why don't we get `404` if we click the button from base url?
-
-That's because frontend router uses window history API, it won't send request to server
-
-### Solution
-
-All we need to do is
-
-1. (BE) redirect any URL with `{baseUrl}/any-path` to `{baseUrl}` ( APP's root url )
-2. (FE) save the `url state` in sessionStorage when user link to a page of your plugin
-3. (FE) set the condition to restore the `url state`, so the we can navigate to the right page by front end router
-
-   _\* BE means Back End_
-   _\* FE means Front End_
-
-### Example
-
-We use [React Router v6](https://reactrouter.com/en/main) for example
-
-coming soon ⛏️⛏️⛏️
-
 ---
 
 ## Reference
 
 1. Inspired by [Vite for WP](https://github.com/kucrut/vite-for-wp)
-2. [WordPress REST API Handbook](https://developer.wordpress.org/rest-api/reference/)
+2. API design Inspired by [Refine](https://refine.dev/)
+3. [WordPress REST API Handbook](https://developer.wordpress.org/rest-api/reference/)
