@@ -334,6 +334,12 @@ const posts = useMany({
 
 ---
 
+## Any Suggestion ?
+
+Welcome to open issue and start a discussion 🎉🎉🎉
+
+---
+
 ## Reference
 
 1. Inspired by [Vite for WP](https://github.com/kucrut/vite-for-wp)
