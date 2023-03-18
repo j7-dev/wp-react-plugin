@@ -20,7 +20,7 @@ function DefaultPage() {
   ] = useState(false)
 
   return (
-    <div className="App">
+    <div className="App py-20">
       <div className="flex justify-center">
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer noopener">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -36,7 +36,7 @@ function DefaultPage() {
           <img src={wpLogo} className="logo wp" alt="WordPress logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React + WordPress</h1>
       <div className="flex justify-center mb-8">
         <button onClick={() => setCount((theCount) => theCount + 1)}>
           Count is {count}

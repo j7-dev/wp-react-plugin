@@ -351,6 +351,8 @@ const posts = useMany({
 
 Welcome to open issue and start a discussion 🎉🎉🎉
 
+If this project is useful for you, please give me a github star ⭐
+
 ---
 
 ## Reference
