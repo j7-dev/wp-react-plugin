@@ -1,7 +1,7 @@
 import { useMany } from '@/hooks'
 import defaultImage from '@/assets/images/defaultImage.jpg'
 
-function GetUsersPage() {
+const GetUsersPage = () => {
   const users = useMany({
     resource: 'users',
     queryOptions: {
@@ -13,7 +13,7 @@ function GetUsersPage() {
     <>
       {!!users ? (
         <>
-          <div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 px-4">
+          <div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 px-4 my-4">
             {users.map((user: any) => {
               const image = user?.avatar_urls?.['96'] || ''
               const name = user?.name || ''

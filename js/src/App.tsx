@@ -1,9 +1,8 @@
 import '@/assets/scss/index.scss'
-import { RouterProvider } from 'react-router-dom'
-import { defaultRouters } from '@/Router'
+import DefaultPage from './pages'
 
 function App() {
-  return <RouterProvider router={defaultRouters} />
+  return <DefaultPage />
 }
 
 export default App

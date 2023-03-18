@@ -2,14 +2,22 @@ import { useState } from 'react'
 import reactLogo from '../assets/images/react.svg'
 import viteLogo from '../assets/images/vite.svg'
 import wpLogo from '../assets/images/wp.png'
-
-import { Link } from 'react-router-dom'
+import GetPostsPage from './getPosts'
+import GetUsersPage from './getUsers'
 
 function DefaultPage() {
   const [
     count,
     setCount,
   ] = useState(0)
+  const [
+    showPosts,
+    setShowPosts,
+  ] = useState(false)
+  const [
+    showUsers,
+    setShowUsers,
+  ] = useState(false)
 
   return (
     <div className="App">
@@ -33,12 +41,14 @@ function DefaultPage() {
         <button onClick={() => setCount((theCount) => theCount + 1)}>
           Count is {count}
         </button>
-        <Link to="/get-posts">
-          <button>Get Posts Example</button>
-        </Link>
-        <Link to="/get-users">
-          <button>Get Users Example</button>
-        </Link>
+
+        <button onClick={() => setShowPosts(!showPosts)}>
+          Get Posts Example
+        </button>
+
+        <button onClick={() => setShowUsers(!showUsers)}>
+          Get Users Example
+        </button>
       </div>
       <p>
         Edit <code>src/App.tsx</code> and save to test HMR
@@ -46,6 +56,9 @@ function DefaultPage() {
       <p className="read-the-docs">
         Click on the Vite, React and WordPress logos to learn more
       </p>
+
+      {showPosts && <GetPostsPage />}
+      {showUsers && <GetUsersPage />}
     </div>
   )
 }

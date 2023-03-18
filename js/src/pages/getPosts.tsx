@@ -2,7 +2,7 @@ import { useMany } from '@/hooks'
 import { renderHTML } from '@/utils'
 import defaultImage from '@/assets/images/defaultImage.jpg'
 
-function GetPostsPage() {
+const GetPostsPage = () => {
   const posts = useMany({
     resource: 'posts',
     queryOptions: {
@@ -29,7 +29,7 @@ function GetPostsPage() {
     <>
       {!!posts ? (
         <>
-          <div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 px-4">
+          <div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 px-4 my-4">
             {posts.map((post: any) => {
               const image = images?.find(
                 (theImage: any) => theImage?.id === post?.featured_media,
