@@ -2,9 +2,22 @@
 
 ⚠️⚠️⚠️ This is a beta version plugin
 
-⚠️⚠️⚠️ Don't use it in production mode
-
 demo link ( coming soon )
+
+## ⚡Features⚡
+
+1. Easy to Use<br>
+   Git clone this repository in `wp-content/plugins/`
+   and `npm run init`, `npm run dev`, that's all the steps
+
+2. Integrate with WordPress RestFul API<br>
+   change the `VITE_API_URL` to your site url in `.env.development`
+
+3. CRUD utility function<br>
+   Default with `getPost` and `getUser` Example, check [more utilities](#functions-simple-crud-for-wordpress-restful-api)
+
+4. Integrate with JWT<br>
+   We use `usefulteam/jwt-auth` in composer, every time a WordPress user logged in, he will get JWT (for call API, if the user has enough capability) automatically.
 
 ## Before getting start
 
