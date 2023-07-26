@@ -1,10 +1,16 @@
-import { useState, useEffect } from 'react'
 import { getResource } from '@/api'
 import { useQuery } from '@tanstack/react-query'
+import { TPostArgs, TDataProvider } from '@/types'
+import { AxiosRequestConfig } from 'axios'
 
-const useOne = (options: {
+export const useOne = (options: {
   resource: string
-  id: number
+  dataProvider?: TDataProvider
+  pathParams?: string[]
+  args?: TPostArgs & {
+    [key: string]: any
+  }
+  config?: AxiosRequestConfig<{ [key: string]: any }> | undefined
   queryOptions?: {
     staleTime?: number
     cacheTime?: number
@@ -17,34 +23,37 @@ const useOne = (options: {
     enabled?: boolean
   }
 }) => {
-  const [
-    fetchedData,
-    setFetchedData,
-  ] = useState<any>(null)
+  const resource = options?.resource || 'post'
+  const dataProvider = options?.dataProvider || 'wp'
+  const pathParams = options?.pathParams || []
+  const args = options?.args || undefined
+  const config = options?.config || undefined
+
+  const queryKey = args
+    ? [
+        `get_${resource}`,
+        dataProvider,
+        pathParams,
+        args,
+      ]
+    : [
+        `get_${resource}`,
+        dataProvider,
+        pathParams,
+      ]
+
   const getResult = useQuery(
-    [
-      `get_${options.resource}`,
-      options.id,
-    ],
+    queryKey,
     async () =>
       getResource({
-        resource: options.resource,
-        id: options.id,
+        resource,
+        dataProvider,
+        pathParams,
+        args,
+        config,
       }),
     options.queryOptions || {},
   )
-  const { isSuccess, data, isFetching } = getResult
 
-  useEffect(() => {
-    if (data) {
-      setFetchedData(data.data || null)
-    }
-  }, [
-    isSuccess,
-    isFetching,
-  ])
-
-  return fetchedData
+  return getResult
 }
-
-export default useOne

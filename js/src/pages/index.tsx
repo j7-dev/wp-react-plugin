@@ -3,7 +3,6 @@ import reactLogo from '../assets/images/react.svg'
 import viteLogo from '../assets/images/vite.svg'
 import wpLogo from '../assets/images/wp.png'
 import GetPostsPage from './getPosts'
-import GetUsersPage from './getUsers'
 
 function DefaultPage() {
   const [
@@ -45,10 +44,6 @@ function DefaultPage() {
         <button onClick={() => setShowPosts(!showPosts)}>
           Get Posts Example
         </button>
-
-        <button onClick={() => setShowUsers(!showUsers)}>
-          Get Users Example
-        </button>
       </div>
       <p>
         Edit <code>src/App.tsx</code> and save to test HMR
@@ -58,7 +53,6 @@ function DefaultPage() {
       </p>
 
       {showPosts && <GetPostsPage />}
-      {showUsers && <GetUsersPage />}
     </div>
   )
 }

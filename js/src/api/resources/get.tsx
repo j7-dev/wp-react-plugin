@@ -1,19 +1,27 @@
 import { axios } from '@/api'
-import { apiUrl } from '@/utils'
+import { apiUrl, getDataProviderUrlParams } from '@/utils'
+import { TDataProvider } from '@/types'
+import { AxiosRequestConfig } from 'axios'
 
 export const getResource = async ({
   resource,
-  id,
+  dataProvider = 'wp',
+  pathParams = [],
   args = {},
+  config = undefined,
 }: {
   resource: string
-  id: number
-  args?: Record<string, any>
+  dataProvider?: TDataProvider
+  pathParams?: string[]
+  args?: Record<string, string>
+  config?: AxiosRequestConfig<{ [key: string]: any }> | undefined
 }) => {
+  const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
   const getResult = await axios.get(
-    `${apiUrl}/wp/v2/${resource}/${id}/?${new URLSearchParams(
-      args,
-    ).toString()}`,
+    `${apiUrl}${dataProviderUrlParams}${resource}/${pathParams.join(
+      '/',
+    )}?${new URLSearchParams(args).toString()}`,
+    config,
   )
 
   return getResult
@@ -21,13 +29,23 @@ export const getResource = async ({
 
 export const getResources = async ({
   resource,
+  dataProvider = 'wp',
+  pathParams = [],
   args = {},
+  config = undefined,
 }: {
   resource: string
-  args?: Record<string, any>
+  dataProvider?: TDataProvider
+  pathParams?: string[]
+  args?: Record<string, string>
+  config?: AxiosRequestConfig<{ [key: string]: any }> | undefined
 }) => {
+  const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
   const getResult = await axios.get(
-    `${apiUrl}/wp/v2/${resource}/?${new URLSearchParams(args).toString()}`,
+    `${apiUrl}${dataProviderUrlParams}${resource}/${pathParams.join(
+      '/',
+    )}?${new URLSearchParams(args).toString()}`,
+    config,
   )
 
   return getResult

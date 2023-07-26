@@ -3,9 +3,14 @@ declare global {
     root: string
     nonce: string
   }
-  var userData: {
-    userName: string
+  var appData: {
+    siteUrl: string
+    ajaxUrl: string
+    ajaxNonce: string
     userId: string
+    postId: string
+    permalink: string
+    checkoutUrl: string
   }
 }
 

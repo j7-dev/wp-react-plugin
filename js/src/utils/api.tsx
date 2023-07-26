@@ -1,3 +1,5 @@
+import { TDataProvider } from '@/types'
+
 export const getTypeText = (
   resource: string,
   method: string,
@@ -38,5 +40,16 @@ export const getTypeText = (
         : `${resourceText}${methodText}`
     default:
       return `${resourceText} ${methodText}`
+  }
+}
+
+export const getDataProviderUrlParams = (dataProvider: TDataProvider) => {
+  switch (dataProvider) {
+    case 'wc':
+      return 'wc/v3/'
+    case 'wc-store':
+      return 'wc/store/v1/'
+    default:
+      return 'wp/v2/'
   }
 }

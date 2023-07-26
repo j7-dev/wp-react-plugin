@@ -1,14 +1,24 @@
 import { axios } from '@/api'
-import { apiUrl } from '@/utils'
+import { apiUrl, getDataProviderUrlParams } from '@/utils'
+import { TDataProvider } from '@/types'
+import { AxiosRequestConfig } from 'axios'
 
 export const deleteResource = async ({
   resource,
-  id,
+  dataProvider = 'wp',
+  pathParams = [],
+  config = undefined,
 }: {
   resource: string
-  id: number
+  dataProvider?: TDataProvider
+  pathParams?: string[]
+  config?: AxiosRequestConfig<{ [key: string]: any }> | undefined
 }) => {
-  const deleteResult = await axios.delete(`${apiUrl}/wp/v2/${resource}/${id}`)
+  const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
+  const deleteResult = await axios.delete(
+    `${apiUrl}${dataProviderUrlParams}${resource}/${pathParams.join('/')}`,
+    config,
+  )
 
   return deleteResult
 }

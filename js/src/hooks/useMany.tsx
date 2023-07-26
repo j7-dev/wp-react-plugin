@@ -1,10 +1,16 @@
-import { useState, useEffect } from 'react'
 import { getResources } from '@/api'
 import { useQuery } from '@tanstack/react-query'
+import { TPostsArgs, TDataProvider } from '@/types'
+import { AxiosRequestConfig } from 'axios'
 
-const useMany = (options: {
+export const useMany = (options: {
   resource: string
-  args?: Record<string, any>
+  dataProvider?: TDataProvider
+  pathParams?: string[]
+  args?: TPostsArgs & {
+    [key: string]: any
+  }
+  config?: AxiosRequestConfig<{ [key: string]: any }> | undefined
   queryOptions?: {
     staleTime?: number
     cacheTime?: number
@@ -17,40 +23,37 @@ const useMany = (options: {
     enabled?: boolean
   }
 }) => {
-  const queryKey = !!options?.args
+  const resource = options?.resource || 'post'
+  const dataProvider = options?.dataProvider || 'wp'
+  const pathParams = options?.pathParams || []
+  const args = options?.args || undefined
+  const config = options?.config || undefined
+
+  const queryKey = args
     ? [
-        `get_${options.resource}s`,
-        options?.args,
+        `get_${resource}s`,
+        dataProvider,
+        pathParams,
+        args,
       ]
     : [
-        `get_${options.resource}s`,
+        `get_${resource}s`,
+        dataProvider,
+        pathParams,
       ]
 
-  const [
-    fetchedData,
-    setFetchedData,
-  ] = useState<any>(null)
   const getResult = useQuery(
     queryKey,
     async () =>
       getResources({
-        resource: options.resource,
-        args: options.args,
+        resource,
+        dataProvider,
+        pathParams,
+        args,
+        config,
       }),
     options.queryOptions || {},
   )
-  const { isSuccess, data, isFetching } = getResult
 
-  useEffect(() => {
-    if (data) {
-      setFetchedData(data.data || null)
-    }
-  }, [
-    isSuccess,
-    isFetching,
-  ])
-
-  return fetchedData
+  return getResult
 }
-
-export default useMany

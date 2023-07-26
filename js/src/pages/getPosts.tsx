@@ -1,22 +1,26 @@
 import { useMany } from '@/hooks'
 import { renderHTML } from '@/utils'
 import defaultImage from '@/assets/images/defaultImage.jpg'
+import { TPost, TImage } from '@/types'
 
 const GetPostsPage = () => {
-  const posts = useMany({
+  const postsResult = useMany({
     resource: 'posts',
+    dataProvider: 'wp',
     queryOptions: {
       enabled: true,
     },
   })
 
-  const featureImgIds = !!posts
-    ? posts.map((post: any) => post?.featured_media)
-    : []
+  const posts = (postsResult?.data?.data ?? []) as TPost[]
+  console.log('⭐  GetPostsPage  posts', posts)
+
+  const featureImgIds = !!posts ? posts.map((post) => post?.featured_media) : []
   const uniqueFeatureImgIds = Array.from(new Set(featureImgIds))
 
-  const images = useMany({
+  const imagesResult = useMany({
     resource: 'media',
+    dataProvider: 'wp',
     args: {
       include: uniqueFeatureImgIds,
     },
@@ -25,14 +29,16 @@ const GetPostsPage = () => {
     },
   })
 
+  const images = (imagesResult?.data?.data ?? []) as TImage[]
+
   return (
     <>
       {!!posts ? (
         <>
           <div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 px-4 my-4">
-            {posts.map((post: any) => {
+            {posts.map((post) => {
               const image = images?.find(
-                (theImage: any) => theImage?.id === post?.featured_media,
+                (theImage) => theImage?.id === post?.featured_media,
               )
               const title = post?.title?.rendered || ''
               const id = post?.id || ''
@@ -44,7 +50,7 @@ const GetPostsPage = () => {
                 >
                   <img
                     alt={title}
-                    src={image?.source_url || defaultImage}
+                    src={image?.src || defaultImage}
                     className="w-full"
                   />
                   <div className="p-4">

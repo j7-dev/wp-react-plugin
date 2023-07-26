@@ -1,2 +1,6 @@
-export { default as useOne } from './useOne'
-export { default as useMany } from './useMany'
+export * from './useOne'
+export * from './useMany'
+export * from './useModal'
+export * from './useUpdate'
+export * from './useAjax'
+export * from './useAjaxGetPostMeta'
