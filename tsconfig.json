@@ -1,47 +1,47 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "declaration": true,
-    "preserveSymlinks": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ES2020",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": "./js/src/",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
-  },
-  "include": [
-    "js/src"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
-  "files": [
-    "js/src/types/env.d.ts",
-    "js/src/types/global.d.ts",
-    "js/src/types/index.d.ts"
-  ]
+	"compilerOptions": {
+		"target": "ES2020",
+		"useDefineForClassFields": true,
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
+		"allowJs": false,
+		"skipLibCheck": true,
+		"declaration": true,
+		"preserveSymlinks": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "ES2020",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"noUnusedLocals": true,
+		"outDir": "dist",
+		"sourceMap": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"baseUrl": "./js/src/",
+		"paths": {
+			"@/*": [
+				"./*"
+			]
+		}
+	},
+	"include": [
+		"js/src"
+	],
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	],
+	"files": [
+		"js/src/types/env.d.ts",
+		"js/src/types/global.d.ts",
+		"js/src/types/index.d.ts"
+	]
 }

@@ -6,15 +6,28 @@
  * Author: j7.dev
  * Author URI: https://github.com/j7-dev
  * License: GPLv2
- * Version: 1.0.1
+ * Version: 1.1.0
  * Requires PHP: 8.1
  */
 
-namespace Kucrut\ViteForWPExample\React;
+/**
+ * Tags: woocommerce, shop, order
+ * Requires at least: 4.6
+ * Tested up to: 4.8
+ * Stable tag: 4.3
+ */
 
-define('PROJECT_NAME', 'your-project');
+namespace J7\WP_REACT_PLUGIN\React;
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/inc/frontend.php';
+require_once __DIR__ . '/inc/admin.php';
 
-Frontend\bootstrap();
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__, '.env.production');
+$dotenv->safeLoad();
+
+
+$instance = new Admin\Bootstrap();
+$instance->init();

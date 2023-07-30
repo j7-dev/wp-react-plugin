@@ -8,41 +8,21 @@
 } */
 
 body {
-  margin: 0 !important;
+	margin: 0 !important;
 }
-.overflow-x-scroll {
-  width: 100%;
-  -webkit-overflow-scrolling: touch;
-  -webkit-overflow-x: scroll; /* added css prefix for safari */
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  touch-action: auto;
-}
-.rounded-none .ant-select-selector {
-  border-radius: 0 !important;
-}
-.rounded-l-none .ant-select-selector {
-  border-radius: 0 6px 6px 0 !important;
-}
-.cc-modal .ant-modal-body {
-  height: calc(80vh - 6rem);
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-.json-upload {
-  .ant-upload {
-    width: 100%;
-  }
+input[class*="ant-select"] {
+	box-shadow: none !important;
+	border: none !important;
+	outline: none !important;
 }
 
 @media print {
-  html,
-  body {
-    height: 100%; /* Use 100% here to support printing more than a single page*/
-    width: 297mm;
-    margin: 0 !important;
-    padding: 10mm !important;
-    overflow: hidden;
-  }
+	html,
+	body {
+		height: 100%; /* Use 100% here to support printing more than a single page*/
+		width: 297mm;
+		margin: 0 !important;
+		padding: 10mm !important;
+		overflow: hidden;
+	}
 }

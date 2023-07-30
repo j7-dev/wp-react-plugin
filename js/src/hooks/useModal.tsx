@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { ModalProps } from 'antd'
 
-export const useModal = () => {
+export const useModal = (props?: ModalProps) => {
   const [
     isModalOpen,
     setIsModalOpen,
@@ -18,10 +19,12 @@ export const useModal = () => {
     setIsModalOpen(false)
   }
 
-  const modalProps = {
+  const modalProps: ModalProps = {
+    centered: true,
     open: isModalOpen,
     onOk: handleOk,
     onCancel: handleCancel,
+    ...(props ? props : {}),
   }
 
   return {
