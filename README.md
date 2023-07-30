@@ -1,8 +1,9 @@
 # Boilerplate-React-SPA-WP-Plugin (BRSWP)
 
-⚠️⚠️⚠️ This is a beta version plugin
+⛏️⛏️⛏️ This Readme is OLD VERSION ⛏️⛏️⛏️
+⛏️⛏️⛏️ New doc is coming soon ⛏️⛏️⛏️
 
-demo link ( coming soon )
+[demo link](https://test.yc-tech.co/)
 
 ## ⚡Features⚡
 
