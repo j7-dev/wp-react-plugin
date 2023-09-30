@@ -6,8 +6,8 @@
  * Author: j7.dev
  * Author URI: https://github.com/j7-dev
  * License: GPLv2
- * Version: 1.1.1
- * Requires PHP: 8.1
+ * Version: 1.1.2
+ * Requires PHP: 7.4.0
  */
 
 /**
