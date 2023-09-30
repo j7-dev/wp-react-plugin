@@ -40,7 +40,7 @@ class Bootstrap
 	 */
 	public function render_app(): void
 	{
-		echo '<div id="' . $_ENV['KEBAB'] . '" class="my-app"></div>';
+		echo '<div id="' . $_ENV['VITE_RENDER_ID_1'] . '"></div>';
 	}
 
 
