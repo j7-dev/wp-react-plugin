@@ -1,4 +1,4 @@
-# Boilerplate-React-SPA-WP-Plugin (BRSWP)
+# WP React Plugin
 
 ⛏️⛏️⛏️ This Readme is OLD VERSION ⛏️⛏️⛏️
 ⛏️⛏️⛏️ New doc is coming soon ⛏️⛏️⛏️
@@ -48,8 +48,8 @@ Tech stacks (knowledge you need to have)
 1. Clone this repository into `/wp-content/plugins`.
    ```sh
    cd  {your-project}/wp-content/plugins
-   git clone https://github.com/j7-dev/boilerplate-react-SPA.wordpress-plugin.git
-   cd boilerplate-react-SPA.wordpress-plugin
+   git clone https://github.com/j7-dev/wp-react-plugin.git
+   cd wp-react-plugin
    ```
 2. Install dependencies:
 
