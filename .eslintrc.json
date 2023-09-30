@@ -39,6 +39,7 @@
 		"no-console": [
 			"warn"
 		],
+		"array-callback-return": "off",
 		"no-duplicate-imports": "error",
 		"linebreak-style": "off",
 		"@typescript-eslint/ban-types": "off",

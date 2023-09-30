@@ -4,7 +4,7 @@ import defaultImage from '@/assets/images/defaultImage.jpg'
 import { TPost, TImage } from '@/types'
 
 const GetPostsPage = () => {
-  const postsResult = useMany({
+  const { data, isLoading } = useMany({
     resource: 'posts',
     dataProvider: 'wp',
     queryOptions: {
@@ -12,8 +12,7 @@ const GetPostsPage = () => {
     },
   })
 
-  const posts = (postsResult?.data?.data ?? []) as TPost[]
-  console.log('⭐  GetPostsPage  posts', posts)
+  const posts = (data?.data ?? []) as TPost[]
 
   const featureImgIds = !!posts ? posts.map((post) => post?.featured_media) : []
   const uniqueFeatureImgIds = Array.from(new Set(featureImgIds))
@@ -30,6 +29,10 @@ const GetPostsPage = () => {
   })
 
   const images = (imagesResult?.data?.data ?? []) as TImage[]
+
+  if (isLoading) {
+    return <>Loading...</>
+  }
 
   return (
     <>

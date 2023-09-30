@@ -48,3 +48,21 @@ export const getCurrencyString = ({
   if (typeof price === 'string') return `${symbol} ${price}`
   return `${symbol} ${price.toString()}`
 }
+
+export const filterObjKeys = (
+  obj: object,
+  arr: (string | number | boolean | undefined | null)[] = [undefined],
+) => {
+  for (const key in obj) {
+    if (arr.includes(obj[key as keyof typeof obj])) {
+      delete obj[key as keyof typeof obj]
+    } else if (typeof obj[key as keyof typeof obj] === 'object') {
+      filterObjKeys(obj[key as keyof typeof obj]) // 递归处理嵌套对象
+      if (Object.keys(obj[key as keyof typeof obj]).length === 0) {
+        delete obj[key as keyof typeof obj]
+      }
+    }
+  }
+
+  return obj
+}

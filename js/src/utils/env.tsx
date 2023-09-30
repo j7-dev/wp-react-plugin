@@ -1,7 +1,6 @@
 export const appName = import.meta.env.APP_NAME || 'Power Shop'
 export const kebab = appName.toLowerCase().replace(/\s+/g, '-')
 export const snake = appName.toLowerCase().replace(/\s+/g, '_')
-export const baseUrl = import.meta.env.VITE_BASE_URL || '/'
 export const renderId1 = import.meta.env.VITE_RENDER_ID_1 || 'my-app'
 export const renderId2 = import.meta.env.VITE_RENDER_ID_2 || 'my-app'
 export const renderId3 = import.meta.env.VITE_RENDER_ID_3 || 'my-app'
