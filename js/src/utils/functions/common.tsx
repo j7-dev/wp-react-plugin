@@ -66,3 +66,6 @@ export const filterObjKeys = (
 
   return obj
 }
+
+export const isUsingBlockEditor =
+  typeof window?.wp !== 'undefined' && typeof window?.wp?.blocks !== 'undefined'

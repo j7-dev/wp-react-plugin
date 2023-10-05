@@ -12,6 +12,9 @@ declare global {
     permalink: string
     checkoutUrl: string
   }
+  var wp: {
+    blocks: any
+  }
 }
 
 export {}
