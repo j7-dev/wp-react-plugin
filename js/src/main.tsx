@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import App2 from './App2'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { renderId1, renderId2 } from '@/utils'
+
+const App = React.lazy(() => import('./App'))
+const App2 = React.lazy(() => import('./App2'))
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -45,7 +45,9 @@ export const getTypeText = (
 
 export const getDataProviderUrlParams = (dataProvider: TDataProvider) => {
   switch (dataProvider) {
-    case 'wc':
+    case 'wp-rest':
+      return 'wp/v2/'
+    case 'wc-rest':
       return 'wc/v3/'
     case 'wc-store':
       return 'wc/store/v1/'

@@ -1,1 +1,1 @@
-export type TDataProvider = 'wp' | 'wc' | 'wc-store'
+export type TDataProvider = 'wp-rest' | 'wc-rest' | 'wc-store'

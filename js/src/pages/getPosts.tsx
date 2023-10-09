@@ -6,10 +6,6 @@ import { TPost, TImage } from '@/types'
 const GetPostsPage = () => {
   const { data, isLoading } = useMany({
     resource: 'posts',
-    dataProvider: 'wp',
-    queryOptions: {
-      enabled: true,
-    },
   })
 
   const posts = (data?.data ?? []) as TPost[]
@@ -19,7 +15,6 @@ const GetPostsPage = () => {
 
   const imagesResult = useMany({
     resource: 'media',
-    dataProvider: 'wp',
     args: {
       include: uniqueFeatureImgIds,
     },

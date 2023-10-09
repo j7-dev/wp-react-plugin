@@ -19,7 +19,7 @@ export const useUpdate = (options: {
   >
 }) => {
   const resource = options?.resource || 'post'
-  const dataProvider = options?.dataProvider || 'wp'
+  const dataProvider = options?.dataProvider || 'wp-rest'
   const pathParams = options?.pathParams || []
   const args = options?.args || undefined
   const config = options?.config || undefined

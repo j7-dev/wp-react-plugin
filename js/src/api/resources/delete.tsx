@@ -5,7 +5,7 @@ import { AxiosRequestConfig } from 'axios'
 
 export const deleteResource = async ({
   resource,
-  dataProvider = 'wp',
+  dataProvider = 'wp-rest',
   pathParams = [],
   config = undefined,
 }: {
