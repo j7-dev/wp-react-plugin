@@ -2,7 +2,7 @@
 
 
 
-[live demo](https://test.yc-tech.co/)
+[live demo](https://demo.yc-tech.co/)
 
 ## ⚡Features⚡
 
