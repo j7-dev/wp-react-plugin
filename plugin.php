@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: WP React Plugin
+ * Plugin Name: WP React Plugin (DEV)
  * Description: WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.
  * Author: j7.dev
  * Author URI: https://github.com/j7-dev
