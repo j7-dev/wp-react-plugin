@@ -2,8 +2,7 @@
 
 /**
  * Plugin Name: WP React Plugin (DEV)
- * Description: WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.
- * Author: j7.dev
+ * Description: WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite. * Author: j7.dev
  * Author URI: https://github.com/j7-dev
  * License: GPLv2
  * Version: 1.1.2
@@ -17,10 +16,10 @@
  * Stable tag: 4.3
  */
 
-namespace J7\WP_REACT_PLUGIN\React;
+namespace J7\WpMyAppPlugin\MyApp\Inc;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/inc/admin.php';
 
-$instance = new Admin\Bootstrap();
+$instance = new Bootstrap();
 $instance->init();

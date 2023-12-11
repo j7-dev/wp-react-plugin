@@ -2,9 +2,9 @@
 
 declare (strict_types = 1);
 
-namespace J7\WP_REACT_PLUGIN\React\Admin;
+namespace J7\WpMyAppPlugin\MyApp\Inc;
 
-use J7\WP_REACT_PLUGIN\React\Admin\Bootstrap;
+use J7\WpMyAppPlugin\MyApp\Inc\Bootstrap;
 
 class ShortCode
 {
