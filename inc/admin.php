@@ -76,7 +76,7 @@ class Bootstrap
         $post_id   = \get_the_ID();
         $permalink = \get_permalink($post_id);
 
-        \wp_localize_script(self::KEBAB, 'appData', array(
+        \wp_localize_script(self::KEBAB, self::SNAKE . '_data', array(
             'env' => [
                 'siteUrl'     => \site_url(),
                 'ajaxUrl'     => \admin_url('admin-ajax.php'),

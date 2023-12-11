@@ -6,13 +6,17 @@ namespace J7\WP_REACT_PLUGIN\React\Admin;
 
 class Api
 {
+    const POSTMETA_API_ENDPOINT = 'postmeta';
+    const AJAX_NONCE_ENDPOINT   = 'ajaxnonce';
 
-    function __construct($shortcode = '')
+    function __construct()
     {
-        \add_action('rest_api_init', 'register_custom_api_routes');
+        foreach ([ self::POSTMETA_API_ENDPOINT, self::AJAX_NONCE_ENDPOINT ] as $action) {
+            \add_action('rest_api_init', [ $this, "register_{$action}_api" ]);
+        }
     }
 
-    public static function custom_get_post_meta_endpoint($request)
+    public function postmeta_callback($request)
     {
         $post_id = $request[ 'id' ];
 
@@ -32,11 +36,32 @@ class Api
         }
     }
 
-    public function register_custom_api_routes()
+    public function register_postmeta_api()
     {
-        \register_rest_route('wrp', 'postmeta/(?P<id>\d+)', array(
+        $endpoint = self::POSTMETA_API_ENDPOINT;
+        \register_rest_route('wrp', "{$endpoint}/(?P<id>\d+)", array(
             'methods'  => 'GET',
-            'callback' => self::custom_get_post_meta_endpoint,
+            'callback' => [ $this, "{$endpoint}_callback" ],
         ));
     }
+
+    public function ajaxnonce_callback()
+    {
+        $ajaxNonce = \wp_create_nonce(Bootstrap::KEBAB);
+
+        return \rest_ensure_response($ajaxNonce);
+
+    }
+
+    public function register_ajaxnonce_api()
+    {
+        $endpoint = self::AJAX_NONCE_ENDPOINT;
+        \register_rest_route('wrp', "{$endpoint}", array(
+            'methods'  => 'GET',
+            'callback' => [ $this, "{$endpoint}_callback" ],
+        ));
+    }
+
 }
+
+new Api();
