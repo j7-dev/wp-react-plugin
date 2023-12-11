@@ -5,7 +5,7 @@ import { TPost, TImage } from '@/types'
 
 const GetPostsPage = () => {
   const { data, isLoading } = useMany({
-    resource: 'posts',
+    resource: 'product',
   })
 
   const posts = (data?.data ?? []) as TPost[]
@@ -48,7 +48,7 @@ const GetPostsPage = () => {
                 >
                   <img
                     alt={title}
-                    src={image?.src || defaultImage}
+                    src={image?.source_url || defaultImage}
                     className="w-full"
                   />
                   <div className="p-4">

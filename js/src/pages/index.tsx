@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from '../assets/images/react.svg'
 import viteLogo from '../assets/images/vite.svg'
 import wpLogo from '../assets/images/wp.png'
-import GetPostsPage from './getPosts'
+import GetRestPostsPage from './GetRestPosts'
 
 function DefaultPage() {
   const [
@@ -10,8 +10,8 @@ function DefaultPage() {
     setCount,
   ] = useState(0)
   const [
-    showPosts,
-    setShowPosts,
+    showRestPosts,
+    setShowRestPosts,
   ] = useState(false)
 
   return (
@@ -40,8 +40,8 @@ function DefaultPage() {
           Count is {count}
         </button>
 
-        <button type="button" onClick={() => setShowPosts(!showPosts)}>
-          Get Posts Example
+        <button type="button" onClick={() => setShowRestPosts(!showRestPosts)}>
+          Get Posts Example by REST API
         </button>
       </div>
       <p>
@@ -51,7 +51,7 @@ function DefaultPage() {
         Click on the Vite, React and WordPress logos to learn more
       </p>
 
-      {showPosts && <GetPostsPage />}
+      {showRestPosts && <GetRestPostsPage />}
     </div>
   )
 }

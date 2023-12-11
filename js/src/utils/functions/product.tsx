@@ -1,7 +1,6 @@
 import { TProduct as TProductStoreApi } from '@/types/wcStoreApi'
 import { TProduct as TProductRestApi } from '@/types/wcRestApi'
-
-import { defaultImage } from '@/utils'
+import defaultImage from '@/assets/images/defaultImage.jpg'
 
 export const getProductImageSrc = (
   product: TProductStoreApi | TProductRestApi,

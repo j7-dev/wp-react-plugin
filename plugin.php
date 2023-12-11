@@ -22,12 +22,5 @@ namespace J7\WP_REACT_PLUGIN\React;
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/inc/admin.php';
 
-
-use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(__DIR__, '.env.production');
-$dotenv->safeLoad();
-
-
 $instance = new Admin\Bootstrap();
 $instance->init();
