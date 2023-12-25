@@ -94,7 +94,7 @@ class Bootstrap
         ));
 
         \wp_localize_script(self::KEBAB, 'wpApiSettings', array(
-            'root'  => \esc_url_raw(rest_url()),
+            'root'  => \untrailingslashit(\esc_url_raw(rest_url())),
             'nonce' => \wp_create_nonce('wp_rest'),
         ));
     }
