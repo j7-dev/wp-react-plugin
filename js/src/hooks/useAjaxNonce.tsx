@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai'
 import { useQuery } from '@tanstack/react-query'
 import { axios } from '@/api'
 import { useEffect } from 'react'
-import { apiUrl } from '@/utils'
+import { apiUrl, kebab } from '@/utils'
 
 export const ajaxNonceAtom = atom('')
 
@@ -16,7 +16,7 @@ export const useAjaxNonce = () => {
     queryKey: [
       'get_ajax_nonce',
     ],
-    queryFn: () => axios.get(`${apiUrl}/wrp/ajaxnonce`),
+    queryFn: () => axios.get(`${apiUrl}/${kebab}/ajaxnonce`),
     staleTime: 1000 * 60 * 60 * 18,
     cacheTime: 1000 * 60 * 60 * 18,
     refetchInterval: 1000 * 60 * 60 * 18,

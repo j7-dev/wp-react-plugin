@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-import { atom } from 'jotai'
-
 const APP_DOMAIN = 'my_app_data' as string
 export const snake = window?.[APP_DOMAIN]?.env?.SNAKE || 'my_app'
 export const appName = window?.[APP_DOMAIN]?.env?.APP_NAME || 'My App'
@@ -18,10 +16,3 @@ export const currentUserId = window?.[APP_DOMAIN]?.env?.userId || '0'
 export const postId = window?.[APP_DOMAIN]?.env?.postId || '0'
 export const permalink = window?.[APP_DOMAIN]?.env?.permalink || '/'
 export const apiTimeout = import.meta.env.API_TIMEOUT || '30000'
-
-export const envAtom = atom(async (get, { signal }) => {
-  const response = await fetch(`${window.location.href}wp-json/${kebab}/env`, {
-    signal,
-  })
-  return response.json()
-})
