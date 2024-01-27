@@ -21,7 +21,7 @@ abstract class Utils
 
 	public static function get_plugin_dir(): string
 	{
-		$plugin_dir = \untrailingslashit(\wp_normalize_path(\get_home_path() . 'wp-content/plugins/wp-react-plugin'));
+		$plugin_dir = \untrailingslashit(\wp_normalize_path(ABSPATH . 'wp-content/plugins/wp-react-plugin'));
 		return $plugin_dir;
 	}
 
