@@ -20,7 +20,7 @@ export const updateResource = async ({
 }) => {
   const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
   const updateResult = await axios.post(
-    `${apiUrl}${dataProviderUrlParams}${resource}/${pathParams.join('/')}`,
+    `${apiUrl}/${dataProviderUrlParams}/${resource}/${pathParams.join('/')}`,
     args,
     config,
   )

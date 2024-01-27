@@ -16,7 +16,7 @@ export const deleteResource = async ({
 }) => {
   const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
   const deleteResult = await axios.delete(
-    `${apiUrl}${dataProviderUrlParams}${resource}/${pathParams.join('/')}`,
+    `${apiUrl}/${dataProviderUrlParams}/${resource}/${pathParams.join('/')}`,
     config,
   )
 

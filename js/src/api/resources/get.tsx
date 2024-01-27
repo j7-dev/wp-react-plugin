@@ -18,7 +18,7 @@ export const getResource = async ({
 }) => {
   const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
   const getResult = await axios.get(
-    `${apiUrl}${dataProviderUrlParams}${resource}/${pathParams.join(
+    `${apiUrl}/${dataProviderUrlParams}/${resource}/${pathParams.join(
       '/',
     )}?${new URLSearchParams(args).toString()}`,
     config,
@@ -42,7 +42,7 @@ export const getResources = async ({
 }) => {
   const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
   const getResult = await axios.get(
-    `${apiUrl}${dataProviderUrlParams}${resource}/${pathParams.join(
+    `${apiUrl}/${dataProviderUrlParams}/${resource}/${pathParams.join(
       '/',
     )}?${new URLSearchParams(args).toString()}`,
     config,

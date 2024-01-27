@@ -5,7 +5,7 @@ import { TPost, TImage } from '@/types'
 
 const GetPostsPage = () => {
   const { data, isLoading } = useMany({
-    resource: 'product',
+    resource: 'posts',
   })
 
   const posts = (data?.data ?? []) as TPost[]

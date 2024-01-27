@@ -18,7 +18,7 @@ export const createResource = async ({
 }) => {
   const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
   const createResult = await axios.post(
-    `${apiUrl}${dataProviderUrlParams}/${resource}`,
+    `${apiUrl}/${dataProviderUrlParams}/${resource}`,
     args,
     config,
   )
