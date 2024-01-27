@@ -1,5 +1,6 @@
 export type TImage = {
   id: number
+  source_url: string
   date_created: string
   date_created_gmt: string
   date_modified: string
