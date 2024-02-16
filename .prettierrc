@@ -1,36 +1,36 @@
 {
-    "arrowParens": "always",
-    "bracketSpacing": true,
-    "parenSpacing": true,
-    "printWidth": 80,
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all",
-    "useTabs": false,
-    "endOfLine": "auto",
-    "prettier-multiline-arrays-set-threshold": 2,
-    "plugins": [
-        "./node_modules/eslint-plugin-prettier",
-        "./node_modules/prettier-plugin-multiline-arrays"
-    ],
-    "overrides": [
-        {
-            "files": ["*.json"],
-            "options": {
-                "singleQuote": false
-            }
-        },
-        {
-            "files": [
-                "*.yaml",
-                "*.yml"
-            ],
-            "options": {
-                "singleQuote": false,
-                "tabWidth": 2,
-                "useTabs": false
-            }
-        }
-    ]
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "parenSpacing": true,
+  "printWidth": 80,
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false,
+  "endOfLine": "auto",
+  "multilineArraysWrapThreshold": 4,
+  "plugins": [
+    "./node_modules/eslint-plugin-prettier",
+    "./node_modules/prettier-plugin-multiline-arrays"
+  ],
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": [
+        "*.yaml",
+        "*.yml"
+      ],
+      "options": {
+        "singleQuote": false,
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    }
+  ]
 }
