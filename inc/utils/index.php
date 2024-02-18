@@ -6,10 +6,11 @@ namespace J7\WpReactPlugin;
 
 abstract class Utils
 {
-    const APP_NAME    = 'My App';
-    const KEBAB       = 'my-app';
-    const SNAKE       = 'my_app';
-    const TEXT_DOMAIN = self::SNAKE;
+    const PLUGIN_DIR_NAME = 'wp-react-plugin';
+    const APP_NAME        = 'My App';
+    const KEBAB           = 'my-app';
+    const SNAKE           = 'my_app';
+    const TEXT_DOMAIN     = self::SNAKE;
 
     const BASE_URL      = '/';
     const APP1_SELECTOR = 'my_app';
@@ -21,7 +22,7 @@ abstract class Utils
 
     public static function get_plugin_dir(): string
     {
-        $plugin_dir = \untrailingslashit(\wp_normalize_path(ABSPATH . 'wp-content/plugins/wp-react-plugin'));
+        $plugin_dir = \untrailingslashit(\wp_normalize_path(ABSPATH . 'wp-content/plugins/' . self::PLUGIN_DIR_NAME));
         return $plugin_dir;
     }
 

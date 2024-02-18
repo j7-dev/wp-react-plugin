@@ -40,7 +40,7 @@ class Bootstrap
 
         Vite\enqueue_asset(
             Utils::get_plugin_dir() . '/js/dist',
-            '/js/src/main.tsx',
+            'js/src/main.tsx',
             [
                 'handle'    => Utils::KEBAB,
                 'in-footer' => true,
