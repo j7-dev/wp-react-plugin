@@ -18,17 +18,25 @@ function DefaultPage() {
     <div className="App py-20">
       <div className="flex justify-center">
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer noopener">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+          <img src={viteLogo} className="logo h-12 w-12" alt="Vite logo" />
         </a>
         <a href="https://reactjs.org" target="_blank" rel="noreferrer noopener">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img
+            src={reactLogo}
+            className="logo react h-12 w-12"
+            alt="React logo"
+          />
         </a>
         <a
           href="https://wordpress.org"
           target="_blank"
           rel="noreferrer noopener"
         >
-          <img src={wpLogo} className="logo wp" alt="WordPress logo" />
+          <img
+            src={wpLogo}
+            className="logo wp h-12 w-12"
+            alt="WordPress logo"
+          />
         </a>
       </div>
       <h1>Vite + React + WordPress</h1>

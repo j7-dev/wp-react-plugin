@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { renderId1, renderId2 } from '@/utils'
+import { app1Selector, app2Selector } from '@/utils'
 
 const App1 = React.lazy(() => import('./App1'))
 const App2 = React.lazy(() => import('./App2'))
@@ -15,29 +15,32 @@ const queryClient = new QueryClient({
     },
   },
 })
-const id1 = document.getElementById(renderId1)
-const id2 = document.getElementById(renderId2)
+
+const app1Nodes = document.querySelectorAll(app1Selector)
+const app2Nodes = document.querySelectorAll(app2Selector)
 
 const mapping = [
   {
-    el: id1,
+    els: app1Nodes,
     App: App1,
   },
   {
-    el: id2,
+    els: app2Nodes,
     App: App2,
   },
 ]
 
-mapping.forEach(({ el, App }) => {
-  if (!!el) {
-    ReactDOM.createRoot(el).render(
-      <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-          <App />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </React.StrictMode>,
-    )
+mapping.forEach(({ els, App }) => {
+  if (!!els) {
+    els.forEach((el) => {
+      ReactDOM.createRoot(el).render(
+        <React.StrictMode>
+          <QueryClientProvider client={queryClient}>
+            <App />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </React.StrictMode>,
+      )
+    })
   }
 })
