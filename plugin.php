@@ -89,7 +89,7 @@ if (!\class_exists('J7\WpReactPlugin\Plugin')) {
             );
             $updateChecker->setBranch('master');
             // if your repo is private, you need to set authentication
-            // $updateChecker->setAuthentication(Utils::GITHUB_PAT);
+            // $updateChecker->setAuthentication(Utils::get_github_pat());
             $updateChecker->getVcsApi()->enableReleaseAssets();
         }
 
