@@ -63,43 +63,24 @@ Tech stacks (knowledge you need to have)
    ```
 
 
-
-
-3. Change the API url to your project in `.env.development`
-
-   ```sh
-   APP_NAME='My App'
-   # ↑ Your App's Name
-
-   VITE_RENDER_ID_1='my-app'
-   # by default, the footer will render a <div id="my-app"></div> container at front-end page footer
-   # You can custom the render id
-
-	 VITE_RENDER_ID_2='my-app-metabox'
-   # by default, in admin page, when you want to add/edit a new post with post_type=my-app, another React App will render in metabox
-	 # Remove it if you don't need a metabox React App
-
-   VITE_API_TIMEOUT='30000'
-   ```
-
-4. Activate the plugin from WordPress admin `/wp-admin`.
+3. Activate the plugin from WordPress admin `/wp-admin`.
 
    <img src="https://user-images.githubusercontent.com/9213776/226081766-6d3ce292-1be6-4a34-8a6b-6055670f0a74.png">
 
-5. Visit your site's homepage and see the rendered application on the footer 🚀🚀🚀
+4. Visit your site's homepage and see the rendered application on the footer 🚀🚀🚀
 
    <img src="https://user-images.githubusercontent.com/9213776/226081865-8e23a778-8321-44d3-82f0-9f361530ad13.png">
 
-6. Click `Count`, `Get Post Example` button to ensure the State and the WordPress API works
+5. Click `Count`, `Get Post Example` button to ensure the State and the WordPress API works
 
    <img src="https://user-images.githubusercontent.com/9213776/226081923-c16cf62f-cd6e-4457-9150-8973b817a6e3.png">
 
 
-7. Check the admin page, you will see a new post type `My App` and a new menu `My App`
+6. Check the admin page, you will see a new post type `My App` and a new menu `My App`
 
    <img src="https://github.com/j7-dev/wp-react-plugin/assets/9213776/b2588014-271a-4620-ab94-d65b2d7a211b">
 
-8. Click Add New, you will see a React App in the metabox
+7. Click Add New, you will see a React App in the metabox
 
    <img src="https://github.com/j7-dev/wp-react-plugin/assets/9213776/62c1efab-cb0e-4bcb-8879-4f4b9b6a4915">
 
