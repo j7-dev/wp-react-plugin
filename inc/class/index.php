@@ -61,8 +61,8 @@ class Bootstrap
                 "KEBAB"         => Utils::KEBAB,
                 "SNAKE"         => Utils::SNAKE,
                 "BASE_URL"      => Utils::BASE_URL,
-                "APP1_SELECTOR" => Utils::APP1_SELECTOR,
-                "APP2_SELECTOR" => Utils::APP2_SELECTOR,
+                "APP1_SELECTOR" => '#' . Utils::APP1_SELECTOR,
+                "APP2_SELECTOR" => '#' . Utils::APP2_SELECTOR,
                 "API_TIMEOUT"   => Utils::API_TIMEOUT,
              ],
         ));
@@ -75,6 +75,6 @@ class Bootstrap
 
     public function remove_notices(): void
     {
-        \remove_action('admin_notices', array(\TGM_Plugin_Activation::$instance, 'notices'));
+        \remove_action('admin_notices', array(TGM_Plugin_Activation::$instance, 'notices'));
     }
 }
