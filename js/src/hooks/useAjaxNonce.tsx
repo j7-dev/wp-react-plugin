@@ -6,6 +6,14 @@ import { apiUrl, kebab } from '@/utils'
 
 export const ajaxNonceAtom = atom('')
 
+/**
+ * @description
+ * About useAjaxNonce
+ * Because some cache plugin will cache the nonce in static page
+ * but the nonce will be expired after a 24 hours
+ * so we need to get the nonce from the server.
+ */
+
 export const useAjaxNonce = () => {
   const [
     ajaxNonce,
