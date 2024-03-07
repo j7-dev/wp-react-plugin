@@ -63,25 +63,6 @@ Tech stacks (knowledge you need to have)
    ```
 
 
-
-
-3. Change the API url to your project in `.env.development`
-
-   ```sh
-   APP_NAME='My App'
-   # ↑ Your App's Name
-
-   VITE_RENDER_ID_1='my-app'
-   # by default, the footer will render a <div id="my-app"></div> container at front-end page footer
-   # You can custom the render id
-
-	 VITE_RENDER_ID_2='my-app-metabox'
-   # by default, in admin page, when you want to add/edit a new post with post_type=my-app, another React App will render in metabox
-	 # Remove it if you don't need a metabox React App
-
-   VITE_API_TIMEOUT='30000'
-   ```
-
 4. Activate the plugin from WordPress admin `/wp-admin`.
 
    <img src="https://user-images.githubusercontent.com/9213776/226081766-6d3ce292-1be6-4a34-8a6b-6055670f0a74.png">
