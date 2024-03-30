@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards for Plugins">
+	<description>Generally-applicable sniffs for WordPress plugins</description>
+
+	<!--
+	#############################################################################
+	COMMAND LINE ARGUMENTS
+	https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Annotated-Ruleset
+	#############################################################################
+	-->
+
+	<file>.</file>
+
+	<!-- Only check PHP files. -->
+	<arg name="extensions" value="php"/>
+
+	<!-- Show progress, show the error codes for each message (source). -->
+	<arg value="ps"/>
+
+	<!-- Strip the filepaths down to the relevant bit. 加入這行就會失效了 -->
+	<!-- <arg name="basepath" value="."/> -->
+
+	<!-- Check up to 8 files simultaneously. -->
+	<arg name="parallel" value="8"/>
+
+	<rule ref="WordPress-Core">
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+		<exclude name="WordPress.PHP.DevelopmentFunctions.error_log_print_r" />
+	</rule>
+	<rule ref="WordPress-Docs">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPress-Extra" />
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName"/>
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+	</rule>
+
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="indent" value="4" />
+			<property name="exact" value="true" />
+			<property name="tabIndent" value="true" />
+		</properties>
+	</rule>
+
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibility" />
+
+	<!-- Enforce PSR1 compatible namespaces. -->
+	<rule ref="PSR1.Classes.ClassDeclaration"/>
+
+	<!-- Enforce that classes are abstract or final. -->
+	<rule ref="Universal.Classes.RequireFinalClass">
+		<!-- ... with the exception of four sniffs which are known to be extended by external standards. -->
+		<exclude-pattern>/WordPress/Sniffs/NamingConventions/ValidHookNameSniff\.php$</exclude-pattern>
+		<exclude-pattern>/WordPress/Sniffs/Security/(EscapeOutput|NonceVerification|ValidatedSanitizedInput)Sniff\.php$</exclude-pattern>
+	</rule>
+
+	<!-- Enforce that methods in traits are always final. -->
+	<rule ref="Universal.FunctionDeclarations.RequireFinalMethodsInTraits"/>
+
+	<!--
+	#############################################################################
+	SNIFF SPECIFIC CONFIGURATION
+	#############################################################################
+	-->
+
+	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
+		<properties>
+			<property name="alignMultilineItems" value="!=100"/>
+			<property name="exact" value="true" phpcs-only="true"/>
+		</properties>
+	</rule>
+
+	<!-- exclude Full-Stop comment style -->
+	<rule ref="Squiz.Commenting.FunctionComment">
+		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+	</rule>
+
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax">
+		<exclude name="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+	</rule>
+
+	<rule ref="Universal.Arrays.DisallowShortArraySyntax">
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
+	</rule>
+
+	<rule ref="Generic.Files.LineEndings">
+		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
+	</rule>
+
+</ruleset>

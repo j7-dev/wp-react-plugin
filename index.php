@@ -1,1 +1,1 @@
-<?php // silence is golden
+<?php // phpcs:ignore silence is golden

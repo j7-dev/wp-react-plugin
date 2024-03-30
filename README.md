@@ -41,6 +41,9 @@ Tech stacks (knowledge you need to have)
 #### Front-end (Optional)
 1. [React Router v6](https://reactrouter.com/en/main) - front-end router
 
+We highly recommend you to use Hash router in WordPress, so you won't get conflict with WordPress Permalink
+
+
 #### Back-end
 
 1. [usefulteam/jwt-auth](https://github.com/usefulteam/jwt-auth) - get JWT if a wordpress user is logged in

@@ -1,7 +1,7 @@
 {
   "name": "wp-react-plugin",
   "private": true,
-  "version": "0.0.2",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "bootstrap": "npm install && composer install --no-interaction",
@@ -10,8 +10,8 @@
     "build": "vite build && mv js/dist/.vite/manifest.json js/dist/",
     "preview": "vite preview",
     "format": "prettier-eslint --write \"js/src/**/*.tsx\"",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint": "eslint . --ext .ts,.tsx && phpcbf",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix && phpcbf",
     "push": "npm version patch && git push"
   },
   "pre-commit": [
@@ -60,6 +60,7 @@
     "typescript-eslint": "^0.0.1-alpha.0",
     "vite": "^5.1.5",
     "vite-plugin-live-reload": "^3.0.2",
-    "vite-tsconfig-paths": "^4.0.5"
+    "vite-tsconfig-paths": "^4.0.5",
+    "yarn-upgrade-all": "^0.7.2"
   }
 }

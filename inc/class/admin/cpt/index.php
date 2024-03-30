@@ -1,25 +1,41 @@
 <?php
+/**
+ * Custom Post Type: My App
+ */
 
 declare(strict_types=1);
 
 namespace J7\WpReactPlugin\Admin;
 
 use J7\WpReactPlugin\Utils;
+use J7\WpReactPlugin\Plugin;
 
-class CPT {
+/**
+ * Class CPT
+ */
+final class CPT {
 
-	public $post_type  = '';
+	/**
+	 * Post metas
+	 *
+	 * @var array
+	 */
 	public $post_metas = array();
-	public $rewrite    = array();
+	/**
+	 * Rewrite
+	 *
+	 * @var array
+	 */
+	public $rewrite = array();
 
-	function __construct( $cpt, $args ) {
-		$this->post_type  = $cpt;
+	/**
+	 * Constructor
+	 *
+	 * @param array $args Arguments.
+	 */
+	public function __construct( $args ) {
 		$this->post_metas = $args['post_metas'];
 		$this->rewrite    = $args['rewrite'] ?? array();
-
-		if ( empty( $this->post_type ) ) {
-			return;
-		}
 
 		\add_action( 'init', array( $this, 'init' ) );
 
@@ -36,55 +52,59 @@ class CPT {
 		}
 	}
 
+	/**
+	 * Initialize
+	 */
 	public function init(): void {
-		$this->register_cpt( $this->post_type, Utils::SNAKE );
+		$this->register_cpt();
 
 		// add {$this->post_type}/{slug}/test rewrite rule
 		if ( ! empty( $this->rewrite ) ) {
-			\add_rewrite_rule( '^' . $this->post_type . '/([^/]+)/' . $this->rewrite['slug'] . '/?$', 'index.php?post_type=' . $this->post_type . '&name=$matches[1]&' . $this->rewrite['var'] . '=1', 'top' );
+			\add_rewrite_rule( '^my-app/([^/]+)/' . $this->rewrite['slug'] . '/?$', 'index.php?post_type=my-app&name=$matches[1]&' . $this->rewrite['var'] . '=1', 'top' );
 			\flush_rewrite_rules();
 		}
 	}
 
-	public static function register_cpt( $label, $text_domain ): void {
-
-		$kebab = str_replace( ' ', '-', strtolower( $label ) );
+	/**
+	 * Register my-app custom post type
+	 */
+	public static function register_cpt(): void {
 
 		$labels = array(
-			'name'                     => \esc_html__( $label, $text_domain ),
-			'singular_name'            => \esc_html__( $label, $text_domain ),
-			'add_new'                  => \esc_html__( 'Add new', $text_domain ),
-			'add_new_item'             => \esc_html__( 'Add new item', $text_domain ),
-			'edit_item'                => \esc_html__( 'Edit', $text_domain ),
-			'new_item'                 => \esc_html__( 'New', $text_domain ),
-			'view_item'                => \esc_html__( 'View', $text_domain ),
-			'view_items'               => \esc_html__( 'View', $text_domain ),
-			'search_items'             => \esc_html__( 'Search ' . $label, $text_domain ),
-			'not_found'                => \esc_html__( 'Not Found', $text_domain ),
-			'not_found_in_trash'       => \esc_html__( 'Not found in trash', $text_domain ),
-			'parent_item_colon'        => \esc_html__( 'Parent item', $text_domain ),
-			'all_items'                => \esc_html__( 'All', $text_domain ),
-			'archives'                 => \esc_html__( $label . ' archives', $text_domain ),
-			'attributes'               => \esc_html__( $label . ' attributes', $text_domain ),
-			'insert_into_item'         => \esc_html__( 'Insert to this ' . $label, $text_domain ),
-			'uploaded_to_this_item'    => \esc_html__( 'Uploaded to this ' . $label, $text_domain ),
-			'featured_image'           => \esc_html__( 'Featured image', $text_domain ),
-			'set_featured_image'       => \esc_html__( 'Set featured image', $text_domain ),
-			'remove_featured_image'    => \esc_html__( 'Remove featured image', $text_domain ),
-			'use_featured_image'       => \esc_html__( 'Use featured image', $text_domain ),
-			'menu_name'                => \esc_html__( $label, $text_domain ),
-			'filter_items_list'        => \esc_html__( 'Filter ' . $label . ' list', $text_domain ),
-			'filter_by_date'           => \esc_html__( 'Filter by date', $text_domain ),
-			'items_list_navigation'    => \esc_html__( $label . ' list navigation', $text_domain ),
-			'items_list'               => \esc_html__( $label . ' list', $text_domain ),
-			'item_published'           => \esc_html__( $label . ' published', $text_domain ),
-			'item_published_privately' => \esc_html__( $label . ' published privately', $text_domain ),
-			'item_reverted_to_draft'   => \esc_html__( $label . ' reverted to draft', $text_domain ),
-			'item_scheduled'           => \esc_html__( $label . ' scheduled', $text_domain ),
-			'item_updated'             => \esc_html__( $label . ' updated', $text_domain ),
+			'name'                     => \esc_html__( 'my-app', 'wp_react_plugin' ),
+			'singular_name'            => \esc_html__( 'my-app', 'wp_react_plugin' ),
+			'add_new'                  => \esc_html__( 'Add new', 'wp_react_plugin' ),
+			'add_new_item'             => \esc_html__( 'Add new item', 'wp_react_plugin' ),
+			'edit_item'                => \esc_html__( 'Edit', 'wp_react_plugin' ),
+			'new_item'                 => \esc_html__( 'New', 'wp_react_plugin' ),
+			'view_item'                => \esc_html__( 'View', 'wp_react_plugin' ),
+			'view_items'               => \esc_html__( 'View', 'wp_react_plugin' ),
+			'search_items'             => \esc_html__( 'Search my-app', 'wp_react_plugin' ),
+			'not_found'                => \esc_html__( 'Not Found', 'wp_react_plugin' ),
+			'not_found_in_trash'       => \esc_html__( 'Not found in trash', 'wp_react_plugin' ),
+			'parent_item_colon'        => \esc_html__( 'Parent item', 'wp_react_plugin' ),
+			'all_items'                => \esc_html__( 'All', 'wp_react_plugin' ),
+			'archives'                 => \esc_html__( 'my-app archives', 'wp_react_plugin' ),
+			'attributes'               => \esc_html__( 'my-app attributes', 'wp_react_plugin' ),
+			'insert_into_item'         => \esc_html__( 'Insert to this my-app', 'wp_react_plugin' ),
+			'uploaded_to_this_item'    => \esc_html__( 'Uploaded to this my-app', 'wp_react_plugin' ),
+			'featured_image'           => \esc_html__( 'Featured image', 'wp_react_plugin' ),
+			'set_featured_image'       => \esc_html__( 'Set featured image', 'wp_react_plugin' ),
+			'remove_featured_image'    => \esc_html__( 'Remove featured image', 'wp_react_plugin' ),
+			'use_featured_image'       => \esc_html__( 'Use featured image', 'wp_react_plugin' ),
+			'menu_name'                => \esc_html__( 'my-app', 'wp_react_plugin' ),
+			'filter_items_list'        => \esc_html__( 'Filter my-app list', 'wp_react_plugin' ),
+			'filter_by_date'           => \esc_html__( 'Filter by date', 'wp_react_plugin' ),
+			'items_list_navigation'    => \esc_html__( 'my-app list navigation', 'wp_react_plugin' ),
+			'items_list'               => \esc_html__( 'my-app list', 'wp_react_plugin' ),
+			'item_published'           => \esc_html__( 'my-app published', 'wp_react_plugin' ),
+			'item_published_privately' => \esc_html__( 'my-app published privately', 'wp_react_plugin' ),
+			'item_reverted_to_draft'   => \esc_html__( 'my-app reverted to draft', 'wp_react_plugin' ),
+			'item_scheduled'           => \esc_html__( 'my-app scheduled', 'wp_react_plugin' ),
+			'item_updated'             => \esc_html__( 'my-app updated', 'wp_react_plugin' ),
 		);
-		$args = array(
-			'label'                 => \esc_html__( $label, $text_domain ),
+		$args   = array(
+			'label'                 => \esc_html__( 'my-app', 'wp_react_plugin' ),
 			'labels'                => $labels,
 			'description'           => '',
 			'public'                => true,
@@ -112,14 +132,17 @@ class CPT {
 			),
 		);
 
-		\register_post_type( $kebab, $args );
+		\register_post_type( 'my-app', $args );
 	}
 
+	/**
+	 * Register meta fields for post type to show in rest api
+	 */
 	public function add_post_meta(): void {
 		foreach ( $this->post_metas as $meta_key ) {
 			\register_meta(
 				'post',
-				Utils::SNAKE . '_' . $meta_key,
+				Plugin::SNAKE . '_' . $meta_key,
 				array(
 					'type'         => 'string',
 					'show_in_rest' => true,
@@ -140,12 +163,14 @@ class CPT {
 
 	/**
 	 * Adds the meta box.
+	 *
+	 * @param string $post_type Post type.
 	 */
 	public function add_metabox( string $post_type ): void {
-		if ( in_array( $post_type, array( Utils::KEBAB ) ) ) {
+		if ( in_array( $post_type, array( Plugin::KEBAB ) ) ) {
 			\add_meta_box(
-				Utils::KEBAB . '-metabox',
-				__( 'My App', Utils::TEXT_DOMAIN ),
+				Plugin::KEBAB . '-metabox',
+				__( 'My App', 'wp_react_plugin' ),
 				array( $this, 'render_meta_box' ),
 				$post_type,
 				'advanced',
@@ -154,23 +179,46 @@ class CPT {
 		}
 	}
 
+	/**
+	 * Render meta box.
+	 */
 	public function render_meta_box(): void {
+		// phpcs:ignore
 		echo '<div id="' . Utils::RENDER_ID_2 . '"></div>';
 	}
 
+
+	/**
+	 * Add query var
+	 *
+	 * @param array $vars Vars.
+	 * @return array
+	 */
 	public function add_query_var( $vars ) {
 		$vars[] = $this->rewrite['var'];
 		return $vars;
 	}
 
+	/**
+	 * Custom post type rewrite rules
+	 *
+	 * @param array $rules Rules.
+	 * @return array
+	 */
 	public function custom_post_type_rewrite_rules( $rules ) {
 		global $wp_rewrite;
 		$wp_rewrite->flush_rules();
 		return $rules;
 	}
 
-	public function save_metabox( $post_id, $post ) {
-
+	/**
+	 * Save the meta when the post is saved.
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 */
+	public function save_metabox( $post_id, $post ) { // phpcs:ignore
+		// phpcs:disable
 		/*
 		* We need to verify this came from the our screen and with proper authorization,
 		* because save_post can be triggered at other times.
@@ -194,7 +242,7 @@ class CPT {
 		$post_type = \sanitize_text_field( $_POST['post_type'] ?? '' );
 
 		// Check the user's permissions.
-		if ( $this->post_type !== $post_type ) {
+		if ( 'my-app' !== $post_type ) {
 			return $post_id;
 		}
 
@@ -205,17 +253,20 @@ class CPT {
 		/* OK, it's safe for us to save the data now. */
 
 		// Sanitize the user input.
-		$meta_data = \sanitize_text_field( $_POST[ Utils::SNAKE . '_meta' ] );
+		$meta_data = \sanitize_text_field( $_POST[ Plugin::SNAKE . '_meta' ] );
 
 		// Update the meta field.
-		\update_post_meta( $post_id, Utils::SNAKE . '_meta', $meta_data );
+		\update_post_meta( $post_id, Plugin::SNAKE . '_meta', $meta_data );
 	}
 
 	/**
-	 * 設定 {Utils::KEBAB}/{slug}/report 的 php template
+	 * Load custom template
+	 * Set {Plugin::KEBAB}/{slug}/report  php template
+	 *
+	 * @param string $template Template.
 	 */
 	public function load_custom_template( $template ) {
-		$repor_template_path = Utils::get_plugin_dir() . '/inc/templates/' . $this->rewrite['template_path'];
+		$repor_template_path = Plugin::$dir . '/inc/templates/' . $this->rewrite['template_path'];
 
 		if ( \get_query_var( $this->rewrite['var'] ) ) {
 			if ( file_exists( $repor_template_path ) ) {
@@ -227,13 +278,12 @@ class CPT {
 }
 
 new CPT(
-	Utils::KEBAB,
 	array(
 		'post_metas' => array( 'meta', 'settings' ),
 		'rewrite'    => array(
 			'template_path' => 'test.php',
 			'slug'          => 'test',
-			'var'           => Utils::SNAKE . '_test',
+			'var'           => Plugin::SNAKE . '_test',
 		),
 	)
 );

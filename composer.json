@@ -27,8 +27,9 @@
     "yahnis-elsts/plugin-update-checker": "^5.3"
   },
   "require-dev": {
-    "wp-coding-standards/wpcs": "^2.3",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2"
+		"squizlabs/php_codesniffer": "@stable",
+    "wp-coding-standards/wpcs": "@stable",
+    "dealerdirect/phpcodesniffer-composer-installer": "@stable"
   },
   "scripts": {
     "lint": "phpcs"
