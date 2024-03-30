@@ -11,10 +11,10 @@
 		"plugin:@wordpress/eslint-plugin/custom",
 		"plugin:@wordpress/eslint-plugin/esnext",
 		"plugin:@wordpress/eslint-plugin/jsdoc",
-		"plugin:prettier/recommended",
 		"plugin:react/recommended",
 		"eslint-config-prettier",
-		"prettier"
+		"prettier",
+		"plugin:prettier/recommended"
 	],
 	"parserOptions": {
 		"ecmaVersion": "latest",
@@ -27,6 +27,7 @@
 		"prettier"
 	],
 	"rules": {
+		"@typescript-eslint/no-explicit-any": "warn",
 		"@wordpress/no-unused-vars-before-return": "off",
 		"semi": [
 			"error",

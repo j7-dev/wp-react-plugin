@@ -11,8 +11,8 @@
   "endOfLine": "auto",
   "multilineArraysWrapThreshold": 4,
   "plugins": [
-    "./node_modules/eslint-plugin-prettier",
-    "./node_modules/prettier-plugin-multiline-arrays"
+    "eslint-plugin-prettier",
+    "prettier-plugin-multiline-arrays"
   ],
   "overrides": [
     {

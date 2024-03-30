@@ -75,6 +75,7 @@ final class Bootstrap {
 					'APP1_SELECTOR' => '#' . Utils::APP1_SELECTOR,
 					'APP2_SELECTOR' => '#' . Utils::APP2_SELECTOR,
 					'API_TIMEOUT'   => Utils::API_TIMEOUT,
+					'nonce'         => \wp_create_nonce( Plugin::KEBAB ),
 				),
 			)
 		);

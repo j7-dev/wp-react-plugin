@@ -9,7 +9,9 @@ pnpm-lock.yaml
 lerna-debug.log*
 
 **/node_modules/**
-dist
+**/dist/**
+**/dist*/**
+**/vendor/**
 dist-ssr
 *.local
 

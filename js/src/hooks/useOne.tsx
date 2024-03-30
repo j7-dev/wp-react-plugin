@@ -1,9 +1,9 @@
 import { getResource } from '@/api'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, UndefinedInitialDataOptions } from '@tanstack/react-query'
 import { TPostArgs, TDataProvider } from '@/types'
-import { AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-export const useOne = (options: {
+export function useOne<Response = unknown, Config = unknown>(options: {
   resource: string
   dataProvider?: TDataProvider
   pathParams?: string[]
@@ -11,18 +11,8 @@ export const useOne = (options: {
     [key: string]: any
   }
   config?: AxiosRequestConfig<{ [key: string]: any }> | undefined
-  queryOptions?: {
-    staleTime?: number
-    cacheTime?: number
-    refetchOnWindowFocus?: boolean
-    refetchOnMount?: boolean
-    refetchOnReconnect?: boolean
-    refetchInterval?: number
-    retry?: boolean | number
-    retryDelay?: number
-    enabled?: boolean
-  }
-}) => {
+  queryOptions?: UndefinedInitialDataOptions<AxiosResponse<Response, Config>>
+}) {
   const resource = options?.resource || 'post'
   const dataProvider = options?.dataProvider || 'wp-rest'
   const pathParams = options?.pathParams || []
@@ -42,9 +32,9 @@ export const useOne = (options: {
         pathParams,
       ]
 
-  const getResult = useQuery(
+  const getResult = useQuery<AxiosResponse<Response, Config>>({
     queryKey,
-    async () =>
+    queryFn: () =>
       getResource({
         resource,
         dataProvider,
@@ -52,8 +42,8 @@ export const useOne = (options: {
         args,
         config,
       }),
-    options.queryOptions || {},
-  )
+    ...options.queryOptions,
+  })
 
   return getResult
 }
