@@ -1,4 +1,4 @@
-import { TImage } from '@/types'
+import { TImage } from '@/types/wpRestApi'
 
 export type TProductBase = {
   id: number
