@@ -4,20 +4,11 @@ import alias from '@rollup/plugin-alias'
 import path from 'path'
 import liveReload from 'vite-plugin-live-reload'
 import { v4wp } from '@kucrut/vite-for-wp'
-import jotaiDebugLabel from 'jotai/babel/plugin-debug-label'
-import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh'
 
 export default {
   plugins: [
     alias(),
-    react({
-      babel: {
-        plugins: [
-          jotaiDebugLabel,
-          jotaiReactRefresh,
-        ],
-      },
-    }),
+    react(),
     tsconfigPaths(),
     liveReload(__dirname + '/**/*.php'),
     v4wp({
