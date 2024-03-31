@@ -97,11 +97,6 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 			require_once __DIR__ . '/inc/utils/index.php';
 			require_once __DIR__ . '/inc/class/class-bootstrap.php';
 
-			self::$dir     = \untrailingslashit( \wp_normalize_path( \plugin_dir_path( __FILE__ ) ) );
-			self::$url     = \untrailingslashit( \plugin_dir_url( __FILE__ ) );
-			$plugin_data   = \get_plugin_data( __FILE__ );
-			self::$version = $plugin_data['Version'];
-
 			\register_activation_hook( __FILE__, array( $this, 'activate' ) );
 			\register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 			\add_action( 'tgmpa_register', array( $this, 'register_required_plugins' ) );
@@ -121,6 +116,11 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 			$is_tgmpa_complete = $instance->is_tgmpa_complete();
 
 			if ( $is_tgmpa_complete ) {
+				self::$dir     = \untrailingslashit( \wp_normalize_path( \plugin_dir_path( __FILE__ ) ) );
+				self::$url     = \untrailingslashit( \plugin_dir_url( __FILE__ ) );
+				$plugin_data   = \get_plugin_data( __FILE__ );
+				self::$version = $plugin_data['Version'];
+
 				new Bootstrap();
 			}
 		}
@@ -155,7 +155,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 			 */
 			$update_checker->setBranch( 'master' );
 			// if your repo is private, you need to set authentication
-			// $updateChecker->setAuthentication(self::$github_pat);
+			// $update_checker->setAuthentication(self::$github_pat);
 			$update_checker->getVcsApi()->enableReleaseAssets();
 		}
 
