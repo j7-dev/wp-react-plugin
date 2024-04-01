@@ -1,6 +1,7 @@
 const path = require('path')
 
 const asset = path.resolve(__dirname, './release/wp-react-plugin.zip')
+console.log('⭐  asset:', asset)
 
 module.exports = {
   git: {
