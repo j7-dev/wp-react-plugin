@@ -46,7 +46,16 @@ module.exports = {
   },
   plugins: {
     '@release-it/bumper': {
-      out: ['composer.json', 'plugin.php'],
+      out: [
+        {
+          file: 'plugin.php',
+          type: 'text/php',
+        },
+        {
+          file: 'composer.json',
+          type: 'text/json',
+        },
+      ],
     },
   },
 }
