@@ -1,7 +1,7 @@
 {
   "name": "wp-react-plugin",
   "private": true,
-  "version": "1.9.10",
+  "version": "1.10.0",
   "type": "module",
   "scripts": {
     "bootstrap": "npm install && composer install --no-interaction",
@@ -13,7 +13,7 @@
     "lint": "eslint . --ext .ts,.tsx && phpcbf",
     "lint:fix": "eslint . --ext .ts,.tsx --fix && phpcbf",
     "push": "npm version patch && git push",
-    "release": "env-cmd -f ./.env release-it minor --ci"
+    "release": "env-cmd -f ./.env release-it minor --ci --verbose"
   },
   "pre-commit": [
     "lint:fix"
