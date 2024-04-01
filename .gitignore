@@ -15,7 +15,7 @@ lerna-debug.log*
 dist-ssr
 *.local
 release/*
-!release/mv.cjs
+!release/*.cjs
 .env
 
 # Editor directories and files
