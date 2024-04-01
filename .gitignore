@@ -16,6 +16,7 @@ dist-ssr
 *.local
 release/*
 !release/mv.cjs
+.env
 
 # Editor directories and files
 .vscode/*

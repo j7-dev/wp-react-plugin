@@ -12,7 +12,8 @@
     "format": "prettier-eslint --write \"js/src/**/*.tsx\"",
     "lint": "eslint . --ext .ts,.tsx && phpcbf",
     "lint:fix": "eslint . --ext .ts,.tsx --fix && phpcbf",
-    "push": "npm version patch && git push"
+    "push": "npm version patch && git push",
+    "release": "dotenv release-it --verbose --"
   },
   "pre-commit": [
     "lint:fix"
@@ -36,6 +37,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@wordpress/eslint-plugin": "^17.11.0",
     "autoprefixer": "^10.4.19",
+    "dotenv-cli": "^7.4.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -53,6 +55,7 @@
     "prettier-eslint": "^16.3.0",
     "prettier-eslint-cli": "^8.0.1",
     "prettier-plugin-multiline-arrays": "^3.0.4",
+    "release-it": "^17.1.1",
     "sass": "^1.72.0",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.3",

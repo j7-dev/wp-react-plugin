@@ -24,6 +24,6 @@ module.exports = {
     releaseName: 'test v${version}',
     assets: [asset],
     web: false,
-    tokenRef: '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',
+    tokenRef: 'GITHUB_TOKEN',
   },
 }
