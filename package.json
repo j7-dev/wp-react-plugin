@@ -7,7 +7,7 @@
     "bootstrap": "npm install && composer install --no-interaction",
     "dev": "vite",
     "prebuild": "echo 'todo: remove console'",
-    "build": "vite build && mv js/dist/.vite/manifest.json js/dist/",
+    "build": "vite build && node release/mv.cjs",
     "preview": "vite preview",
     "format": "prettier-eslint --write \"js/src/**/*.tsx\"",
     "lint": "eslint . --ext .ts,.tsx && phpcbf",

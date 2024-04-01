@@ -14,7 +14,8 @@ lerna-debug.log*
 **/vendor/**
 dist-ssr
 *.local
-release
+release/*
+!release/mv.cjs
 
 # Editor directories and files
 .vscode/*
