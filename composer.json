@@ -1,5 +1,6 @@
 {
   "name": "j7-dev/wp-react-plugin",
+  "version": "0.1.0",
   "description": "This is a boilerplate for creating a WordPress plugin with React, Tailwind, Ant Design, TypeScript, Zod, MSW, React Router v6, React Query v4, SCSS and Vite.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-only",
@@ -27,7 +28,7 @@
     "yahnis-elsts/plugin-update-checker": "^5.3"
   },
   "require-dev": {
-		"squizlabs/php_codesniffer": "@stable",
+    "squizlabs/php_codesniffer": "@stable",
     "wp-coding-standards/wpcs": "@stable",
     "dealerdirect/phpcodesniffer-composer-installer": "@stable"
   },

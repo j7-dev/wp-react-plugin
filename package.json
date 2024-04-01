@@ -7,7 +7,7 @@
     "bootstrap": "npm install && composer install --no-interaction",
     "dev": "vite",
     "prebuild": "echo 'todo: remove console'",
-    "build": "vite build && node release/mv.cjs",
+    "build": "vite build && node release/mv-manifest.cjs",
     "preview": "vite preview",
     "format": "prettier-eslint --write \"js/src/**/*.tsx\"",
     "lint": "eslint . --ext .ts,.tsx && phpcbf",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@kucrut/vite-for-wp": "^0.8.0",
+    "@release-it/bumper": "^6.0.1",
     "@tanstack/react-query-devtools": "^5.28.10",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.12.2",

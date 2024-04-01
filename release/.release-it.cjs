@@ -44,4 +44,9 @@ module.exports = {
     assets: ['./release/wp-react-plugin.zip'], // relative path
     web: false,
   },
+  plugins: {
+    '@release-it/bumper': {
+      out: ['composer.json', 'plugin.php'],
+    },
+  },
 }
