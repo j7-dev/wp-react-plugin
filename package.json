@@ -1,7 +1,7 @@
 {
   "name": "wp-react-plugin",
   "private": true,
-  "version": "1.20.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "bootstrap": "npm install && composer install --no-interaction",
