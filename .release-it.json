@@ -1,9 +1,11 @@
 {
   "git": {
+    "commit": true,
     "commitMessage": "chore: release v${version}",
     "tag": true,
     "tagName": "v${version}",
-    "commitArgs": ["-n"]
+    "commitArgs": ["-n"],
+    "push": true
   },
   "hooks": {
     "before:init": ["yarn build"],
@@ -14,7 +16,8 @@
   },
   "github": {
     "release": true,
-    "releaseName": "Release v${version}",
-    "assets": ["./release/wp-react-plugin.zip"]
+    "releaseName": "v${version}",
+    "assets": ["./release/wp-react-plugin.zip"],
+    "web": false
   }
 }
