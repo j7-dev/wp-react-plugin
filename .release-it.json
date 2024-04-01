@@ -17,7 +17,9 @@
   "github": {
     "release": true,
     "releaseName": "v${version}",
-    "assets": ["./release/wp-react-plugin.zip"],
+    "assets": [
+      "C:\\laragon\\www\\ltest\\wp-content\\plugins\\wp-react-plugin\\release\\wp-react-plugin.zip"
+    ],
     "web": false
   }
 }
