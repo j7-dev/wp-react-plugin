@@ -1,7 +1,7 @@
 {
   "name": "wp-react-plugin",
   "private": true,
-  "version": "1.19.1",
+  "version": "1.19.2",
   "type": "module",
   "scripts": {
     "bootstrap": "npm install && composer install --no-interaction",
@@ -18,7 +18,8 @@
     "release:minor": "env-cmd -f ./.env release-it minor --ci --verbose --config ./release/.release-it.cjs",
     "release:major": "env-cmd -f ./.env release-it major --ci --verbose --config ./release/.release-it.cjs",
     "zip": "env-cmd -f ./.env node ./release/zip.cjs",
-    "create:release": "env-cmd -f ./.env node ./release/create-release.cjs"
+    "create:release": "env-cmd -f ./.env node ./release/create-release.cjs",
+    "sync:version": "wp-update-project-version -s package.json -p plugin.php"
   },
   "pre-commit": [
     "lint:fix"
@@ -32,7 +33,7 @@
   },
   "devDependencies": {
     "@kucrut/vite-for-wp": "^0.8.0",
-    "@release-it/bumper": "^6.0.1",
+    "@soderlind/wp-project-version-sync": "^2.0.2",
     "@tanstack/react-query-devtools": "^5.28.10",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.12.2",

@@ -22,14 +22,14 @@ module.exports = {
     push: true,
   },
   hooks: {
-    'before:init': [
-      'yarn build',
+    // 'before:init': [], // run before initialization
+    // 'after:[my-plugin]:bump': './bin/my-script.sh', // run after bumping version of my-plugin
+    'after:bump': [
+      'yarn build && yarn sync:version',
       'yarn create:release',
       `cd release/${pluginName} && composer install --no-dev && cd ../..`,
       'yarn zip',
-    ], // run before initialization
-    // 'after:[my-plugin]:bump': './bin/my-script.sh', // run after bumping version of my-plugin
-    // 'after:bump': ['echo finish'], // run after bumping version
+    ], // run after bumping version
     // 'after:git:release': 'echo After git push, before github release', // run after git push, before github release
     'after:release': [
       'git pull',
@@ -43,14 +43,5 @@ module.exports = {
     releaseName: 'v${version}',
     assets: ['./release/wp-react-plugin.zip'], // relative path
     web: false,
-  },
-  plugins: {
-    '@release-it/bumper': {
-      in: {
-        file: 'plugin.php',
-        type: 'text/php',
-      },
-      out: ['composer.json', 'package.json'],
-    },
   },
 }
