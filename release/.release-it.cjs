@@ -10,6 +10,7 @@
  * documentation
  * @see https://github.com/release-it/release-it/blob/main/docs/configuration.md
  */
+const pluginName = process?.env?.PLUGIN_NAME || 'wp-react-plugin'
 
 module.exports = {
   git: {
@@ -24,7 +25,7 @@ module.exports = {
     'before:init': [
       'yarn build',
       'yarn create:release',
-      'composer install --no-dev',
+      `cd release/${pluginName} && composer install --no-dev && cd ../..`,
       'yarn zip',
     ], // run before initialization
     // 'after:[my-plugin]:bump': './bin/my-script.sh', // run after bumping version of my-plugin
@@ -32,7 +33,6 @@ module.exports = {
     // 'after:git:release': 'echo After git push, before github release', // run after git push, before github release
     'after:release': [
       'git pull',
-      'echo Successfully released ${name} v${version} to ${repo.repository}.',
     ], // run after release
   },
   npm: {

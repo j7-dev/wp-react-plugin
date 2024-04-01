@@ -1,7 +1,7 @@
 {
   "name": "wp-react-plugin",
   "private": true,
-  "version": "1.15.0",
+  "version": "1.16.0",
   "type": "module",
   "scripts": {
     "bootstrap": "npm install && composer install --no-interaction",
@@ -13,7 +13,10 @@
     "lint": "eslint . --ext .ts,.tsx && phpcbf",
     "lint:fix": "eslint . --ext .ts,.tsx --fix && phpcbf",
     "push": "npm version patch && git push",
-    "release": "env-cmd -f ./.env release-it minor --ci --verbose --config ./release/.release-it.cjs",
+    "release": "env-cmd -f ./.env release-it patch --ci --verbose --config ./release/.release-it.cjs",
+    "release:patch": "env-cmd -f ./.env release-it patch --ci --verbose --config ./release/.release-it.cjs",
+    "release:minor": "env-cmd -f ./.env release-it minor --ci --verbose --config ./release/.release-it.cjs",
+    "release:major": "env-cmd -f ./.env release-it major --ci --verbose --config ./release/.release-it.cjs",
     "zip": "env-cmd -f ./.env node ./release/zip.cjs",
     "create:release": "env-cmd -f ./.env node ./release/create-release.cjs"
   },

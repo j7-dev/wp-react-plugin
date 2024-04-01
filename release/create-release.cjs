@@ -91,6 +91,7 @@ const includes = [
   'composer.lock',
   'index.php',
   'plugin.php',
+  'README.md',
 ]
 
 // delete release directory & zip first
