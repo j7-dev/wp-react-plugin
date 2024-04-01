@@ -13,7 +13,7 @@
     "lint": "eslint . --ext .ts,.tsx && phpcbf",
     "lint:fix": "eslint . --ext .ts,.tsx --fix && phpcbf",
     "push": "npm version patch && git push",
-    "release": "dotenv release-it --verbose --"
+    "release": "env-cmd -f ./.env release-it patch --ci"
   },
   "pre-commit": [
     "lint:fix"
@@ -37,7 +37,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@wordpress/eslint-plugin": "^17.11.0",
     "autoprefixer": "^10.4.19",
-    "dotenv-cli": "^7.4.1",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
