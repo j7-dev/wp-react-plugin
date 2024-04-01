@@ -20,7 +20,9 @@ const archive = archiver('zip', {
 })
 
 output.on('close', function () {
-  console.log(`壓縮文件的總大小: ${archive.pointer() / 1024 / 1024} MB`)
+  console.log(
+    `壓縮文件的總大小: ${Math.round((archive.pointer() * 100) / 1024 / 1024) / 100} MB`,
+  )
 })
 
 // 監聽錯誤事件
