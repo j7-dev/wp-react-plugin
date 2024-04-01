@@ -1,17 +1,20 @@
 {
   "git": {
     "commitMessage": "chore: release v${version}",
-    "tagName": "v${version}"
+    "tag": true,
+    "tagName": "v${version}",
+    "commitArgs": ["-n"]
   },
   "hooks": {
     "before:init": ["yarn build"],
-    "after:bump": ["echo finish"]
+    "after:bump": ["echo ✅ finish"]
   },
   "npm": {
     "publish": false
   },
   "github": {
     "release": true,
+    "releaseName": "Release v${version}",
     "assets": ["./release/wp-react-plugin.zip"]
   }
 }
