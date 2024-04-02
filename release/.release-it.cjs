@@ -41,7 +41,17 @@ module.exports = {
   github: {
     release: true,
     releaseName: 'v${version}',
-    assets: [`./release/${pluginName }.zip`], // relative path
+    assets: [`./release/${pluginName}.zip`], // relative path
     web: false,
   },
+  includes: [
+    'inc',
+    'js/dist',
+    'required_plugins',
+    'composer.json',
+    'composer.lock',
+    'index.php',
+    'plugin.php',
+    'README.md',
+  ],
 }

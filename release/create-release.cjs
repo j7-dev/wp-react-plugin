@@ -12,6 +12,12 @@
 const fs = require('fs')
 const path = require('path')
 const { deleteRelease } = require('./delete-release.cjs')
+const { includes } = require('./.release-it.cjs')
+const pluginName = process?.env?.PLUGIN_NAME || 'wp-react-plugin'
+const srcDir = path.resolve(__dirname, '../')
+const destDir = path.resolve(__dirname, `./${pluginName}`)
+
+console.log('⭐  includes:', includes)
 
 /**
  * Recursively copy directories and files
@@ -77,22 +83,6 @@ function recursiveCopy(srcDir, destDir, includes) {
     })
   }
 }
-
-// 使用範例
-
-const pluginName = process?.env?.PLUGIN_NAME || 'wp-react-plugin'
-const srcDir = path.resolve(__dirname, '../')
-const destDir = path.resolve(__dirname, `./${pluginName}`)
-const includes = [
-  'inc',
-  'js/dist',
-  'required_plugins',
-  'composer.json',
-  'composer.lock',
-  'index.php',
-  'plugin.php',
-  'README.md',
-]
 
 // delete release directory & zip first
 
