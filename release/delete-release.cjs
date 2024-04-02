@@ -3,11 +3,11 @@
  * Clear files in the release directory
  */
 
-const pluginName = process?.env?.PLUGIN_NAME || 'wp-react-plugin'
+const { releasedPluginName } = require('./.release-it.cjs')
 const fs = require('fs')
 const path = require('path')
-const entryDir = path.resolve(__dirname, `./${pluginName}`)
-const outputZip = path.resolve(__dirname, `./${pluginName}.zip`)
+const entryDir = path.resolve(__dirname, `./${releasedPluginName}`)
+const outputZip = path.resolve(__dirname, `./${releasedPluginName}.zip`)
 
 /**
  *  Delete directory recursively

@@ -79,11 +79,8 @@ composer install
 
 將 `GITHUB_TOKEN` 填入您的 [`github personal token`](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
 
-將 `PLUGIN_NAME` 填入您的套件目錄名稱，如果填寫錯誤，將無法正確完成打包，🚩寫名稱就好，不需要寫路徑
-
 ```bash
 GITHUB_TOKEN="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-PLUGIN_NAME="wp-react-plugin"
 ```
 
 🚩🚩🚩 因為安全因素，請勿將 GITHUB_TOKEN, 即此 `.env` 納入 github 版本控制中 (預設已在 `.gitignore` 排除)，否則 github 將會 Block 你的 push
@@ -96,13 +93,17 @@ PLUGIN_NAME="wp-react-plugin"
 
 所有預設 config 可以參考這 [default config](https://github.com/release-it/release-it/blob/main/config/release-it.json)
 
-接著到設定您要打包的目錄，只有被寫入在 `includes` array 內的檔案會被複製 (會遞規複製裡面的檔案&目錄)，例如
+---
+
+我們在 `.release-it.cjs` 有兩個自訂的配置項: `allowedItems` 與 `releasedPluginName`
+
+`allowedItems`: 只有被寫入在 `allowedItems` array 內的檔案會被複製 (會遞規複製裡面的檔案&目錄)，例如
 
 ```
 // .release-it.cjs
 {
 	...
-	includes: [
+	allowedItems: [
 		'inc',
 		'js/dist', // 只複製 js/dist，而不會複製 js/src
 		'required_plugins',
@@ -114,6 +115,9 @@ PLUGIN_NAME="wp-react-plugin"
 	]
 }
 ```
+
+`releasedPluginName`: 最終打包的 zip 檔案名稱，例如: 您也可以叫做 my-plugin-release
+
 
 ### 3. 發布
 

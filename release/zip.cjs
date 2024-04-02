@@ -5,11 +5,11 @@
  * @see https://www.npmjs.com/package/archiver
  */
 
-const pluginName = process?.env?.PLUGIN_NAME || 'wp-react-plugin'
+const { releasedPluginName } = require('./.release-it.cjs')
 const fs = require('fs')
 const path = require('path')
-const entryDir = path.resolve(__dirname, `./${pluginName}`)
-const outputZip = path.resolve(__dirname, `./${pluginName}.zip`)
+const entryDir = path.resolve(__dirname, `./${releasedPluginName}`)
+const outputZip = path.resolve(__dirname, `./${releasedPluginName}.zip`)
 const archiver = require('archiver')
 
 // 創建一個檔案來存儲zip檔案

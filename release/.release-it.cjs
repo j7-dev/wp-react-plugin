@@ -10,9 +10,17 @@
  * documentation
  * @see https://github.com/release-it/release-it/blob/main/docs/configuration.md
  */
-const pluginName = process?.env?.PLUGIN_NAME || 'wp-react-plugin'
+
+const path = require('path')
+
+// get parent directory path
+const parentDirectoryPath = path.resolve(__dirname, `../`)
+
+// get parent directory name
+const pluginName = path.basename(parentDirectoryPath)
 
 module.exports = {
+  releasedPluginName: 'wp-react-plugin',
   git: {
     commit: true,
     commitMessage: 'chore: release v${version}',
@@ -44,7 +52,7 @@ module.exports = {
     assets: [`./release/${pluginName}.zip`], // relative path
     web: false,
   },
-  includes: [
+  allowedItems: [
     'inc',
     'js/dist',
     'required_plugins',
