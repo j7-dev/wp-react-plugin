@@ -98,19 +98,21 @@ PLUGIN_NAME="wp-react-plugin"
 
 接著到設定您要打包的目錄，只有被寫入在 `includes` array 內的檔案會被複製 (會遞規複製裡面的檔案&目錄)，例如
 
-```json
+```
 // .release-it.cjs
-
-includes: [
-  'inc',
-  'js/dist', // 只複製 js/dist，而不會複製 js/src
-  'required_plugins',
-  'composer.json', // 需要這個是因為，打包過程中會執行 composer install --no-dev
-  'composer.lock', // 需要這個是因為，打包過程中會執行 composer install --no-dev
-  'index.php',
-  'plugin.php',
-  'README.md'
-]
+{
+	...
+	includes: [
+		'inc',
+		'js/dist', // 只複製 js/dist，而不會複製 js/src
+		'required_plugins',
+		'composer.json', // 需要這個是因為，打包過程中會執行 composer install --no-dev
+		'composer.lock', // 需要這個是因為，打包過程中會執行 composer install --no-dev
+		'index.php',
+		'plugin.php',
+		'README.md'
+	]
+}
 ```
 
 ### 3. 發布
