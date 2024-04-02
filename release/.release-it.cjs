@@ -11,16 +11,10 @@
  * @see https://github.com/release-it/release-it/blob/main/docs/configuration.md
  */
 
-const path = require('path')
-
-// get parent directory path
-const parentDirectoryPath = path.resolve(__dirname, `../`)
-
-// get parent directory name
-const pluginName = path.basename(parentDirectoryPath)
+const releasedPluginName = 'wp-react-plugin'
 
 module.exports = {
-  releasedPluginName: 'wp-react-plugin',
+  releasedPluginName,
   git: {
     commit: true,
     commitMessage: 'chore: release v${version}',
@@ -35,7 +29,7 @@ module.exports = {
     'after:bump': [
       'yarn build && echo ✅ build success && yarn sync:version && echo ✅ sync version success',
       'yarn create:release && echo ✅ create release files success',
-      `cd release/${pluginName} && composer install --no-dev && cd ../.. && echo ✅ composer install success`,
+      `cd release/${releasedPluginName} && composer install --no-dev && cd ../.. && echo ✅ composer install success`,
       'yarn zip && echo ✅ create zip success',
     ], // run after bumping version
     // 'after:git:release': 'echo After git push, before github release', // run after git push, before github release
@@ -49,7 +43,7 @@ module.exports = {
   github: {
     release: true,
     releaseName: 'v${version}',
-    assets: [`./release/${pluginName}.zip`], // relative path
+    assets: [`./release/${releasedPluginName}.zip`], // relative path
     web: false,
   },
   allowedItems: [
