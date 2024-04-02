@@ -8,7 +8,6 @@ declare (strict_types = 1);
 namespace J7\WpReactPlugin;
 
 use Kucrut\Vite;
-use TGM_Plugin_Activation;
 
 /**
  * Class Bootstrap

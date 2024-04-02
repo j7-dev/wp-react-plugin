@@ -114,9 +114,6 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		public function check_required_plugins() {
 			$instance          = TGM_Plugin_Activation::get_instance();
 			$is_tgmpa_complete = $instance->is_tgmpa_complete();
-			ob_start();
-			print_r( $is_tgmpa_complete ? 'TGMPA is complete' : 'TGMPA is not complete' );
-			\J7\WpToolkit\Utils::debug_log( '' . ob_get_clean() );
 
 			if ( $is_tgmpa_complete ) {
 				self::$dir     = \untrailingslashit( \wp_normalize_path( \plugin_dir_path( __FILE__ ) ) );
