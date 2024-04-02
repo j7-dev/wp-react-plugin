@@ -13,9 +13,9 @@
 > 例如 vendor, node_modules, eslint, config 都不會進去
 > 6. 排除 composer 開發依賴 composer install --no-dev
 > 7. 整個 release外掛檔案打包成 zip，上傳 github release
-> 
+>
 > 然後用戶就會在 WordPress 後台收到外掛更新通知了
-> 
+>
 > 以上動作就濃縮成一個指令 yarn release
 
 
@@ -77,16 +77,16 @@ composer install
 
 然後修改內容
 
-將 `GITHUB_TOKEN` 填入您的 [`github personal token`](github personal token)
+將 `GITHUB_TOKEN` 填入您的 [`github personal token`](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
 
 將 `PLUGIN_NAME` 填入您的套件目錄名稱，如果填寫錯誤，將無法正確完成打包，🚩寫名稱就好，不需要寫路徑
 
 ```bash
-GITHUB_TOKEN="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"  
+GITHUB_TOKEN="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 PLUGIN_NAME="wp-react-plugin"
 ```
 
-🚩🚩🚩 因為安全因素，請勿將 GITHUB_TOKEN, 即此 `.env` 納入 github 版本控制中 (預設已在 .gitignore 排除)，否則 github 將會 Block 你的 push
+🚩🚩🚩 因為安全因素，請勿將 GITHUB_TOKEN, 即此 `.env` 納入 github 版本控制中 (預設已在 `.gitignore` 排除)，否則 github 將會 Block 你的 push
 
 ---
 
@@ -96,22 +96,20 @@ PLUGIN_NAME="wp-react-plugin"
 
 所有預設 config 可以參考這 [default config](https://github.com/release-it/release-it/blob/main/config/release-it.json)
 
----
+接著到設定您要打包的目錄，只有被寫入在 `includes` array 內的檔案會被複製 (會遞規複製裡面的檔案&目錄)，例如
 
-接著到 [`create-release.cjs`](https://github.com/j7-dev/wp-react-plugin/blob/master/release/create-release.cjs)
+```json
+// .release-it.cjs
 
-設定您要打包的目錄，只有被寫入在 `includes` array 內的檔案會被複製 (會遞規複製裡面的檔案&目錄)，例如
-
-```javascript
-const includes = [
+includes: [
   'inc',
-  'js/dist', // 只複製 js/dist，而不會複製 js/src 
+  'js/dist', // 只複製 js/dist，而不會複製 js/src
   'required_plugins',
   'composer.json', // 需要這個是因為，打包過程中會執行 composer install --no-dev
   'composer.lock', // 需要這個是因為，打包過程中會執行 composer install --no-dev
   'index.php',
   'plugin.php',
-  'README.md',
+  'README.md'
 ]
 ```
 

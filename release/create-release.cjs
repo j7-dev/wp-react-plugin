@@ -14,10 +14,8 @@ const path = require('path')
 const { deleteRelease } = require('./delete-release.cjs')
 const { includes } = require('./.release-it.cjs')
 const pluginName = process?.env?.PLUGIN_NAME || 'wp-react-plugin'
-const srcDir = path.resolve(__dirname, '../')
-const destDir = path.resolve(__dirname, `./${pluginName}`)
-
-console.log('⭐  includes:', includes)
+const sourceDir = path.resolve(__dirname, '../')
+const destinationDir = path.resolve(__dirname, `./${pluginName}`)
 
 /**
  * Recursively copy directories and files
@@ -90,4 +88,4 @@ deleteRelease()
 
 // then create release directory
 
-recursiveCopy(srcDir, destDir, includes)
+recursiveCopy(sourceDir, destinationDir, includes)
