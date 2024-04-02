@@ -24,7 +24,8 @@
     "kucrut/vite-for-wp": "^0.8.0",
     "usefulteam/jwt-auth": "^2.1",
     "lodash-php/lodash-php": "^0.0.7",
-    "yahnis-elsts/plugin-update-checker": "^5.3"
+    "yahnis-elsts/plugin-update-checker": "^5.3",
+    "tgmpa/tgm-plugin-activation": "^2.6"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "@stable",

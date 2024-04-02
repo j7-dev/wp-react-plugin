@@ -20,6 +20,7 @@ declare (strict_types = 1);
 namespace J7\WpReactPlugin;
 
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+use TGM_Plugin_Activation;
 
 if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 
@@ -92,7 +93,6 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		 * Constructor
 		 */
 		public function __construct() {
-			require_once __DIR__ . '/required_plugins/index.php';
 			require_once __DIR__ . '/vendor/autoload.php';
 			require_once __DIR__ . '/inc/utils/index.php';
 			require_once __DIR__ . '/inc/class/class-bootstrap.php';
@@ -112,7 +112,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		 * @return void
 		 */
 		public function check_required_plugins() {
-			$instance          = call_user_func( array( __NAMESPACE__ . '\TGM_Plugin_Activation', 'get_instance' ) );
+			$instance          = TGM_Plugin_Activation::get_instance();
 			$is_tgmpa_complete = $instance->is_tgmpa_complete();
 
 			if ( $is_tgmpa_complete ) {
