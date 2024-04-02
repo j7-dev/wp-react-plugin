@@ -75,18 +75,18 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		 * @var array
 		 */
 		public $required_plugins = array(
-			// [
+			// array(
 			// 'name'     => 'WooCommerce',
 			// 'slug'     => 'woocommerce',
 			// 'required' => true,
-			// 'version'  => '7.6.1',
-			// ],
-			// [
+			// 'version'  => '7.6.0',
+			// ),
+			// array(
 			// 'name'     => 'WP Toolkit',
 			// 'slug'     => 'wp-toolkit',
 			// 'source'   => 'https://github.com/j7-dev/wp-toolkit/releases/latest/download/wp-toolkit.zip',
 			// 'required' => true,
-			// ],
+			// ),
 		);
 
 		/**
@@ -114,6 +114,9 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		public function check_required_plugins() {
 			$instance          = TGM_Plugin_Activation::get_instance();
 			$is_tgmpa_complete = $instance->is_tgmpa_complete();
+			ob_start();
+			print_r( $is_tgmpa_complete ? 'TGMPA is complete' : 'TGMPA is not complete' );
+			\J7\WpToolkit\Utils::debug_log( '' . ob_get_clean() );
 
 			if ( $is_tgmpa_complete ) {
 				self::$dir     = \untrailingslashit( \wp_normalize_path( \plugin_dir_path( __FILE__ ) ) );
@@ -251,7 +254,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 				),
 			);
 
-			call_user_func( __NAMESPACE__ . '\tgmpa', $this->required_plugins, $config );
+			\tgmpa($this->required_plugins, $config );
 		}
 
 		/**

@@ -8,6 +8,7 @@ declare (strict_types = 1);
 namespace J7\WpReactPlugin;
 
 use Kucrut\Vite;
+use TGM_Plugin_Activation;
 
 /**
  * Class Bootstrap
@@ -24,7 +25,6 @@ final class Bootstrap {
 
 		\add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_script' ), 99 );
 		\add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ), 99 );
-		\add_action( 'init', array( $this, 'remove_notices' ), 20 );
 	}
 
 	/**
@@ -88,14 +88,5 @@ final class Bootstrap {
 				'nonce' => \wp_create_nonce( 'wp_rest' ),
 			)
 		);
-	}
-
-	/**
-	 * Remove TGMPA notices
-	 *
-	 * @return void
-	 */
-	public function remove_notices(): void {
-		\remove_action( 'admin_notices', array( TGM_Plugin_Activation::$instance, 'notices' ) );
 	}
 }

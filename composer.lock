@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d10289a769a9b1f40a3e2a35b2942eaf",
+    "content-hash": "051cd5e898787872472a09bdb282f0e5",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -62,6 +62,56 @@
                 "source": "https://github.com/firebase/php-jwt/tree/v5.5.1"
             },
             "time": "2021-11-08T20:18:51+00:00"
+        },
+        {
+            "name": "j7-dev/tgm-plugin-activation-forked",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j7-dev/tgm-plugin-activation-forked.git",
+                "reference": "d6724f0a610da6f7d3aefd8971f516041d63bb77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j7-dev/tgm-plugin-activation-forked/zipball/d6724f0a610da6f7d3aefd8971f516041d63bb77",
+                "reference": "d6724f0a610da6f7d3aefd8971f516041d63bb77",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "class-tgm-plugin-activation.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "J7",
+                    "email": "j7.dev.gg@gmail.com",
+                    "homepage": "https://github.com/j7-dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is a library forked from tgmpa/tgm-plugin-activation and add some custom config and features",
+            "homepage": "http://tgmpluginactivation.com",
+            "keywords": [
+                "activation",
+                "library",
+                "plugins",
+                "theme",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/j7-dev/tgm-plugin-activation-forked/issues",
+                "source": "https://github.com/j7-dev/tgm-plugin-activation-forked"
+            },
+            "time": "2024-04-02T09:57:40+00:00"
         },
         {
             "name": "kucrut/vite-for-wp",
@@ -1174,65 +1224,6 @@
                 }
             ],
             "time": "2023-06-28T12:46:07+00:00"
-        },
-        {
-            "name": "tgmpa/tgm-plugin-activation",
-            "version": "2.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/TGMPA/TGM-Plugin-Activation.git",
-                "reference": "c626d0d91fc8ef24916e809c7b79eeafab1c1cac"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/TGMPA/TGM-Plugin-Activation/zipball/c626d0d91fc8ef24916e809c7b79eeafab1c1cac",
-                "reference": "c626d0d91fc8ef24916e809c7b79eeafab1c1cac",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "class-tgm-plugin-activation.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Thomas Griffin",
-                    "homepage": "http://thomasgriffinmedia.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Gary Jones",
-                    "homepage": "https://github.com/GaryJones",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Juliette Reinders Folmer",
-                    "homepage": "https://github.com/jrfnl",
-                    "role": "Developer"
-                }
-            ],
-            "description": "TGM Plugin Activation is a PHP library that allows you to easily require or recommend plugins for your WordPress themes (and plugins).",
-            "homepage": "http://tgmpluginactivation.com",
-            "keywords": [
-                "activation",
-                "library",
-                "plugins",
-                "theme",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/TGMPA/TGM-Plugin-Activation/issues",
-                "source": "https://github.com/TGMPA/TGM-Plugin-Activation"
-            },
-            "time": "2016-05-19T15:46:51+00:00"
         },
         {
             "name": "usefulteam/jwt-auth",
