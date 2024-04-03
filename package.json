@@ -4,7 +4,7 @@
   "version": "2.0.9",
   "type": "module",
   "scripts": {
-    "bootstrap": "npm install && composer install --no-interaction",
+    "bootstrap": "yarn install && composer install --no-interaction",
     "dev": "vite",
     "prebuild": "echo 'todo: remove console'",
     "build": "vite build && node release/mv-manifest.cjs",
@@ -12,7 +12,6 @@
     "format": "prettier-eslint --write \"js/src/**/*.tsx\"",
     "lint": "eslint . --ext .ts,.tsx && phpcbf",
     "lint:fix": "eslint . --ext .ts,.tsx --fix && phpcbf",
-    "push": "npm version patch && git push",
     "release": "env-cmd -f ./.env release-it patch --ci --verbose --config ./release/.release-it.cjs",
     "release:patch": "env-cmd -f ./.env release-it patch --ci --verbose --config ./release/.release-it.cjs",
     "release:minor": "env-cmd -f ./.env release-it minor --ci --verbose --config ./release/.release-it.cjs",
@@ -25,13 +24,13 @@
     "lint:fix"
   ],
   "dependencies": {
-    "@rollup/plugin-alias": "^5.1.0",
     "@tanstack/react-query": "^5.28.9",
     "axios": "^1.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^5.1.0",
     "@kucrut/vite-for-wp": "^0.8.0",
     "@soderlind/wp-project-version-sync": "^2.0.2",
     "@tanstack/react-query-devtools": "^5.28.10",
