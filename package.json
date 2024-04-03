@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.0",
+    "@ant-design/cssinjs": "^1.19.1",
     "@kucrut/vite-for-wp": "^0.8.0",
     "@soderlind/wp-project-version-sync": "^2.0.2",
     "@tanstack/react-query-devtools": "^5.28.10",

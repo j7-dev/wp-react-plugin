@@ -22,8 +22,31 @@ final class Bootstrap {
 		require_once __DIR__ . '/admin/index.php';
 		require_once __DIR__ . '/front-end/index.php';
 
-		\add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_script' ), 99 );
-		\add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ), 99 );
+		\add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_script' ), 99 );
+		\add_action( 'wp_enqueue_scripts', array( $this, 'frontend_enqueue_script' ), 99 );
+	}
+
+	/**
+	 * Admin Enqueue script
+	 * You can load the script on demand
+	 *
+	 * @param string $hook current page hook
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_script( $hook ): void {
+		$this->enqueue_script();
+	}
+
+
+	/**
+	 * Front-end Enqueue script
+	 * You can load the script on demand
+	 *
+	 * @return void
+	 */
+	public function frontend_enqueue_script(): void {
+		$this->enqueue_script();
 	}
 
 	/**
@@ -33,17 +56,6 @@ final class Bootstrap {
 	 * @return void
 	 */
 	public function enqueue_script(): void {
-		/*
-		* enquene script on demand
-		if (\is_admin()) {
-		// match wp-admin screen_id
-		$screen = \get_current_screen();
-		if (($screen->id !== Plugin::KEBAB)) return;
-		} else {
-		// match front-end post_type slug {Plugin::KEBAB}
-		if (strpos($_SERVER['REQUEST_URI'], Plugin::KEBAB) === false) return;
-		}
-		*/
 
 		Vite\enqueue_asset(
 			Plugin::$dir . '/js/dist',
