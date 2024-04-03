@@ -15,8 +15,8 @@ declare global {
       KEBAB: string
       SNAKE: string
       BASE_URL: string
-      RENDER_ID_1: string
-      RENDER_ID_2: string
+      APP1_SELECTOR: string
+      APP2_SELECTOR: string
       API_TIMEOUT: string
     }
   }

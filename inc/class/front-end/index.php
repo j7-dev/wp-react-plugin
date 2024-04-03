@@ -24,7 +24,7 @@ final class FrontEnd {
 	 */
 	public function render_app(): void {
 		// phpcs:ignore
-		echo '<div id="' . Utils::RENDER_ID_1 . '"></div>';
+		echo '<div id="' . Utils::APP1_SELECTOR . '"></div>';
 	}
 }
 

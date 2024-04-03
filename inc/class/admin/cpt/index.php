@@ -184,7 +184,7 @@ final class CPT {
 	 */
 	public function render_meta_box(): void {
 		// phpcs:ignore
-		echo '<div id="' . Utils::RENDER_ID_2 . '"></div>';
+		echo '<div id="' . Utils::APP2_SELECTOR . '"></div>';
 	}
 
 
