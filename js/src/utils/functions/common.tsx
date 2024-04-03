@@ -70,7 +70,7 @@ export const filterObjKeys = (
 export const isUsingBlockEditor =
   typeof window?.wp !== 'undefined' && typeof window?.wp?.blocks !== 'undefined'
 
-export const removeTrailingSlash = (str: string) => {
+export function removeTrailingSlash(str: string) {
   if (str.endsWith('/')) {
     // 如果字符串以斜杠结尾，使用 slice 方法去除最后一个字符
 
