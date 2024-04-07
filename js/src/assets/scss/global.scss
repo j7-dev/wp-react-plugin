@@ -10,15 +10,43 @@
 body {
 	margin: 0 !important;
 }
-input[class*="ant-select"] {
-	box-shadow: none !important;
-	border: none !important;
-	outline: none !important;
-}
 
-input.ant-input {
-	min-height: unset !important;
-	line-height: 1.5 !important;
+div[class^="ant-"] {
+	a {
+		&:focus {
+			box-shadow: none;
+		}
+	}
+
+	ins {
+		@apply text-red-500 ml-1 no-underline;
+	}
+	del {
+		@apply text-gray-400;
+	}
+	input[class*="ant-select"] {
+		box-shadow: none !important;
+		border: none !important;
+		outline: none !important;
+	}
+	span.from {
+		@apply hidden;
+	}
+
+	input[class*="ant-input"],
+	input.ant-select-selection-search-input {
+		min-height: unset;
+		line-height: 1.5;
+	}
+
+	.antd-form-sm {
+		div.ant-form-item {
+			@apply mb-2;
+		}
+		div.ant-form-item-label {
+			@apply pb-0 text-xs;
+		}
+	}
 }
 
 @media print {
