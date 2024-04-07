@@ -1,5 +1,5 @@
 import { useMany } from '@/hooks'
-import { renderHTML } from '@/utils'
+import { renderHTML } from 'antd-toolkit'
 import defaultImage from '@/assets/images/defaultImage.jpg'
 import { TPost, TImage } from '@/types/wpRestApi'
 
