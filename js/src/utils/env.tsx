@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-import { removeTrailingSlash } from '@/utils'
+import { removeTrailingSlash } from 'antd-toolkit'
 
 const APP_DOMAIN = 'my_app_data' as string
 export const snake = window?.[APP_DOMAIN]?.env?.SNAKE || 'my_app'
