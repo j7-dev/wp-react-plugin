@@ -14,7 +14,7 @@ const path = require('path')
 const { deleteRelease } = require('./delete-release.cjs')
 const { allowedItems, releasedPluginName } = require('./.release-it.cjs')
 const sourceDir = path.resolve(__dirname, '../')
-const destinationDir = path.resolve(__dirname, `./${releasedPluginName}`)
+const destinationDir = path.resolve(__dirname, `./${releasedPluginName}/${releasedPluginName}`)
 
 /**
  * Recursively copy directories and files
