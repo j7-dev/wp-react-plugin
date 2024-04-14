@@ -20,15 +20,16 @@ declare (strict_types = 1);
 namespace J7\WpReactPlugin;
 
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+use Micropackage\Singleton\Singleton;
 use TGM_Plugin_Activation;
 
 if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
 
 	/**
 	 * Class Plugin
 	 */
-	final class Plugin {
-
+	final class Plugin extends Singleton {
 		const APP_NAME    = 'My App';
 		const KEBAB       = 'my-app';
 		const SNAKE       = 'my_app';
@@ -63,13 +64,6 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		public static $version;
 
 		/**
-		 * Instance
-		 *
-		 * @var Plugin
-		 */
-		private static $instance;
-
-		/**
 		 * Required plugins
 		 *
 		 * @var array
@@ -93,8 +87,6 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		 * Constructor
 		 */
 		public function __construct() {
-			require_once __DIR__ . '/vendor/autoload.php';
-			require_once __DIR__ . '/inc/utils/index.php';
 			require_once __DIR__ . '/inc/class/class-bootstrap.php';
 
 			\register_activation_hook( __FILE__, array( $this, 'activate' ) );
@@ -121,20 +113,8 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 				$plugin_data   = \get_plugin_data( __FILE__ );
 				self::$version = $plugin_data['Version'];
 
-				new Bootstrap();
+				Bootstrap::get();
 			}
-		}
-
-		/**
-		 * Instance
-		 *
-		 * @return Plugin
-		 */
-		public static function instance() {
-			if ( empty( self::$instance ) ) {
-				self::$instance = new self();
-			}
-			return self::$instance;
 		}
 
 		/**
@@ -288,5 +268,5 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		}
 	}
 
-	Plugin::instance();
+	Plugin::get();
 }

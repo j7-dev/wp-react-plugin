@@ -27,7 +27,8 @@
     "usefulteam/jwt-auth": "^2.1",
     "lodash-php/lodash-php": "^0.0.7",
     "yahnis-elsts/plugin-update-checker": "^5.3",
-    "j7-dev/tgm-plugin-activation-forked": "^1.0"
+    "j7-dev/tgm-plugin-activation-forked": "^1.0",
+    "micropackage/singleton": "^1.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "@stable",

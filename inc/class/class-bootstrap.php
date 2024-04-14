@@ -7,18 +7,21 @@ declare (strict_types = 1);
 
 namespace J7\WpReactPlugin;
 
+use Micropackage\Singleton\Singleton;
+use J7\WpReactPlugin\Utils\Base;
 use Kucrut\Vite;
 
 /**
  * Class Bootstrap
  */
-final class Bootstrap {
+final class Bootstrap extends Singleton {
 
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
+		require_once __DIR__ . '/utils/index.php';
 		require_once __DIR__ . '/admin/index.php';
 		require_once __DIR__ . '/front-end/index.php';
 
@@ -82,10 +85,10 @@ final class Bootstrap {
 					'APP_NAME'      => Plugin::APP_NAME,
 					'KEBAB'         => Plugin::KEBAB,
 					'SNAKE'         => Plugin::SNAKE,
-					'BASE_URL'      => Utils::BASE_URL,
-					'APP1_SELECTOR' => '#' . Utils::APP1_SELECTOR,
-					'APP2_SELECTOR' => '#' . Utils::APP2_SELECTOR,
-					'API_TIMEOUT'   => Utils::API_TIMEOUT,
+					'BASE_URL'      => Base::BASE_URL,
+					'APP1_SELECTOR' => '#' . Base::APP1_SELECTOR,
+					'APP2_SELECTOR' => '#' . Base::APP2_SELECTOR,
+					'API_TIMEOUT'   => Base::API_TIMEOUT,
 					'nonce'         => \wp_create_nonce( Plugin::KEBAB ),
 				),
 			)

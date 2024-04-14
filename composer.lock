@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "051cd5e898787872472a09bdb282f0e5",
+    "content-hash": "4db8a6b833c523da2e0ef7da85ccf53f",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -206,6 +206,51 @@
                 "source": "https://github.com/lodash-php/lodash-php/tree/0.0.7"
             },
             "time": "2020-09-21T11:55:26+00:00"
+        },
+        {
+            "name": "micropackage/singleton",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/micropackage/singleton.git",
+                "reference": "594b5a857ee42149e6b01e8a353e5aaee52e726d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/micropackage/singleton/zipball/594b5a857ee42149e6b01e8a353e5aaee52e726d",
+                "reference": "594b5a857ee42149e6b01e8a353e5aaee52e726d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "phpcompatibility/php-compatibility": "^9.1",
+                "wp-coding-standards/wpcs": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Micropackage\\Singleton\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Mikita",
+                    "email": "jakub@bracketspace.com"
+                }
+            ],
+            "description": "Singleton implementation",
+            "support": {
+                "issues": "https://github.com/micropackage/singleton/issues",
+                "source": "https://github.com/micropackage/singleton/tree/1.1.1"
+            },
+            "time": "2022-01-25T19:59:48+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -1507,5 +1552,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }

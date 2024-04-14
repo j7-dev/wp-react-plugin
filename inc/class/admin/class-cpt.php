@@ -7,13 +7,14 @@ declare(strict_types=1);
 
 namespace J7\WpReactPlugin\Admin;
 
-use J7\WpReactPlugin\Utils;
+use Micropackage\Singleton\Singleton;
+use J7\WpReactPlugin\Utils\Base;
 use J7\WpReactPlugin\Plugin;
 
 /**
  * Class CPT
  */
-final class CPT {
+final class CPT extends Singleton {
 
 	/**
 	 * Post metas
@@ -184,7 +185,7 @@ final class CPT {
 	 */
 	public function render_meta_box(): void {
 		// phpcs:ignore
-		echo '<div id="' . Utils::APP2_SELECTOR . '"></div>';
+		echo '<div id="' . Base::APP2_SELECTOR . '"></div>';
 	}
 
 
@@ -277,7 +278,7 @@ final class CPT {
 	}
 }
 
-new CPT(
+CPT::get(
 	array(
 		'post_metas' => array( 'meta', 'settings' ),
 		'rewrite'    => array(
