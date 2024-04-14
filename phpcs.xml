@@ -37,6 +37,7 @@
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
 	</rule>
 
+	<exclude-pattern>./release/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>
@@ -48,7 +49,7 @@
 		</properties>
 	</rule>
 
-	<config name="testVersion" value="7.4-"/>
+	<config name="testVersion" value="8.0-"/>
 	<rule ref="PHPCompatibility" />
 
 	<!-- Enforce PSR1 compatible namespaces. -->
