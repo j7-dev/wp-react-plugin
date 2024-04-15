@@ -19,9 +19,15 @@ const targetPath = path.resolve(__dirname, '../js/dist/manifest.json')
 
 // move manifest.json
 
-fs.rename(originPath, targetPath, (err) => {
-  if (err) {
-    throw err
-  }
-  console.log('✅ move manifest.json to js/dist/manifest.json success!')
-})
+if (!fs.existsSync(originPath)) {
+  //if originPath exists
+
+  console.log('❌ manifest.json not found!')
+} else {
+  fs.rename(originPath, targetPath, (err) => {
+    if (err) {
+      throw err
+    }
+    console.log('✅ move manifest.json to js/dist/manifest.json success!')
+  })
+}
