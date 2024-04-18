@@ -2,7 +2,7 @@
 
 
 
-[live demo](https://demo.yc-tech.co/)
+🚧live demo
 
 ## ⚡Features⚡
 
@@ -10,19 +10,13 @@
    Git clone this repository in `wp-content/plugins/`
    and `npm run bootstrap`, `npm run dev`, that's all the steps
 
-2. Integrate with WordPress RestFul API<br>
-   By default, the `API_URL` would be `{site_url}/wp-json}` which is set in `inc/admin.php`
-
-3. CRUD utility function<br>
+2. CRUD utility function<br>
    Default with `getPost` Example, check [more utilities](#functions-simple-crud-for-wordpress-restful-api)
 
-4. Integrate with JWT<br>
-   We use `usefulteam/jwt-auth` in composer, every time a WordPress user logged in, he will get JWT (for call API, if the user has enough capability) automatically.
-
-5. HMR (Hot Module Reload) for PHP<br>
+3. HMR (Hot Module Reload) for PHP<br>
 	By using `vite-plugin-live-reload`,  the page will auto reload while PHP files changed
 
-6. Multi-React-App in one plugin<br>
+4. Multi-React-App in one plugin<br>
 	By default, we render 2 React App, 1 is for front-end page, and 1 is for admin page. You can add more React App in `js/src/main.tsx`
 
 ## Before getting start
@@ -31,12 +25,12 @@ Tech stacks (knowledge you need to have)
 
 #### Front-end
 
-1. [Vite](https://vitejs.dev/) - build tool
+1. [Vite v5](https://vitejs.dev/) - build tool
 2. [React v18](https://beta.reactjs.org/)
-3. [TypeScript](https://www.typescriptlang.org/docs/) - compile project with type safe
+3. [TypeScript v5](https://www.typescriptlang.org/docs/) - compile project with type safe
 4. [Tailwind v3](https://tailwindcss.com/) - you can install any UI library, like Ant Design, MUI, Chakra...etc
 5. [SCSS](https://sass-lang.com/documentation/syntax)
-6. [React Query v4](https://tanstack.com/query/v4) - managing API status
+6. [React Query v5]([https://tanstack.com/query/v4](https://tanstack.com/query/latest/docs/framework/react/overview)) - managing API status
 
 #### Front-end (Optional)
 1. [React Router v6](https://reactrouter.com/en/main) - front-end router
@@ -45,8 +39,6 @@ We highly recommend you to use Hash router in WordPress, so you won't get confli
 
 
 #### Back-end
-
-1. [usefulteam/jwt-auth](https://github.com/usefulteam/jwt-auth) - get JWT if a wordpress user is logged in
 
 ## Install
 
@@ -95,7 +87,7 @@ We highly recommend you to use Hash router in WordPress, so you won't get confli
 npm run build
 ```
 
-After you build the project will apply `.env.production` and enqueue the hashed assets in `js/dist` folder.
+After you build the project enqueue the hashed assets in `js/dist` folder.
 
 the files in `js/dist` is EXACT the files of your plugin, you can only upload the `js/dist` if you don't want to share the `src` source code
 
