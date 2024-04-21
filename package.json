@@ -13,6 +13,7 @@
     "lint": "yarn eslint ./js/src/*.{ts,tsx} --ext .ts,.tsx && phpcbf",
     "lint:fix": "yarn eslint ./js/src/*.{ts,tsx} --fix && phpcbf",
     "release": "env-cmd -f ./.env release-it patch --ci --verbose --config ./release/.release-it.cjs",
+    "release:build-only": "env-cmd -f ./.env release-it patch --ci --verbose --config ./release/.release-it.cjs --build-only",
     "release:patch": "env-cmd -f ./.env release-it patch --ci --verbose --config ./release/.release-it.cjs",
     "release:minor": "env-cmd -f ./.env release-it minor --ci --verbose --config ./release/.release-it.cjs",
     "release:major": "env-cmd -f ./.env release-it major --ci --verbose --config ./release/.release-it.cjs",
