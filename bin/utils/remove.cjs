@@ -3,8 +3,8 @@ const path = require('path')
 
 // 定義 .git 目錄路徑
 
-function removeGit() {
-  const gitDirPath = path.join(process.cwd(), '.git')
+function remove(dir) {
+  const gitDirPath = path.join(process.cwd(), dir)
 
   // 檢查 .git 目錄是否存在
 
@@ -41,6 +41,11 @@ function removeGit() {
   })
 }
 
+const execRemove = (dir) => () => {
+  return remove(dir)
+}
+
 module.exports = {
-  removeGit,
+  execRemove,
+  remove,
 }
