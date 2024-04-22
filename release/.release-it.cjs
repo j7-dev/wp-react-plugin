@@ -13,19 +13,19 @@
 
 const releasedPluginName = 'wp-react-plugin'
 
-const args = process.argv.slice(2) // 去掉前兩個內建的參數
+const args = process.argv.slice(2) // remove 2 default args
 
-const release = !args.includes('--build-only')
+const release = !args.includes('--build-only') // Build release only or build release and push to github
 
 module.exports = {
   releasedPluginName,
   git: {
-    commit: true,
+    commit: release,
     commitMessage: 'chore: release v${version}',
-    tag: true,
+    tag: release,
     tagName: 'v${version}',
     commitArgs: ['-n'],
-    push: true,
+    push: release,
   },
   hooks: {
     // 'before:init': [], // run before initialization

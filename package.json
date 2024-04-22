@@ -74,6 +74,8 @@
     "vite": "^5.2.7",
     "vite-plugin-live-reload": "^3.0.3",
     "vite-tsconfig-paths": "^4.3.2",
+    "yargs": "^17.7.2",
     "yarn-upgrade-all": "^0.7.2"
-  }
+  },
+  "bin": "./bin/create.cjs"
 }
