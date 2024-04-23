@@ -23,10 +23,10 @@ async function runCommands(...commands) {
           // 如果命令是 `cd`，則使用 `process.chdir()` 更改當前工作目錄
           const newDir = command.slice(3) // 去掉前綴 'cd '
           process.chdir(newDir)
-          results.push({ command, stdout: `✅ cd to ${process.cwd()}` })
+          console.log(`✅ cd to ${process.cwd()}`)
         } else {
           const { stdout, stderr } = await runCommand(command)
-          results.push({ command, stdout, stderr })
+          console.log(`✅ ${command} successfully`)
         }
       } else if ('function' === typeof command) {
         await command()
@@ -39,7 +39,7 @@ async function runCommands(...commands) {
         throw new Error('Invalid command, must be string or function')
       }
     } catch (error) {
-      results.push({ command, error: error.toString() })
+      throw new Error(JSON.stringify(error))
     }
   }
   return results

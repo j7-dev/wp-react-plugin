@@ -10,7 +10,11 @@ async function main() {
   const commands = [
     `git clone git@github.com:j7-dev/wp-react-plugin.git ${projectName}`,
     `cd ${projectName}`,
-    'yarn bootstrap',
+    'npm install',
+    `npm run replace-string ${projectName}`,
+
+    // 'yarn bootstrap',
+
     execRemove('.git'),
     execRemove('bin'),
   ]

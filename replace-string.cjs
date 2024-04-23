@@ -2,6 +2,7 @@ const { Case } = require('change-case-all')
 const replace = require('replace')
 
 const projectName = process?.argv?.[2] || ''
+console.log('⭐ ~ projectName:', projectName)
 
 function replaceString(str) {
   // regex example   /^(AAA|BBB|CCC)$/
