@@ -1,9 +1,9 @@
 {
   "name": "create-wp-react-plugin",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "type": "module",
   "scripts": {
-    "bootstrap": "yarn install && composer install --no-interaction  && node ./bin/replace-string.cjs",
+    "bootstrap": "yarn install && composer install --no-interaction  && node ./bin/utils/replace-string.cjs",
     "dev": "vite",
     "prebuild": "echo 'todo: remove console'",
     "build": "vite build && node release/mv-manifest.cjs",
