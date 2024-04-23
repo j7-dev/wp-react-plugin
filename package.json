@@ -1,6 +1,6 @@
 {
   "name": "create-wp-react-plugin",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "type": "module",
   "scripts": {
     "bootstrap": "yarn install && composer install --no-interaction",
@@ -78,8 +78,5 @@
     "yargs": "^17.7.2",
     "yarn-upgrade-all": "^0.7.2"
   },
-  "bin": "./bin/create.cjs",
-  "bundledDependencies": [
-    "change-case-all"
-  ]
+  "bin": "./bin/create.cjs"
 }

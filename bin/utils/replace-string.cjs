@@ -1,7 +1,11 @@
-const { Case } = require('change-case-all')
-const replace = require('replace')
+const execReplace = (str) => () => {
+  const { Case } = require('change-case-all')
+  const replace = require('replace')
 
-function replaceString(str) {
+  return replaceString(str, Case, replace)
+}
+
+function replaceString(str, Case, replace) {
   // regex example   /^(AAA|BBB|CCC)$/
 
   const capital = Case.capital(str)
@@ -92,11 +96,6 @@ function replaceString(str) {
   })
 }
 
-const execReplace = (str) => () => {
-  return replaceString(str)
-}
-
 module.exports = {
-  replaceString,
   execReplace,
 }
