@@ -1,8 +1,10 @@
 # WP React Plugin
 
-
-
 🚧live demo
+
+```
+npx create-wp-react-plugin <your-plugin-name>
+```
 
 ## ⚡Features⚡
 
