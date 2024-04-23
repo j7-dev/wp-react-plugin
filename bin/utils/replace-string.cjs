@@ -1,11 +1,9 @@
-const execReplace = (str) => () => {
-  const { Case } = require('change-case-all')
-  const replace = require('replace')
+const { Case } = require('change-case-all')
+const replace = require('replace')
 
-  return replaceString(str, Case, replace)
-}
+const projectName = process?.argv?.[2] || ''
 
-function replaceString(str, Case, replace) {
+function replaceString(str) {
   // regex example   /^(AAA|BBB|CCC)$/
 
   const capital = Case.capital(str)
@@ -96,6 +94,13 @@ function replaceString(str, Case, replace) {
   })
 }
 
-module.exports = {
-  execReplace,
-}
+replaceString(projectName)
+
+// const execReplace = (str) => () => {
+//   return replaceString(str)
+// }
+
+// module.exports = {
+//   replaceString,
+//   execReplace,
+// }

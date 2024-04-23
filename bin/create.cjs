@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 const { runCommands } = require('./utils/command.cjs')
 const { execRemove } = require('./utils/remove.cjs')
-const { execReplace } = require('./utils/replace-string.cjs')
 
 const projectName = process?.argv?.[2] || ''
 
@@ -14,7 +13,6 @@ async function main() {
     'npm install', // TODO bootstrap
     execRemove('.git'),
     execRemove('bin'),
-    execReplace(projectName),
   ]
   const results = await runCommands(...commands)
 
