@@ -1,5 +1,5 @@
 {
-  "name": "wp-react-plugin",
+  "name": "create-wp-react-plugin",
   "version": "3.0.1",
   "type": "module",
   "scripts": {
@@ -27,6 +27,7 @@
     "@tanstack/react-query": "^5.28.9",
     "antd-toolkit": "^0.1.23",
     "axios": "^1.6.8",
+    "change-case-all": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -47,7 +48,6 @@
     "adm-zip": "^0.5.12",
     "archiver": "^7.0.1",
     "autoprefixer": "^10.4.19",
-    "change-case-all": "^2.1.0",
     "env-cmd": "^10.1.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
