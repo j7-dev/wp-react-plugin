@@ -13,27 +13,27 @@ async function main() {
     'npm install',
     `npm run replace-string ${projectName}`,
 
-    // 'yarn bootstrap',
+    // `yarn bootstrap ${projectName}`,
 
     execRemove('.git'),
     execRemove('bin'),
   ]
   const results = await runCommands(...commands)
 
-  console.log('Results:')
-  results.forEach(({ command, stdout, stderr, error }) => {
-    console.log(`🚀 Run command: ${command}`)
-    if (stdout) {
-      console.log(`✅ stdout: ${stdout}`)
-    }
-    if (stderr) {
-      console.log(`❌ stderr: ${stderr}`)
-    }
-    if (error) {
-      console.log(`Error: ${error}`)
-    }
-    console.log('----')
-  })
+  // console.log('Results:')
+  // results.forEach(({ command, stdout, stderr, error }) => {
+  //   console.log(`🚀 Run command: ${command}`)
+  //   if (stdout) {
+  //     console.log(`✅ stdout: ${stdout}`)
+  //   }
+  //   if (stderr) {
+  //     console.log(`❌ stderr: ${stderr}`)
+  //   }
+  //   if (error) {
+  //     console.log(`Error: ${error}`)
+  //   }
+  //   console.log('----')
+  // })
 }
 
 main()

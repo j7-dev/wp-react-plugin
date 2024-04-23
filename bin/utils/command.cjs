@@ -2,13 +2,15 @@ const { exec } = require('child_process')
 
 async function runCommand(command) {
   return new Promise((resolve, reject) => {
+    console.log(`🚀 Run command: ${command}`)
     exec(command, (error, stdout, stderr) => {
       if (error) {
         reject(error)
-        console.log(`❌ ${command} `)
+        console.log(`❌ ${command} failed`)
+        console.log(error)
       } else {
         resolve({ stdout, stderr })
-        console.log(`✅ ${command} `)
+        console.log(`✅ ${command} successfully`)
       }
     })
   })
@@ -26,15 +28,9 @@ async function runCommands(...commands) {
           console.log(`✅ cd to ${process.cwd()}`)
         } else {
           const { stdout, stderr } = await runCommand(command)
-          console.log(`✅ ${command} successfully`)
         }
       } else if ('function' === typeof command) {
         await command()
-        results.push({
-          command,
-          stdout: `✅ exec ${command.name} successfully`,
-          stderr: '',
-        })
       } else {
         throw new Error('Invalid command, must be string or function')
       }
