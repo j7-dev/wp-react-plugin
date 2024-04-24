@@ -19,21 +19,6 @@ async function main() {
     execRemoveFile('README.md'),
   ]
   const results = await runCommands(...commands)
-
-  // console.log('Results:')
-  // results.forEach(({ command, stdout, stderr, error }) => {
-  //   console.log(`🚀 Run command: ${command}`)
-  //   if (stdout) {
-  //     console.log(`✅ stdout: ${stdout}`)
-  //   }
-  //   if (stderr) {
-  //     console.log(`❌ stderr: ${stderr}`)
-  //   }
-  //   if (error) {
-  //     console.log(`Error: ${error}`)
-  //   }
-  //   console.log('----')
-  // })
 }
 
 main()

@@ -1,26 +1,22 @@
 const fs = require('fs')
 const path = require('path')
 
-// 定義 .git 目錄路徑
+// define .git directory path and remove it recursively
 
 function remove(dir) {
   const gitDirPath = path.join(process.cwd(), dir)
 
-  // 檢查 .git 目錄是否存在
+  // check if .git directory exists
 
   fs.access(gitDirPath, fs.constants.F_OK, (err) => {
     if (err) {
-      // .git 目錄不存在
-
-      console.log('.git 目錄不存在')
+      console.log('.git directory does not exist.')
       return
     }
 
-    // .git 目錄存在
+    console.log('.git directory exists. removing...')
 
-    console.log('.git 目錄存在,正在移除...')
-
-    // 使用遞迴方式移除目錄
+    //  remove .git directory recursively
 
     const removeDirRecursive = (dirPath) => {
       if (fs.existsSync(dirPath)) {
@@ -37,7 +33,7 @@ function remove(dir) {
     }
 
     removeDirRecursive(gitDirPath)
-    console.log('.git 目錄已移除')
+    console.log('.git directory has been removed.')
   })
 }
 
@@ -45,12 +41,12 @@ function removeFile(fileName) {
   const filePath = path.join(process.cwd(), fileName)
 
   try {
-    // 檢查檔案是否存在
+    // check if file exists
 
     const fileExists = fs.existsSync(filePath)
 
     if (fileExists) {
-      // 如果檔案存在,則刪除
+      // if file exists, remove it
 
       fs.unlinkSync(filePath)
       console.log(`File "${fileName}" has been deleted.`)

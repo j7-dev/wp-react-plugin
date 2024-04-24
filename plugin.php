@@ -3,7 +3,7 @@
  * Plugin Name:       WP React Plugin (DEV)
  * Plugin URI:        https://github.com/j7-dev/wp-react-plugin
  * Description:       WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.
- * Version:           3.0.17
+ * Version:           3.0.18
  * Requires at least: 5.7
  * Requires PHP:      8.0
  * Author:            J7
@@ -108,8 +108,11 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 			$is_tgmpa_complete = $instance->is_tgmpa_complete();
 
 			if ( $is_tgmpa_complete ) {
-				self::$dir     = \untrailingslashit( \wp_normalize_path( \plugin_dir_path( __FILE__ ) ) );
-				self::$url     = \untrailingslashit( \plugin_dir_url( __FILE__ ) );
+				self::$dir = \untrailingslashit( \wp_normalize_path( \plugin_dir_path( __FILE__ ) ) );
+				self::$url = \untrailingslashit( \plugin_dir_url( __FILE__ ) );
+				if ( ! \function_exists( 'get_plugin_data' ) ) {
+					require_once \ABSPATH . 'wp-admin/includes/plugin.php';
+				}
 				$plugin_data   = \get_plugin_data( __FILE__ );
 				self::$version = $plugin_data['Version'];
 
