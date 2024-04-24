@@ -16,6 +16,7 @@ async function main() {
     execRemove('.git'),
     execRemove('bin'),
     execRemoveFile('replace-string.cjs'),
+    execRemoveFile('README.md'),
   ]
   const results = await runCommands(...commands)
 

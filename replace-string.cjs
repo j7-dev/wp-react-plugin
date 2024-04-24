@@ -34,108 +34,180 @@ function replaceString(str) {
   const snakeName = Case.snake(str)
   const kebabName = Case.kebab(str)
 
-  replace({
-    regex: 'My App',
-    replacement: capital,
-    paths: ['.', './inc', './js/src'],
-    recursive: true,
-    silent: false,
-    include: '*.php, *.ts, *.tsx', // 可以用逗號隔開
+  const textMap1 = [
+    {
+      paths: ['.'],
+      include: 'plugin.php',
+    },
+    {
+      paths: ['./inc/class/admin'],
+      include: 'class-cpt.php',
+    },
+    {
+      paths: ['./js/src/utils'],
+      include: 'env.tsx',
+    },
+  ]
+
+  textMap1.forEach(({ paths, include }) => {
+    replace({
+      regex: 'My App',
+      replacement: capital,
+      paths,
+      recursive: false,
+      silent: false,
+      include, // 可以用逗號隔開
+    })
   })
 
-  replace({
-    regex: 'my-app',
-    replacement: kebabName,
-    paths: ['.', './inc', './js/src'],
-    recursive: true,
-    silent: false,
-    include: '*.php, *.ts, *.tsx', // 可以用逗號隔開
+  textMap1.forEach(({ paths, include }) => {
+    replace({
+      regex: 'my-app',
+      replacement: kebabName,
+      paths,
+      recursive: false,
+      silent: false,
+      include, // 可以用逗號隔開
+    })
   })
 
-  replace({
-    regex: 'my_app',
-    replacement: snakeName,
-    paths: ['.', './inc', './js/src'],
-    recursive: true,
-    silent: false,
-    include: '*.php, *.ts, *.tsx', // 可以用逗號隔開
+  const textMap2 = [
+    {
+      paths: ['.'],
+      include: 'plugin.php',
+    },
+    {
+      paths: ['./inc/class/utils'],
+      include: 'class-base.php',
+    },
+    {
+      paths: ['./inc/templates'],
+      include: 'test.php',
+    },
+    {
+      paths: ['./js/src/utils'],
+      include: 'env.tsx',
+    },
+  ]
+
+  textMap2.forEach(({ paths, include }) => {
+    replace({
+      regex: 'my_app',
+      replacement: snakeName,
+      paths,
+      recursive: false,
+      silent: false,
+      include, // 可以用逗號隔開
+    })
   })
 
-  replace({
-    regex: 'WpReactPlugin',
-    replacement: pascalName,
-    paths: ['.', './inc'],
-    recursive: true,
-    silent: false,
-    include: '*.php',
+  const textMap3 = [
+    {
+      paths: ['.'],
+      include: 'plugin.php',
+    },
+    {
+      paths: ['./inc/class'],
+      include: 'class-bootstrap.php',
+    },
+    {
+      paths: ['./inc/class/admin'],
+      include: 'class-cpt.php',
+    },
+    {
+      paths: ['./inc/class/front-end'],
+      include: 'class-entry.php',
+    },
+    {
+      paths: ['./inc/class/utils'],
+      include: 'class-base.php',
+    },
+  ]
+
+  textMap3.forEach(({ paths, include }) => {
+    replace({
+      regex: 'WpReactPlugin',
+      replacement: pascalName,
+      paths,
+      recursive: false,
+      silent: false,
+      include, // 可以用逗號隔開
+    })
   })
 
   replace({
     regex: 'wp-react-plugin',
     replacement: kebabName,
-    paths: ['.', './inc'],
-    recursive: true,
-    silent: false,
-  })
-
-  replace({
-    regex: 'wp_react_plugin',
-    replacement: snakeName,
-    paths: ['.', './inc'],
-    recursive: true,
-    silent: false,
-    include: '*.php',
-  })
-
-  replace({
-    regex: '3.0.0',
-    replacement: '0.0.1',
     paths: ['.'],
-    recursive: true,
+    recursive: false,
     silent: false,
-    include: '*.php, *.json',
+    include: 'composer.json, package.json, plugin.php',
+  })
+
+  const textMap4 = [
+    {
+      paths: ['.'],
+      include: 'plugin.php',
+    },
+    {
+      paths: ['./inc/class/admin'],
+      include: 'class-cpt.php',
+    },
+  ]
+
+  textMap4.forEach(({ paths, include }) => {
+    replace({
+      regex: 'wp_react_plugin',
+      replacement: snakeName,
+      paths,
+      recursive: false,
+      silent: false,
+      include, // 可以用逗號隔開
+    })
   })
 
   const version = getVersionFromPluginPhp()
 
   const textMap = [
     {
-      text: version,
+      regex: version,
       replacement: '0.0.1',
     },
     {
-      text: "'https://github.com/j7-dev/wp-react-plugin';",
+      regex: "'https://github.com/j7-dev/wp-react-plugin';",
       replacement: "''; // change to your github repo",
     },
     {
-      text: 'WP React Plugin (DEV)',
+      regex: 'WP React Plugin (DEV)',
       replacement: capital,
     },
     {
-      text: 'WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.',
+      regex:
+        'WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.',
       replacement: 'your description',
     },
     {
-      text: 'vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin',
+      regex:
+        'vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin',
       replacement: 'your tags',
     },
     {
-      text: 'https://github.com/j7-dev/wp-react-plugin',
+      regex: 'https://github.com/j7-dev/wp-react-plugin',
       replacement: '',
     },
     {
-      text: 'J7',
+      regex: 'J7',
       replacement: '',
     },
     {
-      text: 'https://github.com/j7-dev',
+      regex: 'https://github.com/j7-dev',
       replacement: '',
     },
   ]
 
-  textMap.forEach(({ text, replacement }) => {
+  textMap.forEach(({ regex, replacement }) => {
     replace({
-      regex: text,
+      regex,
       replacement,
       paths: ['.'],
       recursive: false,
