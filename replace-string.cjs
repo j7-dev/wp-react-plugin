@@ -120,16 +120,12 @@ function replaceString(str) {
       to: 'your tags',
     },
     {
-      from: 'https://github.com/j7-dev/wp-react-plugin',
-      to: '',
-    },
-    {
       from: '* Author:            J7',
-      to: '* Author:            ',
+      to: '* Author:            Your Name',
     },
     {
       from: 'https://github.com/j7-dev',
-      to: '',
+      to: 'Author URL',
     },
   ]
 

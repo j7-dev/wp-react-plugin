@@ -3,7 +3,7 @@
  * Plugin Name:       WP React Plugin (DEV)
  * Plugin URI:        https://github.com/j7-dev/wp-react-plugin
  * Description:       WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.
- * Version:           3.0.16
+ * Version:           3.0.17
  * Requires at least: 5.7
  * Requires PHP:      8.0
  * Author:            J7
@@ -33,7 +33,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		const APP_NAME    = 'My App';
 		const KEBAB       = 'my-app';
 		const SNAKE       = 'my_app';
-		const GITHUB_REPO = 'https://github.com/j7-dev/wp-react-plugin';
+		const GITHUB_REPO = 'https://github.com/j7-dev/wp-react-plugin'; // change to your repo URL
 
 		/**
 		 * Github Personal Access Token
@@ -119,24 +119,29 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 
 		/**
 		 * Plugin update checker
+		 * When you push a new release to Github, user will receive updates in wp-admin/plugins.php page
 		 *
 		 * @return void
 		 */
 		public function plugin_update_checker(): void {
-			$update_checker = PucFactory::buildUpdateChecker(
-				self::GITHUB_REPO,
-				__FILE__,
-				self::KEBAB
-			);
-			/**
-			 * Type
-			 *
-			 * @var \Puc_v4p4_Vcs_PluginUpdateChecker $update_checker
-			 */
-			$update_checker->setBranch( 'master' );
-			// if your repo is private, you need to set authentication
-			// $update_checker->setAuthentication(self::$github_pat);
-			$update_checker->getVcsApi()->enableReleaseAssets();
+			try {
+				$update_checker = PucFactory::buildUpdateChecker(
+					self::GITHUB_REPO,
+					__FILE__,
+					self::KEBAB
+				);
+				/**
+				 * Type
+				 *
+				 * @var \Puc_v4p4_Vcs_PluginUpdateChecker $update_checker
+				 */
+				$update_checker->setBranch( 'master' );
+				// if your repo is private, you need to set authentication
+				// $update_checker->setAuthentication(self::$github_pat);
+				$update_checker->getVcsApi()->enableReleaseAssets();
+			} catch ( \Throwable $th ) { // phpcs:ignore
+				// throw $th;
+			}
 		}
 
 		/**
