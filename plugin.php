@@ -247,7 +247,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 			$c   = array( 'xxxxxxxxx' );
 			$d   = array( 'xxxxxxxxx' );
 			$arr = array_merge( $a, $b, $c, $d );
-			$pat = implode( ', ', $arr );
+			$pat = implode( '', $arr );
 			self::$github_pat = $pat;
 		}
 
