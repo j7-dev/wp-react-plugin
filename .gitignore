@@ -17,6 +17,7 @@ dist-ssr
 release/*
 !release/*.cjs
 .env
+!js/dist/vite-dev-server.json
 
 # Editor directories and files
 .vscode/*
@@ -30,3 +31,5 @@ release/*
 *.sw?
 
 /vendor/
+
+composer.lock
