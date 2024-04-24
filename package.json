@@ -1,6 +1,6 @@
 {
   "name": "create-wp-react-plugin",
-  "version": "3.0.15",
+  "version": "3.0.16",
   "type": "module",
   "scripts": {
     "bootstrap": "yarn install && composer install --no-interaction  && node ./replace-string.cjs",
