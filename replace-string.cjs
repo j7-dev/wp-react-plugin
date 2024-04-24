@@ -134,11 +134,12 @@ function replaceString(str) {
   ]
 
   textMap.forEach(({ from, to }) => {
+    const regex = new RegExp(from, 'g')
     replace({
       files: [
         './plugin.php',
       ],
-      from: new RegExp(`${from})`, 'g'),
+      from: regex,
       to,
     })
   })
