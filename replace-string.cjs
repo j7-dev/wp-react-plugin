@@ -24,7 +24,6 @@ function getVersionFromPluginPhp() {
 }
 
 const projectName = process?.argv?.[2] || ''
-console.log('⭐ ~ projectName:', projectName)
 
 function replaceString(str) {
   // regex example   /^(AAA|BBB|CCC)$/
@@ -125,8 +124,8 @@ function replaceString(str) {
       to: '',
     },
     {
-      from: 'J7',
-      to: '',
+      from: '* Author:            J7',
+      to: '* Author:            ',
     },
     {
       from: 'https://github.com/j7-dev',
