@@ -3,7 +3,7 @@
  * Plugin Name:       WP React Plugin (DEV)
  * Plugin URI:        https://github.com/j7-dev/wp-react-plugin
  * Description:       WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.
- * Version:           3.0.14
+ * Version:           3.0.15
  * Requires at least: 5.7
  * Requires PHP:      8.0
  * Author:            J7

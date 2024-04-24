@@ -24,6 +24,7 @@ function getVersionFromPluginPhp() {
 }
 
 const projectName = process?.argv?.[2] || ''
+console.log('⭐ ~ projectName:', projectName)
 
 function replaceString(str) {
   // regex example   /^(AAA|BBB|CCC)$/
@@ -34,7 +35,7 @@ function replaceString(str) {
   const snakeName = Case.snake(str)
   const kebabName = Case.kebab(str)
 
-  replace({
+  replace.sync({
     files: [
       './plugin.php',
       './inc/class/admin/class-cpt.php',
@@ -44,7 +45,7 @@ function replaceString(str) {
     to: capital,
   })
 
-  replace({
+  replace.sync({
     files: [
       './plugin.php',
       './inc/class/admin/class-cpt.php',
@@ -54,7 +55,7 @@ function replaceString(str) {
     to: kebabName,
   })
 
-  replace({
+  replace.sync({
     files: [
       './plugin.php',
       './inc/class/utils/class-base.php',
@@ -65,7 +66,7 @@ function replaceString(str) {
     to: snakeName,
   })
 
-  replace({
+  replace.sync({
     files: [
       './plugin.php',
       './inc/class/class-bootstrap.php',
@@ -77,7 +78,7 @@ function replaceString(str) {
     to: pascalName,
   })
 
-  replace({
+  replace.sync({
     files: [
       './composer.json',
       './package.json',
@@ -87,7 +88,7 @@ function replaceString(str) {
     to: kebabName,
   })
 
-  replace({
+  replace.sync({
     files: [
       './plugin.php',
       './inc/class/admin/class-cpt.php',
@@ -134,8 +135,11 @@ function replaceString(str) {
   ]
 
   textMap.forEach(({ from, to }) => {
-    const regex = new RegExp(from, 'g')
-    replace({
+    const regex = new RegExp(
+      from.replace(/([(){}[\]\\|?*+.,^$])/g, '\\$1'),
+      'g',
+    )
+    replace.sync({
       files: [
         './plugin.php',
       ],
@@ -146,12 +150,3 @@ function replaceString(str) {
 }
 
 replaceString(projectName)
-
-// const execReplace = (str) => () => {
-//   return replaceString(str)
-// }
-
-// module.exports = {
-//   replaceString,
-//   execReplace,
-// }
