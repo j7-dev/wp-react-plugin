@@ -10,12 +10,9 @@ async function main() {
   const commands = [
     `git clone git@github.com:j7-dev/wp-react-plugin.git ${projectName}`,
     `cd ${projectName}`,
-
-    // 'npm install',
-    // `npm run replace-string ${projectName}`,
-
-    `yarn bootstrap ${projectName}`,
-
+    'yarn',
+    `node ./replace-string.cjs ${projectName}`,
+    'composer install --no-interaction',
     execRemove('.git'),
     execRemove('bin'),
     execRemoveFile('replace-string.cjs'),
