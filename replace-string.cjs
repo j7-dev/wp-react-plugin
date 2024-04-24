@@ -1,8 +1,29 @@
 const { Case } = require('change-case-all')
 const replace = require('replace')
+const fs = require('fs')
+const path = require('path')
+
+function getVersionFromPluginPhp() {
+  const pluginPhpPath = path.join(__dirname, 'plugin.php')
+
+  try {
+    const pluginPhpContent = fs.readFileSync(pluginPhpPath, 'utf-8')
+    const versionLine = pluginPhpContent
+      .split('\n')
+      .find((line) => line.includes('* Version:'))
+
+    if (versionLine) {
+      const version = versionLine.split(':')[1].trim()
+      return version
+    }
+    throw new Error('Version line not found in plugin.php')
+  } catch (err) {
+    console.error(`Error reading plugin.php: ${err.message}`)
+    return null
+  }
+}
 
 const projectName = process?.argv?.[2] || ''
-console.log('⭐ ~ projectName:', projectName)
 
 function replaceString(str) {
   // regex example   /^(AAA|BBB|CCC)$/
@@ -14,7 +35,7 @@ function replaceString(str) {
   const kebabName = Case.kebab(str)
 
   replace({
-    regex: /^(My App|WP React Plugin (DEV))$/,
+    regex: 'My App',
     replacement: capital,
     paths: ['.', './inc', './js/src'],
     recursive: true,
@@ -38,15 +59,6 @@ function replaceString(str) {
     recursive: true,
     silent: false,
     include: '*.php, *.ts, *.tsx', // 可以用逗號隔開
-  })
-
-  replace({
-    regex: "'https://github.com/j7-dev/wp-react-plugin';",
-    replacement: "''; // change to your github repo",
-    paths: ['.'],
-    recursive: true,
-    silent: false,
-    include: 'plugin.php',
   })
 
   replace({
@@ -84,14 +96,52 @@ function replaceString(str) {
     include: '*.php, *.json',
   })
 
-  replace({
-    regex:
-      /^(WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.|vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin)$/,
-    replacement: '',
-    paths: ['.'],
-    recursive: true,
-    silent: false,
-    include: 'plugin.php',
+  const version = getVersionFromPluginPhp()
+
+  const textMap = [
+    {
+      text: version,
+      replacement: '0.0.1',
+    },
+    {
+      text: "'https://github.com/j7-dev/wp-react-plugin';",
+      replacement: "''; // change to your github repo",
+    },
+    {
+      text: 'WP React Plugin (DEV)',
+      replacement: capital,
+    },
+    {
+      text: 'WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.',
+      replacement: 'your description',
+    },
+    {
+      text: 'vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin',
+      replacement: 'your tags',
+    },
+    {
+      text: 'https://github.com/j7-dev/wp-react-plugin',
+      replacement: '',
+    },
+    {
+      text: 'J7',
+      replacement: '',
+    },
+    {
+      text: 'https://github.com/j7-dev',
+      replacement: '',
+    },
+  ]
+
+  textMap.forEach(({ text, replacement }) => {
+    replace({
+      regex: text,
+      replacement,
+      paths: ['.'],
+      recursive: false,
+      silent: false,
+      include: 'plugin.php',
+    })
   })
 }
 

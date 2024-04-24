@@ -41,11 +41,38 @@ function remove(dir) {
   })
 }
 
+function removeFile(fileName) {
+  const filePath = path.join(__dirname, fileName)
+
+  try {
+    // 檢查檔案是否存在
+
+    const fileExists = fs.existsSync(filePath)
+
+    if (fileExists) {
+      // 如果檔案存在,則刪除
+
+      fs.unlinkSync(filePath)
+      console.log(`File "${fileName}" has been deleted.`)
+    } else {
+      console.log(`File "${fileName}" does not exist.`)
+    }
+  } catch (err) {
+    console.error(`Error deleting file "${fileName}": ${err.message}`)
+  }
+}
+
 const execRemove = (dir) => () => {
   return remove(dir)
+}
+
+const execRemoveFile = (fileName) => () => {
+  return removeFile(fileName)
 }
 
 module.exports = {
   execRemove,
   remove,
+  execRemoveFile,
+  removeFile,
 }

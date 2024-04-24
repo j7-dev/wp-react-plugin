@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const { runCommands } = require('./utils/command.cjs')
-const { execRemove } = require('./utils/remove.cjs')
+const { execRemove, execRemoveFile } = require('./utils/remove.cjs')
 
 const projectName = process?.argv?.[2] || ''
 
@@ -10,13 +10,15 @@ async function main() {
   const commands = [
     `git clone git@github.com:j7-dev/wp-react-plugin.git ${projectName}`,
     `cd ${projectName}`,
-    'npm install',
-    `npm run replace-string ${projectName}`,
 
-    // `yarn bootstrap ${projectName}`,
+    // 'npm install',
+    // `npm run replace-string ${projectName}`,
+
+    `yarn bootstrap ${projectName}`,
 
     execRemove('.git'),
     execRemove('bin'),
+    execRemoveFile('replace-string.cjs'),
   ]
   const results = await runCommands(...commands)
 
