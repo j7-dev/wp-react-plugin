@@ -1,5 +1,5 @@
 const { Case } = require('change-case-all')
-const replace = require('replace')
+const replace = require('replace-in-file')
 const fs = require('fs')
 const path = require('path')
 
@@ -34,185 +34,112 @@ function replaceString(str) {
   const snakeName = Case.snake(str)
   const kebabName = Case.kebab(str)
 
-  const textMap1 = [
-    {
-      paths: ['.'],
-      include: 'plugin.php',
-    },
-    {
-      paths: ['./inc/class/admin'],
-      include: 'class-cpt.php',
-    },
-    {
-      paths: ['./js/src/utils'],
-      include: 'env.tsx',
-    },
-  ]
-
-  textMap1.forEach(({ paths, include }) => {
-    replace({
-      regex: 'My App',
-      replacement: capital,
-      paths,
-      recursive: false,
-      silent: false,
-      include, // 可以用逗號隔開
-    })
-  })
-
-  textMap1.forEach(({ paths, include }) => {
-    replace({
-      regex: 'my-app',
-      replacement: kebabName,
-      paths,
-      recursive: false,
-      silent: false,
-      include, // 可以用逗號隔開
-    })
-  })
-
-  const textMap2 = [
-    {
-      paths: ['.'],
-      include: 'plugin.php',
-    },
-    {
-      paths: ['./inc/class/utils'],
-      include: 'class-base.php',
-    },
-    {
-      paths: ['./inc/templates'],
-      include: 'test.php',
-    },
-    {
-      paths: ['./js/src/utils'],
-      include: 'env.tsx',
-    },
-  ]
-
-  textMap2.forEach(({ paths, include }) => {
-    replace({
-      regex: 'my_app',
-      replacement: snakeName,
-      paths,
-      recursive: false,
-      silent: false,
-      include, // 可以用逗號隔開
-    })
-  })
-
-  const textMap3 = [
-    {
-      paths: ['.'],
-      include: 'plugin.php',
-    },
-    {
-      paths: ['./inc/class'],
-      include: 'class-bootstrap.php',
-    },
-    {
-      paths: ['./inc/class/admin'],
-      include: 'class-cpt.php',
-    },
-    {
-      paths: ['./inc/class/front-end'],
-      include: 'class-entry.php',
-    },
-    {
-      paths: ['./inc/class/utils'],
-      include: 'class-base.php',
-    },
-  ]
-
-  textMap3.forEach(({ paths, include }) => {
-    replace({
-      regex: 'WpReactPlugin',
-      replacement: pascalName,
-      paths,
-      recursive: false,
-      silent: false,
-      include, // 可以用逗號隔開
-    })
+  replace({
+    files: [
+      './plugin.php',
+      './inc/class/admin/class-cpt.php',
+      './js/src/utils/env.tsx',
+    ],
+    from: /My App/g,
+    to: capital,
   })
 
   replace({
-    regex: 'wp-react-plugin',
-    replacement: kebabName,
-    paths: ['.'],
-    recursive: false,
-    silent: false,
-    include: 'composer.json, package.json, plugin.php',
+    files: [
+      './plugin.php',
+      './inc/class/admin/class-cpt.php',
+      './js/src/utils/env.tsx',
+    ],
+    from: /my-app/g,
+    to: kebabName,
   })
 
-  const textMap4 = [
-    {
-      paths: ['.'],
-      include: 'plugin.php',
-    },
-    {
-      paths: ['./inc/class/admin'],
-      include: 'class-cpt.php',
-    },
-  ]
+  replace({
+    files: [
+      './plugin.php',
+      './inc/class/utils/class-base.php',
+      './inc/templates/test.php',
+      './js/src/utils/env.tsx',
+    ],
+    from: /my_app/g,
+    to: snakeName,
+  })
 
-  textMap4.forEach(({ paths, include }) => {
-    replace({
-      regex: 'wp_react_plugin',
-      replacement: snakeName,
-      paths,
-      recursive: false,
-      silent: false,
-      include, // 可以用逗號隔開
-    })
+  replace({
+    files: [
+      './plugin.php',
+      './inc/class/class-bootstrap.php',
+      './inc/class/admin/class-cpt.php',
+      './inc/class/front-end/class-entry.php',
+      './inc/class/utils/class-base.php',
+    ],
+    from: /WpReactPlugin/g,
+    to: pascalName,
+  })
+
+  replace({
+    files: [
+      './composer.json',
+      './package.json',
+      './plugin.php',
+    ],
+    from: /wp-react-plugin/g,
+    to: kebabName,
+  })
+
+  replace({
+    files: [
+      './plugin.php',
+      './inc/class/admin/class-cpt.php',
+    ],
+    from: /wp_react_plugin/g,
+    to: snakeName,
   })
 
   const version = getVersionFromPluginPhp()
 
   const textMap = [
     {
-      regex: version,
-      replacement: '0.0.1',
+      from: version,
+      to: '0.0.1',
     },
     {
-      regex: "'https://github.com/j7-dev/wp-react-plugin';",
-      replacement: "''; // change to your github repo",
+      from: "'https://github.com/j7-dev/wp-react-plugin';",
+      to: "''; // change to your github repo",
     },
     {
-      regex: 'WP React Plugin (DEV)',
-      replacement: capital,
+      from: 'WP React Plugin (DEV)',
+      to: capital,
     },
     {
-      regex:
-        'WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.',
-      replacement: 'your description',
+      from: 'WP React Plugin is a boilerplate for creating a WordPress plugin with React, Tailwind, TypeScript, React Query v4, SCSS and Vite.',
+      to: 'your description',
     },
     {
-      regex:
-        'vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin',
-      replacement: 'your tags',
+      from: 'vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin',
+      to: 'your tags',
     },
     {
-      regex: 'https://github.com/j7-dev/wp-react-plugin',
-      replacement: '',
+      from: 'https://github.com/j7-dev/wp-react-plugin',
+      to: '',
     },
     {
-      regex: 'J7',
-      replacement: '',
+      from: 'J7',
+      to: '',
     },
     {
-      regex: 'https://github.com/j7-dev',
-      replacement: '',
+      from: 'https://github.com/j7-dev',
+      to: '',
     },
   ]
 
-  textMap.forEach(({ regex, replacement }) => {
+  textMap.forEach(({ from, to }) => {
     replace({
-      regex,
-      replacement,
-      paths: ['.'],
-      recursive: false,
-      silent: false,
-      include: 'plugin.php',
+      files: [
+        './plugin.php',
+      ],
+      from: new RegExp(`${from})`, 'g'),
+      to,
     })
   })
 }

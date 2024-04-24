@@ -1,6 +1,6 @@
 {
   "name": "create-wp-react-plugin",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "type": "module",
   "scripts": {
     "bootstrap": "yarn install && composer install --no-interaction  && node ./replace-string.cjs",
@@ -68,7 +68,7 @@
     "prettier-eslint-cli": "^8.0.1",
     "prettier-plugin-multiline-arrays": "^3.0.4",
     "release-it": "^17.1.1",
-    "replace": "^1.2.2",
+    "replace-in-file": "^7.1.0",
     "sass": "^1.72.0",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.3",

@@ -42,7 +42,7 @@ function remove(dir) {
 }
 
 function removeFile(fileName) {
-  const filePath = path.join(__dirname, fileName)
+  const filePath = path.join(process.cwd(), fileName)
 
   try {
     // 檢查檔案是否存在
