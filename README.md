@@ -3,8 +3,14 @@
 🚧live demo
 
 ```
+cd <your-WordPress-project>/wp-content/plugins
 npx create-wp-react-plugin <your-plugin-name>
 ```
+
+## 📹 demo video
+https://github.com/j7-dev/wp-react-plugin/assets/9213776/efb5b3ae-b8d0-408c-8e66-7e6f9e933877
+
+
 
 ## ⚡Features⚡
 
