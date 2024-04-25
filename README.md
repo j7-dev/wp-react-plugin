@@ -1,11 +1,13 @@
 # WP React Plugin
 
+## 💻 `npx create-wp-react-plugin`
+
+> The easiest way to develop a React base WordPress Plugin
+
+<br><br>
+
 🚧live demo
 
-```
-cd <your-WordPress-project>/wp-content/plugins
-npx create-wp-react-plugin <your-plugin-name>
-```
 
 ## 📹 demo video
 https://github.com/j7-dev/wp-react-plugin/assets/9213776/efb5b3ae-b8d0-408c-8e66-7e6f9e933877
@@ -15,11 +17,19 @@ https://github.com/j7-dev/wp-react-plugin/assets/9213776/efb5b3ae-b8d0-408c-8e66
 ## ⚡Features⚡
 
 1. Easy to Use<br>
-   Git clone this repository in `wp-content/plugins/`
-   and `npm run bootstrap`, `npm run dev`, that's all the steps
+
+    ```bash
+    cd <your-WordPress-project>/wp-content/plugins
+    npx create-wp-react-plugin <your-plugin-name>
+    ```
+
+   cd to `wp-content/plugins/` in your WordPress project
+   and `npx create-wp-react-plugin <your-plugin-name>`, that's all the steps
+
+	 🚩 we use yarn by default for now
 
 2. CRUD utility function<br>
-   Default with `getPost` Example, check [more utilities](#functions-simple-crud-for-wordpress-restful-api)
+   Default with `getPost` Example, check [functions](https://github.com/j7-dev/wp-react-plugin/tree/master/js/src/api/resources) and [custom hooks](https://github.com/j7-dev/wp-react-plugin/tree/master/js/src/hooks)
 
 3. HMR (Hot Module Reload) for PHP<br>
 	By using `vite-plugin-live-reload`,  the page will auto reload while PHP files changed
@@ -27,9 +37,24 @@ https://github.com/j7-dev/wp-react-plugin/assets/9213776/efb5b3ae-b8d0-408c-8e66
 4. Multi-React-App in one plugin<br>
 	By default, we render 2 React App, 1 is for front-end page, and 1 is for admin page. You can add more React App in `js/src/main.tsx`
 
+5. Plugin Update Checker
+	Once you publish a release on Github, the user installed your plugin will receive a notification in `wp-admin/plugins.php`
+
+6. Plugin Dependencies Checker
+	Does your plugin rely on another plugin like WooCommerce, Learndash etc...?
+	By defining the `$required_plugins`, we can easily manage plugin dependencies.
+
+7. 1-click release
+	Simply type `yarn release` and the command will execute a series of command in `release/.release-it.cjs`, like `yarn build`, `composer install` etc..., and finally publish a release on github
+	see more configuration in [release-it](https://www.npmjs.com/package/release-it)
+
+---
+
 ## Before getting start
 
-Tech stacks (knowledge you need to have)
+You MUST have `nodejs v18+` and `composer` installed
+
+Here are tech stacks (knowledge you need to have) we used
 
 #### Front-end
 
@@ -41,6 +66,7 @@ Tech stacks (knowledge you need to have)
 6. [React Query v5]([https://tanstack.com/query/v4](https://tanstack.com/query/latest/docs/framework/react/overview)) - managing API status
 
 #### Front-end (Optional)
+
 1. [React Router v6](https://reactrouter.com/en/main) - front-end router
 
 We highly recommend you to use Hash router in WordPress, so you won't get conflict with WordPress Permalink
@@ -48,301 +74,56 @@ We highly recommend you to use Hash router in WordPress, so you won't get confli
 
 #### Back-end
 
-## Install
+Libraries we used
 
-1. Clone this repository into `/wp-content/plugins`.
-   ```sh
-   cd  {your-project}/wp-content/plugins
-   git clone https://github.com/j7-dev/wp-react-plugin.git
-   cd wp-react-plugin
-   ```
-2. Install dependencies:
+```js
+"kucrut/vite-for-wp": "^0.8.0", // the core of vite integrated with wp
+"yahnis-elsts/plugin-update-checker": "^5.3", // update checker
+"j7-dev/tgm-plugin-activation-forked": "^1.0", // check plugin dependency, forked from TGMPA
+"micropackage/singleton": "^1.1", // singleton pattern
 
-   ⭐ You must have [Composer](https://getcomposer.org/) installed
-
-   ```sh
-   npm run bootstrap # This will run `npm install` & `composer install`
-   npm run dev
-   ```
-
-
-4. Activate the plugin from WordPress admin `/wp-admin`.
-
-   <img src="https://user-images.githubusercontent.com/9213776/226081766-6d3ce292-1be6-4a34-8a6b-6055670f0a74.png">
-
-5. Visit your site's homepage and see the rendered application on the footer 🚀🚀🚀
-
-   <img src="https://user-images.githubusercontent.com/9213776/226081865-8e23a778-8321-44d3-82f0-9f361530ad13.png">
-
-6. Click `Count`, `Get Post Example` button to ensure the State and the WordPress API works
-
-   <img src="https://user-images.githubusercontent.com/9213776/226081923-c16cf62f-cd6e-4457-9150-8973b817a6e3.png">
-
-
-7. Check the admin page, you will see a new post type `My App` and a new menu `My App`
-
-   <img src="https://github.com/j7-dev/wp-react-plugin/assets/9213776/b2588014-271a-4620-ab94-d65b2d7a211b">
-
-8. Click Add New, you will see a React App in the metabox
-
-   <img src="https://github.com/j7-dev/wp-react-plugin/assets/9213776/62c1efab-cb0e-4bcb-8879-4f4b9b6a4915">
-
-8. 🎉🎉🎉 Enjoy the dev 🎉🎉🎉
-
-## Build
-
-```shell
-npm run build
+// php code standard
+"squizlabs/php_codesniffer": "@stable",
+"wp-coding-standards/wpcs": "@stable",
+"dealerdirect/phpcodesniffer-composer-installer": "@stable"
 ```
 
-After you build the project enqueue the hashed assets in `js/dist` folder.
+---
 
-the files in `js/dist` is EXACT the files of your plugin, you can only upload the `js/dist` if you don't want to share the `src` source code
+## Dev
 
-## Functions: Simple CRUD for WordPress Restful API
-
-path: `js\src\api\resources`
-
-### `createResource`
-
-#### - Properties:
-
-```typescript
-{
-  resource: string,
-  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
-  args?: {
-    [key: string]: any
-  },
-  // ↑ Check the WordPress RESTFUL API Endpoint args
-  config?: any
-  // ↑ This is Axios Config, see more info in https://axios-http.com/
-  // ex: change headers config for special use
-}
+```bash
+cd wp-content/plugins/<your-plugin-name>
+yarn dev
 ```
 
-#### - Return:
+Sure we have HMR when you change the front-end content
 
-The created Resource id
+---
 
-#### - Example:
+## Build Before you release
 
-```javascript
-const createPost = await createResource({
-  resource: 'posts',
-  args: {
-    title: 'Post Created by API',
-    status: 'publish',
-  },
-})
+```bash
+cd wp-content/plugins/<your-plugin-name>
+yarn release:build-only
 ```
 
-### `getResource`
+This command will build the release version of your plugin without publish to Github in `release` directory, you can see a `zip` file and a directory with `<your-plugin-name>`
 
-#### - Properties:
+I often use this command to test my release version plugin on my test site.
+We can move to next step after checking everything works well.
 
-```typescript
-{
-  resource: string,
-  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
-  id: number,
-  args?: {
-    [key: string]: any
-  },
-  // ↑ Check the WordPress RESTFUL API Endpoint args (url params)
-}
+---
+
+## Release
+
+```bash
+cd wp-content/plugins/<your-plugin-name>
+yarn release # this will git tag a patch version, you can choose `yarn release:minor` or `yarn release:major`
 ```
 
-#### - Return:
-
-WordPress Object
-
-#### - Example:
-
-```javascript
-// get the post with id = 200
-const getPost = await getResource({
-  resource: 'posts',
-  id: 200,
-})
-```
-
-### `getResources`
-
-#### - Properties:
-
-```typescript
-{
-  resource: string,
-  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
-  args?: {
-    [key: string]: any
-  },
-  // ↑ Check the WordPress RESTFUL API Endpoint args (url params)
-}
-```
-
-#### - Return:
-
-WordPress Object Array
-
-#### - Example:
-
-```javascript
-// get the all posts that author_id = 1
-const getPosts = await getResources({
-  resource: 'posts',
-  args: {
-    author: 1,
-  },
-})
-```
-
-### `updateResource`
-
-#### - Properties:
-
-```typescript
-{
-  resource: string,
-  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
-  id: number,
-  args?: {
-    [key: string]: any
-  },
-  // ↑ Check the WordPress RESTFUL API Endpoint args (url params)
-}
-```
-
-#### - Return:
-
-Update Status
-
-#### - Example:
-
-```javascript
-// update the title with post_id = 200
-const updatePost = await updateResource({
-  resource: 'posts',
-  id: 200,
-  args: {
-    title: 'Update Title by API',
-  },
-})
-```
-
-### `deleteResource`
-
-#### - Properties:
-
-```typescript
-{
-  resource: string,
-  // ↑ WordPress RESTFUL API Endpoint like: posts, users, products
-  id: number,
-}
-```
-
-#### - Return:
-
-Delete Status
-
-#### - Example:
-
-```javascript
-// delete the post with id = 200
-const deletePost = await deleteResource({
-  resource: 'posts',
-  id: 200,
-})
-```
-
-## Custom Hooks
-
-### `useOne`
-
-#### - Properties:
-
-```typescript
-{
-  resource: string
-  // WordPress RESTFUL API Endpoint like: posts, users, products
-  id: number
-  queryOptions?: {
-    // please visit React Query for more detail
-    staleTime?: number
-    cacheTime?: number
-    refetchOnWindowFocus?: boolean
-    refetchOnMount?: boolean
-    refetchOnReconnect?: boolean
-    refetchInterval?: number
-    retry?: boolean | number
-    retryDelay?: number
-    enabled?: boolean
-  }
-}
-```
-
-#### - Return:
-
-WordPress Object
-
-#### - Example:
-
-```javascript
-// get the post with id = 200
-const post = useOne({
-  resource: 'posts',
-  id: 200,
-})
-
-// get the user with id = 1
-const user = useOne({
-  resource: 'users',
-  id: 1,
-})
-```
-
-### `useMany`
-
-#### - Properties:
-
-```typescript
-{
-  resource: string
-  // WordPress RESTFUL API Endpoint like: posts, users, products
-  args?: Record<string, any>
-  // please visit WordPress RESTFUL API Handbook for more detail
-  queryOptions?: {
-    // please visit React Query for more detail
-    staleTime?: number
-    cacheTime?: number
-    refetchOnWindowFocus?: boolean
-    refetchOnMount?: boolean
-    refetchOnReconnect?: boolean
-    refetchInterval?: number
-    retry?: boolean | number
-    retryDelay?: number
-    enabled?: boolean
-  }
-}
-```
-
-#### - Return:
-
-WordPress Object Array
-
-#### - Example:
-
-```javascript
-// get all posts that author_id = 1
-const posts = useMany({
-  resource: 'posts',
-  args: {
-    author: 1,
-  },
-})
-```
+This command will build the release version and publish the plugin `zip` file to Github.
+The user installed your plugin will receive a notification.
 
 ---
 
