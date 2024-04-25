@@ -8,7 +8,7 @@ async function main() {
   // can be shell command or callback function
 
   const commands = [
-    `git clone git@github.com:j7-dev/wp-react-plugin.git ${projectName}`,
+    `git clone https://github.com/j7-dev/wp-react-plugin.git ${projectName}`,
     `cd ${projectName}`,
     'yarn',
     `node ./replace-string.cjs ${projectName}`,
