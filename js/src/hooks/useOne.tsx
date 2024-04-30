@@ -1,6 +1,7 @@
 import { getResource } from '@/api'
 import { useQuery, UndefinedInitialDataOptions } from '@tanstack/react-query'
-import { TPostArgs, TDataProvider } from '@/types'
+import { TDataProvider } from '@/types'
+import { TPostArgs } from '@/types/wpRestApi'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 export function useOne<Response = unknown, Config = unknown>(options: {
