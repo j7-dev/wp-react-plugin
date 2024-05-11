@@ -36,11 +36,11 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		const GITHUB_REPO = 'https://github.com/j7-dev/wp-react-plugin'; // change to your repo URL
 
 		/**
-		 * Github Personal Access Token
+		 * Plugin Update Checker Personal Access Token
 		 *
 		 * @var string
 		 */
-		public static $github_pat;
+		public static $puc_pat;
 
 		/**
 		 * Plugin Directory
@@ -94,7 +94,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 			\add_action( 'tgmpa_register', array( $this, 'register_required_plugins' ) );
 			\add_action( 'plugins_loaded', array( $this, 'check_required_plugins' ) );
 
-			$this->set_github_pat();
+			$this->set_puc_pat();
 			$this->plugin_update_checker();
 		}
 
@@ -140,7 +140,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 				 */
 				$update_checker->setBranch( 'master' );
 				// if your repo is private, you need to set authentication
-				// $update_checker->setAuthentication(self::$github_pat);
+				// $update_checker->setAuthentication( self::$puc_pat );
 				$update_checker->getVcsApi()->enableReleaseAssets();
 			} catch ( \Throwable $th ) { // phpcs:ignore
 				// throw $th;
@@ -243,20 +243,19 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 		}
 
 		/**
-		 * Set Github Personal Access Token
+		 * Set Plugin Update Checker Personal Access Token
 		 *
-		 * @return void
+		 * @return array
 		 */
-		private function set_github_pat() {
-			// spilt your Github personal access token into 4 parts
-			// because Github will revoke the token if it's exposed
-			$a   = array( 'ghp_xxxx' );
-			$b   = array( 'xxxxxxxxx' );
-			$c   = array( 'xxxxxxxxx' );
-			$d   = array( 'xxxxxxxxx' );
-			$arr = array_merge( $a, $b, $c, $d );
-			$pat = implode( '', $arr );
-			self::$github_pat = $pat;
+		public static function set_puc_pat(): void{
+			$env_file = __DIR__ . '/.puc_pat';
+
+			// Check if .env file exists
+			if ( file_exists( $env_file ) ) {
+					// Read contents of .env file
+					$env_contents = file_get_contents( $env_file );
+					self::$puc_pat = trim($env_contents);
+			}
 		}
 
 		/**
