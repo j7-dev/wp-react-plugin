@@ -18,6 +18,7 @@ release/*
 !release/*.cjs
 .env
 !js/dist/vite-dev-server.json
+.puc_pat
 
 # Editor directories and files
 .vscode/*
