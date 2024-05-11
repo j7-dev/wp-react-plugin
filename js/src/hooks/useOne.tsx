@@ -1,5 +1,5 @@
 import { getResource } from '@/api'
-import { useQuery, UndefinedInitialDataOptions } from '@tanstack/react-query'
+import { useQuery, UseQueryOptions } from '@tanstack/react-query'
 import { TDataProvider } from '@/types'
 import { TPostArgs } from '@/types/wpRestApi'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
@@ -12,7 +12,10 @@ export function useOne<Response = unknown, Config = unknown>(options: {
     [key: string]: any
   }
   config?: AxiosRequestConfig<{ [key: string]: any }> | undefined
-  queryOptions?: UndefinedInitialDataOptions<AxiosResponse<Response, Config>>
+  queryOptions: Omit<
+    UseQueryOptions<AxiosResponse<Response, Config>>,
+    'queryKey'
+  >
 }) {
   const resource = options?.resource || 'post'
   const dataProvider = options?.dataProvider || 'wp-rest'
