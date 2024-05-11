@@ -77,11 +77,11 @@ final class Bootstrap extends Singleton {
 			Plugin::SNAKE . '_data',
 			array(
 				'env' => array(
-					'siteUrl'       => \site_url(),
-					'ajaxUrl'       => \admin_url( 'admin-ajax.php' ),
+					'siteUrl'       => \untrailingslashit( \site_url() ),
+					'ajaxUrl'       => \untrailingslashit( \admin_url( 'admin-ajax.php' ) ),
 					'userId'        => \wp_get_current_user()->data->ID ?? null,
 					'postId'        => $post_id,
-					'permalink'     => $permalink,
+					'permalink'     => \untrailingslashit( $permalink ),
 					'APP_NAME'      => Plugin::APP_NAME,
 					'KEBAB'         => Plugin::KEBAB,
 					'SNAKE'         => Plugin::SNAKE,

@@ -1,5 +1,5 @@
+import React from 'react'
 import { useMany } from '@/hooks'
-import { renderHTML } from 'antd-toolkit'
 import defaultImage from '@/assets/images/defaultImage.jpg'
 import { TPost, TImage } from '@/types/wpRestApi'
 
@@ -65,6 +65,12 @@ const GetPostsPage = () => {
       )}
     </>
   )
+}
+
+function renderHTML(HTMLstring: string) {
+  return React.createElement('div', {
+    dangerouslySetInnerHTML: { __html: HTMLstring },
+  })
 }
 
 export default GetPostsPage
