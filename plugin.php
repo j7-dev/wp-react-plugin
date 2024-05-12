@@ -10,7 +10,7 @@
  * Author URI:        https://github.com/j7-dev
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wp-react-plugin
+ * Text Domain:       wp_react_plugin
  * Domain Path:       /languages
  * Tags: vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin
  */
