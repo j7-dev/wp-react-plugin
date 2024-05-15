@@ -1,3 +1,4 @@
+storybook-static
 .pnpm-store
 **/dist/**
 **/node_modules/**
@@ -11,4 +12,3 @@ php/**
 /index.mjs
 /plugins
 /shared
-/utils
