@@ -1,4 +1,5 @@
 
+storybook-static
 .pnpm-store
 *.lock
 **/dist/**
@@ -15,4 +16,3 @@ pnpm-lock.yaml
 /index.mjs
 /plugins
 /shared
-/utils
