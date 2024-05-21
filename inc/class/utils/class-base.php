@@ -25,4 +25,21 @@ abstract class Base {
 	public static function is_hpos_enabled(): bool {
 		return class_exists( \Automattic\WooCommerce\Utilities\OrderUtil::class ) && \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled();
 	}
+
+	/**
+	 * Delete post meta by meta id
+	 *
+	 * @param int $mid - meta id
+	 * @return string
+	 */
+	public static function delete_post_meta_by_mid( $mid ) {
+		global $wpdb;
+
+		// 执行删除查询
+		$deleted = $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}postmeta WHERE meta_id = %d", $mid ) );
+
+		$delete_success = $deleted !== false;
+
+		return $delete_success;
+	}
 }

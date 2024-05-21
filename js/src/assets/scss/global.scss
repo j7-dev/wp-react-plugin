@@ -47,6 +47,10 @@ div[class^="ant-"] {
 			@apply pb-0 text-xs;
 		}
 	}
+
+	&:focus-visible {
+		outline: unset;
+	}
 }
 
 @media print {
