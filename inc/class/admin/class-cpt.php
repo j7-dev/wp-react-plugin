@@ -191,7 +191,7 @@ final class CPT {
 	 */
 	public function render_meta_box(): void {
 		// phpcs:ignore
-		echo '<div id="' . Base::APP2_SELECTOR . '"></div>';
+		echo '<div id="my_app_metabox"></div>';
 	}
 
 

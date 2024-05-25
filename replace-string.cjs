@@ -58,6 +58,8 @@ function replaceString(str) {
     files: [
       './plugin.php',
       './inc/class/utils/class-base.php',
+      './inc/class/admin/class-cpt.php',
+      './inc/class/front-end/class-entry.php',
       './inc/templates/test.php',
       './js/src/utils/env.tsx',
     ],
@@ -125,7 +127,7 @@ function replaceString(str) {
     },
     {
       from: 'https://github.com/j7-dev',
-      to: 'Author URL',
+      to: '[YOUR GITHUB URL]',
     },
   ]
 

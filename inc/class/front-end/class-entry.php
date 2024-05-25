@@ -26,7 +26,7 @@ final class Entry {
 	 */
 	public function render_app(): void {
 		// phpcs:ignore
-		echo '<div id="' . Base::APP1_SELECTOR . '"></div>';
+		echo '<div id="my_app"></div>';
 	}
 }
 
