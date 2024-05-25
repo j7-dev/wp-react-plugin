@@ -7,15 +7,14 @@ declare (strict_types = 1);
 
 namespace J7\WpReactPlugin;
 
-use Micropackage\Singleton\Singleton;
 use J7\WpReactPlugin\Utils\Base;
 use Kucrut\Vite;
 
 /**
  * Class Bootstrap
  */
-final class Bootstrap extends Singleton {
-
+final class Bootstrap {
+	use \J7\WpUtils\Traits\SingletonTrait;
 
 	/**
 	 * Constructor
@@ -64,7 +63,7 @@ final class Bootstrap extends Singleton {
 			Plugin::$dir . '/js/dist',
 			'js/src/main.tsx',
 			array(
-				'handle'    => Plugin::KEBAB,
+				'handle'    => Plugin::$kebab,
 				'in-footer' => true,
 			)
 		);
@@ -73,8 +72,8 @@ final class Bootstrap extends Singleton {
 		$permalink = \get_permalink( $post_id );
 
 		\wp_localize_script(
-			Plugin::KEBAB,
-			Plugin::SNAKE . '_data',
+			Plugin::$kebab,
+			Plugin::$snake . '_data',
 			array(
 				'env' => array(
 					'siteUrl'       => \untrailingslashit( \site_url() ),
@@ -82,20 +81,20 @@ final class Bootstrap extends Singleton {
 					'userId'        => \wp_get_current_user()->data->ID ?? null,
 					'postId'        => $post_id,
 					'permalink'     => \untrailingslashit( $permalink ),
-					'APP_NAME'      => Plugin::APP_NAME,
-					'KEBAB'         => Plugin::KEBAB,
-					'SNAKE'         => Plugin::SNAKE,
+					'APP_NAME'      => Plugin::$app_name,
+					'KEBAB'         => Plugin::$kebab,
+					'SNAKE'         => Plugin::$snake,
 					'BASE_URL'      => Base::BASE_URL,
 					'APP1_SELECTOR' => Base::APP1_SELECTOR,
 					'APP2_SELECTOR' => Base::APP2_SELECTOR,
 					'API_TIMEOUT'   => Base::API_TIMEOUT,
-					'nonce'         => \wp_create_nonce( Plugin::KEBAB ),
+					'nonce'         => \wp_create_nonce( Plugin::$kebab ),
 				),
 			)
 		);
 
 		\wp_localize_script(
-			Plugin::KEBAB,
+			Plugin::$kebab,
 			'wpApiSettings',
 			array(
 				'root'  => \untrailingslashit( \esc_url_raw( rest_url() ) ),

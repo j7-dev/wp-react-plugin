@@ -24,9 +24,7 @@
   },
   "require": {
     "kucrut/vite-for-wp": "^0.8.0",
-    "yahnis-elsts/plugin-update-checker": "^5.3",
-    "j7-dev/tgm-plugin-activation-forked": "1.2.2",
-    "micropackage/singleton": "^1.1"
+    "j7-dev/wp-utils": "0.0.8"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "@stable",

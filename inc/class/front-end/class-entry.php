@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace J7\WpReactPlugin\FrontEnd;
 
-use Micropackage\Singleton\Singleton;
 use J7\WpReactPlugin\Utils\Base;
 /**
  * Class Entry
  */
-final class Entry extends Singleton {
+final class Entry {
+	use \J7\WpUtils\Traits\SingletonTrait;
 
 	/**
 	 * Constructor
@@ -30,4 +30,4 @@ final class Entry extends Singleton {
 	}
 }
 
-Entry::get();
+Entry::instance();

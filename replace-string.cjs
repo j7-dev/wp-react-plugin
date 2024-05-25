@@ -104,8 +104,8 @@ function replaceString(str) {
       to: '0.0.1',
     },
     {
-      from: "'https://github.com/j7-dev/wp-react-plugin';",
-      to: "''; // change to your github repo",
+      from: "'https://github.com/j7-dev/wp-react-plugin',",
+      to: "'', // change to your github repo url",
     },
     {
       from: 'WP React Plugin (DEV)',
