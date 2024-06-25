@@ -18,7 +18,7 @@ final class Entry {
 	 * Constructor
 	 */
 	public function __construct() {
-		\add_action( 'wp_footer', array( $this, 'render_app' ) );
+		\add_action( 'wp_footer', [ $this, 'render_app' ] );
 	}
 
 	/**

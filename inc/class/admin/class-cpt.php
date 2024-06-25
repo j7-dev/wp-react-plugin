@@ -21,41 +21,41 @@ final class CPT {
 	 *
 	 * @var array
 	 */
-	public $post_meta_array = array();
+	public $post_meta_array = [];
 	/**
 	 * Rewrite
 	 *
 	 * @var array
 	 */
-	public $rewrite = array();
+	public $rewrite = [];
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$args                  = array(
-			'post_meta_array' => array( 'meta', 'settings' ),
-			'rewrite'         => array(
+		$args                  = [
+			'post_meta_array' => [ 'meta', 'settings' ],
+			'rewrite'         => [
 				'template_path' => 'test.php',
 				'slug'          => 'test',
 				'var'           => Plugin::$snake . '_test',
-			),
-		);
+			],
+		];
 		$this->post_meta_array = $args['post_meta_array'];
-		$this->rewrite         = $args['rewrite'] ?? array();
+		$this->rewrite         = $args['rewrite'] ?? [];
 
-		\add_action( 'init', array( $this, 'init' ) );
+		\add_action( 'init', [ $this, 'init' ] );
 
 		if ( ! empty( $args['post_meta_array'] ) ) {
-			\add_action( 'rest_api_init', array( $this, 'add_post_meta' ) );
+			\add_action( 'rest_api_init', [ $this, 'add_post_meta' ] );
 		}
 
-		\add_action( 'load-post.php', array( $this, 'init_metabox' ) );
-		\add_action( 'load-post-new.php', array( $this, 'init_metabox' ) );
+		\add_action( 'load-post.php', [ $this, 'init_metabox' ] );
+		\add_action( 'load-post-new.php', [ $this, 'init_metabox' ] );
 
 		if ( ! empty( $args['rewrite'] ) ) {
-			\add_filter( 'query_vars', array( $this, 'add_query_var' ) );
-			\add_filter( 'template_include', array( $this, 'load_custom_template' ), 99 );
+			\add_filter( 'query_vars', [ $this, 'add_query_var' ] );
+			\add_filter( 'template_include', [ $this, 'load_custom_template' ], 99 );
 		}
 	}
 
@@ -77,7 +77,7 @@ final class CPT {
 	 */
 	public static function register_cpt(): void {
 
-		$labels = array(
+		$labels = [
 			'name'                     => \esc_html__( 'my-app', 'wp_react_plugin' ),
 			'singular_name'            => \esc_html__( 'my-app', 'wp_react_plugin' ),
 			'add_new'                  => \esc_html__( 'Add new', 'wp_react_plugin' ),
@@ -109,8 +109,8 @@ final class CPT {
 			'item_reverted_to_draft'   => \esc_html__( 'my-app reverted to draft', 'wp_react_plugin' ),
 			'item_scheduled'           => \esc_html__( 'my-app scheduled', 'wp_react_plugin' ),
 			'item_updated'             => \esc_html__( 'my-app updated', 'wp_react_plugin' ),
-		);
-		$args   = array(
+		];
+		$args   = [
 			'label'                 => \esc_html__( 'my-app', 'wp_react_plugin' ),
 			'labels'                => $labels,
 			'description'           => '',
@@ -131,13 +131,13 @@ final class CPT {
 			'menu_position'         => 6,
 			'menu_icon'             => 'dashicons-store',
 			'capability_type'       => 'post',
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author' ),
-			'taxonomies'            => array(),
+			'supports'              => [ 'title', 'editor', 'thumbnail', 'custom-fields', 'author' ],
+			'taxonomies'            => [],
 			'rest_controller_class' => 'WP_REST_Posts_Controller',
-			'rewrite'               => array(
+			'rewrite'               => [
 				'with_front' => true,
-			),
-		);
+			],
+		];
 
 		\register_post_type( 'my-app', $args );
 	}
@@ -150,11 +150,11 @@ final class CPT {
 			\register_meta(
 				'post',
 				Plugin::$snake . '_' . $meta_key,
-				array(
+				[
 					'type'         => 'string',
 					'show_in_rest' => true,
 					'single'       => true,
-				)
+				]
 			);
 		}
 	}
@@ -163,9 +163,9 @@ final class CPT {
 	 * Meta box initialization.
 	 */
 	public function init_metabox(): void {
-		\add_action( 'add_meta_boxes', array( $this, 'add_metabox' ) );
-		\add_action( 'save_post', array( $this, 'save_metabox' ), 10, 2 );
-		\add_filter( 'rewrite_rules_array', array( $this, 'custom_post_type_rewrite_rules' ) );
+		\add_action( 'add_meta_boxes', [ $this, 'add_metabox' ] );
+		\add_action( 'save_post', [ $this, 'save_metabox' ], 10, 2 );
+		\add_filter( 'rewrite_rules_array', [ $this, 'custom_post_type_rewrite_rules' ] );
 	}
 
 	/**
@@ -174,11 +174,11 @@ final class CPT {
 	 * @param string $post_type Post type.
 	 */
 	public function add_metabox( string $post_type ): void {
-		if ( in_array( $post_type, array( Plugin::$kebab ) ) ) {
+		if ( in_array( $post_type, [ Plugin::$kebab ] ) ) {
 			\add_meta_box(
 				Plugin::$kebab . '-metabox',
 				__( 'My App', 'wp_react_plugin' ),
-				array( $this, 'render_meta_box' ),
+				[ $this, 'render_meta_box' ],
 				$post_type,
 				'advanced',
 				'high'
