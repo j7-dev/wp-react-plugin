@@ -35,6 +35,7 @@
 		<exclude name="WordPress.Files.FileName"/>
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+		<exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"/>
 	</rule>
 
 	<exclude-pattern>./release/*</exclude-pattern>
@@ -98,6 +99,12 @@
 	<rule ref="Generic.Files.LineEndings">
 		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
 	</rule>
+
+	<!-- 允許單行 <?php. -->
+  <rule ref="Squiz.PHP.EmbeddedPhp.ContentAfterOpen">
+    <severity>0</severity>
+  </rule>
+
 
 
 
