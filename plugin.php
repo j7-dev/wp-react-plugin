@@ -15,7 +15,7 @@
  * Tags: vite, react, tailwind, typescript, react-query, scss, WordPress, WordPress plugin
  */
 
-declare (strict_types = 1);
+declare ( strict_types=1 );
 
 namespace J7\WpReactPlugin;
 
@@ -54,7 +54,7 @@ if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
 				[
 					'app_name'    => 'My App',
 					'github_repo' => 'https://github.com/j7-dev/wp-react-plugin',
-					'callback'    => [ '\J7\WpReactPlugin\Bootstrap', 'instance' ],
+					'callback'    => [ Bootstrap::class, 'instance' ],
 				]
 			);
 		}
