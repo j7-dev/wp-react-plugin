@@ -30,7 +30,7 @@ div[class^="ant-"] {
 		outline: none !important;
 	}
 	span.from {
-		@apply hidden;
+		display: none;
 	}
 
 	input[class*="ant-input"],
