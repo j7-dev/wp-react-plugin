@@ -34,19 +34,19 @@
     <rule ref="WordPress">
         <exclude name="WordPress.Files.FileName"/>
         <exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+        <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"/>
+        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket"/>
+        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket"/>
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceAfterOpenParenthesis"/>
         <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore"/>
         <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter"/>
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis"/>
         <exclude name="WordPress.DateTime.RestrictedFunctions.date_date"/>
-        <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"/>
-        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket"/>
-        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket"/>
-				<exclude name="PEAR.Functions.FunctionCallSignature.Indent"/>
-				<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
         <exclude name="Generic.Commenting.DocComment.MissingShort"/>
         <exclude name="Universal.Operators.DisallowShortTernary.Found"/>
-				<exclude name="Universal.Classes.RequireFinalClass.NonFinalClassFound"/>
+        <exclude name="PEAR.Functions.FunctionCallSignature.Indent"/>
+				<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
     </rule>
 
     <exclude-pattern>.idea/*</exclude-pattern>
