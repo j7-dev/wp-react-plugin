@@ -1,36 +1,36 @@
 {
-  "arrowParens": "always",
-  "bracketSpacing": true,
-  "parenSpacing": true,
-  "printWidth": 80,
-  "semi": false,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "all",
-  "useTabs": false,
-  "endOfLine": "auto",
-  "multilineArraysWrapThreshold": 4,
-  "plugins": [
-    "eslint-plugin-prettier",
-    "prettier-plugin-multiline-arrays"
-  ],
-  "overrides": [
-    {
-      "files": ["*.json"],
-      "options": {
-        "singleQuote": false
-      }
-    },
-    {
-      "files": [
-        "*.yaml",
-        "*.yml"
-      ],
-      "options": {
-        "singleQuote": false,
-        "tabWidth": 2,
-        "useTabs": false
-      }
-    }
-  ]
+	"arrowParens": "always",
+	"bracketSpacing": true,
+	"parenSpacing": true,
+	"printWidth": 80,
+	"semi": false,
+	"singleQuote": true,
+	"tabWidth": 2,
+	"trailingComma": "all",
+	"useTabs": true,
+	"endOfLine": "auto",
+	"multilineArraysWrapThreshold": 4,
+	"plugins": [
+		"eslint-plugin-prettier",
+		"prettier-plugin-multiline-arrays"
+	],
+	"overrides": [
+		{
+			"files": ["*.json"],
+			"options": {
+				"singleQuote": false
+			}
+		},
+		{
+			"files": [
+				"*.yaml",
+				"*.yml"
+			],
+			"options": {
+				"singleQuote": false,
+				"tabWidth": 2,
+				"useTabs": false
+			}
+		}
+	]
 }

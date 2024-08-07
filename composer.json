@@ -1,37 +1,42 @@
 {
-  "name": "j7-dev/wp-react-plugin",
-  "description": "This is a boilerplate for creating a WordPress plugin with React, Tailwind, Ant Design, TypeScript, Zod, MSW, React Router v6, React Query v4, SCSS and Vite.",
-  "type": "wordpress-plugin",
-  "license": "GPL-2.0-only",
-  "authors": [
-    {
-      "name": "JerryLiu",
-      "email": "j7.dev.gg@gmail.com",
-      "homepage": "https://github.com/j7-dev",
-      "role": "Developer"
-    }
-  ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
-    }
-  ],
-  "config": {
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
-    }
-  },
-  "require": {
-    "kucrut/vite-for-wp": "^0.8.0",
-    "j7-dev/wp-utils": "0.0.14"
-  },
-  "require-dev": {
-    "squizlabs/php_codesniffer": "@stable",
-    "wp-coding-standards/wpcs": "@stable",
-    "dealerdirect/phpcodesniffer-composer-installer": "@stable"
-  },
-  "scripts": {
-    "lint": "phpcs"
-  }
+	"name": "j7-dev/wp-react-plugin",
+	"description": "This is a boilerplate for creating a WordPress plugin with React, Tailwind, Ant Design, TypeScript, Zod, MSW, React Router v6, React Query v4, SCSS and Vite.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-only",
+	"authors": [
+		{
+			"name": "JerryLiu",
+			"email": "j7.dev.gg@gmail.com",
+			"homepage": "https://github.com/j7-dev",
+			"role": "Developer"
+		}
+	],
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org"
+		}
+	],
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"require": {
+		"kucrut/vite-for-wp": "^0.8.0",
+		"j7-dev/wp-utils": "0.0.14"
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "@stable",
+		"wp-coding-standards/wpcs": "@stable",
+		"dealerdirect/phpcodesniffer-composer-installer": "@stable",
+		"phpcompatibility/php-compatibility": "@stable",
+		"phpstan/phpstan": "^1.11",
+		"php-stubs/woocommerce-stubs": "^9.0",
+		"php-stubs/wordpress-stubs": "^6.5",
+		"phpstan/extension-installer": "^1.4"
+	},
+	"scripts": {
+		"lint": "phpcs"
+	}
 }

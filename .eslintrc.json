@@ -27,6 +27,7 @@
 		"prettier"
 	],
 	"rules": {
+		"quote-props": "off",
 		"@typescript-eslint/no-explicit-any": "warn",
 		"@wordpress/no-unused-vars-before-return": "off",
 		"semi": [
@@ -52,7 +53,7 @@
 			"error",
 			{
 				"endOfLine": "auto",
-				"useTabs": false,
+				"useTabs": true,
 				"tabWidth": 2,
 				"prettier-multiline-arrays-set-threshold": 1
 			}
@@ -69,10 +70,6 @@
 			"error"
 		],
 		"camelcase": "off",
-		"quote-props": [
-			"error",
-			"consistent"
-		],
 		"jsdoc/valid-types": "off",
 		"@typescript-eslint/no-unused-vars": [
 			"warn",
