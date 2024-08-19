@@ -16,7 +16,9 @@
 	],
 	"overrides": [
 		{
-			"files": ["*.json"],
+			"files": [
+				"*.json"
+			],
 			"options": {
 				"singleQuote": false
 			}
