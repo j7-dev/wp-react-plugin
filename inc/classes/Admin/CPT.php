@@ -7,9 +7,11 @@ declare(strict_types=1);
 
 namespace J7\WpReactPlugin\Admin;
 
-use J7\WpReactPlugin\Utils\Base;
 use J7\WpReactPlugin\Plugin;
 
+if (class_exists('J7\WpReactPlugin\Admin\CPT')) {
+	return;
+}
 /**
  * Class CPT
  */
@@ -283,5 +285,3 @@ final class CPT {
 		return $template;
 	}
 }
-
-CPT::instance();

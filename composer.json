@@ -17,6 +17,11 @@
 			"url": "https://wpackagist.org"
 		}
 	],
+	"autoload": {
+		"psr-4": {
+			"J7\\WpReactPlugin\\": "inc/classes/"
+		}
+	},
 	"config": {
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true,

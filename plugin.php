@@ -19,46 +19,46 @@ declare ( strict_types=1 );
 
 namespace J7\WpReactPlugin;
 
-if ( ! \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
-	require_once __DIR__ . '/vendor/autoload.php';
+if ( \class_exists( 'J7\WpReactPlugin\Plugin' ) ) {
+	return;
+}
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+/**
+ * Class Plugin
+ */
+final class Plugin {
+	use \J7\WpUtils\Traits\PluginTrait;
+	use \J7\WpUtils\Traits\SingletonTrait;
 
 	/**
-	 * Class Plugin
+	 * Constructor
 	 */
-	final class Plugin {
-		use \J7\WpUtils\Traits\PluginTrait;
-		use \J7\WpUtils\Traits\SingletonTrait;
+	public function __construct() {
+		// $this->required_plugins = array(
+		// array(
+		// 'name'     => 'WooCommerce',
+		// 'slug'     => 'woocommerce',
+		// 'required' => true,
+		// 'version'  => '7.6.0',
+		// ),
+		// array(
+		// 'name'     => 'WP Toolkit',
+		// 'slug'     => 'wp-toolkit',
+		// 'source'   => 'Author URL/wp-toolkit/releases/latest/download/wp-toolkit.zip',
+		// 'required' => true,
+		// ),
+		// );
 
-		/**
-		 * Constructor
-		 */
-		public function __construct() {
-			require_once __DIR__ . '/inc/class/class-bootstrap.php';
-
-			// $this->required_plugins = array(
-			// array(
-			// 'name'     => 'WooCommerce',
-			// 'slug'     => 'woocommerce',
-			// 'required' => true,
-			// 'version'  => '7.6.0',
-			// ),
-			// array(
-			// 'name'     => 'WP Toolkit',
-			// 'slug'     => 'wp-toolkit',
-			// 'source'   => 'Author URL/wp-toolkit/releases/latest/download/wp-toolkit.zip',
-			// 'required' => true,
-			// ),
-			// );
-
-			$this->init(
-				[
-					'app_name'    => 'My App',
-					'github_repo' => 'https://github.com/j7-dev/wp-react-plugin',
-					'callback'    => [ Bootstrap::class, 'instance' ],
-				]
-			);
-		}
+		$this->init(
+			[
+				'app_name'    => 'My App',
+				'github_repo' => 'https://github.com/j7-dev/wp-react-plugin',
+				'callback'    => [ Bootstrap::class, 'instance' ],
+			]
+		);
 	}
-
-	Plugin::instance();
 }
+
+Plugin::instance();

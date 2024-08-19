@@ -7,6 +7,9 @@ declare (strict_types = 1);
 
 namespace J7\WpReactPlugin\Utils;
 
+if (class_exists('J7\WpReactPlugin\Utils\Base')) {
+	return;
+}
 /**
  * Class Base
  */
