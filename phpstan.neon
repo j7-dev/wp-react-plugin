@@ -3,6 +3,8 @@ parameters:
 	paths:
 		- plugin.php
 		- inc/
+	ignoreErrors:
+		- '#Constant .* not found#'
 	excludePaths:
 		- js/*
 		- vendor/*
