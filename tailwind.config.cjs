@@ -50,10 +50,13 @@ module.exports = {
 				'.tw-fixed': {
 					position: 'fixed',
 				},
+				'.tw-inline': {
+					display: 'inline'
+				}
 			}
 			addUtilities(newUtilities, ['responsive', 'hover'])
 		},
 	],
 	safelist: [],
-	blocklist: ['fixed', 'columns-1', 'columns-2', 'hidden'],
+	blocklist: ['fixed', 'columns-1', 'columns-2', 'hidden', 'inline'],
 }
