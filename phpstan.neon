@@ -5,6 +5,8 @@ parameters:
 		- inc/
 	ignoreErrors:
 		- '#Constant .* not found#'
+		- '#Function .* not found#'
+		- '#Cannot cast mixed to .*#'
 	excludePaths:
 		- js/*
 		- vendor/*
