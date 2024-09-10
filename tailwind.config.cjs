@@ -4,6 +4,7 @@ module.exports = {
 	important: true,
 	corePlugins: {
 		preflight: false,
+		container: false,
 	},
 	content: ['./js/src/**/*.{js,ts,jsx,tsx}', './inc/**/*.php'],
 	theme: {
@@ -58,5 +59,5 @@ module.exports = {
 		},
 	],
 	safelist: [],
-	blocklist: ['fixed', 'columns-1', 'columns-2', 'hidden', 'inline', 'container'],
+	blocklist: ['fixed', 'columns-1', 'columns-2', 'hidden', 'inline'],
 }
