@@ -28,7 +28,7 @@ module.exports = {
 		push: release,
 	},
 	hooks: {
-		'before:init': ['yarn i18n', 'git add .'], // run before initialization
+		// 'before:init': [], // run before initialization
 		// 'after:[my-plugin]:bump': './bin/my-script.sh', // run after bumping version of my-plugin
 		'after:bump': [
 			'yarn build && echo ✅ build success',
