@@ -92,6 +92,22 @@ function replaceString(str) {
 
 	replace.sync({
 		files: [
+			'./package.json',
+		],
+		from: /create-wp-react-plugin/g,
+		to: kebabName,
+	})
+
+	replace.sync({
+		files: [
+			'./package.json',
+		],
+		from: /"version": "[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}"/,
+		to: '"version": "0.0.1"',
+	})
+
+	replace.sync({
+		files: [
 			'./plugin.php',
 			'./inc/class/admin/class-cpt.php',
 		],
@@ -127,6 +143,10 @@ function replaceString(str) {
 			to: '* Author:            Your Name',
 		},
 		{
+			from: "'app_name'    => 'Wp React Plugin'",
+			to: `'app_name'    => '${str}'`,
+		},
+		{
 			from: 'https://github.com/j7-dev',
 			to: '[YOUR GITHUB URL]',
 		},
@@ -145,6 +165,8 @@ function replaceString(str) {
 			to,
 		})
 	})
+
+
 }
 
 replaceString(projectName)
