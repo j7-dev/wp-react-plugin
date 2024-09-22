@@ -36,24 +36,26 @@ final class Plugin {
 	 * Constructor
 	 */
 	public function __construct() {
-		// $this->required_plugins = array(
-		// array(
+		// if your plugin depends on other plugins, you can add them here
+		// $this->required_plugins = [
+		// [
 		// 'name'     => 'WooCommerce',
 		// 'slug'     => 'woocommerce',
 		// 'required' => true,
 		// 'version'  => '7.6.0',
-		// ),
-		// array(
-		// 'name'     => 'WP Toolkit',
-		// 'slug'     => 'wp-toolkit',
-		// 'source'   => 'Author URL/wp-toolkit/releases/latest/download/wp-toolkit.zip',
+		// ],
+		// [
+		// 'name'     => 'Powerhouse',
+		// 'slug'     => 'powerhouse',
+		// 'source'   => 'https://github.com/j7-dev/wp-powerhouse/releases/latest/download/powerhouse.zip',
+		// 'version'  => '1.0.14',
 		// 'required' => true,
-		// ),
-		// );
+		// ],
+		// ];
 
 		$this->init(
 			[
-				'app_name'    => 'My App',
+				'app_name'    => 'Wp React Plugin',
 				'github_repo' => 'https://github.com/j7-dev/wp-react-plugin',
 				'callback'    => [ Bootstrap::class, 'instance' ],
 			]

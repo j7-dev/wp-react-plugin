@@ -19,7 +19,8 @@
 		"zip": "env-cmd -f ./.env node ./release/zip.cjs",
 		"create:release": "env-cmd -f ./.env node ./release/create-release.cjs",
 		"sync:version": "wp-update-project-version -s package.json -p plugin.php",
-		"replace-string": "node ./replace-string.cjs"
+		"replace-string": "node ./replace-string.cjs",
+		"i18n": "wp i18n make-pot . languages/wp_react_plugin.pot"
 	},
 	"dependencies": {
 		"@tanstack/react-query": "4.36.1",

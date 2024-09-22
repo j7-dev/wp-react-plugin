@@ -30,17 +30,17 @@
 	},
 	"require": {
 		"kucrut/vite-for-wp": "^0.8.0",
-		"j7-dev/wp-utils": "0.2.9"
+		"j7-dev/wp-utils": "0.2.27"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "@stable",
 		"wp-coding-standards/wpcs": "@stable",
 		"dealerdirect/phpcodesniffer-composer-installer": "@stable",
 		"phpcompatibility/php-compatibility": "@stable",
-		"phpstan/phpstan": "^1.11",
-		"php-stubs/woocommerce-stubs": "^9.0",
-		"php-stubs/wordpress-stubs": "^6.5",
-		"phpstan/extension-installer": "^1.4"
+		"phpstan/phpstan": "^1.11.9",
+		"php-stubs/woocommerce-stubs": "^9.1",
+		"php-stubs/wordpress-stubs": "^6.6",
+		"phpstan/extension-installer": "^1.4.1"
 	},
 	"scripts": {
 		"lint": "phpcs"
