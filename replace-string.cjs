@@ -102,6 +102,14 @@ function replaceString(str) {
 		files: [
 			'./package.json',
 		],
+		from: "wp i18n make-pot . languages/wp_react_plugin.pot",
+		to: `wp i18n make-pot . languages/${snakeName}.pot`,
+	})
+
+	replace.sync({
+		files: [
+			'./package.json',
+		],
 		from: /"version": "[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}"/,
 		to: '"version": "0.0.1"',
 	})
