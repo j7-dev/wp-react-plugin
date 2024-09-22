@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line no-undef
 module.exports = {
-	important: true,
+	// important: '.tailwind', // you need to use tailwindcss in a .tailwind class
 	corePlugins: {
 		preflight: false,
-		container: false,
+		container: false, // conflicted with WordPress
 	},
 	content: ['./js/src/**/*.{js,ts,jsx,tsx}', './inc/**/*.php'],
 	theme: {
@@ -38,7 +38,7 @@ module.exports = {
 					direction: 'rtl',
 				},
 
-				// 與 WordPress 衝突的 class
+				// classes conflicted with WordPress
 				'.tw-hidden': {
 					display: 'none',
 				},
