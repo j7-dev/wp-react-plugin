@@ -37,7 +37,7 @@ function replaceString(str) {
 	replace.sync({
 		files: [
 			'./plugin.php',
-			'./inc/class/admin/class-cpt.php',
+			'./inc/classes/Admin/CPT.php',
 			'./js/src/utils/env.tsx',
 		],
 		from: /My App/g,
@@ -47,7 +47,7 @@ function replaceString(str) {
 	replace.sync({
 		files: [
 			'./plugin.php',
-			'./inc/class/admin/class-cpt.php',
+			'./inc/classes/Admin/CPT.php',
 			'./js/src/utils/env.tsx',
 		],
 		from: /my-app/g,
@@ -57,9 +57,9 @@ function replaceString(str) {
 	replace.sync({
 		files: [
 			'./plugin.php',
-			'./inc/class/utils/class-base.php',
-			'./inc/class/admin/class-cpt.php',
-			'./inc/class/front-end/class-entry.php',
+			'./inc/classes/Utils/Base.php',
+			'./inc/classes/Admin/CPT.php',
+			'./inc/classes/FrontEnd/Entry.php',
 			'./inc/templates/test.php',
 			'./js/src/utils/env.tsx',
 		],
@@ -71,10 +71,10 @@ function replaceString(str) {
 		files: [
 			'./composer.json',
 			'./plugin.php',
-			'./inc/class/class-bootstrap.php',
-			'./inc/class/admin/class-cpt.php',
-			'./inc/class/front-end/class-entry.php',
-			'./inc/class/utils/class-base.php',
+			'./inc/classes/Bootstrap.php',
+			'./inc/classes/Admin/CPT.php',
+			'./inc/classes/FrontEnd/Entry.php',
+			'./inc/classes/Utils/Base.php',
 		],
 		from: /WpReactPlugin/g,
 		to: pascalName,
@@ -117,7 +117,7 @@ function replaceString(str) {
 	replace.sync({
 		files: [
 			'./plugin.php',
-			'./inc/class/admin/class-cpt.php',
+			'./inc/classes/Admin/CPT.php',
 		],
 		from: /wp_react_plugin/g,
 		to: snakeName,
