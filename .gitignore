@@ -1,3 +1,6 @@
+composer.lock
+yarn.lock
+
 # Logs
 logs
 *.log
@@ -32,5 +35,3 @@ release/*
 *.sw?
 
 /vendor/
-
-composer.lock
