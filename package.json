@@ -1,6 +1,6 @@
 {
 	"name": "create-wp-react-plugin",
-	"version": "4.0.10",
+	"version": "4.0.11",
 	"type": "module",
 	"scripts": {
 		"bootstrap": "yarn install && composer install --no-interaction",
