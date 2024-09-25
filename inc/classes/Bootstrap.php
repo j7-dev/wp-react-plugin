@@ -79,7 +79,7 @@ final class Bootstrap {
 				'env' => [
 					'siteUrl'       => \untrailingslashit( \site_url() ),
 					'ajaxUrl'       => \untrailingslashit( \admin_url( 'admin-ajax.php' ) ),
-					'userId'        => \wp_get_current_user()->data->ID ?? null,
+					'userId'        => \get_current_user_id(),
 					'postId'        => $post_id,
 					'APP_NAME'      => Plugin::$app_name,
 					'KEBAB'         => Plugin::$kebab,

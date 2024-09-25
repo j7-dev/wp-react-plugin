@@ -274,7 +274,7 @@ final class CPT {
 	 *
 	 * @param string $template Template.
 	 */
-	public function load_custom_template( $template ) {
+	public function load_custom_template( $template ):string {
 		$repor_template_path = Plugin::$dir . '/inc/templates/' . $this->rewrite['template_path'];
 
 		if ( \get_query_var( $this->rewrite['var'] ) ) {
