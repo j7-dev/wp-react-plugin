@@ -3,7 +3,7 @@
 	"version": "4.0.11",
 	"type": "module",
 	"scripts": {
-		"bootstrap": "yarn install && composer install --no-interaction",
+		"bootstrap": "yarn && composer install --no-interaction",
 		"dev": "vite",
 		"prebuild": "echo 'todo: remove console'",
 		"build": "vite build && node release/mv-manifest.cjs",
