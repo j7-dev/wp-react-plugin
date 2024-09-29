@@ -77,7 +77,7 @@ final class CPT {
 	/**
 	 * Register my-app custom post type
 	 */
-	public static function register_cpt(): void {
+	public function register_cpt(): void {
 
 		$labels = [
 			'name'                     => \esc_html__( 'my-app', 'wp_react_plugin' ),
