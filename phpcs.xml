@@ -46,7 +46,8 @@
         <exclude name="Generic.Commenting.DocComment.MissingShort"/>
         <exclude name="Universal.Operators.DisallowShortTernary.Found"/>
         <exclude name="PEAR.Functions.FunctionCallSignature.Indent"/>
-				<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
+	<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
+	<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
     </rule>
 
     <exclude-pattern>.idea/*</exclude-pattern>
