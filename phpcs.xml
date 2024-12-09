@@ -48,6 +48,7 @@
         <exclude name="PEAR.Functions.FunctionCallSignature.Indent"/>
 	<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
 	<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+	<exclude name="Universal.Classes.RequireFinalClass.NonFinalClassFound"/>
     </rule>
 
     <exclude-pattern>.idea/*</exclude-pattern>
