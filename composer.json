@@ -30,7 +30,7 @@
 	},
 	"require": {
 		"kucrut/vite-for-wp": "^0.8.0",
-		"j7-dev/wp-utils": "0.2.51"
+		"j7-dev/wp-utils": "0.2.57"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "@stable",
