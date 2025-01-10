@@ -8,12 +8,12 @@ module.exports = {
 	},
 	content: ['./js/src/**/*.{js,ts,jsx,tsx}', './inc/**/*.php'],
 	theme: {
-		animation: {
-			// why need this? because elementor plugin might conflict with same animate keyframe name
-			// we override the animation name with this
-			pulse: 'tw-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-		},
 		extend: {
+			animation: {
+				// why need this? because elementor plugin might conflict with same animate keyframe name
+				// we override the animation name with this
+				pulse: 'tw-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			},
 			colors: {
 				primary: '#1677ff',
 			},
