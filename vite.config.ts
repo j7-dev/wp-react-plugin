@@ -8,6 +8,11 @@ import path from 'path'
 import { v4wp } from '@kucrut/vite-for-wp'
 
 export default {
+  server: {
+		cors: {
+			origin: '*',
+		},
+	},
   plugins: [
     alias(),
     react(),
