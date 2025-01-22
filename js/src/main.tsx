@@ -37,7 +37,7 @@ mapping.forEach(({ els, App }) => {
 			ReactDOM.createRoot(el).render(
 				<React.StrictMode>
 					<QueryClientProvider client={queryClient}>
-						<StyleProvider hashPriority="high">
+						<StyleProvider hashPriority="low">
 							<App />
 						</StyleProvider>
 						<ReactQueryDevtools initialIsOpen={false} />
