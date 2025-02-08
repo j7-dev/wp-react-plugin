@@ -46,12 +46,13 @@
         <exclude name="Generic.Commenting.DocComment.MissingShort"/>
         <exclude name="Universal.Operators.DisallowShortTernary.Found"/>
         <exclude name="PEAR.Functions.FunctionCallSignature.Indent"/>
-				<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
-				<exclude name="Universal.Classes.RequireFinalClass.NonFinalClassFound"/>
-				<exclude name="Squiz.Commenting.FunctionComment.MissingParamName"/>
-				<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
-				<exclude name="WordPress.PHP.NoSilencedErrors.Discouraged"/>
-				<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+	<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
+	<exclude name="Universal.Classes.RequireFinalClass.NonFinalClassFound"/>
+	<exclude name="Squiz.Commenting.FunctionComment.MissingParamName"/>
+	<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+	<exclude name="WordPress.PHP.NoSilencedErrors.Discouraged"/>
+	<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+	<exclude name="Squiz.Commenting.FileComment.Missing"/>
     </rule>
 
     <exclude-pattern>.idea/*</exclude-pattern>
