@@ -1,12 +1,15 @@
 parameters:
-	level: 6
+	level: 9
 	paths:
 		- plugin.php
 		- inc/
 	ignoreErrors:
+		- '#Access to constant .* on an unknown class#'
 		- '#Constant .* not found#'
 		- '#Function .* not found#'
 		- '#Cannot cast mixed to .*#'
+		- '#Using nullsafe method call on non-nullable type .*#'
+		- '#Call to function is_numeric\(\) with .*#'
 	excludePaths:
 		- js/*
 		- vendor/*
