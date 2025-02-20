@@ -31,19 +31,21 @@ const mapping = [
 	},
 ]
 
-mapping.forEach(({ els, App }) => {
-	if (!!els) {
-		els.forEach((el) => {
-			ReactDOM.createRoot(el).render(
-				<React.StrictMode>
-					<QueryClientProvider client={queryClient}>
-						<StyleProvider hashPriority="low">
-							<App />
-						</StyleProvider>
-						<ReactQueryDevtools initialIsOpen={false} />
-					</QueryClientProvider>
-				</React.StrictMode>,
-			)
-		})
-	}
+document.addEventListener('DOMContentLoaded', () => {
+	mapping.forEach(({ els, App }) => {
+		if (!!els) {
+			els.forEach((el) => {
+				ReactDOM.createRoot(el).render(
+					<React.StrictMode>
+						<QueryClientProvider client={queryClient}>
+							<StyleProvider hashPriority="low">
+								<App />
+							</StyleProvider>
+							<ReactQueryDevtools initialIsOpen={false} />
+						</QueryClientProvider>
+					</React.StrictMode>,
+				)
+			})
+		}
+	})
 })
