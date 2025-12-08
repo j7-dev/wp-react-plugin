@@ -45,7 +45,7 @@ export type TProduct = {
 	parent: number
 	type: string
 	variation: string
-	permalink: string
+	PERMALINK: string
 	sku: string
 	short_description: string
 	description: string
@@ -97,7 +97,7 @@ export const defaultProduct: TProduct = {
 	parent: 0,
 	type: '',
 	variation: '',
-	permalink: '',
+	PERMALINK: '',
 	sku: '',
 	short_description: '',
 	description: '',

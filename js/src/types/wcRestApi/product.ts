@@ -2,7 +2,7 @@ import { TImage } from '@/types/wpRestApi'
 
 export type TProductBase = {
 	id: number
-	permalink: string
+	PERMALINK: string
 	date_created: string
 	date_created_gmt: string
 	date_modified: string

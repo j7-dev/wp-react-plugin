@@ -1,13 +1,11 @@
 import axios, { AxiosInstance } from 'axios'
-import { apiUrl, apiTimeout } from '@/utils'
-
-const wpApiSettings = window?.wpApiSettings || {}
+import { API_URL, NONCE } from '@/utils'
 
 const instance: AxiosInstance = axios.create({
-	baseURL: apiUrl,
-	timeout: parseInt(apiTimeout, 10),
+	baseURL: API_URL,
+	timeout: 30000,
 	headers: {
-		'X-WP-Nonce': wpApiSettings?.nonce || '',
+		'X-WP-Nonce': NONCE,
 		'Content-Type': 'application/json',
 	},
 })

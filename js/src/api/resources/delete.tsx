@@ -1,5 +1,5 @@
 import { axios } from '@/api'
-import { apiUrl, getDataProviderUrlParams } from '@/utils'
+import { API_URL, getDataProviderUrlParams } from '@/utils'
 import { TDataProvider } from '@/types'
 import { AxiosRequestConfig } from 'axios'
 
@@ -16,7 +16,7 @@ export const deleteResource = async ({
 }) => {
 	const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
 	const deleteResult = await axios.delete(
-		`${apiUrl}/${dataProviderUrlParams}/${resource}/${pathParams.join('/')}`,
+		`${API_URL}/${dataProviderUrlParams}/${resource}/${pathParams.join('/')}`,
 		config,
 	)
 

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { app1Selector, app2Selector } from '@/utils'
+import { APP1_SELECTOR, APP2_SELECTOR } from '@/utils'
 import { StyleProvider } from '@ant-design/cssinjs'
 
 const App1 = React.lazy(() => import('./App1'))
@@ -17,8 +17,8 @@ const queryClient = new QueryClient({
 	},
 })
 
-const app1Nodes = document.querySelectorAll(app1Selector)
-const app2Nodes = document.querySelectorAll(app2Selector)
+const app1Nodes = document.querySelectorAll(APP1_SELECTOR)
+const app2Nodes = document.querySelectorAll(APP2_SELECTOR)
 
 const mapping = [
 	{

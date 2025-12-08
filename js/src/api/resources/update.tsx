@@ -1,5 +1,5 @@
 import { axios } from '@/api'
-import { apiUrl, getDataProviderUrlParams } from '@/utils'
+import { API_URL, getDataProviderUrlParams } from '@/utils'
 import { TDataProvider } from '@/types'
 import { AxiosRequestConfig } from 'axios'
 
@@ -20,7 +20,7 @@ export const updateResource = async ({
 }) => {
 	const dataProviderUrlParams = getDataProviderUrlParams(dataProvider)
 	const updateResult = await axios.post(
-		`${apiUrl}/${dataProviderUrlParams}/${resource}/${pathParams.join('/')}`,
+		`${API_URL}/${dataProviderUrlParams}/${resource}/${pathParams.join('/')}`,
 		args,
 		config,
 	)

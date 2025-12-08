@@ -14,7 +14,7 @@ export type TPost = {
 	status: 'publish' | 'future' | 'draft' | 'pending' | 'private'
 	type: string
 	password: string
-	permalink_template: string
+	PERMALINK_template: string
 	generated_slug: string
 	title: {
 		rendered: string

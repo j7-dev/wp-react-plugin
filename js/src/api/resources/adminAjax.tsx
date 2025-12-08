@@ -1,6 +1,6 @@
 /* eslint-disable quote-props */
 import { axios } from '@/api'
-import { ajaxUrl } from '@/utils'
+import { AJAX_URL } from '@/utils'
 import { AxiosRequestConfig } from 'axios'
 
 export type TAdminAjaxArgs = {
@@ -24,7 +24,7 @@ export const adminAjax = async ({
 		})
 	}
 
-	const result = await axios.post(ajaxUrl, formData, {
+	const result = await axios.post(AJAX_URL, formData, {
 		...config,
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

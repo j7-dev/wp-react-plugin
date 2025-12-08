@@ -58,7 +58,7 @@ export type TCartItem = {
 	backorders_allowed: boolean
 	show_backorder_badge: boolean
 	sold_individually: boolean
-	permalink: string
+	PERMALINK: string
 	images: TImage[]
 	variation: any[]
 	item_data: any[]

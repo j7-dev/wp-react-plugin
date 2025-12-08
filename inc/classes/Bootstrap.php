@@ -70,35 +70,32 @@ final class Bootstrap {
 			]
 		);
 
-		$post_id = \get_the_ID();
+		$post_id   = \get_the_ID();
+		$permalink = $post_id ? \get_permalink( $post_id ) : '';
+
+		/** @var array<string> $active_plugins */
+		$active_plugins = \get_option( 'active_plugins', [] );
+
+		$env = [
+			'SITE_URL'          => \untrailingslashit( \site_url() ),
+			'API_URL'           => \untrailingslashit( \esc_url_raw( rest_url() ) ),
+			'CURRENT_USER_ID'   => \get_current_user_id(),
+			'CURRENT_POST_ID'   => $post_id,
+			'PERMALINK'         => \untrailingslashit( $permalink ),
+			'APP_NAME'          => Plugin::$app_name,
+			'KEBAB'             => Plugin::$kebab,
+			'SNAKE'             => Plugin::$snake,
+			'NONCE'             => \wp_create_nonce( 'wp_rest' ),
+			'APP1_SELECTOR'     => Base::APP1_SELECTOR,
+			'APP2_SELECTOR'     => Base::APP2_SELECTOR,
+			'ELEMENTOR_ENABLED' => \in_array( 'elementor/elementor.php', $active_plugins, true ), // 檢查 elementor 是否啟用
+		];
 
 		\wp_localize_script(
 			Plugin::$kebab,
 			Plugin::$snake . '_data',
 			[
-				'env' => [
-					'siteUrl'       => \untrailingslashit( \site_url() ),
-					'ajaxUrl'       => \untrailingslashit( \admin_url( 'admin-ajax.php' ) ),
-					'userId'        => \get_current_user_id(),
-					'postId'        => $post_id,
-					'APP_NAME'      => Plugin::$app_name,
-					'KEBAB'         => Plugin::$kebab,
-					'SNAKE'         => Plugin::$snake,
-					'BASE_URL'      => Base::BASE_URL,
-					'APP1_SELECTOR' => Base::APP1_SELECTOR,
-					'APP2_SELECTOR' => Base::APP2_SELECTOR,
-					'API_TIMEOUT'   => Base::API_TIMEOUT,
-					'nonce'         => \wp_create_nonce( Plugin::$kebab ),
-				],
-			]
-		);
-
-		\wp_localize_script(
-			Plugin::$kebab,
-			'wpApiSettings',
-			[
-				'root'  => \untrailingslashit( \esc_url_raw( rest_url() ) ),
-				'nonce' => \wp_create_nonce( 'wp_rest' ),
+				'env' => $env,
 			]
 		);
 	}

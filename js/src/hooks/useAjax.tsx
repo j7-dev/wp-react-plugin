@@ -2,7 +2,7 @@
 import { adminAjax, TAdminAjaxArgs } from '@/api'
 import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import { ajaxNonce } from '@/utils'
+import { NONCE } from '@/utils'
 
 export const useAjax = (options?: {
 	args?: Omit<TAdminAjaxArgs, 'nonce'>
@@ -20,7 +20,7 @@ export const useAjax = (options?: {
 		adminAjax({
 			args: {
 				...(fnProps || args || {}),
-				nonce: ajaxNonce,
+				nonce: NONCE,
 			} as TAdminAjaxArgs,
 			config,
 		})
