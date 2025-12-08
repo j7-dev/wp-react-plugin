@@ -34,7 +34,7 @@ module.exports = {
 	plugins: [
 		function ({ addUtilities }) {
 			const newUtilities = {
-				'.rtl': {
+				'.right-to-left': {
 					direction: 'rtl',
 				},
 
@@ -53,11 +53,26 @@ module.exports = {
 				},
 				'.tw-inline': {
 					display: 'inline'
+				},
+				'.tw-blur': {
+					'--tw-blur': 'blur(8px)',
+    			filter: "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 				}
 			}
 			addUtilities(newUtilities, ['responsive', 'hover'])
 		},
 	],
 	safelist: [],
-	blocklist: ['fixed', 'columns-1', 'columns-2', 'hidden', 'inline'],
+	blocklist: [
+		'hidden',
+		'columns-1',
+		'columns-2',
+		'fixed',
+		'block',
+		'inline',
+		'blur',
+		'size-full',
+		'container',
+		'rtl',
+	],
 }

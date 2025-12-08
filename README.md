@@ -26,7 +26,7 @@ https://github.com/j7-dev/wp-react-plugin/assets/9213776/efb5b3ae-b8d0-408c-8e66
    cd to `wp-content/plugins/` in your WordPress project
    and `npx create-wp-react-plugin <your-plugin-name>`, that's all the steps
 
-	 🚩 we use yarn by default for now
+	 🚩 we use pnpm by default for now
 
 2. CRUD utility function<br>
    Default with `getPost` Example, check [functions](https://github.com/j7-dev/wp-react-plugin/tree/master/js/src/api/resources) and [custom hooks](https://github.com/j7-dev/wp-react-plugin/tree/master/js/src/hooks)
@@ -45,7 +45,7 @@ https://github.com/j7-dev/wp-react-plugin/assets/9213776/efb5b3ae-b8d0-408c-8e66
 	By defining the `$required_plugins`, we can easily manage plugin dependencies.
 
 7. 1-click release
-	Simply type `yarn release` and the command will execute a series of command in `release/.release-it.cjs`, like `yarn build`, `composer install` etc..., and finally publish a release on github
+	Simply type `pnpm release` and the command will execute a series of command in `release/.release-it.cjs`, like `pnpm build`, `composer install` etc..., and finally publish a release on github
 	see more configuration in [release-it](https://www.npmjs.com/package/release-it)
 
 ---
@@ -94,7 +94,7 @@ Libraries we used
 
 ```bash
 cd wp-content/plugins/<your-plugin-name>
-yarn dev
+pnpm dev
 ```
 
 Sure we have HMR when you change the front-end content
@@ -105,7 +105,7 @@ Sure we have HMR when you change the front-end content
 
 ```bash
 cd wp-content/plugins/<your-plugin-name>
-yarn release:build-only
+pnpm release:build-only
 ```
 
 This command will build the release version of your plugin without publish to Github in `release` directory, you can see a `zip` file and a directory with `<your-plugin-name>`
@@ -119,7 +119,7 @@ We can move to next step after checking everything works well.
 
 ```bash
 cd wp-content/plugins/<your-plugin-name>
-yarn release # this will git tag a patch version, you can choose `yarn release:minor` or `yarn release:major`
+pnpm release # this will git tag a patch version, you can choose `pnpm release:minor` or `pnpm release:major`
 ```
 
 This command will build the release version and publish the plugin `zip` file to Github.
